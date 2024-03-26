@@ -1,8 +1,8 @@
 project:
   type: book
 book:
-  title: HSMA - the book of DES
-  author: Sammi Rosser
+  title: HSMA - the little book of DES
+  author: Dan Chalk and Sammi Rosser
   date: 26/03/2024
   chapters:
   - index.qmd
@@ -11,6 +11,7 @@ book:
   - intro_to_simpy.qmd
   - recommended_structure_classes_for_des_models.qmd
   - an_example_simpy_model.qmd
+  - an_example_simpy_model_multiple.qmd
   - part: advanced_concepts.qmd
     chapters:
     - reneging_balking_jockeying.qmd

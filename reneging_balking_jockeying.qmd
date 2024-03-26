@@ -1,0 +1,11 @@
+# Reneging, balking and jockeying
+
+Not all queues run “as planned”. We may wish to model behaviours where entities stop waiting, switch queues, or never join the queue in the first place.
+
+**Reneging** refers to an entity removing themselves from a queue after a certain amount of time has elapsed (eg person not willing to wait any longer, or test sample no longer being viable)
+
+**Balking** refers to an entity not entering a queue in the first place because of the length and / or capacity of the queue (eg person seeing long queue or no capacity in waiting room)
+
+**Jockeying** refers to an entity switching queues in the hope of reducing queuing time. (eg switching till queues at the supermarket)
+
+![](images/reneging_balking_jockeying_overview.png)

@@ -14,9 +14,6 @@ And more!
 
 DES models are extremely useful for asking what if? questions about process / pathway changes.
 
-## An example
-
-![](images/example_des_simple.png)
 
 ## Why use DES?
 
@@ -33,7 +30,25 @@ This can allow you to optimize a system, leading to  better balance and better f
 - Improved patient experience
 - Meeting targets
 
+## An example
+
+Imagine being able to create a model of an emergency department.
+
+In this model, you can change all sorts of things
+- how many doctors, nurses and receptionists there are at each step
+- how long it takes for people to be seen
+- how many people go into the trauma pathway versus the non-trauma pathway
+
+Then sprinkle in a dose of randomness - because in real life, you're not going to have each appointment taking the exact same amount of time, or people arriving exactly every five minutes - and then you can start to explore just how well a system will perform, what changes might have the most impact, and what configuration is likely to perform best. Then you can run it 1000 times with slightly different random days to see how well it performs on both good days and bad.
+
+You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what's going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of theser changes themselves.
+
+{{< video https://private-user-images.githubusercontent.com/29951987/285421000-1adc36a0-7bc0-4808-8d71-2d253a855b31.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTE0NzQzMTAsIm5iZiI6MTcxMTQ3NDAxMCwicGF0aCI6Ii8yOTk1MTk4Ny8yODU0MjEwMDAtMWFkYzM2YTAtN2JjMC00ODA4LThkNzEtMmQyNTNhODU1YjMxLm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAzMjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMzI2VDE3MjY1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTAyZmM0ZTE5NWI1YWFhODg4NjUyOWRiNDE0Mjg0Y2U0ZWE4MWRmYzZlNDRkY2U4OTliNWExZGE5YTNmOTQ3YjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.o3wKMOkfKw2FgtAIjLaI9XfZh-Z-p1wkbzvOe5VyYX4 >}}
+
+
 ## Key DES Terminology
+
+![](images/example_des_simple.png)
 
 **Entities** are the things that are flowing through the sequential processes in the model (eg patients, test results, callers on a phone)
 
