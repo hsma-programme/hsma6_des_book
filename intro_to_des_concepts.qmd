@@ -1,0 +1,177 @@
+# Introduction to DES Concepts
+
+Discrete Event Simulation (DES) is a simulation modelling approach that allows us to model queuing problems.  Queuing problems are those in which “things” (usually people, but not always) are waiting for a service or services.
+
+In a Discrete Event Simulation, entities flow through (and queue for) discrete sequential processes that use resources.  The queues may be physical (people physically waiting) or more abstract (people on a waiting list, waiting for an appointment etc).
+
+![](images/example.png)
+
+In healthcare, DES models can be used to model :
+- Patient pathways
+- Phone systems
+- The transit of test results
+And more!
+
+DES models are extremely useful for asking what if? questions about process / pathway changes.
+
+## An example
+
+![](images/example_des_simple.png)
+
+## Why use DES?
+
+Discrete event simulation allows you to
+
+- Test changes in a risk-free, low-cost way
+- Explore the impact of changes in demand
+- See whether a system can cope on bad days as well as good days
+- Predict how long it will take to clear an existing backlog
+
+This can allow you to optimize a system, leading to  better balance and better flow, which can in turn lead to
+- A safer environment
+- Less stress for staff
+- Improved patient experience
+- Meeting targets
+
+## Key DES Terminology
+
+**Entities** are the things that are flowing through the sequential processes in the model (eg patients, test results, callers on a phone)
+
+**Generators** are the way in which entities enter the model and come into being (eg arriving at ED by ambulance, self-presenting, referral from GP)
+
+**Inter-Arrival Times** specify the time between entities being generated in the generators (ie the time between arrivals into the modelled system)
+
+**Activities** (sometimes referred to as Servers) are the bits of process that the entities are queuing up for (eg triaged, seen at reception, speak to doctor etc)
+
+**Activity Time** represents the amount of time it takes for an activity to happen to an entity - this is normally stochastic (random) and drawn from a distribution for each entity (eg time spent with nurse, time to be treated etc)
+
+**Resources** are the “stuff” and / or “staff” required for an activity to happen to an entity (eg nurse to triage, bed for patient, consultation room for GP to see patient etc, X-Ray machine and Radiographer to be free for X-Ray etc).  Important - resources may be shared between activities (eg the same nurse may be required to run multiple activities in our model, or even things we haven’t explicitly modelled)
+
+**Queues** hold entities that are waiting for an activity.  Entities wait in a queue until the activity has both the capacity and all required resources.
+
+**Sinks** are how entities leave the model (the bit of system we’re modelling)
+
+![](images/des_steps.png)
+
+### Entities
+
+Each entity may have certain “attributes” that it “carries with them” to help determine its journey through the modelled system. For example :
+
+- whether it goes down path A or B
+- how long it spends in an activity
+- its priority in a queue for an activity
+
+There may also be more than one type of entity in a model at the same time. For example, patients in a clinic, their test results, and phone calls into the clinic are all entities that we may want to capture when modelling the clinic.
+
+![](images/des_entities.png)
+
+### Generators and Inter-Arrival
+
+A generator creates new entities to bring into the system. The rate at which new entities are generated is determined by an inter-arrival time.
+
+The inter-arrival time determines the time between one entity being generated, and the next one being generated.
+
+Inter-arrival times may be fixed, but are typically sampled (drawn) stochastically (randomly) from a distribution to capture variability (even if the variability is small).
+
+An Exponential Distribution is often used to sample inter-arrival times. More than one distribution may be used for the same generator (e.g. for different times of the day, day of week etc). You may also (often) have more than one generator in a system.
+
+![](images/generators_iat.png)
+
+### Queues
+
+Each activity in a Discrete Event Simulation has an associated queue. The queue holds entities whilst they wait for the activity to become available for them.
+
+Each queue has a queuing policy. This determines the order in which entities are released from the queue into the activity. The two most common queuing policies are:
+
+- First In First Out (FIFO) : entities are seen in the order they arrive. This is the default.
+- Priority-based : entities are seen according to some priority attribute. Ties often resolved using FIFO
+
+![](images/queue_types.png)
+
+### Activities and Activity Times
+
+Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs :
+- An entity (drawn from the queue)
+- The required type and number of resource to be available
+
+Once the above conditions have been met, the activity begins. The entity, and the resource(s) are then locked in place for an amount of time – the Activity Time. The resource(s) cannot be used elsewhere until the activity time has passed.
+
+Activity times may be fixed, but are typically sampled stochastically from a distribution.
+
+![](images/activity_activity_times.png)
+
+::: {.callout-tip}
+The common distribution for process times is the Log Normal distributions. However, Exponential Distributions can be a good starting point, as it’s easy to change the “mean” when playing around with things. You can then change to something like a Log Normal once you (and the stakeholders) are happy
+:::
+
+### Resources
+
+Resources are needed to undertake activities. An activity may require just a single resource, more than one resource of the same type, or multiple resources of different types.
+
+::: {.callout-tip}
+An activity may not require a resource at all, but think carefully to ensure that it really is either “resourceless” or there is no constraint on the resource (and so doesn’t need to be modelled).
+
+Resources can include
+- “staff” (e.g. doctors, nurses, officers etc)
+- “stuff” (beds, test equipment, detention cell etc)
+:::
+
+Resources can (and often are) shared across a system, so may be required for more than one activity.  Therefore, a resource drain in one part of the system can affect another.
+
+All required resources are needed for an activity to take place.
+
+In some activities, having optional additional resource may speed up the activity (though rarely linearly).
+
+![](images/resources_simple.png)
+
+### Sinks
+
+Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include :
+- an entity physically leaving a system (e.g. discharge from hospital)
+- an entity no longer existing (e.g. death, use of sample, end of telephone call)
+- an entity no longer needing to access activities that we’re interested in (e.g. they leave the bit of the system that we’re modelling)
+
+The most important thing to remember about a sink is that it doesn’t necessarily represent an entity leaving the system entirely.
+
+For example, the scope of your model may only cover the triage aspect of an Emergency Department. Therefore, a valid sink might be placed after their triage - they’ve left the scope of our model
+
+![](images/sinks_simple.png)
+
+### Branching Paths
+
+Real world systems (and the models of those systems) are rarely linear. Often, different things will happen to different entities. In a Discrete Event Simulation, this means different entities flowing to different activities, or different sinks.
+
+We might differentiate based on :
+- an attribute of the patient (e.g. patients with a higher priority value flow through a different set of activities)
+- probability (e.g. we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time)
+- time (e.g. after a certain time of day, entities flow through a different set of activities)
+
+![](images/branching_paths_simple.png)
+
+### Outputs
+
+As with any type of model, it’s important to think about what outputs you need your DES model to generate to answer your modelling questions.  As a DES model is used to model queuing and resourcing problems, typical DES model outputs include average, min, max, xth percentile of :
+
+- time entities are in system
+- queue length and duration for queues of interest
+- rate of resource utilisation (ie % of time a resource is in use for activities in the model)
+- probability of exceeding a defined queue length / queue time / resource utilisation threshold (e.g. 4 hour wait in ED, overcrowding thresholds)
+
+![](images/output_example_simple.png)
+
+
+:::{.callout-info}
+## Exercise 1
+
+Design a Discrete Event Simulation for a system of your choosing.
+
+Think about some different possibilities (and these don’t have to be health-related, they can be anything!  A restaurant?  Airport?  Customer service line?).
+
+You should then draw up a design for the model.  This should include :
+- The “what if?” question(s) you would use the model to answer
+- A process map of the system you are looking to model
+- A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).  Identify the types of entities, generators, activities, queues, resources and sinks.  Describe what each of your inter-arrival times and activity times represent, and from where you might draw the data.  Remember the training from session 1B - consider scope, level of detail etc when designing your model.  What do you need to model to answer your question?  How can you simplify?
+
+The website ![draw.io (also known as diagrams.net)](https://app.diagrams.net/) is a great free resource for creating process maps.
+
+:::

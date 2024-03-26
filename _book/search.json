@@ -1,0 +1,62 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "HSMA - the book of DES",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro_to_des_concepts.html",
+    "href": "intro_to_des_concepts.html",
+    "title": "2  Introduction to DES Concepts",
+    "section": "",
+    "text": "2.1 An example",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to DES Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "intro_to_des_concepts.html#why-use-des",
+    "href": "intro_to_des_concepts.html#why-use-des",
+    "title": "2  Introduction to DES Concepts",
+    "section": "2.2 Why use DES?",
+    "text": "2.2 Why use DES?\nDiscrete event simulation allows you to\n\nTest changes in a risk-free, low-cost way\nExplore the impact of changes in demand\nSee whether a system can cope on bad days as well as good days\nPredict how long it will take to clear an existing backlog\n\nThis can allow you to optimize a system, leading to better balance and better flow, which can in turn lead to - A safer environment - Less stress for staff - Improved patient experience - Meeting targets",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to DES Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "intro_to_des_concepts.html#key-steps-in-a-des",
+    "href": "intro_to_des_concepts.html#key-steps-in-a-des",
+    "title": "2  Introduction to DES Concepts",
+    "section": "2.3 Key Steps in a DES",
+    "text": "2.3 Key Steps in a DES\n\n2.3.1 Arrivals\nTo start with, all we’re looking at is generating patients to arrive!\nOne great thing about DES is controlled randomness.\nWe can work out the average time between patients arriving at the centre - maybe every 5 minutes - but we don’t want people to just turn up at exact 5-minute intervals.\nThat’s not very realistic, and it doesn’t help us understand how the system copes with variation.\nSo we sample the gap between arrivals from a distribution.\nWhere the bar higher, there is a greater chance that the random number picked will be somewhere around that value.\n\n\n\n\n\n\n\nNote\n\n\n\nComputers aren’t very good at being random!\nSo we give it a ‘seed’ to start from.\nIf our seed is 1, maybe the arrival times sampled from the distribution will be\n5 minutes, 2 minutes, 3 minutes, 6 minutes, 5 minutes\nIf our seed is 101, maybe the arrival times will be\n10 minutes, 2 minutes, 5 minutes, 5 minutes, 3 minutes\n\n\nThis is great, because we can either - Change the random number and see how the same system can cope with different patterns of arrivals - Keep the random number the same and see how changing the system affects performance\n\n2.3.1.1 Exercise 1\nIn the playground, you can drag the sliders to change the values.\nThen you can click ‘run simulation’ to start a new simulation.\nTake a look at the graphs that are created!\n\n\nTry changing the slider with the title ‘How many patients should arrive per day on average?’. Look at the graph below it.\n\nHow do the numbers on the horizontal axis change?\n\nChange the average number of patients back to the default (80) and click on ‘Run simulation’. - Look at the charts that show the variation in patient arrivals per simulation run. - Look at the scatter (dot) plots at the bottom of the page to understand how the arrival times of patients varies across different simulation runs and different days. - Hover over the dots to see more detail about the arrival time of each patient. By 6am, roughly how many patients have arrived in each simulation run?\n\nThink about how this randomness in arrival times across different runs could be useful.\n\nTry changing the random number the computer uses without changing anything else. What happens to the number of patients? Do the bar charts and histograms look different?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to DES Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "References"
+    ]
+  }
+]

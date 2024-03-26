@@ -1,0 +1,203 @@
+---
+title: "Webexercises"
+---
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Uncomment to change widget colours:
+#style_widgets(incorrect = "goldenrod", correct = "purple", highlight = "firebrick")
+```
+
+This is a Web Exercise template created by the [psychology teaching team at the University of Glasgow](http://www.psy.gla.ac.uk), based on ideas from [Software Carpentry](https://software-carpentry.org/lessons/). This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.
+
+The `{webexercises}` package provides a number of functions that you use in [inline R code](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.
+
+**NOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser.**
+
+## Example Questions
+
+### Fill-In-The-Blanks (`fitb()`)
+
+Create fill-in-the-blank questions using `fitb()`, providing the answer as the first argument.
+
+- 2 + 2 is `r fitb(4)`
+
+You can also create these questions dynamically, using variables from your R session.
+
+```{r}
+x <- sample(2:8, 1)
+```
+
+- The square root of `r x^2` is: `r fitb(x)`
+
+The blanks are case-sensitive; if you don't care about case, use the argument `ignore_case = TRUE`.
+
+- What is the letter after D? `r fitb("E", ignore_case = TRUE)`
+
+If you want to ignore differences in whitespace use, use the argument `ignore_ws = TRUE` (which is the default) and include spaces in your answer anywhere they could be acceptable.
+
+- How do you load the tidyverse package? `r fitb(c("library( tidyverse )", "library( \"tidyverse\" )", "library( 'tidyverse' )"), ignore_ws = TRUE, width = "20")`
+
+You can set more than one possible correct answer by setting the answers as a vector.
+
+- Type a vowel: `r fitb(c("A", "E", "I", "O" , "U"), ignore_case = TRUE)`
+
+You can use regular expressions to test answers against more complex rules.
+
+- Type any 3 letters: `r fitb("^[a-zA-Z]{3}$", width = 3, regex = TRUE)`
+
+You can provide feedback that will appear when an incorrect answer is typed in.
+
+- What is 1 + 3 x 2: `r fitb(7, num = TRUE, feedback="Not quite - think about the order of operations.")`
+
+However, where the answer is longer than 1 letter, you may wish to use it in conjunction with the 'checked sections' function (see below) to prevent the feedback from being displayed prematurely.
+
+- Type in the word 'long': `r fitb("long", feedback="See, this does not work quite as well.")`
+
+### Multiple Choice (`mcq()`)
+
+- "Never gonna give you up, never gonna: `r mcq(c("let you go", "turn you down", "run away", answer = "let you down"))`"
+- "I `r mcq(c(answer = "bless the rains", "guess it rains", "sense the rain"))` down in Africa" -Toto
+
+You can also optionally pass a vector of feedback to the multiple choice question. The feedback will appear below the box when an answer is selected.
+
+- What is 20 - 2 x 4? `r mcq(opts=c("72", answer = "12"), feedback=c("Not quite - remember the order of operations. What part of the sum do you need to do first?", "Great job! You followed the order of operations by doing the multiplication before the subtraction."))`
+
+If present, the feedback vector must be the same length as the options vector and the order must match up with the order of the options vector. However, you can pass an empty string "" if you don't want any feedback to show for certain options.
+
+- What has changed in the year 3000? `r mcq(opts=c(answer = "Not much, but they live underwater", "Everything", "Nothing - I can't believe they don't have hoverboards yet"), feedback=c("", "Go and listen to the definitive song on the subject and report back!", "Wait, really? They don't? Well, that's thoroughly disappointing."))`
+
+### True or False (`torf()`)
+
+- True or False? You can permute values in a vector using `sample()`. `r torf(TRUE)`
+
+You can also add feedback to True or False questions.
+To do this, just pass in a vector of feedback - the first item is the feedback for the 'TRUE' option, and the second is for the 'FALSE' option.
+
+True or False? The month of April has 31 days. `r torf(FALSE, c("That's not quite right. Remember the rhyme - 30 days has September, *April* June and November!", "Well done! April - along with September, June and November - has 30 days. February has 28 or 29 (depending on whether it's a leap year), and the rest have 31."))`
+
+### Longer MCQs (`longmcq()`)
+
+When your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use `longmcq()` to deal with this. Since the answers are long, It's probably best to set up the options inside an R chunk with `echo=FALSE`.
+
+**What is a p-value?**
+
+```{r}
+opts_p <- c(
+   "the probability that the null hypothesis is true",
+   answer = "the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true",
+   "the probability of making an error in your conclusion"
+)
+```
+
+`r longmcq(opts_p)`
+
+You can also add feedback to long multiple choice questions.
+
+```{r}
+feedback_p <- c("Not quite - have another go",
+                "Correct! This is a really important definition to get comfortable with.",
+                "Not quite - try again.")
+```
+
+`r longmcq(opts_p, feedback_p)`
+
+**What is true about a 95% confidence interval of the mean?**
+
+```{r}
+# use sample() to randomise the order
+opts_ci <- sample(c(
+  answer = "if you repeated the process many times, 95% of intervals calculated in this way contain the true mean",
+  "there is a 95% probability that the true mean lies within this range",
+  "95% of the data fall within this range"
+))
+```
+
+`r longmcq(opts_ci)`
+
+
+
+Not every option needs to have feedback - but you need to pass an empty string so that the feedback vector is the same length as the options vector.
+If randomising the order, you need to make sure you apply the same ordering to the opts and feedback vectors.
+
+```{r}
+# use sample() to randomise the order
+opts_ci <- c(
+  answer = "if you repeated the process many times, 95% of intervals calculated in this way contain the true mean",
+  "there is a 95% probability that the true mean lies within this range",
+  "95% of the data fall within this range"
+)
+
+feedback_ci <- c(
+  "",
+  "This is a common misconception - but it's not quite right.",
+  "Not quite - you get data falling outside of this. Think more about the true mean."
+)
+
+indices = sample(length(opts_ci))
+```
+
+`r longmcq(opts_ci[order(indices)], feedback_ci[order(indices)])`
+
+## Checked sections
+
+Create sections with the class `webex-check` to add a button that hides feedback until it is pressed. Add the class `webex-box` to draw a box around the section (or use your own styles).
+
+::: {.webex-check .webex-box}
+
+I am going to learn a lot: `r torf(TRUE)`
+
+```{r, results='asis'}
+opts <- c(
+   "the probability that the null hypothesis is true",
+   answer = "the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true",
+   "the probability of making an error in your conclusion"
+)
+
+cat("What is a p-value?", longmcq(opts))
+```
+
+:::
+
+
+You can provide feedback within these and it won't display until the 'check answers' button is clicked.
+
+::: {.webex-check .webex-box}
+
+I am going to learn a lot: `r torf(TRUE, feedback=c("Yes! That's what we like to see.", "I look forward to proving you wrong!"))`
+
+Type in the word 'long': `r fitb("long", feedback="See, this does not work quite as well.")`
+
+```{r, results='asis'}
+cat("What is a p-value?", longmcq(opts_p, feedback_p))
+```
+
+:::
+
+
+## Hidden solutions and hints
+
+You can fence off a solution area that will be hidden behind a button using `hide()` before the solution and `unhide()` after, each as inline R code.  Pass the text you want to appear on the button to the `hide()` function.
+
+If the solution is a code chunk, instead of using `hide()` and `unhide()`, simply set the `webex.hide` chunk option to TRUE, or set it to the string you wish to display on the button.
+
+**Recreate the scatterplot below, using the built-in `cars` dataset.**
+
+```{r}
+with(cars, plot(speed, dist))
+```
+
+
+`r hide("I need a hint")`
+
+See the documentation for `plot()` (`?plot`)
+
+`r unhide()`
+
+<!-- note: you could also just set webex.hide to TRUE -->
+
+```{r, echo = TRUE, eval = FALSE}
+#| webex.hide: "Click here to see the solution"
+plot(cars$speed, cars$dist)
+```

@@ -1,0 +1,63 @@
+# An Introduction to SimPy
+
+SimPy is a Python package that allows us to create powerful Discrete Event Simulation (DES) models.
+
+SimPy is built around Python Generator Functions, which we covered in the previous session.
+
+SimPy also has some tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/.
+
+:::{.callout-info}
+To install SimPy, we need to `pip install simpy`.  However, it is recommended that you use a separate environment.  Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!
+:::
+
+Before we look at how we put together a SimPy model, there’s a couple concepts we need to cover first that are important to understand.
+
+## Simulation Time
+
+SimPy simulations run in time units*.  These units of time can represent any real world amount of time we like as long as we are consistent within the same model.
+
+Our time units should represent the lowest level of real world time that we need to represent in the model.  In models of pathways where people arrive for a service, this will likely be minutes (seconds is too much, and hours is probably not enough, unless all the processes are slow).  But we may have pathways where we measure time in days or weeks (e.g. referral pathways).
+
+For example, in an ED model, our time units may represent minutes.  So we specify everything in minutes - inter-arrival times, activity times etc.
+
+:::{.calllout-info}
+Strictly speaking, SimPy doesn’t run in time units ticking away one by one.  Instead, it schedules events jumps to the next event.  But don’t worry about that for your purposes.  Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).
+:::
+
+## Runs and Trials
+
+In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.
+
+What if you had a run with unusually long activity times sampled (a run of “bad luck”)?  Or unusually long inter-arrival times (a run of “good luck”)?
+
+We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.
+
+A single run of a model for a simulated period of time is known as a run.  A batch of multiple runs with the same parameter values is known as a trial.
+
+
+## Generator Functions
+
+SimPy is built around a special type of function in Python known as a Generator Function.
+
+So let’s have a look at what we mean by a Generator Function.
+
+Conventional functions in Python are called, then run with some (optional) inputs, and then finish (usually by returning some output).  When we call the function again, it runs again, from scratch.
+
+Generator functions remember where they were and what they did when control is passed back (they retain their local state), so that they can continue where they left off, and can be used as powerful iterators (for and while loops are other examples of iterators).
+
+This is very useful where we want state to be maintained, so we can remember how long until we generate the next entity, or where an entity is in a pathway…
+
+Let’s look at a very simple example of a generator function to see how they work.
+
+![](images/generator_func_example.png)
+
+In SimPy, we use Generator Functions in two different places :
+
+To model the DES generators (arrival points)
+To model the individual journey of each entity
+
+Let’s imagine we are modelling patients in a patient pathway.
+
+For 1, the generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient.  Then it does it all over again.
+
+For 2, the generator function requests a resource and freezes until that resource is available (the queue).  When the resource is available it freezes in place for an amount of time with it (the activity).  It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.

@@ -1,0 +1,57 @@
+project:
+  type: book
+book:
+  title: HSMA - the book of DES
+  author: Sammi Rosser
+  date: 26/03/2024
+  chapters:
+  - index.qmd
+  - intro.qmd
+  - intro_to_des_concepts.qmd
+  - intro_to_simpy.qmd
+  - recommended_structure_classes_for_des_models.qmd
+  - an_example_simpy_model.qmd
+  - part: advanced_concepts.qmd
+    chapters:
+    - reneging_balking_jockeying.qmd
+    - visualising_des_models.qmd
+    - testing_large_numbers_scenarios.qmd
+    - modelling_variable_arrival_rates.qmd
+    - appointment_style_booking_models.qmd
+    - requesting_multiple_resources.qmd
+    - choosing_resource_from_many.qmd
+    - running_parallel_cpus.qmd
+  - alternative_foss_simulation_libraries_software.qmd
+  - references.qmd
+cover-image: resources/logos/hsma_logo_transparent_background_large.png
+favicon: resources/logos/hsma_logo_transparent_background_large.png
+search: true
+page-navigation: true
+back-to-top-navigation: true
+navbar:
+  search: false
+  background: '#8A1E1E'
+sidebar:
+  search: true
+  style: docked
+  logo: resources/logos/hsma_logo_transparent_background_large.png
+  background: '#111111'
+bibliography: references.bib
+format:
+  html:
+    css: include/webex.css
+    include-after-body: include/webex.js
+html:
+  css: include/webex.css
+  include-after-body: include/webex.js
+  theme:
+    dark:
+    - darkly
+    - theme-dark.scss
+    - resources/fonts/css/lexend.css
+    light:
+    - flatly
+    - theme-light.scss
+    - resources/fonts/css/lexend.css
+  grid:
+    sidebar-width: 250px
