@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES</title>
+<title>HSMA - the little book of DES - 11&nbsp; Priority-Based Queueing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./modelling_resource_unavailability.html" rel="next">
-<link href="./model_warm_up.html" rel="prev">
+<link href="./visualising_model_metrics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,12 +102,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -82,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extending_your_model.html">extending_your_model.html</a></li><li class="breadcrumb-item"><a href="./priority_based_queueing.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">priority_based_queueing.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extending_your_model.html">extending_your_model.html</a></li><li class="breadcrumb-item"><a href="./priority_based_queueing.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -137,21 +174,21 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./extending_your_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">extending_your_model.html</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">your_first_simpy_model.qmd</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
@@ -161,31 +198,66 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">an_example_simpy_model_branching.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./extending_your_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">extending_your_model.html</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">model_warm_up.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">visualising_model_metrics.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./priority_based_queueing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">priority_based_queueing.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">choosing_distributions.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">choosing_distributions.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">exercise_des_advanced.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -194,57 +266,51 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./advanced_concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">advanced_concepts.html</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">visualising_des_models.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">visualising_des_models.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">requesting_multiple_resources.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">requesting_multiple_resources.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">choosing_resource_from_many.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">choosing_resource_from_many.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">running_parallel_cpus.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">running_parallel_cpus.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,7 +318,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">alternative_foss_simulation_libraries_software.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">alternative_foss_simulation_libraries_software.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,15 +332,579 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#implementing-priority-based-queueing" id="toc-implementing-priority-based-queueing" class="nav-link active" data-scroll-target="#implementing-priority-based-queueing"><span class="header-section-number">11.1</span> Implementing priority-based queueing</a>
+  <ul class="collapse">
+  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">11.1.1</span> g class</a></li>
+  <li><a href="#patient-class" id="toc-patient-class" class="nav-link" data-scroll-target="#patient-class"><span class="header-section-number">11.1.2</span> Patient class</a></li>
+  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">11.1.3</span> Model class</a></li>
+  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">11.1.4</span> Trial class</a></li>
+  </ul></li>
+  <li><a href="#the-full-code" id="toc-the-full-code" class="nav-link" data-scroll-target="#the-full-code"><span class="header-section-number">11.2</span> The full code</a></li>
+  <li><a href="#evaluating-the-outputs" id="toc-evaluating-the-outputs" class="nav-link" data-scroll-target="#evaluating-the-outputs"><span class="header-section-number">11.3</span> Evaluating the outputs</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extending_your_model.html">extending_your_model.html</a></li><li class="breadcrumb-item"><a href="./priority_based_queueing.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>So far, we’ve assumed that the queues in our models follow a FIFO (First in First Out) policy. This means that whoever has been queuing the longest is seen next.</p>
+<p>But in healthcare systems, very often there is an element of prioritisation in a real world queue. Typically this represents the severity of the patient’s condition.</p>
+<p>We can build in priority-based queuing in our SimPy models in a few different ways - but one of the easiest is using something known as a <strong>PriorityResource</strong>.</p>
+<p>A PriorityResource is a class in SimPy that’s like the standard Resource class we’ve used so far, but also has functionality that allows it to select which entity to pull out of a queue next based on a priority value we specify.</p>
+<p>The way this works in SimPy is :</p>
+<ol type="1">
+<li><p>We set up resources that will be dealing with priority-based queues as PriorityResources rather than Resources</p></li>
+<li><p>We have an attribute stored against the entity that specifies that entity’s priority (with lower values indicating higher priority)</p></li>
+<li><p>When we request a PriorityResource, we tell it the attribute to use to determine priority in that queue (this also means we could have multiple attributes for priority and use different ones for different queues).</p></li>
+</ol>
+<section id="implementing-priority-based-queueing" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="implementing-priority-based-queueing"><span class="header-section-number">11.1</span> Implementing priority-based queueing</h2>
+<section id="g-class" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">11.1.1</span> g class</h3>
+<p>The g class is unchanged</p>
+</section>
+<section id="patient-class" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="patient-class"><span class="header-section-number">11.1.2</span> Patient class</h3>
+<p>Here we add an attribute of the patient that determines their priority :::{.callout-tip} When using a priority resource</p>
+<p>Lower value = higher priority :::</p>
+<p>In this example, we just randomly pick a value between 1 and 5, but you can use whatever logic you like.</p>
+<p>In reality, you’d likely have probabilities to determine what priority a patient is based on your data - maybe there’s a 20% chance they are a high priority and an 80% chance they are a low priority.</p>
+<div id="cdc916be" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.priority <span class="op">=</span> random.randint(<span class="dv">1</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-class" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">11.1.3</span> Model class</h3>
+<section id="init" class="level4" data-number="11.1.3.1">
+<h4 data-number="11.1.3.1" class="anchored" data-anchor-id="init"><span class="header-section-number">11.1.3.1</span> _init</h4>
+<p>Here we set up the nurse as an instance of PriorityResource rather than Resource</p>
+<div id="0e8b2f87" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up SimPy environment</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up counters to use as entity IDs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up resources</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse <span class="op">=</span> simpy.PriorityResource(<span class="va">self</span>.env,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                            capacity<span class="op">=</span>g.number_of_nurses)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set run number from value passed in</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.run_number <span class="op">=</span> run_number</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up DataFrame to store patient-level results</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Patient ID"</span>] <span class="op">=</span> [<span class="dv">1</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Priority"</span>] <span class="op">=</span> [<span class="dv">1</span>] <span class="co">##NEW</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.set_index(<span class="st">"Patient ID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up attributes that will store mean queuing times across the run</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="attend_clinic" class="level4" data-number="11.1.3.2">
+<h4 data-number="11.1.3.2" class="anchored" data-anchor-id="attend_clinic"><span class="header-section-number">11.1.3.2</span> attend_clinic</h4>
+<p>Near the beginning of the attend_clinic() method, we have added a print message so we can see how priority works.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Logging in this way can help you check that your model is behaving as expected.</p>
+</div>
+</div>
+<p>Now that the nurse is set up as a PriorityResource, we can pass in the value that we want it to look at to determine who’s seen next when we request the resource (here, that’s the priority attribute of the patient we set up in the Patient class).</p>
+<p>We have also added a step that records the patient priority to our dataframe of individual patient results.</p>
+<div id="8b192b58" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function representing pathway for patients attending the</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clinic.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nurse consultation activity</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Patient </span><span class="sc">{</span>patient<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> with priority </span><span class="sc">{</span>patient<span class="sc">.</span>priority<span class="sc">}</span><span class="ss"> is"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">"queuing for the nurse."</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.nurse.request(priority<span class="op">=</span>patient.priority) <span class="im">as</span> req:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            end_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="co">##NEW</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span> (<span class="ss">f"Patient </span><span class="sc">{</span>patient<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> with priority </span><span class="sc">{</span>patient<span class="sc">.</span>priority<span class="sc">}</span><span class="ss"> is"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                   <span class="ss">f"being seen at minute </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>env<span class="sc">.</span>now<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            patient.q_time_nurse <span class="op">=</span> end_q_nurse <span class="op">-</span> start_q_nurse</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Nurse"</span>] <span class="op">=</span> (</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_nurse</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                <span class="co">##NEW</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Priority"</span>] <span class="op">=</span> (</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                    patient.priority</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            sampled_nurse_act_time <span class="op">=</span> random.expovariate(<span class="fl">1.0</span> <span class="op">/</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                                                        g.mean_n_consult_time)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="trial-class" class="level3" data-number="11.1.4">
+<h3 data-number="11.1.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">11.1.4</span> Trial class</h3>
+<p>The trial class is unchanged.</p>
+</section>
+</section>
+<section id="the-full-code" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="the-full-code"><span class="header-section-number">11.2</span> The full code</h2>
+<p>The full code is given below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="6cd35486" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store global parameter values.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Activity times</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Resource numbers</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    number_of_nurses <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">##NEW - We've changed the parameters to have no warm-up</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulation meta parameters</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    sim_duration <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    warm_up_period <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - here we add an attribute of the patient that determines their</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># priority (lower value = higher priority).  In this example, we just</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># randomly pick a value between 1 and 5, but you can use whatever logic</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># you like (in reality, you'd likely have probabilities to determine</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># what priority a patient is based on your data)</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.priority <span class="op">=</span> random.randint(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up SimPy environment</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up counters to use as entity IDs</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up resources</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - here we set up the nurse as an instance of PriorityResource</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># rather than Resource</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse <span class="op">=</span> simpy.PriorityResource(<span class="va">self</span>.env,</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                                            capacity<span class="op">=</span>g.number_of_nurses)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set run number from value passed in</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.run_number <span class="op">=</span> run_number</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up DataFrame to store patient-level results</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Patient ID"</span>] <span class="op">=</span> [<span class="dv">1</span>]</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Priority"</span>] <span class="op">=</span> [<span class="dv">1</span>] <span class="co">##NEW</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.set_index(<span class="st">"Patient ID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up attributes that will store mean queuing times across the run</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generator function that represents the DES generator for patient arrivals</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>            p <span class="op">=</span> Patient(<span class="va">self</span>.patient_counter)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env.process(<span class="va">self</span>.attend_clinic(p))</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>            sampled_inter <span class="op">=</span> random.expovariate(<span class="fl">1.0</span> <span class="op">/</span> g.patient_inter)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_inter)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generator function representing pathway for patients attending the</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clinic.</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nurse consultation activity</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added a print message so we can see how priority works</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>        <span class="co"># I'm limiting it to the first 10 patients so we're not swamped by outputs!</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> patient.<span class="bu">id</span> <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span> (<span class="ss">f"Patient </span><span class="sc">{</span>patient<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> with priority </span><span class="sc">{</span>patient<span class="sc">.</span>priority<span class="sc">}</span><span class="ss"> is"</span>,</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                <span class="st">"queuing for the nurse."</span>)</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - now that the nurse is set up as a PriorityResource, we can pass</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>        <span class="co"># in the value that we want it to look at to determine who's seen next</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>        <span class="co"># when we request the resource (here, that's the priority attribute of</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the patient we set up in the Patient class)</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.nurse.request(priority<span class="op">=</span>patient.priority) <span class="im">as</span> req:</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>            end_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>            <span class="co">##NEW - added a print message so we can see how priority works</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>            <span class="co"># I'm limiting it to the first 10 patients so we're not swamped by outputs!</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> patient.<span class="bu">id</span> <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span> (<span class="ss">f"Patient </span><span class="sc">{</span>patient<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> with priority </span><span class="sc">{</span>patient<span class="sc">.</span>priority<span class="sc">}</span><span class="ss"> is"</span>,</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"being seen at minute </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>env<span class="sc">.</span>now<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>            patient.q_time_nurse <span class="op">=</span> end_q_nurse <span class="op">-</span> start_q_nurse</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Nurse"</span>] <span class="op">=</span> (</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_nurse</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Priority"</span>] <span class="op">=</span> (</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>                    patient.priority</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>            sampled_nurse_act_time <span class="op">=</span> random.expovariate(<span class="fl">1.0</span> <span class="op">/</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>                                                        g.mean_n_consult_time)</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to calculate and store results over the run</span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_run_results(<span class="va">self</span>):</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>].mean()</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to run a single run of the simulation</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Start up DES generators</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run for the duration specified in g class</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span>(g.sim_duration <span class="op">+</span> g.warm_up_period))</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate results over the run</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_run_results()</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.results_df</span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation</span></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results.set_index(<span class="st">"Run Number"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to calculate and store means across runs in the trial</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to calculate and store means across runs in the trial</span></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run the simulation for the number of runs specified in g class.</span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For each run, we create a new instance of the Model class and call its</span></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run method, which sets everything else in motion.  Once the run has</span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>        <span class="co"># completed, we grab out the stored run results and store it against</span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the run number in the trial results dataframe. We also return the</span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>        <span class="co"># full patient-level dataframes.</span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a>        <span class="co"># First, create an empty list for storing our patient-level dataframes.</span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>        results_dfs <span class="op">=</span> []</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>            my_model <span class="op">=</span> Model(run)</span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>            patient_level_results <span class="op">=</span> my_model.run()</span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>( <span class="va">self</span>.df_trial_results)</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>            <span class="co"># First let's record our mean wait time for this run</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results.loc[run] <span class="op">=</span> [my_model.mean_q_time_nurse]</span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Next let's work on our patient-level results dataframes</span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>            <span class="co"># We start by rounding everything to 2 decimal places</span></span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>            patient_level_results <span class="op">=</span> patient_level_results.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add a new column recording the run</span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>            patient_level_results[<span class="st">'run'</span>] <span class="op">=</span> run</span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Now we're just going to add this to our empty list (or, after the first</span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>            <span class="co"># time we loop through, as an extra dataframe in our list)</span></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>            results_dfs.append(patient_level_results)</span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>        all_results_patient_level <span class="op">=</span> pd.concat(results_dfs)</span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>        <span class="co"># This calculates the attribute self.mean_q_time_nurse_trial</span></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_means_over_trial()</span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Once the trial (ie all runs) has completed, return the results</span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.df_trial_results, all_results_patient_level, <span class="va">self</span>.mean_q_time_nurse_trial</span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to print trial results, including averages across runs</span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Q Nurse : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_q_time_nurse_trial<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new instance of Trial and run it</span></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>df_trial_results, all_results_patient_level, means_over_trial  <span class="op">=</span> my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Patient 1 with priority 1 is queuing for the nurse.
+Patient 1 with priority 1 is being seen at minute 0
+Patient 2 with priority 3 is queuing for the nurse.
+Patient 2 with priority 3 is being seen at minute 0.577261881306865
+Patient 3 with priority 4 is queuing for the nurse.
+Patient 4 with priority 3 is queuing for the nurse.
+Patient 5 with priority 1 is queuing for the nurse.
+Patient 5 with priority 1 is being seen at minute 10.476288925953796
+Patient 6 with priority 4 is queuing for the nurse.
+Patient 7 with priority 5 is queuing for the nurse.
+Patient 8 with priority 4 is queuing for the nurse.
+Patient 9 with priority 3 is queuing for the nurse.
+Patient 10 with priority 5 is queuing for the nurse.
+Patient 4 with priority 3 is being seen at minute 19.48852852893323
+Patient 9 with priority 3 is being seen at minute 31.70494923010755
+Patient 3 with priority 4 is being seen at minute 42.364794675353075
+Patient 6 with priority 4 is being seen at minute 69.04348291258661
+Patient 8 with priority 4 is being seen at minute 70.11935806485822
+Patient 7 with priority 5 is being seen at minute 324.8610657806176
+Patient 10 with priority 5 is being seen at minute 363.76211311943615
+            Mean Q Time Nurse
+Run Number                   
+0                         0.0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-the-outputs" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">11.3</span> Evaluating the outputs</h2>
+<p>First let’s look at some sample patients.</p>
+<div id="82fdacbc" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_results_patient_level.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Q Time Nurse</th>
+<th data-quarto-table-cell-role="th">Priority</th>
+<th data-quarto-table-cell-role="th">run</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Patient ID</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.00</td>
+<td>1.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.00</td>
+<td>3.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>1.86</td>
+<td>1.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>14.01</td>
+<td>3.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11</td>
+<td>0.29</td>
+<td>1.0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Let’s calculate the mean queue time by priority.</p>
+<div id="22f209d7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(all_results_patient_level</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">'Priority'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">'Priority'</span>:<span class="st">'size'</span>, <span class="st">'Q Time Nurse'</span>:<span class="st">'mean'</span>}) <span class="op">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">'Priority'</span>:<span class="st">'count'</span>,<span class="st">'Q Time Nurse'</span>:<span class="st">'mean queue time'</span>})</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean queue time</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Priority</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1.0</td>
+<td>189</td>
+<td>6.85</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2.0</td>
+<td>189</td>
+<td>12.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3.0</td>
+<td>169</td>
+<td>30.18</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4.0</td>
+<td>192</td>
+<td>75.53</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5.0</td>
+<td>121</td>
+<td>1139.90</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>We can see that the queueing time is shorter for the</p>
+<div id="447fafa8" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.box(all_results_patient_level.reset_index(), x<span class="op">=</span><span class="st">"Priority"</span>, y<span class="op">=</span><span class="st">"Q Time Nurse"</span>, points<span class="op">=</span><span class="st">"all"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>                            <div id="fa7ccf66-33d1-46f0-a752-abfc945ca278" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("fa7ccf66-33d1-46f0-a752-abfc945ca278")) {                    Plotly.newPlot(                        "fa7ccf66-33d1-46f0-a752-abfc945ca278",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"Priority=%{x}\u003cbr\u003eQ Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa"},"name":"","notched":false,"offsetgroup":"","orientation":"v","showlegend":false,"x":[1.0,3.0,1.0,3.0,1.0,3.0,1.0,4.0,1.0,2.0,3.0,4.0,4.0,3.0,3.0,2.0,4.0,1.0,1.0,2.0,2.0,2.0,3.0,1.0,2.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,1.0,2.0,2.0,3.0,3.0,2.0,2.0,3.0,3.0,1.0,4.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,5.0,2.0,1.0,1.0,1.0,2.0,3.0,4.0,5.0,5.0,2.0,2.0,5.0,5.0,1.0,1.0,1.0,1.0,2.0,1.0,2.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,1.0,3.0,3.0,1.0,1.0,3.0,3.0,4.0,2.0,1.0,2.0,1.0,3.0,4.0,4.0,3.0,3.0,1.0,2.0,4.0,4.0,5.0,2.0,2.0,4.0,2.0,4.0,2.0,2.0,5.0,4.0,1.0,2.0,5.0,5.0,5.0,4.0,4.0,5.0,1.0,1.0,1.0,4.0,3.0,4.0,4.0,2.0,1.0,5.0,2.0,1.0,3.0,3.0,3.0,4.0,1.0,4.0,5.0,1.0,2.0,1.0,2.0,2.0,2.0,1.0,1.0,2.0,3.0,3.0,3.0,3.0,3.0,1.0,3.0,2.0,3.0,1.0,2.0,2.0,3.0,2.0,3.0,4.0,2.0,4.0,4.0,4.0,4.0,1.0,1.0,1.0,2.0,1.0,2.0,1.0,2.0,2.0,3.0,1.0,3.0,4.0,4.0,4.0,4.0,4.0,3.0,2.0,3.0,4.0,4.0,5.0,5.0,2.0,4.0,4.0,4.0,5.0,1.0,2.0,3.0,1.0,4.0,4.0,1.0,2.0,2.0,4.0,5.0,1.0,2.0,4.0,4.0,1.0,5.0,5.0,3.0,3.0,3.0,1.0,3.0,2.0,1.0,2.0,1.0,1.0,2.0,2.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,2.0,3.0,1.0,2.0,1.0,3.0,4.0,2.0,2.0,2.0,3.0,4.0,1.0,3.0,4.0,4.0,1.0,3.0,4.0,4.0,4.0,3.0,4.0,1.0,4.0,3.0,4.0,4.0,1.0,4.0,4.0,4.0,4.0,2.0,1.0,4.0,1.0,1.0,3.0,4.0,4.0,4.0,2.0,3.0,4.0,4.0,3.0,1.0,3.0,1.0,2.0,3.0,4.0,1.0,2.0,2.0,3.0,1.0,2.0,3.0,3.0,1.0,4.0,4.0,1.0,4.0,5.0,5.0,2.0,4.0,5.0,5.0,5.0,5.0,5.0,5.0,2.0,3.0,5.0,5.0,2.0,5.0,5.0,1.0,4.0,5.0,5.0,1.0,2.0,3.0,5.0,5.0,5.0,1.0,1.0,5.0,5.0,5.0,1.0,4.0,5.0,5.0,4.0,5.0,5.0,5.0,5.0,4.0,2.0,4.0,5.0,5.0,3.0,5.0,5.0,4.0,5.0,4.0,2.0,2.0,1.0,2.0,4.0,4.0,5.0,4.0,3.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,2.0,2.0,2.0,1.0,2.0,3.0,1.0,3.0,3.0,3.0,2.0,1.0,3.0,3.0,3.0,3.0,3.0,3.0,2.0,3.0,4.0,4.0,1.0,2.0,3.0,3.0,1.0,1.0,2.0,2.0,2.0,3.0,1.0,1.0,3.0,3.0,3.0,2.0,3.0,4.0,4.0,4.0,1.0,4.0,4.0,4.0,4.0,4.0,4.0,3.0,4.0,2.0,4.0,4.0,4.0,5.0,5.0,5.0,1.0,5.0,2.0,2.0,2.0,5.0,5.0,5.0,4.0,5.0,2.0,2.0,5.0,2.0,3.0,1.0,1.0,2.0,2.0,3.0,3.0,4.0,4.0,1.0,1.0,4.0,4.0,4.0,5.0,5.0,3.0,5.0,4.0,5.0,5.0,4.0,4.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,1.0,4.0,4.0,4.0,5.0,5.0,5.0,1.0,2.0,1.0,2.0,1.0,2.0,3.0,1.0,1.0,1.0,2.0,2.0,3.0,3.0,3.0,2.0,1.0,1.0,1.0,3.0,1.0,2.0,3.0,1.0,1.0,1.0,2.0,1.0,2.0,2.0,2.0,2.0,1.0,2.0,3.0,1.0,3.0,3.0,1.0,1.0,2.0,3.0,4.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,3.0,3.0,4.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,5.0,5.0,5.0,5.0,5.0,5.0,5.0,2.0,1.0,2.0,2.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,2.0,2.0,3.0,3.0,1.0,2.0,3.0,1.0,1.0,1.0,4.0,2.0,4.0,3.0,5.0,5.0,5.0,5.0,2.0,5.0,2.0,3.0,4.0,4.0,5.0,5.0,2.0,2.0,3.0,4.0,5.0,1.0,1.0,2.0,2.0,2.0,4.0,3.0,5.0,5.0,5.0,5.0,5.0,1.0,1.0,2.0,4.0,5.0,5.0,1.0,2.0,1.0,3.0,5.0,5.0,4.0,5.0,1.0,2.0,1.0,2.0,3.0,2.0,4.0,4.0,4.0,4.0,1.0,2.0,1.0,1.0,2.0,3.0,3.0,3.0,1.0,1.0,2.0,4.0,1.0,2.0,2.0,2.0,4.0,4.0,3.0,1.0,1.0,2.0,4.0,5.0,1.0,3.0,1.0,2.0,3.0,3.0,4.0,4.0,5.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,3.0,1.0,1.0,3.0,3.0,3.0,3.0,4.0,4.0,5.0,5.0,3.0,5.0,5.0,3.0,2.0,4.0,4.0,4.0,4.0,5.0,5.0,5.0,1.0,4.0,4.0,5.0,5.0,1.0,2.0,3.0,2.0,3.0,1.0,2.0,3.0,4.0,4.0,1.0,1.0,4.0,4.0,5.0,5.0,5.0,2.0,4.0,4.0,1.0,1.0,4.0,2.0,4.0,4.0,5.0,4.0,2.0,5.0,1.0,2.0,3.0,5.0,5.0,3.0,3.0,1.0,1.0,1.0,2.0,3.0,3.0,1.0,2.0,3.0,2.0,3.0,3.0,4.0,2.0,3.0,4.0,2.0,4.0,3.0,4.0,5.0,2.0,1.0,5.0,5.0,4.0,5.0,3.0,2.0,2.0,2.0,3.0,1.0,2.0,2.0,3.0,3.0,3.0,1.0,4.0,4.0,4.0,5.0,5.0,3.0,3.0,4.0,4.0,2.0,2.0,4.0,5.0,5.0,5.0,5.0,2.0,3.0,1.0,3.0,3.0,3.0,4.0,4.0,3.0,2.0,1.0,2.0,4.0,1.0,3.0,1.0,3.0,3.0,4.0,1.0,1.0,1.0,1.0,1.0,2.0,1.0,1.0,3.0,1.0,2.0,2.0,1.0,3.0,3.0,2.0,3.0,1.0,2.0,4.0,4.0,3.0,2.0,3.0,3.0,4.0,4.0,4.0,3.0,4.0,1.0,4.0,1.0,3.0,2.0,2.0,2.0],"x0":" ","xaxis":"x","y":[0.0,0.0,1.86,14.01,0.29,15.25,3.54,38.88,8.14,9.41,10.77,56.97,55.44,7.37,8.66,0.13,75.54,1.8,13.66,24.1,33.56,17.83,29.39,5.18,3.88,41.54,8.86,141.78,94.34,89.06,85.98,70.07,25.17,30.02,3.67,15.93,8.4,35.47,28.15,1.6,6.51,25.74,2.58,5.23,119.9,113.81,7.16,123.63,123.75,80.95,53.22,8.15,311.93,2.63,5.12,12.56,6.91,24.14,5.24,8.53,344.74,325.09,0.12,0.73,282.94,276.48,13.35,9.41,12.81,13.25,33.02,1.41,33.78,35.79,27.76,26.69,19.79,69.39,76.84,76.87,5.0,34.84,33.28,3.58,2.69,38.87,38.53,114.68,2.11,5.77,1.08,1.97,18.05,129.47,112.45,3.21,10.94,6.62,9.06,107.78,30.05,465.75,5.59,2.05,8.92,2.09,9.4,4.35,0.34,482.6,3.96,2.33,3.52,490.12,493.09,462.87,3.71,4.58,462.38,5.59,25.42,5.29,19.02,1.33,28.6,27.34,0.14,2.37,530.58,1.71,6.46,14.43,12.73,6.01,20.72,10.12,30.02,580.28,1.08,16.23,4.94,0.24,4.78,3.38,25.3,10.7,27.32,88.11,78.32,70.28,74.07,75.05,0.69,74.5,0.33,75.31,3.51,13.82,16.49,80.68,7.08,35.59,147.57,1.87,149.95,78.27,77.05,64.02,4.15,6.43,0.25,19.58,5.07,29.02,13.51,48.51,2.4,21.88,5.74,19.21,153.81,146.1,121.02,105.77,8.59,0.94,0.81,8.8,23.04,16.79,825.4,812.65,2.56,6.67,5.06,4.05,821.95,0.55,14.42,16.06,9.91,32.37,27.83,7.0,8.48,6.35,19.73,878.49,2.97,0.69,20.64,9.44,6.98,902.54,857.75,2.44,4.63,5.68,2.48,22.06,1.66,5.9,8.56,6.66,2.24,31.46,23.34,22.37,20.1,57.99,53.52,25.11,13.0,121.31,121.19,75.46,76.54,53.14,6.47,44.8,3.51,6.19,0.92,34.31,208.76,2.88,9.79,2.91,17.53,178.82,0.76,9.75,178.84,169.03,18.03,23.21,180.84,182.97,159.38,4.43,130.18,6.52,104.13,3.69,43.83,41.67,4.85,19.82,26.0,13.49,5.34,0.63,2.88,14.66,19.25,0.15,6.18,36.27,33.49,35.52,6.27,4.12,34.03,11.72,5.65,5.79,0.86,11.75,0.03,19.89,54.61,5.8,10.82,10.48,31.84,7.53,9.13,62.1,22.49,5.0,142.13,77.15,3.54,6.79,1426.13,1400.24,0.13,0.88,1391.8,1358.49,1214.31,1212.38,1206.03,1133.42,0.65,2.08,1039.35,1015.85,16.36,1034.01,1026.08,6.75,13.41,1033.87,1027.47,2.67,8.07,7.15,1041.81,1032.39,1021.41,1.1,2.74,1023.02,1020.28,990.54,15.08,0.86,986.0,955.95,0.39,961.89,920.31,915.36,905.51,4.96,1.67,6.28,825.1,806.29,0.26,801.0,796.81,4.04,805.47,5.25,2.91,5.68,3.57,8.05,30.87,9.47,844.45,4.92,4.72,2.73,5.78,5.02,17.45,15.77,24.09,32.88,22.04,20.28,7.83,3.35,74.92,48.14,28.48,20.32,19.9,5.03,1.86,16.62,114.41,13.65,129.21,117.41,117.73,7.63,6.08,115.22,85.87,79.06,76.89,64.12,20.54,6.44,23.16,300.44,282.6,0.77,12.94,25.89,14.88,5.15,5.22,9.77,12.55,4.51,33.42,1.29,7.48,42.1,40.94,47.56,0.5,8.56,377.19,373.49,353.13,1.24,259.46,256.53,235.5,217.88,216.38,187.91,1.31,193.43,12.15,184.31,107.7,7.12,1288.12,1282.66,1261.12,5.66,1269.69,1.1,3.16,3.09,1267.09,1254.08,1250.25,4.77,1229.38,2.85,3.66,1236.83,4.4,10.36,5.04,0.07,20.16,13.41,13.77,12.38,57.99,55.9,11.13,2.23,69.02,44.8,27.4,1327.32,1312.62,1.39,1194.56,4.64,1201.25,1183.0,4.7,4.89,4.4,10.52,10.95,13.0,11.94,5.49,22.23,3.48,22.1,15.91,19.16,1235.86,1198.78,1190.58,4.55,8.01,14.65,18.76,4.49,27.22,53.79,3.34,6.66,8.48,17.36,15.91,50.75,62.45,48.51,1.55,4.86,3.05,12.88,45.0,16.81,12.2,61.44,2.99,10.26,6.84,19.98,11.27,45.37,44.82,33.63,24.46,0.28,22.69,134.67,3.29,75.71,66.95,1.86,4.2,15.16,11.51,286.68,10.07,10.57,8.1,17.65,29.49,26.74,2.97,2.06,17.4,341.37,205.61,196.51,177.21,170.79,130.82,126.51,6.75,2.99,128.0,128.45,7.73,140.26,136.23,138.15,98.19,43.33,46.81,3.96,1588.04,1590.76,1533.3,1530.26,1530.05,1504.5,1490.18,4.03,4.45,10.44,33.27,6.63,14.29,11.34,10.75,12.74,13.19,16.03,20.94,3.68,91.25,21.88,15.97,7.68,37.84,2.63,4.09,7.65,160.09,0.97,62.41,0.84,1593.48,1517.35,1432.44,1413.11,2.86,1387.35,3.05,12.8,19.79,18.62,1394.12,1398.11,5.98,10.13,16.32,4.89,1367.5,4.49,8.97,30.36,10.22,13.02,4.01,0.59,1386.12,1340.26,1338.44,1258.29,1254.05,7.78,4.82,0.97,23.14,1282.95,1277.67,4.21,8.82,1.07,0.47,1261.71,1249.25,1.27,1226.11,4.69,11.13,5.17,3.97,36.3,12.19,50.38,38.91,32.05,26.89,2.07,3.8,0.47,4.93,19.29,25.79,25.83,18.79,7.62,3.92,7.91,35.55,0.11,8.25,0.65,6.98,36.23,28.94,1.85,2.33,7.16,6.63,56.66,1360.23,2.27,5.19,1.3,11.95,17.95,18.53,19.02,9.54,1397.82,10.77,5.26,1.77,5.63,23.52,28.67,16.52,24.02,5.34,2.86,29.62,26.51,19.48,19.89,60.66,22.55,1406.01,1362.11,1.09,1349.66,1336.76,4.57,0.89,3.18,5.26,0.69,6.36,1363.78,1360.93,1332.74,4.46,20.74,14.96,1347.28,1323.9,5.47,0.78,4.68,0.5,7.83,13.69,15.47,4.74,55.49,34.19,0.05,0.05,36.38,6.06,1421.47,1374.12,1347.15,15.83,9.97,9.81,6.51,3.78,16.26,2.53,24.06,20.14,1402.69,0.13,4.62,1339.63,0.21,1.42,2.42,1254.55,1253.24,1.71,4.03,5.76,11.69,9.31,2.52,42.25,40.18,1.25,5.55,26.82,2.12,19.74,2.65,70.31,1.06,10.84,77.23,4.14,10.55,2.38,20.67,1326.09,0.92,10.62,1308.62,1309.73,0.88,1315.11,2.02,10.69,6.04,2.5,18.53,13.47,8.97,1.34,32.99,20.68,8.28,0.49,70.79,26.04,31.71,1383.38,1356.85,21.89,8.53,21.47,11.75,4.95,8.79,4.35,1396.66,1393.03,1371.92,1323.02,5.98,5.66,3.53,14.38,4.73,1.28,13.42,10.71,25.17,15.23,1.93,7.46,62.74,4.13,38.89,1.32,22.89,16.91,94.8,20.45,20.85,20.39,20.7,0.3,13.89,1.07,1.07,56.46,4.44,33.03,28.08,5.13,38.08,34.04,6.79,24.89,2.43,1.72,237.06,218.84,2.7,1.24,8.68,0.0,185.88,141.85,143.98,2.66,151.26,1.28,102.84,8.99,16.24,13.7,13.12,8.9],"y0":" ","yaxis":"y","type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Priority"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Q Time Nurse"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('fa7ccf66-33d1-46f0-a752-abfc945ca278');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1025,13 +1655,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./model_warm_up.html" class="pagination-link" aria-label="model_warm_up.html">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">model_warm_up.html</span></span>
+      <a href="./visualising_model_metrics.html" class="pagination-link" aria-label="visualising_model_metrics.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">visualising_model_metrics.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./modelling_resource_unavailability.html" class="pagination-link" aria-label="modelling_resource_unavailability.html">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
