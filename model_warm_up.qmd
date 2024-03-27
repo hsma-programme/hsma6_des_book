@@ -272,7 +272,7 @@ class g:
 
     # Simulation meta parameters
     sim_duration = 2880
-    number_of_runs = 100
+    number_of_runs = 20
     warm_up_period = 1440 ##NEW - this will be in addition to the sim_duration
 
 # Class representing patients coming in to the clinic.
@@ -448,8 +448,8 @@ class g:
     patient_inter = 5
     mean_n_consult_time = 6
     number_of_nurses = 1
-    sim_duration = 120
-    number_of_runs = 5
+    sim_duration = 2880+1440
+    number_of_runs = 20
 
 # Class representing patients coming in to the clinic.  Here, patients have
 # two attributes that they carry with them - their ID, and the amount of time
@@ -742,3 +742,27 @@ f"{means_over_trial_warmup.round(2)} minutes"
 You can see overall that the warm-up time can have a very significant impact on our waiting times!
 
 Let's look at this in a graph.
+
+#### Results over time
+
+```{python}
+#| eval: true
+#| echo: true
+
+import plotly.express as px
+
+df_trial_results = df_trial_results.reset_index()
+df_trial_results['Warm Up'] = 'No Warm Up'
+
+df_trial_results_warmup = df_trial_results_warmup.reset_index()
+df_trial_results_warmup['Warm Up'] = 'With Warm Up'
+
+fig = px.histogram(
+    pd.concat([df_trial_results, df_trial_results_warmup]).round(2).reset_index(),
+    x="Warm Up",
+    color="Run Number", y="Mean Q Time Nurse",
+    barmode='group',
+    title='Average Queue Times per Run - With and Without Warmups')
+
+fig.show()
+```
