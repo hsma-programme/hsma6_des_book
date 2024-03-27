@@ -20,7 +20,6 @@ book:
   - part: extending_your_model.qmd
     chapters:
     - model_warm_up.qmd
-    - visualising_model_metrics.qmd
     - priority_based_queueing.qmd
     - modelling_resource_unavailability.qmd
     - choosing_distributions.qmd
@@ -28,12 +27,14 @@ book:
     - exercise_des_advanced.qmd
   - part: advanced_concepts.qmd
     chapters:
+    - visualising_model_metrics.qmd
+    - tracking_resource_utilisation.qmd
     - visualising_des_models.qmd
-    - testing_large_numbers_scenarios.qmd
     - modelling_variable_arrival_rates.qmd
-    - appointment_style_booking_models.qmd
     - requesting_multiple_resources.qmd
     - choosing_resource_from_many.qmd
+    - appointment_style_booking_models.qmd
+    - testing_large_numbers_scenarios.qmd
     - running_parallel_cpus.qmd
   - alternative_foss_simulation_libraries_software.qmd
   - references.qmd

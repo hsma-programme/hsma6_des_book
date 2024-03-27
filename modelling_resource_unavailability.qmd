@@ -1,0 +1,32 @@
+---
+title: Modelling Resource Unavailability
+execute:
+  eval: false
+jupyter: python3
+---
+
+So far in our models, we’ve assumed that, outside of working on our modelled activities, our modelled resources are always available for the time we’re simulating.  But that won’t always be the case in the real world.
+
+Resources may not always be “on shift”, or may be called off to other areas of the system (e.g. different parts of a hospital).  How we deal with this depends on the answer to the following question :
+
+When this happens, does another resource of the same type cover?
+
+If yes, then it doesn’t matter to the model and we don't need to change the model to reflect it.  For example, in a ward there might always be 5 doctors available, even if who those doctors are changes.
+
+If no, and the level of resource availability changes, then we can model this in SimPy by “obstructing” a resource for a certain amount of time.
+
+Let’s consider our nurse consultation model as an example.  Let’s imagine that every 2 hours, our nurse has a 15 minute break.
+
+Let’s look at how we’d model that.
+
+![](images/modelling_unavailability.png)
+
+## The approach
+
+Basically, we will :
+- Set up the frequency and duration of unavailability as parameter values in g class
+- Make sure that the nurse is set up as a PriorityResource
+- Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!)
+- Start this new generator running in our run method of the Model class.
+
+## Coding the approach
