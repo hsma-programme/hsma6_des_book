@@ -1,0 +1,4 @@
+QUARTO_PYTHON=C:\HSMA\_HSMA 6\Sammi's Sessions\hsma6_des_book\.venv\Scripts\python.exe
+QUARTO_PRINT_STACK="true"
+QUARTO_LUA_CPATH=""
+LUA_CPATH=""

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.552">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -104,7 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="include/webex.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -367,7 +366,7 @@ Note
 <p>We do not create an instance of g class. Instead, we refer to it directly when we need to access something in it.</p>
 <section id="example-g-class" class="level3 callout-info" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="example-g-class"><span class="header-section-number">4.1.1</span> Example g class</h3>
-<div id="849003f9" class="cell" data-execution_count="1">
+<div id="e23656e5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -384,7 +383,7 @@ Note
 <p>In a simple model, an entity may just carry their ID and how long they spent queuing for a resource (once known). But more advanced models could store things like their condition, their priority, probability of going down path x, etc.</p>
 <section id="example-entity-class" class="level3 callout-info" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="example-entity-class"><span class="header-section-number">4.2.1</span> Example entity class</h3>
-<div id="56f6d58c" class="cell" data-execution_count="2">
+<div id="9a08933f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -415,7 +414,7 @@ Note
 </section>
 <section id="full-example-model-class" class="level3 callout-info" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="full-example-model-class"><span class="header-section-number">4.3.4</span> Full Example model class</h3>
-<div id="cc243460" class="cell" data-execution_count="3">
+<div id="af330b51" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create a new model.</span></span>
@@ -574,7 +573,7 @@ Note
 <p>Our final class is the Trial class. This represents a batch of simulation runs, and will contain methods to run a batch of runs, as well as store, record and display results from the trial.</p>
 <section id="example-trial-class" class="level3 callout-info" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="example-trial-class"><span class="header-section-number">4.4.1</span> Example trial class</h3>
-<div id="eea84455" class="cell" data-execution_count="4">
+<div id="42b111df" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># results from each run (just the mean queuing time for the nurse here)</span></span>
@@ -615,343 +614,6 @@ Note
 </section>
 
 </main> <!-- /main -->
-<script>
-
-/* update total correct if #webex-total_correct exists */
-update_total_correct = function() {
-  console.log("webex: update total_correct");
-
-  var t = document.getElementsByClassName("webex-total_correct");
-  for (var i = 0; i < t.length; i++) {
-    p = t[i].parentElement;
-    var correct = p.getElementsByClassName("webex-correct").length;
-    var solvemes = p.getElementsByClassName("webex-solveme").length;
-    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-    var selects = p.getElementsByClassName("webex-select").length;
-
-    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-  }
-}
-
-/* webex-solution button toggling function */
-b_func = function() {
-  console.log("webex: toggle hide");
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('open')) {
-    cl.remove("open");
-  } else {
-    cl.add("open");
-  }
-}
-
-/* check answers */
-check_func = function() {
-  console.log("webex: check answers");
-  console.log(document.getElementsByClassName("webex-check"));
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('unchecked')) {
-    cl.remove("unchecked");
-    this.innerHTML = "Hide Answers";
-
-    check_answer_box_nodelist = this.parentNode.childNodes
-    console.log(check_answer_box_nodelist)
-    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-      var cl_inner = check_answer_box_nodelist[i].classList;
-      console.log("Nodelist", i, ":", cl_inner);
-      if (typeof cl_inner !== "undefined")
-        {
-          if (cl_inner.contains("feedback")) {
-            {/* console.log(cl_inner.contains("feedback")) */}
-            {/* console.log(check_answer_box_nodelist[i].style.display) */}
-            check_answer_box_nodelist[i].style.display = "block"
-          }
-        }
-
-      }
-
-  } else {
-    cl.add("unchecked");
-    this.innerHTML = "Show Answers";
-
-    check_answer_box_nodelist = this.parentNode.childNodes
-    console.log(check_answer_box_nodelist)
-    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-      var cl_inner = check_answer_box_nodelist[i].classList;
-      console.log("Nodelist", i, ":", cl_inner);
-      if (typeof cl_inner !== "undefined")
-        {
-          if (cl_inner.contains("feedback")) {
-            {/* console.log(cl_inner.contains("feedback")) */}
-            {/* console.log(check_answer_box_nodelist[i].style.display) */}
-            check_answer_box_nodelist[i].style.display = "none"
-          }
-        }
-
-      }
-
-  }
-
-}
-
-/* function for checking solveme answers */
-solveme_func = function(e) {
-  console.log("webex: check solveme");
-  {/* console.log(e) */}
-  {/* console.log(this) */}
-
-  var real_answers = JSON.parse(this.dataset.answer);
-  var my_answer = this.value;
-  var cl = this.classList;
-
-  var feedback = (this.getAttribute("feedback"))
-
-  if (document.getElementById('feedbackDiv'+this.id) === null){
-
-    var feedbackDiv = document.createElement("p");
-    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-    feedbackDiv.setAttribute("class", "feedback");
-
-  } else {
-
-    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-    feedbackDiv.innerHTML = "";
-
-  }
-
-  // Check if inside a 'check answers' box - if so and if answer box is
-  // currently unchecked, ensure feedback is hidden
-  if (this.parentElement.parentElement.classList.contains("unchecked")) {
-    {/* console.log(this.parentElement.parentElement.classList); */}
-    feedbackDiv.style.display = "none"
-  } else {
-    {/* console.log(this.parentElement.parentElement.classList); */}
-    feedbackDiv.style.display = "block"
-  }
-
-  if (cl.contains("ignorecase")) {
-    my_answer = my_answer.toLowerCase();
-  }
-  if (cl.contains("nospaces")) {
-    my_answer = my_answer.replace(/ /g, "")
-  }
-
-  if (my_answer == "") {
-    cl.remove("webex-correct");
-    cl.remove("webex-incorrect");
-  } else if (real_answers.includes(my_answer)) {
-    cl.add("webex-correct");
-    cl.remove("webex-incorrect");
-  } else {
-    cl.add("webex-incorrect");
-    cl.remove("webex-correct");
-    feedbackDiv.innerHTML = feedback;
-  	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-  }
-
-  // match numeric answers within a specified tolerance
-  if(this.dataset.tol > 0){
-    var tol = JSON.parse(this.dataset.tol);
-    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-    if (matches.reduce((a, b) => a + b, 0) > 0) {
-      cl.add("webex-correct");
-    } else {
-      cl.remove("webex-correct");
-      feedbackDiv.innerHTML = feedback;
-  	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-    }
-  }
-
-  // added regex bit
-  if (cl.contains("regex")){
-    answer_regex = RegExp(real_answers.join("|"))
-    if (answer_regex.test(my_answer)) {
-      cl.add("webex-correct");
-    }
-  }
-
-  update_total_correct();
-}
-
-/* function for checking select answers */
-select_func = function(e) {
-  console.log("webex: check select");
-
-  var cl = this.classList
-  var feedback = (this[this.selectedIndex].getAttribute("feedback"))
-
-  if (document.getElementById('feedbackDiv'+this.id) === null){
-
-    var feedbackDiv = document.createElement("p");
-    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-    feedbackDiv.setAttribute("class", "feedback");
-
-  } else {
-
-    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-    feedbackDiv.innerHTML = "";
-
-  }
-
-  feedbackDiv.innerHTML = feedback;
-  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
-  // Check if inside a 'check answers' box - if so and if answer box is
-  // currently unchecked, ensure feedback is hidden
-  if (this.parentElement.parentElement.classList.contains("unchecked")) {
-    {/* console.log(this.parentElement.parentElement.classList); */}
-    feedbackDiv.style.display = "none"
-  } else {
-    {/* console.log(this.parentElement.parentElement.classList); */}
-    feedbackDiv.style.display = "block"
-  }
-
-  /* add style */
-  cl.remove("webex-incorrect");
-  cl.remove("webex-correct");
-  if (this.value == "answer") {
-    cl.add("webex-correct");
-  } else if (this.value != "blank") {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-/* function for checking radiogroups answers */
-radiogroups_func = function(e) {
-  console.log("webex: check radiogroups");
-
-  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-  var cl = checked_button.parentElement.classList;
-  var labels = checked_button.parentElement.parentElement.children;
-  var feedback = (checked_button.getAttribute("feedback"))
-  if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
-
-  if (document.getElementById('feedbackDiv'+this.id) === null){
-
-    var feedbackDiv = document.createElement("div");
-    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-    feedbackDiv.setAttribute("class", "feedback");
-
-  } else {
-
-      var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-      feedbackDiv.innerHTML = "";
-
-  }
-
-  const currentDiv = document.getElementById(this);
-  feedbackDiv.innerHTML = feedback;
-  this.insertAdjacentElement('afterend', feedbackDiv);
-
-    // Check if inside a 'check answers' box - if so and if answer box is
-  // currently unchecked, ensure feedback is hidden
-  if (this.parentElement.classList.contains("unchecked")) {
-      {/* console.log(this.parentElement.parentElement.classList); */}
-      feedbackDiv.style.display = "none"
-    } else {
-      {/* console.log(this.parentElement.parentElement.classList); */}
-      feedbackDiv.style.display = "block"
-    }
-
-
-  /* get rid of styles */
-  for (i = 0; i < labels.length; i++) {
-    labels[i].classList.remove("webex-incorrect");
-    labels[i].classList.remove("webex-correct");
-  }
-
-  /* add style */
-  if (checked_button.value == "answer") {
-    cl.add("webex-correct");
-  } else {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-window.onload = function() {
-  console.log("webex onload");
-  /* set up solution buttons */
-  var buttons = document.getElementsByTagName("button");
-
-  for (var i = 0; i < buttons.length; i++) {
-    if (buttons[i].parentElement.classList.contains('webex-solution')) {
-      buttons[i].onclick = b_func;
-    }
-  }
-
-  var check_sections = document.getElementsByClassName("webex-check");
-  console.log("check:", check_sections.length);
-  for (var i = 0; i < check_sections.length; i++) {
-    check_sections[i].classList.add("unchecked");
-    console.log(check_sections[i])
-
-    let btn = document.createElement("button");
-    btn.innerHTML = "Show Answers";
-    btn.classList.add("webex-check-button");
-    // check_func removes the 'unchecked' class from box
-    // and updates the button text
-    // subsequently recheck all possible question funcs
-    // to ensure feedback gets shown or hidden as appropriate
-    btn.onclick = check_func;
-
-    check_sections[i].appendChild(btn);
-
-    let spn = document.createElement("span");
-    spn.classList.add("webex-total_correct");
-    check_sections[i].appendChild(spn);
-  }
-
-  /* set up webex-solveme inputs */
-  var solveme = document.getElementsByClassName("webex-solveme");
-
-  for (var i = 0; i < solveme.length; i++) {
-    /* make sure input boxes don't auto-anything */
-    solveme[i].setAttribute("autocomplete","off");
-    solveme[i].setAttribute("autocorrect", "off");
-    solveme[i].setAttribute("autocapitalize", "off");
-    solveme[i].setAttribute("spellcheck", "false");
-    solveme[i].value = "";
-
-    /* adjust answer for ignorecase or nospaces */
-    var cl = solveme[i].classList;
-    var real_answer = solveme[i].dataset.answer;
-    if (cl.contains("ignorecase")) {
-      real_answer = real_answer.toLowerCase();
-    }
-    if (cl.contains("nospaces")) {
-      real_answer = real_answer.replace(/ /g, "");
-    }
-    solveme[i].dataset.answer = real_answer;
-
-    /* attach checking function */
-    solveme[i].onkeyup = solveme_func;
-    solveme[i].onchange = solveme_func;
-
-    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  /* set up radiogroups */
-  var radiogroups = document.getElementsByClassName("webex-radiogroup");
-  for (var i = 0; i < radiogroups.length; i++) {
-    radiogroups[i].onchange = radiogroups_func;
-  }
-
-  /* set up selects */
-  var selects = document.getElementsByClassName("webex-select");
-  for (var i = 0; i < selects.length; i++) {
-    selects[i].onchange = select_func;
-    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  update_total_correct();
-}
-
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1031,6 +693,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1065,7 +745,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1341,12 +1025,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro_to_simpy.html" class="pagination-link  aria-label=" &lt;span="" introduction="" to="" simpy&lt;="" span&gt;"="">
+      <a href="./intro_to_simpy.html" class="pagination-link" aria-label="An Introduction to SimPy">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./an_example_simpy_model.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>An example simpy model</span>">
+      <a href="./an_example_simpy_model.html" class="pagination-link" aria-label="An example simpy model">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

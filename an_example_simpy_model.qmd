@@ -1,18 +1,20 @@
 ---
 title: An example simpy model
-execute:
-  eval: true
+format:
+    html:
+        code-fold: false
 jupyter: python3
 ---
-In the example we’re going to look at, we’ll model a very simple model - patients arriving at a clinic for a nurse consultation.  One type of entity, one generator, one activity, one queue, one sink, one type of resource.
+
+In the example we’re going to look at, we’ll model a very simple model - patients arriving at a clinic for a nurse consultation. One type of entity, one generator, one activity, one queue, one sink, one type of resource.
 
 ![](images/example_simplest_model.png)
 
-A SimPy model can seem quite complex at first, particularly for such a simple model as this.  But the good news is the overall structure is always the same, regardless of complexity.
+A SimPy model can seem quite complex at first, particularly for such a simple model as this. But the good news is the overall structure is always the same, regardless of complexity.
 
 ## Import statements
 
-First we need our import statements.  The libraries you import will vary depending on your model and what you need, but these three are likely going to always be in there (the first must be!)
+First we need our import statements. The libraries you import will vary depending on your model and what you need, but these three are likely going to always be in there (the first must be!)
 
 ```{python}
 import simpy
@@ -20,12 +22,9 @@ import random
 import pandas as pd
 ```
 
-:::{.callout-tip}
-
+::: callout-tip
 **random** gives us access to stochastic sampling from probability distributions
-
 :::
-
 
 ## g Class
 
@@ -213,7 +212,6 @@ class Model:
 
 ```
 
-
 ## Trial Class
 
 ```{python}
@@ -251,7 +249,6 @@ class Trial:
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
 ```
-
 
 Now we just need to run the trial and print out the results!
 
