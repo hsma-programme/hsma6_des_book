@@ -2,6 +2,7 @@ project:
   type: book
 book:
   title: HSMA - the little book of DES
+  subtitle: An introduction to writing discrete event simulation models for healthcare (and beyond) in SimPy
   author: Dan Chalk and Sammi Rosser
   date: 26/03/2024
   chapters:
@@ -10,11 +11,23 @@ book:
   - intro_to_des_concepts.qmd
   - intro_to_simpy.qmd
   - recommended_structure_classes_for_des_models.qmd
-  - an_example_simpy_model.qmd
-  - an_example_simpy_model_multiple.qmd
+  - part: your_first_simpy_model.qmd
+    chapters:
+    - an_example_simpy_model.qmd
+    - an_example_simpy_model_multiple_steps.qmd
+    - an_example_simpy_model_branching.qmd
+    - exercise_gp.qmd
+  - part: extending_your_model.qmd
+    chapters:
+    - model_warm_up.qmd
+    - visualising_model_metrics.qmd
+    - priority_based_queueing.qmd
+    - modelling_resource_unavailability.qmd
+    - choosing_distributions.qmd
+    - reneging_balking_jockeying.qmd
+    - exercise_des_advanced.qmd
   - part: advanced_concepts.qmd
     chapters:
-    - reneging_balking_jockeying.qmd
     - visualising_des_models.qmd
     - testing_large_numbers_scenarios.qmd
     - modelling_variable_arrival_rates.qmd
@@ -26,33 +39,33 @@ book:
   - references.qmd
 cover-image: resources/logos/hsma_logo_transparent_background_large.png
 favicon: resources/logos/hsma_logo_transparent_background_large.png
-# search: true
-# page-navigation: true
-# back-to-top-navigation: true
-# navbar:
-#   search: false
-#   background: '#8A1E1E'
-# sidebar:
-#   search: true
-#   style: docked
-#   logo: resources/logos/hsma_logo_transparent_background_large.png
-#   background: '#111111'
-# bibliography: references.bib
-# format:
-#   html:
-#     css: include/webex.css
-#     include-after-body: include/webex.js
-# html:
-#   css: include/webex.css
-#   include-after-body: include/webex.js
-#   theme:
-#     dark:
-#     - darkly
-#     - theme-dark.scss
-#     - resources/fonts/css/lexend.css
-#     light:
-#     - flatly
-#     - theme-light.scss
-#     - resources/fonts/css/lexend.css
-#   grid:
-#     sidebar-width: 250px
+search: true
+page-navigation: true
+back-to-top-navigation: true
+navbar:
+  search: false
+  background: '#8A1E1E'
+sidebar:
+  search: true
+  style: docked
+  logo: resources/logos/hsma_logo_transparent_background_large.png
+  background: '#111111'
+bibliography: references.bib
+format:
+  html:
+    css: include/webex.css
+    include-after-body: include/webex.js
+html:
+  css: include/webex.css
+  include-after-body: include/webex.js
+  theme:
+    dark:
+    - darkly
+    - theme-dark.scss
+    - resources/fonts/css/lexend.css
+    light:
+    - flatly
+    - theme-light.scss
+    - resources/fonts/css/lexend.css
+  grid:
+    sidebar-width: 250px

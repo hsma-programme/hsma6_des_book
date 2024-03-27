@@ -19,7 +19,11 @@ If we want patients to flow from one activity to another, we just write another 
 :::{.callout-warning}
 Just make sure you write the next bit outside of the with statement.  Otherwise you’ll drag across the resource from the previous activity too…
 
-Of course, in some cases, you might want that - perhaps if you’re modelling a bed as a resource, for example…
+Of course, in some cases, you might want that - perhaps if you’re modelling a bed as a resource, for example, but then want to model using an additional resource like a nurse for some parts of the process.
+:::
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
 :::
 
 First, lets add some additional parameters to our g class.
@@ -441,7 +445,7 @@ class Trial:
 
 Let's run the updated code and see the outputs.
 
-```
+```{python}
 # Create an instance of the Trial class
 my_trial = Trial()
 

@@ -1,0 +1,744 @@
+---
+title: Warm Up Periods
+execute:
+  eval: false
+jupyter: python3
+---
+
+In the models we've created so far patients start coming in when the service opens, and then all leave when it closes.
+
+But what if our system isn’t like that?  What if we have a system that is never empty - like an Emergency Department?
+
+By default, a DES model assumes that our system is empty at the start of a simulation run.  But if we were modelling an ED, that would skew (throw off) our results, as the initial period during which patients were coming in to an empty system wouldn’t represent what’s happening in the real world  - known as the **Initialisation Bias**.
+
+The solution to this in DES modelling is to use a Warm Up Period.
+
+The idea of a warm up period is simple.  We run the model as normal - from empty - but for a period of time (the warm up period) we don’t collect results.
+
+The model continues to run as normal, it’s just we don’t count what’s happening.
+
+:::{.callout-warning}
+If you don't use a warm-up period, you may find that the average waits you give are a lot lower than the true state - the average will be pulled lower by the earlier period of results before queues build up to their normal levels.
+:::
+
+## How long should a warm-up period be?
+
+The length of the warm up period is up to you as the modeller to define.
+
+You could be very precise about analysing it and use statistical testing to identify when the system reaches equilibrium (see https://eudl.eu/pdf/10.4108/ICST.SIMUTOOLS2009.5603 as an example).
+
+Or you could plot what’s happening over time by eye and make an estimate.
+
+Or you could just set your warm up period long enough that it’ll be representative when it starts collecting results.
+
+## Implementing the warm-up period
+
+Implementing a warm up period in SimPy is really easy.
+
+We just simply check the current time whenever we go to calculate / store a result, and see if it’s beyond the warm up period.  If it is, we do it.  If it’s not, we don’t.
+
+Let’s look at an example.  This is a slightly amended version of the model of patients coming in for a nurse consultation with a few tweaks (longer duration, more runs, added trial results calculation)
+
+We’re going to assume this is a system that’s open 24 hours - let's imagine this is a triage function at an emergency department.
+
+I’ve marked the bits I’ve added to include warm up with ##NEW
+
+### The g class
+
+First we add in a new parameter - the length of the warm-up period.
+
+Here, the sim duration has been set to 2880, and the warm-up-period to half of this (1440). You don't need to stick to this pattern - your warm-up could even be longer than your results collection if you want!
+
+```{python}
+#| label: g_class
+# Class to store global parameter values.
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    warm_up_period = 1440 ##NEW - this will be in addition to the sim_duration
+    number_of_runs = 100
+```
+
+:::{.callout-tip}
+
+If you find it easier to keep track of, you could define your warm-up like this instead.
+
+```{python}
+#| label: g_class_alt
+results_collection_period = 2880
+warm_up_period = 1440
+total_sim_duration = results_collection_period + warm_up_period
+```
+
+:::
+
+### The patient class
+
+Our patient class is unchanged.
+
+### The model class
+
+In the model class, the 'attend_clinic' method changes.
+
+We look at the current elapsed simulation time with the attribute `self.env.now`
+
+Then, whenever a patient attends the clinic and is using a nurse resource, we check whether the current simulation time is later than the number of time units we've set as our warm-up.
+
+#### The attend_clinic method
+
+```{python}
+#| label: attend_clinic_func
+# Generator function representing pathway for patients attending the
+# clinic.
+def attend_clinic(self, patient):
+    # Nurse consultation activity
+    start_q_nurse = self.env.now
+
+    with self.nurse.request() as req:
+        yield req
+
+        end_q_nurse = self.env.now
+
+        patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+        ##NEW - this checks whether the warm up period has passed before
+        # adding any results
+        if self.env.now > g.warm_up_period:
+            self.results_df.at[patient.id, "Q Time Nurse"] = (
+                patient.q_time_nurse
+            )
+
+        sampled_nurse_act_time = random.expovariate(1.0 /
+                                                    g.mean_n_consult_time)
+
+        yield self.env.timeout(sampled_nurse_act_time)
+```
+
+For example, if the simulation time is at 840 and our warm_up is 1440, this bit of code - which adds the queuing time for this patient to our records - won't run:
+
+```{python}
+#| label: warm_up_bypassed_code
+self.results_df.at[patient.id, "Q Time Nurse"] = (
+    patient.q_time_nurse
+)
+```
+
+However, if the simulation time is 1680, for example, it will.
+
+### the calculate_run_results method
+
+As we now won't count the first patient, we need to remove the dummy first patient result entry we created when we set up the dataframe.
+
+```{python}
+#| label: dummy_remove
+# Method to calculate and store results over the run
+def calculate_run_results(self):
+    self.results_df.drop([1], inplace=True) ##NEW
+
+    self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+```
+
+#### The run method
+
+Next we need to tweak the duration of our model to reflect the combination of the period we want to collect results for and the warm-up period.
+
+```{python}
+#| label: single_run
+# Method to run a single run of the simulation
+def run(self):
+    # Start up DES generators
+    self.env.process(self.generator_patient_arrivals())
+
+    # Run for the duration specified in g class
+    ##NEW - we need to tell the simulation to run for the specified duration
+    # + the warm up period if we still want the specified duration in full
+    self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+    # Calculate results over the run
+    self.calculate_run_results()
+
+    # Print patient level results for this run
+    print (f"Run Number {self.run_number}")
+    print (self.results_df)
+```
+
+### The Trial class
+
+Our trial class is unchanged.
+
+
+## The impact of the warm-up period
+
+Let's compare the results we get with and without the warm-up period.
+
+### Editing our results method
+
+To make it easier to look at the outputs, I'm going to modify two methods slightl.
+
+First, we modify the `run` method of the `Model` class slightly to swap from print the patient level dataframes to returning them as an output.
+
+```{python}
+# Method to run a single run of the simulation
+def run(self):
+    # Start up DES generators
+    self.env.process(self.generator_patient_arrivals())
+
+    # Run for the duration specified in g class
+    # We need to tell the simulation to run for the specified duration
+    # + the warm up period if we still want the specified duration in full
+    self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+    # Calculate results over the run
+    self.calculate_run_results()
+
+    # Return patient level results for this run
+    return (self.results_df) ##NEW
+```
+
+Next, we modify the `run_trial` method of the `Trial` class so that we get multiple outputs: the full patient level dataframes, a summary of results per trial, and an overall average figure for all of the trials.
+
+```{python}
+#| label: edited_results_method
+#| eval: false
+# Method to run a trial
+def run_trial(self):
+    # Run the simulation for the number of runs specified in g class.
+    # For each run, we create a new instance of the Model class and call its
+    # run method, which sets everything else in motion.  Once the run has
+    # completed, we grab out the stored run results and store it against
+    # the run number in the trial results dataframe. We also return the
+    # full patient-level dataframes.
+
+    # First, create an empty list for storing our patient-level dataframes.
+    results_dfs = []
+
+    for run in range(g.number_of_runs):
+        my_model = Model(run)
+        patient_level_results = my_model.run()
+
+        print( self.df_trial_results)
+        # First let's record our mean wait time for this run
+        self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
+
+        # Next let's work on our patient-level results dataframes
+        # We start by rounding everything to 2 decimal places
+        patient_level_results = patient_level_results.round(2)
+        # Add a new column recording the run
+        patient_level_results['run'] = run
+        # Now we're just going to add this to our empty list (or, after the first
+        # time we loop through, as an extra dataframe in our list)
+        results_dfs.append(patient_level_results)
+
+    all_results_patient_level = pd.concat(results_dfs)
+
+    # This calculates the attribute self.mean_q_time_nurse_trial
+    self.calculate_means_over_trial()
+
+    # Once the trial (ie all runs) has completed, return the results
+    return self.df_trial_results, all_results_patient_level, self.mean_q_time_nurse_trial
+```
+
+
+### The full updated code
+
+```{python}
+#| label: code_full_warm_up
+#| echo: true
+#| eval: true
+
+import simpy
+import random
+import pandas as pd
+
+# Class to store global parameter values.
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    number_of_runs = 100
+    warm_up_period = 1440 ##NEW - this will be in addition to the sim_duration
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+    # Generator function that represents the DES generator for patient arrivals
+    def generator_patient_arrivals(self):
+        while True:
+            self.patient_counter += 1
+
+            p = Patient(self.patient_counter)
+
+            self.env.process(self.attend_clinic(p))
+
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            yield self.env.timeout(sampled_inter)
+
+    # Generator function representing pathway for patients attending the
+    # clinic.
+    def attend_clinic(self, patient):
+        # Nurse consultation activity
+        start_q_nurse = self.env.now
+
+        with self.nurse.request() as req:
+            yield req
+
+            end_q_nurse = self.env.now
+
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            ##NEW - this checks whether the warm up period has passed before
+            # adding any results
+            if self.env.now > g.warm_up_period:
+                self.results_df.at[patient.id, "Q Time Nurse"] = (
+                    patient.q_time_nurse
+                )
+
+            sampled_nurse_act_time = random.expovariate(1.0 /
+                                                        g.mean_n_consult_time)
+
+            yield self.env.timeout(sampled_nurse_act_time)
+
+    # Method to calculate and store results over the run
+    def calculate_run_results(self):
+        ##NEW - as we now won't count the first patient, we need to remove
+        # the dummy first patient result entry we created when we set up the
+        # dataframe
+        self.results_df.drop([1], inplace=True)
+
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # Method to run a single run of the simulation
+    def run(self):
+        # Start up DES generators
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run for the duration specified in g class
+        ##NEW - we need to tell the simulation to run for the specified duration
+        # + the warm up period if we still want the specified duration in full
+        self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+        # Calculate results over the run
+        self.calculate_run_results()
+
+        # Return patient level results for this run
+        return (self.results_df)
+
+# Class representing a Trial for our simulation
+class Trial:
+    # Constructor
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to calculate and store means across runs in the trial
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+    def run_trial(self):
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results and store it against
+        # the run number in the trial results dataframe. We also return the
+        # full patient-level dataframes.
+
+        # First, create an empty list for storing our patient-level dataframes.
+        results_dfs = []
+
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            patient_level_results = my_model.run()
+
+            print( self.df_trial_results)
+            # First let's record our mean wait time for this run
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
+
+            # Next let's work on our patient-level results dataframes
+            # We start by rounding everything to 2 decimal places
+            patient_level_results = patient_level_results.round(2)
+            # Add a new column recording the run
+            patient_level_results['run'] = run
+            # Now we're just going to add this to our empty list (or, after the first
+            # time we loop through, as an extra dataframe in our list)
+            results_dfs.append(patient_level_results)
+
+        all_results_patient_level = pd.concat(results_dfs)
+
+        # This calculates the attribute self.mean_q_time_nurse_trial
+        self.calculate_means_over_trial()
+
+        # Once the trial (ie all runs) has completed, return the results
+        return self.df_trial_results, all_results_patient_level, self.mean_q_time_nurse_trial
+
+    # Method to print trial results, including averages across runs
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+        print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+
+# Create new instance of Trial and run it
+my_trial = Trial()
+df_trial_results_warmup, all_results_patient_level_warmup, means_over_trial_warmup = my_trial.run_trial()
+```
+
+```{python}
+#| label: code_full_no_warm_up
+#| echo: false
+#| eval: true
+
+import simpy
+import random
+import pandas as pd
+
+# Class to store global parameter values.  We don't create an instance of this
+# class - we just refer to the class blueprint itself to access the numbers
+# inside.
+class g:
+    patient_inter = 5
+    mean_n_consult_time = 6
+    number_of_nurses = 1
+    sim_duration = 120
+    number_of_runs = 5
+
+# Class representing patients coming in to the clinic.  Here, patients have
+# two attributes that they carry with them - their ID, and the amount of time
+# they spent queuing for the nurse.  The ID is passed in when a new patient is
+# created.
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor to set up the model for a run.  We pass in a run number when
+    # we create a new model.
+    def __init__(self, run_number):
+        # Create a SimPy environment in which everything will live
+        self.env = simpy.Environment()
+
+        # Create a patient counter (which we'll use as a patient ID)
+        self.patient_counter = 0
+
+        # Create a SimPy resource to represent a nurse, that will live in the
+        # environment created above.  The number of this resource we have is
+        # specified by the capacity, and we grab this value from our g class.
+        self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
+
+        # Store the passed in run number
+        self.run_number = run_number
+
+        # Create a new Pandas DataFrame that will store some results against
+        # the patient ID (which we'll use as the index).
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df["Time with Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Create an attribute to store the mean queuing time for the nurse
+        # across this run of the model
+        self.mean_q_time_nurse = 0
+
+    # A generator function that represents the DES generator for patient
+    # arrivals
+    def generator_patient_arrivals(self):
+        # We use an infinite loop here to keep doing this indefinitely whilst
+        # the simulation runs
+        while True:
+            # Increment the patient counter by 1 (this means our first patient
+            # will have an ID of 1)
+            self.patient_counter += 1
+
+            # Create a new patient - an instance of the Patient Class we
+            # defined above.  Remember, we pass in the ID when creating a
+            # patient - so here we pass the patient counter to use as the ID.
+            p = Patient(self.patient_counter)
+
+            # Tell SimPy to start up the attend_clinic generator function with
+            # this patient (the generator function that will model the
+            # patient's journey through the system)
+            self.env.process(self.attend_clinic(p))
+
+            # Randomly sample the time to the next patient arriving.  Here, we
+            # sample from an exponential distribution (common for inter-arrival
+            # times), and pass in a lambda value of 1 / mean.  The mean
+            # inter-arrival time is stored in the g class.
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            # Freeze this instance of this function in place until the
+            # inter-arrival time we sampled above has elapsed.  Note - time in
+            # SimPy progresses in "Time Units", which can represent anything
+            # you like (just make sure you're consistent within the model)
+            yield self.env.timeout(sampled_inter)
+
+    # A generator function that represents the pathway for a patient going
+    # through the clinic.  Here the pathway is extremely simple - a patient
+    # arrives, waits to see a nurse, and then leaves.
+    # The patient object is passed in to the generator function so we can
+    # extract information from / record information to it
+    def attend_clinic(self, patient):
+        # Record the time the patient started queuing for a nurse
+        start_q_nurse = self.env.now
+
+        # This code says request a nurse resource, and do all of the following
+        # block of code with that nurse resource held in place (and therefore
+        # not usable by another patient)
+        with self.nurse.request() as req:
+            # Freeze the function until the request for a nurse can be met.
+            # The patient is currently queuing.
+            yield req
+
+            # When we get to this bit of code, control has been passed back to
+            # the generator function, and therefore the request for a nurse has
+            # been met.  We now have the nurse, and have stopped queuing, so we
+            # can record the current time as the time we finished queuing.
+            end_q_nurse = self.env.now
+
+            # Calculate the time this patient was queuing for the nurse, and
+            # record it in the patient's attribute for this.
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            # Now we'll randomly sample the time this patient with the nurse.
+            # Here, we use an Exponential distribution for simplicity, but you
+            # would typically use a Log Normal distribution for a real model
+            # (we'll come back to that).  As with sampling the inter-arrival
+            # times, we grab the mean from the g class, and pass in 1 / mean
+            # as the lambda value.
+            sampled_nurse_act_time = random.expovariate(1.0 /
+                                                        g.mean_n_consult_time)
+
+            # Here we'll store the queuing time for the nurse and the sampled
+            # time to spend with the nurse in the results DataFrame against the
+            # ID for this patient.  In real world models, you may not want to
+            # bother storing the sampled activity times - but as this is a
+            # simple model, we'll do it here.
+            # We use a handy property of pandas called .at, which works a bit
+            # like .loc.  .at allows us to access (and therefore change) a
+            # particular cell in our DataFrame by providing the row and column.
+            # Here, we specify the row as the patient ID (the index), and the
+            # column for the value we want to update for that patient.
+            self.results_df.at[patient.id, "Q Time Nurse"] = (
+                patient.q_time_nurse)
+            self.results_df.at[patient.id, "Time with Nurse"] = (
+                sampled_nurse_act_time)
+
+            # Freeze this function in place for the activity time we sampled
+            # above.  This is the patient spending time with the nurse.
+            yield self.env.timeout(sampled_nurse_act_time)
+
+            # When the time above elapses, the generator function will return
+            # here.  As there's nothing more that we've written, the function
+            # will simply end.  This is a sink.  We could choose to add
+            # something here if we wanted to record something - e.g. a counter
+            # for number of patients that left, recording something about the
+            # patients that left at a particular sink etc.
+
+    # This method calculates results over a single run.  Here we just calculate
+    # a mean, but in real world models you'd probably want to calculate more.
+    def calculate_run_results(self):
+        # Take the mean of the queuing times for the nurse across patients in
+        # this run of the model.
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # The run method starts up the DES entity generators, runs the simulation,
+    # and in turns calls anything we need to generate results for the run
+    def run(self):
+        # Start up our DES entity generators that create new patients.  We've
+        # only got one in this model, but we'd need to do this for each one if
+        # we had multiple generators.
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run the model for the duration specified in g class
+        self.env.run(until=g.sim_duration)
+
+        # Now the simulation run has finished, call the method that calculates
+        # run results
+        self.calculate_run_results()
+
+        # Return patient level results for this run
+        return (self.results_df)
+
+# Class representing a Trial for our simulation - a batch of simulation runs.
+class Trial:
+    # The constructor sets up a pandas dataframe that will store the key
+    # results from each run (just the mean queuing time for the nurse here)
+    # against run number, with run number as the index.
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to calculate and store means across runs in the trial
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+    def run_trial(self):
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results and store it against
+        # the run number in the trial results dataframe. We also return the
+        # full patient-level dataframes.
+
+        # First, create an empty list for storing our patient-level dataframes.
+        results_dfs = []
+
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            patient_level_results = my_model.run()
+
+            print( self.df_trial_results)
+            # First let's record our mean wait time for this run
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
+
+            # Next let's work on our patient-level results dataframes
+            # We start by rounding everything to 2 decimal places
+            patient_level_results = patient_level_results.round(2)
+            # Add a new column recording the run
+            patient_level_results['run'] = run
+            # Now we're just going to add this to our empty list (or, after the first
+            # time we loop through, as an extra dataframe in our list)
+            results_dfs.append(patient_level_results)
+
+        all_results_patient_level = pd.concat(results_dfs)
+
+        # This calculates the attribute self.mean_q_time_nurse_trial
+        self.calculate_means_over_trial()
+
+        # Once the trial (ie all runs) has completed, return the results
+        return self.df_trial_results, all_results_patient_level, self.mean_q_time_nurse_trial
+
+    # Method to print trial results, including averages across runs
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+        print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+
+# Create new instance of Trial and run it
+my_trial = Trial()
+df_trial_results, all_results_patient_level, means_over_trial = my_trial.run_trial()
+```
+
+
+### Comparing the results
+
+#### Patient-level dataframes
+
+First, let's look at the first five rows of our patient dataframes.
+
+Without the warm-up, our patient IDs start at 1.
+
+##### Without warm-up
+```{python}
+#| eval: true
+#| label: results_p_level_head
+all_results_patient_level.head()
+```
+
+
+##### With warm-up
+
+With the warm-up, our patient IDs start later.
+
+```{python}
+#| eval: true
+#| label: results_warmup_p_level_head
+all_results_patient_level_warmup.head()
+```
+
+#### Per-run results
+
+
+##### Without warm-up
+```{python}
+#| eval: true
+#| label: results_trial_level_head
+df_trial_results.round(2).head()
+```
+
+
+##### With warm-up
+
+With the warm-up, our patient IDs start later.
+
+```{python}
+#| eval: true
+#| label: results_warmup_trial_level_head
+df_trial_results_warmup.round(2).head()
+```
+
+#### Overall results
+
+Without the warm up, our overall average wait time is
+```{python}
+#| eval: true
+#| echo: false
+f"{means_over_trial.round(2)} minutes"
+```
+
+With the warm up, our overall average wait time is
+```{python}
+#| eval: true
+#| echo: false
+f"{means_over_trial_warmup.round(2)} minutes"
+```
+
+You can see overall that the warm-up time can have a very significant impact on our waiting times!
+
+Let's look at this in a graph.

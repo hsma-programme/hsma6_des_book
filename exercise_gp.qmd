@@ -1,0 +1,38 @@
+
+
+Your task is to build a Discrete Event Simulation model of the following GP surgery.
+
+![](images/exercise_gp.png)
+
+Patients
+- arrive into the GP surgery around every 3 minutes
+- spend around 2 minutes being registered
+- then spend around 8 minutes with the GP.
+
+Around a quarter of patients need to book a test at reception after they’ve seen the GP, and this takes around 4 minutes.
+
+In addition to registering patients and booking tests, receptionists also answer incoming calls, which come in around every 10 minutes and last about 4 minutes.
+
+The surgery currently has 1 receptionist and 2 GPs.  They feel there is a problem in their system as they are receiving complaints about lengthy delays both from patients and callers.  They want you to build a simulation model to find out what’s happening and propose some solutions.
+
+Your model should represent a “day in the life” of the surgery, which is open to both in-person patients and telephone callers for 8 hours continuously.
+
+Your trial should be at least 100 runs of the simulation.
+
+## Required outputs
+
+The surgery is only interested in queuing times for each of the queues in the system (you don’t need to worry about storing sampled activity times for example), but they would like to look at the results for patients and callers separately.  You should give them mean results as a minimum, but you may consider providing additional results too.
+
+You also need to calculate and provide them with the mean queuing times across the trial (eg mean queue for registration across all runs, for GP etc - so four numbers that you would report).  You’ll need a new method in your Trial class to calculate this.  You should find this a helpful output, as it’ll help you compare scenarios easily.  Report these means to 1 decimal place.
+
+## Goal
+
+Once you’ve built the model, use it to
+- a) identify where you think the problem is
+- b) provide proposals for how you would fix it (this can include anything you like - they are open to suggestions - more resources, changes to processes to cut activity times, having the GP book the test, anything you can think of!
+
+Try different things, different solutions.
+
+:::{.callout-tip}
+Take a copy of the original working file for the base case scenario first :)
+:::

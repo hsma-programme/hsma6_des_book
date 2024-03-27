@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 3&nbsp; An Introduction to SimPy</title>
+<title>HSMA - the little book of DES - 7&nbsp; An example simpy model - branching paths</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./recommended_structure_classes_for_des_models.html" rel="next">
-<link href="./intro_to_des_concepts.html" rel="prev">
+<link href="./exercise_gp.html" rel="next">
+<link href="./an_example_simpy_model_multiple_steps.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">your_first_simpy_model.qmd</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model_branching.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
   </div>
 </li>
@@ -137,21 +137,21 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./extending_your_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">extending_your_model.html</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">your_first_simpy_model.qmd</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
@@ -160,32 +160,67 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">an_example_simpy_model_branching.html</span></span></a>
+  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./extending_your_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">extending_your_model.html</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">model_warm_up.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">visualising_model_metrics.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./priority_based_queueing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">priority_based_queueing.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">priority_based_queueing.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">choosing_distributions.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">choosing_distributions.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">exercise_des_advanced.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -194,57 +229,51 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./advanced_concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">advanced_concepts.html</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">visualising_des_models.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">visualising_des_models.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">requesting_multiple_resources.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">requesting_multiple_resources.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">choosing_resource_from_many.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">choosing_resource_from_many.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">running_parallel_cpus.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">running_parallel_cpus.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,7 +281,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">alternative_foss_simulation_libraries_software.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">alternative_foss_simulation_libraries_software.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -267,22 +296,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#simulation-time" id="toc-simulation-time" class="nav-link active" data-scroll-target="#simulation-time"><span class="header-section-number">3.1</span> Simulation Time</a></li>
-  <li><a href="#runs-and-trials" id="toc-runs-and-trials" class="nav-link" data-scroll-target="#runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</a></li>
-  <li><a href="#generator-functions" id="toc-generator-functions" class="nav-link" data-scroll-target="#generator-functions"><span class="header-section-number">3.3</span> Generator Functions</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">your_first_simpy_model.qmd</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model_branching.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></h1>
 </div>
 
 
@@ -299,46 +320,53 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>SimPy is a Python package that allows us to create powerful Discrete Event Simulation (DES) models.</p>
-<p>SimPy is built around Python Generator Functions, which we covered in the previous session.</p>
-<p>SimPy also has some tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/.</p>
-<div class="callout-info">
-<p>To install SimPy, we need to <code>pip install simpy</code>. However, it is recommended that you use a separate environment. Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!</p>
+<p>“Most real world systems aren’t linear!” we hear you say. “Some people go over here, some go over there.”</p>
+<p>You want branching paths? Coming right up!</p>
+<p>So this time, instead of this model</p>
+<p><img src="images/example_simplest_model.png" class="img-fluid"></p>
+<p>Or this model</p>
+<p><img src="images/example_simple_model_sequential.png" class="img-fluid"></p>
+<p>We will create something more like this:</p>
+<p><img src="images/example_simple_model_branching.png" class="img-fluid"></p>
+<p>To model a branching path, we can use our good old Python friend Conditional Logic.</p>
+<p>Often, the branches in a DES are based on probabilities that represent the proportion of patients (or whatever your entity is) that travel along a certain route. For example, the data might show that 60% of patients see a doctor after seeing a nurse.</p>
+<p>To model this, we can randomly sample from a uniform distribution between 0 and 1, and compare the value to this probability. If we pick a value below the probability, then we say that the patient follows this route. Why does this work? Well…</p>
+<p><img src="images/probability_bar.png" class="img-fluid"></p>
+<p>60% of values between 0 and 1 are below 0.6.</p>
+<p>Therefore, if there’s an equal chance of any value being picked (as is the case in a uniform distribution) then there’s a 60% probability of picking one below 0.6.</p>
+<p><strong>We can use this to emulate the probability of following a path.</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>Before we look at how we put together a SimPy model, there’s a couple concepts we need to cover first that are important to understand.</p>
-<section id="simulation-time" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="simulation-time"><span class="header-section-number">3.1</span> Simulation Time</h2>
-<p>SimPy simulations run in time units*. These units of time can represent any real world amount of time we like as long as we are consistent within the same model.</p>
-<p>Our time units should represent the lowest level of real world time that we need to represent in the model. In models of pathways where people arrive for a service, this will likely be minutes (seconds is too much, and hours is probably not enough, unless all the processes are slow). But we may have pathways where we measure time in days or weeks (e.g.&nbsp;referral pathways).</p>
-<p>For example, in an ED model, our time units may represent minutes. So we specify everything in minutes - inter-arrival times, activity times etc.</p>
-<div class="calllout-info">
-<p>Strictly speaking, SimPy doesn’t run in time units ticking away one by one. Instead, it schedules events jumps to the next event. But don’t worry about that for your purposes. Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).</p>
+<div class="callout-title-container flex-fill">
+Note
 </div>
-</section>
-<section id="runs-and-trials" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</h2>
-<p>In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results. This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.</p>
-<p>What if you had a run with unusually long activity times sampled (a run of “bad luck”)? Or unusually long inter-arrival times (a run of “good luck”)?</p>
-<p>We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.</p>
-<p>A single run of a model for a simulated period of time is known as a run. A batch of multiple runs with the same parameter values is known as a trial.</p>
-</section>
-<section id="generator-functions" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="generator-functions"><span class="header-section-number">3.3</span> Generator Functions</h2>
-<p>SimPy is built around a special type of function in Python known as a Generator Function.</p>
-<p>So let’s have a look at what we mean by a Generator Function.</p>
-<p>Conventional functions in Python are called, then run with some (optional) inputs, and then finish (usually by returning some output). When we call the function again, it runs again, from scratch.</p>
-<p>Generator functions remember where they were and what they did when control is passed back (they retain their local state), so that they can continue where they left off, and can be used as powerful iterators (for and while loops are other examples of iterators).</p>
-<p>This is very useful where we want state to be maintained, so we can remember how long until we generate the next entity, or where an entity is in a pathway…</p>
-<p>Let’s look at a very simple example of a generator function to see how they work.</p>
-<p><img src="images/generator_func_example.png" class="img-fluid"></p>
-<p>In SimPy, we use Generator Functions in two different places :</p>
-<p>To model the DES generators (arrival points) To model the individual journey of each entity</p>
-<p>Let’s imagine we are modelling patients in a patient pathway.</p>
-<p>For 1, the generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient. Then it does it all over again.</p>
-<p>For 2, the generator function requests a resource and freezes until that resource is available (the queue). When the resource is available it freezes in place for an amount of time with it (the activity). It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.</p>
+</div>
+<div class="callout-body-container callout-body">
+<p>Not all branching paths will be probability-based.</p>
+<p>It may be that some paths are followed depending on - the time of day - the type of patient - how long a patient spends in an activity - etc.</p>
+<p>In these cases, you’d still use conditional logic, but just alter the condition you’re checking.</p>
+<p>For the time of day, you’d want to check the current simulation time in the run.</p>
+<p>For the type of patient, you may have stored this in an <strong>attribute</strong> of the patient.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Throughout the code, anything new that’s been added will be followed by the comment <code>##NEW</code> - so look out for that in the following code chunks.</p>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script>
@@ -1089,13 +1117,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro_to_des_concepts.html" class="pagination-link" aria-label="Introduction to DES Concepts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span>
+      <a href="./an_example_simpy_model_multiple_steps.html" class="pagination-link" aria-label="An example simpy model - multiple activities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model - multiple activities</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./recommended_structure_classes_for_des_models.html" class="pagination-link" aria-label="The Recommended Structure for DES Models">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exercise_gp.html" class="pagination-link" aria-label="Required outputs">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Required outputs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

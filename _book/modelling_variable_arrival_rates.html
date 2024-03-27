@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 3&nbsp; An Introduction to SimPy</title>
+<title>HSMA - the little book of DES</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./recommended_structure_classes_for_des_models.html" rel="next">
-<link href="./intro_to_des_concepts.html" rel="prev">
+<link href="./appointment_style_booking_models.html" rel="next">
+<link href="./testing_large_numbers_scenarios.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./advanced_concepts.html">advanced_concepts.html</a></li><li class="breadcrumb-item"><a href="./modelling_variable_arrival_rates.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
   </div>
 </li>
@@ -219,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
+  <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
   </div>
 </li>
@@ -266,79 +266,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#simulation-time" id="toc-simulation-time" class="nav-link active" data-scroll-target="#simulation-time"><span class="header-section-number">3.1</span> Simulation Time</a></li>
-  <li><a href="#runs-and-trials" id="toc-runs-and-trials" class="nav-link" data-scroll-target="#runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</a></li>
-  <li><a href="#generator-functions" id="toc-generator-functions" class="nav-link" data-scroll-target="#generator-functions"><span class="header-section-number">3.3</span> Generator Functions</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<p>SimPy is a Python package that allows us to create powerful Discrete Event Simulation (DES) models.</p>
-<p>SimPy is built around Python Generator Functions, which we covered in the previous session.</p>
-<p>SimPy also has some tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/.</p>
-<div class="callout-info">
-<p>To install SimPy, we need to <code>pip install simpy</code>. However, it is recommended that you use a separate environment. Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!</p>
-</div>
-<p>Before we look at how we put together a SimPy model, there’s a couple concepts we need to cover first that are important to understand.</p>
-<section id="simulation-time" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="simulation-time"><span class="header-section-number">3.1</span> Simulation Time</h2>
-<p>SimPy simulations run in time units*. These units of time can represent any real world amount of time we like as long as we are consistent within the same model.</p>
-<p>Our time units should represent the lowest level of real world time that we need to represent in the model. In models of pathways where people arrive for a service, this will likely be minutes (seconds is too much, and hours is probably not enough, unless all the processes are slow). But we may have pathways where we measure time in days or weeks (e.g.&nbsp;referral pathways).</p>
-<p>For example, in an ED model, our time units may represent minutes. So we specify everything in minutes - inter-arrival times, activity times etc.</p>
-<div class="calllout-info">
-<p>Strictly speaking, SimPy doesn’t run in time units ticking away one by one. Instead, it schedules events jumps to the next event. But don’t worry about that for your purposes. Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).</p>
-</div>
-</section>
-<section id="runs-and-trials" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</h2>
-<p>In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results. This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.</p>
-<p>What if you had a run with unusually long activity times sampled (a run of “bad luck”)? Or unusually long inter-arrival times (a run of “good luck”)?</p>
-<p>We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.</p>
-<p>A single run of a model for a simulated period of time is known as a run. A batch of multiple runs with the same parameter values is known as a trial.</p>
-</section>
-<section id="generator-functions" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="generator-functions"><span class="header-section-number">3.3</span> Generator Functions</h2>
-<p>SimPy is built around a special type of function in Python known as a Generator Function.</p>
-<p>So let’s have a look at what we mean by a Generator Function.</p>
-<p>Conventional functions in Python are called, then run with some (optional) inputs, and then finish (usually by returning some output). When we call the function again, it runs again, from scratch.</p>
-<p>Generator functions remember where they were and what they did when control is passed back (they retain their local state), so that they can continue where they left off, and can be used as powerful iterators (for and while loops are other examples of iterators).</p>
-<p>This is very useful where we want state to be maintained, so we can remember how long until we generate the next entity, or where an entity is in a pathway…</p>
-<p>Let’s look at a very simple example of a generator function to see how they work.</p>
-<p><img src="images/generator_func_example.png" class="img-fluid"></p>
-<p>In SimPy, we use Generator Functions in two different places :</p>
-<p>To model the DES generators (arrival points) To model the individual journey of each entity</p>
-<p>Let’s imagine we are modelling patients in a patient pathway.</p>
-<p>For 1, the generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient. Then it does it all over again.</p>
-<p>For 2, the generator function requests a resource and freezes until that resource is available (the queue). When the resource is available it freezes in place for an amount of time with it (the activity). It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.</p>
-
-
-</section>
 
 </main> <!-- /main -->
 <script>
@@ -1089,13 +1025,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro_to_des_concepts.html" class="pagination-link" aria-label="Introduction to DES Concepts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span>
+      <a href="./testing_large_numbers_scenarios.html" class="pagination-link" aria-label="testing_large_numbers_scenarios.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./recommended_structure_classes_for_des_models.html" class="pagination-link" aria-label="The Recommended Structure for DES Models">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./appointment_style_booking_models.html" class="pagination-link" aria-label="appointment_style_booking_models.html">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

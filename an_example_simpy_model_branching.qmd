@@ -1,0 +1,55 @@
+---
+title: An example simpy model - branching paths
+execute:
+  eval: true
+jupyter: python3
+---
+"Most real world systems aren’t linear!" we hear you say. "Some people go over here, some go over there.”
+
+You want branching paths?  Coming right up!
+
+So this time, instead of this model
+
+![](images/example_simplest_model.png)
+
+Or this model
+
+![](images/example_simple_model_sequential.png)
+
+We will create something more like this:
+
+![](images/example_simple_model_branching.png)
+
+To model a branching path, we can use our good old Python friend Conditional Logic.
+
+Often, the branches in a DES are based on probabilities that represent the proportion of patients (or whatever your entity is) that travel along a certain route.  For example, the data might show that 60% of patients see a doctor after seeing a nurse.
+
+To model this, we can randomly sample from a uniform distribution between 0 and 1, and compare the value to this probability.  If we pick a value below the probability, then we say that the patient follows this route.  Why does this work?  Well…
+
+![](images/probability_bar.png)
+
+60% of values between 0 and 1 are below 0.6.
+
+Therefore, if there’s an equal chance of any value being picked (as is the case in a uniform distribution) then there’s a 60% probability of picking one below 0.6.
+
+**We can use this to emulate the probability of following a path.**
+
+:::{.callout-note}
+Not all branching paths will be probability-based.
+
+It may be that some paths are followed depending on
+  - the time of day
+  - the type of patient
+  - how long a patient spends in an activity
+  - etc.
+
+In these cases, you’d still use conditional logic, but just alter the condition you’re checking.
+
+For the time of day, you'd want to check the current simulation time in the run.
+
+For the type of patient, you may have stored this in an **attribute** of the patient.
+:::
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::

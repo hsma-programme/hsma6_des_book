@@ -43,7 +43,7 @@ Then sprinkle in a dose of randomness - because in real life, you're not going t
 
 You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what's going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of theser changes themselves.
 
-{{< video https://private-user-images.githubusercontent.com/29951987/285421000-1adc36a0-7bc0-4808-8d71-2d253a855b31.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTE0NzQzMTAsIm5iZiI6MTcxMTQ3NDAxMCwicGF0aCI6Ii8yOTk1MTk4Ny8yODU0MjEwMDAtMWFkYzM2YTAtN2JjMC00ODA4LThkNzEtMmQyNTNhODU1YjMxLm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAzMjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMzI2VDE3MjY1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTAyZmM0ZTE5NWI1YWFhODg4NjUyOWRiNDE0Mjg0Y2U0ZWE4MWRmYzZlNDRkY2U4OTliNWExZGE5YTNmOTQ3YjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.o3wKMOkfKw2FgtAIjLaI9XfZh-Z-p1wkbzvOe5VyYX4 >}}
+{{< video https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit/assets/29951987/1adc36a0-7bc0-4808-8d71-2d253a855b31 >}}
 
 
 ## Key DES Terminology
@@ -187,6 +187,6 @@ You should then draw up a design for the model.  This should include :
 - A process map of the system you are looking to model
 - A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).  Identify the types of entities, generators, activities, queues, resources and sinks.  Describe what each of your inter-arrival times and activity times represent, and from where you might draw the data.  Remember the training from session 1B - consider scope, level of detail etc when designing your model.  What do you need to model to answer your question?  How can you simplify?
 
-The website ![draw.io (also known as diagrams.net)](https://app.diagrams.net/) is a great free resource for creating process maps.
+The website [draw.io (also known as diagrams.net)](https://app.diagrams.net/) is a great free resource for creating process maps.
 
 :::
