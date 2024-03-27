@@ -11,13 +11,13 @@ book:
   - intro_to_des_concepts.qmd
   - intro_to_simpy.qmd
   - recommended_structure_classes_for_des_models.qmd
-  - part: your_first_simpy_model.qmd
+  - part: "Your First SimPy Model"
     chapters:
     - an_example_simpy_model.qmd
     - an_example_simpy_model_multiple_steps.qmd
     - an_example_simpy_model_branching.qmd
     - exercise_gp.qmd
-  - part: extending_your_model.qmd
+  - part: "Extending Your Model"
     chapters:
     - model_warm_up.qmd
     - priority_based_queueing.qmd
@@ -25,7 +25,7 @@ book:
     - choosing_distributions.qmd
     - reneging_balking_jockeying.qmd
     - exercise_des_advanced.qmd
-  - part: advanced_concepts.qmd
+  - part: "Advanced Concepts"
     chapters:
     - visualising_model_metrics.qmd
     - tracking_resource_utilisation.qmd
