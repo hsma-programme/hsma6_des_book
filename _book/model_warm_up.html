@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 9&nbsp; Warm Up Periods</title>
+<title>HSMA - the little book of DES - 10&nbsp; Warm Up Periods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,23 +64,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./visualising_model_metrics.html" rel="next">
-<link href="./extending_your_model.html" rel="prev">
+<link href="./priority_based_queueing.html" rel="next">
+<link href="./reproducibility.html" rel="prev">
+<link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -131,16 +134,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">HSMA - the little book of DES</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extending_your_model.html">extending_your_model.html</a></li><li class="breadcrumb-item"><a href="./model_warm_up.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Extending Your Model</a></li><li class="breadcrumb-item"><a href="./model_warm_up.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -150,13 +166,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">HSMA - the little book of DES</a> 
-    </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./resources/logos/hsma_logo_transparent_background_large.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -198,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">your_first_simpy_model.qmd</span></a>
+ <span class="menu-text">Your First SimPy Model</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -213,13 +229,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model - multiple activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">An example simpy model - branching paths</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -232,8 +248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./extending_your_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">extending_your_model.html</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Extending Your Model</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -241,14 +257,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+  <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">visualising_model_metrics.html</span></span></a>
+  <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,13 +276,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">modelling_resource_unavailability.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">choosing_distributions.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -278,15 +294,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">exercise_des_advanced.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./advanced_concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">advanced_concepts.html</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Advanced Concepts</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -294,44 +310,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">visualising_des_models.html</span></span></a>
+  <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">testing_large_numbers_scenarios.html</span></span></a>
+  <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">modelling_variable_arrival_rates.html</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">appointment_style_booking_models.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">requesting_multiple_resources.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">choosing_resource_from_many.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">running_parallel_cpus.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -339,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">alternative_foss_simulation_libraries_software.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -358,20 +386,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-long-should-a-warm-up-period-be" id="toc-how-long-should-a-warm-up-period-be" class="nav-link active" data-scroll-target="#how-long-should-a-warm-up-period-be"><span class="header-section-number">9.1</span> How long should a warm-up period be?</a></li>
-  <li><a href="#implementing-the-warm-up-period" id="toc-implementing-the-warm-up-period" class="nav-link" data-scroll-target="#implementing-the-warm-up-period"><span class="header-section-number">9.2</span> Implementing the warm-up period</a>
+  <li><a href="#how-long-should-a-warm-up-period-be" id="toc-how-long-should-a-warm-up-period-be" class="nav-link active" data-scroll-target="#how-long-should-a-warm-up-period-be"><span class="header-section-number">10.1</span> How long should a warm-up period be?</a></li>
+  <li><a href="#implementing-the-warm-up-period" id="toc-implementing-the-warm-up-period" class="nav-link" data-scroll-target="#implementing-the-warm-up-period"><span class="header-section-number">10.2</span> Implementing the warm-up period</a>
   <ul class="collapse">
-  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">9.2.1</span> The g class</a></li>
-  <li><a href="#the-patient-class" id="toc-the-patient-class" class="nav-link" data-scroll-target="#the-patient-class"><span class="header-section-number">9.2.2</span> The patient class</a></li>
-  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">9.2.3</span> The model class</a></li>
-  <li><a href="#the-calculate_run_results-method" id="toc-the-calculate_run_results-method" class="nav-link" data-scroll-target="#the-calculate_run_results-method"><span class="header-section-number">9.2.4</span> the calculate_run_results method</a></li>
-  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">9.2.5</span> The Trial class</a></li>
+  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">10.2.1</span> The g class</a></li>
+  <li><a href="#the-patient-class" id="toc-the-patient-class" class="nav-link" data-scroll-target="#the-patient-class"><span class="header-section-number">10.2.2</span> The patient class</a></li>
+  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">10.2.3</span> The model class</a></li>
+  <li><a href="#the-calculate_run_results-method" id="toc-the-calculate_run_results-method" class="nav-link" data-scroll-target="#the-calculate_run_results-method"><span class="header-section-number">10.2.4</span> the calculate_run_results method</a></li>
+  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">10.2.5</span> The Trial class</a></li>
   </ul></li>
-  <li><a href="#the-impact-of-the-warm-up-period" id="toc-the-impact-of-the-warm-up-period" class="nav-link" data-scroll-target="#the-impact-of-the-warm-up-period"><span class="header-section-number">9.3</span> The impact of the warm-up period</a>
+  <li><a href="#the-impact-of-the-warm-up-period" id="toc-the-impact-of-the-warm-up-period" class="nav-link" data-scroll-target="#the-impact-of-the-warm-up-period"><span class="header-section-number">10.3</span> The impact of the warm-up period</a>
   <ul class="collapse">
-  <li><a href="#editing-our-results-method" id="toc-editing-our-results-method" class="nav-link" data-scroll-target="#editing-our-results-method"><span class="header-section-number">9.3.1</span> Editing our results method</a></li>
-  <li><a href="#the-full-updated-code" id="toc-the-full-updated-code" class="nav-link" data-scroll-target="#the-full-updated-code"><span class="header-section-number">9.3.2</span> The full updated code</a></li>
-  <li><a href="#comparing-the-results" id="toc-comparing-the-results" class="nav-link" data-scroll-target="#comparing-the-results"><span class="header-section-number">9.3.3</span> Comparing the results</a></li>
+  <li><a href="#editing-our-results-method" id="toc-editing-our-results-method" class="nav-link" data-scroll-target="#editing-our-results-method"><span class="header-section-number">10.3.1</span> Editing our results method</a></li>
+  <li><a href="#the-full-updated-code" id="toc-the-full-updated-code" class="nav-link" data-scroll-target="#the-full-updated-code"><span class="header-section-number">10.3.2</span> The full updated code</a></li>
+  <li><a href="#comparing-the-results" id="toc-comparing-the-results" class="nav-link" data-scroll-target="#comparing-the-results"><span class="header-section-number">10.3.3</span> Comparing the results</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -379,9 +407,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extending_your_model.html">extending_your_model.html</a></li><li class="breadcrumb-item"><a href="./model_warm_up.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Extending Your Model</a></li><li class="breadcrumb-item"><a href="./model_warm_up.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></h1>
 </div>
 
 
@@ -417,22 +445,22 @@ Warning
 <p>If you don’t use a warm-up period, you may find that the average waits you give are a lot lower than the true state - the average will be pulled lower by the earlier period of results before queues build up to their normal levels.</p>
 </div>
 </div>
-<section id="how-long-should-a-warm-up-period-be" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="how-long-should-a-warm-up-period-be"><span class="header-section-number">9.1</span> How long should a warm-up period be?</h2>
+<section id="how-long-should-a-warm-up-period-be" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="how-long-should-a-warm-up-period-be"><span class="header-section-number">10.1</span> How long should a warm-up period be?</h2>
 <p>The length of the warm up period is up to you as the modeller to define.</p>
 <p>You could be very precise about analysing it and use statistical testing to identify when the system reaches equilibrium (see https://eudl.eu/pdf/10.4108/ICST.SIMUTOOLS2009.5603 as an example).</p>
 <p>Or you could plot what’s happening over time by eye and make an estimate.</p>
 <p>Or you could just set your warm up period long enough that it’ll be representative when it starts collecting results.</p>
 </section>
-<section id="implementing-the-warm-up-period" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="implementing-the-warm-up-period"><span class="header-section-number">9.2</span> Implementing the warm-up period</h2>
+<section id="implementing-the-warm-up-period" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="implementing-the-warm-up-period"><span class="header-section-number">10.2</span> Implementing the warm-up period</h2>
 <p>Implementing a warm up period in SimPy is really easy.</p>
 <p>We just simply check the current time whenever we go to calculate / store a result, and see if it’s beyond the warm up period. If it is, we do it. If it’s not, we don’t.</p>
 <p>Let’s look at an example. This is a slightly amended version of the model of patients coming in for a nurse consultation with a few tweaks (longer duration, more runs, added trial results calculation)</p>
 <p>We’re going to assume this is a system that’s open 24 hours - let’s imagine this is a triage function at an emergency department.</p>
 <p>I’ve marked the bits I’ve added to include warm up with ##NEW</p>
-<section id="the-g-class" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">9.2.1</span> The g class</h3>
+<section id="the-g-class" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">10.2.1</span> The g class</h3>
 <p>First we add in a new parameter - the length of the warm-up period.</p>
 <p>Here, the sim duration has been set to 2880, and the warm-up-period to half of this (1440). You don’t need to stick to this pattern - your warm-up could even be longer than your results collection if you want!</p>
 <div id="g_class" class="cell" data-execution_count="1">
@@ -471,17 +499,17 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-patient-class" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">9.2.2</span> The patient class</h3>
+<section id="the-patient-class" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">10.2.2</span> The patient class</h3>
 <p>Our patient class is unchanged.</p>
 </section>
-<section id="the-model-class" class="level3" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">9.2.3</span> The model class</h3>
+<section id="the-model-class" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">10.2.3</span> The model class</h3>
 <p>In the model class, the ‘attend_clinic’ method changes.</p>
 <p>We look at the current elapsed simulation time with the attribute <code>self.env.now</code></p>
 <p>Then, whenever a patient attends the clinic and is using a nurse resource, we check whether the current simulation time is later than the number of time units we’ve set as our warm-up.</p>
-<section id="the-attend_clinic-method" class="level4" data-number="9.2.3.1">
-<h4 data-number="9.2.3.1" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">9.2.3.1</span> The attend_clinic method</h4>
+<section id="the-attend_clinic-method" class="level4" data-number="10.2.3.1">
+<h4 data-number="10.2.3.1" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">10.2.3.1</span> The attend_clinic method</h4>
 <div id="attend_clinic_func" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function representing pathway for patients attending the</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># clinic.</span></span>
@@ -517,8 +545,8 @@ Tip
 <p>However, if the simulation time is 1680, for example, it will.</p>
 </section>
 </section>
-<section id="the-calculate_run_results-method" class="level3" data-number="9.2.4">
-<h3 data-number="9.2.4" class="anchored" data-anchor-id="the-calculate_run_results-method"><span class="header-section-number">9.2.4</span> the calculate_run_results method</h3>
+<section id="the-calculate_run_results-method" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="the-calculate_run_results-method"><span class="header-section-number">10.2.4</span> the calculate_run_results method</h3>
 <p>As we now won’t count the first patient, we need to remove the dummy first patient result entry we created when we set up the dataframe.</p>
 <div id="dummy_remove" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method to calculate and store results over the run</span></span>
@@ -527,8 +555,8 @@ Tip
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="the-run-method" class="level4" data-number="9.2.4.1">
-<h4 data-number="9.2.4.1" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">9.2.4.1</span> The run method</h4>
+<section id="the-run-method" class="level4" data-number="10.2.4.1">
+<h4 data-number="10.2.4.1" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">10.2.4.1</span> The run method</h4>
 <p>Next we need to tweak the duration of our model to reflect the combination of the period we want to collect results for and the warm-up period.</p>
 <div id="single_run" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method to run a single run of the simulation</span></span>
@@ -550,19 +578,19 @@ Tip
 </div>
 </section>
 </section>
-<section id="the-trial-class" class="level3" data-number="9.2.5">
-<h3 data-number="9.2.5" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">9.2.5</span> The Trial class</h3>
+<section id="the-trial-class" class="level3" data-number="10.2.5">
+<h3 data-number="10.2.5" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">10.2.5</span> The Trial class</h3>
 <p>Our trial class is unchanged.</p>
 </section>
 </section>
-<section id="the-impact-of-the-warm-up-period" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="the-impact-of-the-warm-up-period"><span class="header-section-number">9.3</span> The impact of the warm-up period</h2>
+<section id="the-impact-of-the-warm-up-period" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="the-impact-of-the-warm-up-period"><span class="header-section-number">10.3</span> The impact of the warm-up period</h2>
 <p>Let’s compare the results we get with and without the warm-up period.</p>
-<section id="editing-our-results-method" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="editing-our-results-method"><span class="header-section-number">9.3.1</span> Editing our results method</h3>
+<section id="editing-our-results-method" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="editing-our-results-method"><span class="header-section-number">10.3.1</span> Editing our results method</h3>
 <p>To make it easier to look at the outputs, I’m going to modify two methods slightl.</p>
 <p>First, we modify the <code>run</code> method of the <code>Model</code> class slightly to swap from print the patient level dataframes to returning them as an output.</p>
-<div id="3a6fbda3" class="cell" data-execution_count="7">
+<div id="55888c0e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method to run a single run of the simulation</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
@@ -619,8 +647,8 @@ Tip
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.df_trial_results, all_results_patient_level, <span class="va">self</span>.mean_q_time_nurse_trial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-full-updated-code" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="the-full-updated-code"><span class="header-section-number">9.3.2</span> The full updated code</h3>
+<section id="the-full-updated-code" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="the-full-updated-code"><span class="header-section-number">10.3.2</span> The full updated code</h3>
 <div id="code_full_warm_up" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -803,232 +831,232 @@ Run Number
 0                         0.0
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
+0                  479.494598
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
+0                  479.494598
+1                  519.032800
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
+0                  479.494598
+1                  519.032800
+2                  530.582290
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
-14                 465.637707
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
+14                 359.081049
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
-14                 465.637707
-15                 761.003986
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
+14                 359.081049
+15                 689.990959
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
-14                 465.637707
-15                 761.003986
-16                 301.182129
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
+14                 359.081049
+15                 689.990959
+16                 487.867078
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
-14                 465.637707
-15                 761.003986
-16                 301.182129
-17                 375.371993
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
+14                 359.081049
+15                 689.990959
+16                 487.867078
+17                 629.171591
             Mean Q Time Nurse
 Run Number                   
-0                  330.270129
-1                  699.110403
-2                  644.950425
-3                  597.604479
-4                  646.799856
-5                  544.462742
-6                  312.242691
-7                  464.139026
-8                  529.051693
-9                  565.048231
-10                 504.244890
-11                 773.046540
-12                 591.393568
-13                 427.135240
-14                 465.637707
-15                 761.003986
-16                 301.182129
-17                 375.371993
-18                 709.028968</code></pre>
+0                  479.494598
+1                  519.032800
+2                  530.582290
+3                  440.712074
+4                  477.638899
+5                  424.738039
+6                  320.918419
+7                  309.139530
+8                  632.406425
+9                  589.449248
+10                 500.258789
+11                 439.885667
+12                 405.497937
+13                 590.918928
+14                 359.081049
+15                 689.990959
+16                 487.867078
+17                 629.171591
+18                 605.082133</code></pre>
 </div>
 </div>
 <div id="code_full_no_warm_up" class="cell" data-execution_count="10">
@@ -1038,243 +1066,243 @@ Run Number
 0                         0.0
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
+0                  330.328587
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
+0                  330.328587
+1                  372.724790
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
+0                  330.328587
+1                  372.724790
+2                  263.649515
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
-14                 418.341762
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
+14                 480.681830
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
-14                 418.341762
-15                 339.258445
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
+14                 480.681830
+15                 500.469721
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
-14                 418.341762
-15                 339.258445
-16                 354.562595
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
+14                 480.681830
+15                 500.469721
+16                 343.751239
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
-14                 418.341762
-15                 339.258445
-16                 354.562595
-17                 406.193858
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
+14                 480.681830
+15                 500.469721
+16                 343.751239
+17                 236.557258
             Mean Q Time Nurse
 Run Number                   
-0                  308.910936
-1                  247.005586
-2                  159.525657
-3                  509.499257
-4                  298.869257
-5                  390.750001
-6                  303.555568
-7                  317.085518
-8                  561.906152
-9                  185.157894
-10                 348.757930
-11                 292.711017
-12                 344.374948
-13                 246.100536
-14                 418.341762
-15                 339.258445
-16                 354.562595
-17                 406.193858
-18                 348.835424</code></pre>
+0                  330.328587
+1                  372.724790
+2                  263.649515
+3                  491.825049
+4                  498.207117
+5                  371.329393
+6                  306.484434
+7                  301.005387
+8                  370.553368
+9                  516.037261
+10                 357.545435
+11                 479.195136
+12                 343.921997
+13                 256.425052
+14                 480.681830
+15                 500.469721
+16                 343.751239
+17                 236.557258
+18                 391.373874</code></pre>
 </div>
 </div>
 </section>
-<section id="comparing-the-results" class="level3" data-number="9.3.3">
-<h3 data-number="9.3.3" class="anchored" data-anchor-id="comparing-the-results"><span class="header-section-number">9.3.3</span> Comparing the results</h3>
-<section id="patient-level-dataframes" class="level4" data-number="9.3.3.1">
-<h4 data-number="9.3.3.1" class="anchored" data-anchor-id="patient-level-dataframes"><span class="header-section-number">9.3.3.1</span> Patient-level dataframes</h4>
+<section id="comparing-the-results" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="comparing-the-results"><span class="header-section-number">10.3.3</span> Comparing the results</h3>
+<section id="patient-level-dataframes" class="level4" data-number="10.3.3.1">
+<h4 data-number="10.3.3.1" class="anchored" data-anchor-id="patient-level-dataframes"><span class="header-section-number">10.3.3.1</span> Patient-level dataframes</h4>
 <p>First, let’s look at the first five rows of our patient dataframes.</p>
 <p>Without the warm-up, our patient IDs start at 1.</p>
-<section id="without-warm-up" class="level5" data-number="9.3.3.1.1">
-<h5 data-number="9.3.3.1.1" class="anchored" data-anchor-id="without-warm-up"><span class="header-section-number">9.3.3.1.1</span> Without warm-up</h5>
+<section id="without-warm-up" class="level5" data-number="10.3.3.1.1">
+<h5 data-number="10.3.3.1.1" class="anchored" data-anchor-id="without-warm-up"><span class="header-section-number">10.3.3.1.1</span> Without warm-up</h5>
 <div id="cell-results_p_level_head" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>all_results_patient_level.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="results_p_level_head" class="cell-output cell-output-display" data-execution_count="3">
@@ -1301,31 +1329,31 @@ Run Number
 <tr class="odd">
 <td data-quarto-table-cell-role="th">1</td>
 <td>0.00</td>
-<td>9.59</td>
+<td>4.60</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2</td>
-<td>6.93</td>
-<td>1.00</td>
+<td>0.00</td>
+<td>4.86</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td>1.51</td>
-<td>1.11</td>
+<td>4.41</td>
+<td>10.78</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4</td>
-<td>1.90</td>
-<td>6.77</td>
+<td>13.61</td>
+<td>1.96</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>3.47</td>
-<td>2.26</td>
+<td>6.20</td>
+<td>0.68</td>
 <td>0</td>
 </tr>
 </tbody>
@@ -1336,8 +1364,8 @@ Run Number
 </div>
 </div>
 </section>
-<section id="with-warm-up" class="level5" data-number="9.3.3.1.2">
-<h5 data-number="9.3.3.1.2" class="anchored" data-anchor-id="with-warm-up"><span class="header-section-number">9.3.3.1.2</span> With warm-up</h5>
+<section id="with-warm-up" class="level5" data-number="10.3.3.1.2">
+<h5 data-number="10.3.3.1.2" class="anchored" data-anchor-id="with-warm-up"><span class="header-section-number">10.3.3.1.2</span> With warm-up</h5>
 <p>With the warm-up, our patient IDs start later.</p>
 <div id="cell-results_warmup_p_level_head" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>all_results_patient_level_warmup.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1361,28 +1389,28 @@ Run Number
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">261</td>
-<td>184.71</td>
+<td data-quarto-table-cell-role="th">207</td>
+<td>229.89</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">262</td>
-<td>187.29</td>
+<td data-quarto-table-cell-role="th">208</td>
+<td>223.02</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">263</td>
-<td>197.64</td>
+<td data-quarto-table-cell-role="th">209</td>
+<td>224.64</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">264</td>
-<td>200.44</td>
+<td data-quarto-table-cell-role="th">210</td>
+<td>219.71</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">265</td>
-<td>201.47</td>
+<td data-quarto-table-cell-role="th">211</td>
+<td>218.63</td>
 <td>0</td>
 </tr>
 </tbody>
@@ -1394,10 +1422,10 @@ Run Number
 </div>
 </section>
 </section>
-<section id="per-run-results" class="level4" data-number="9.3.3.2">
-<h4 data-number="9.3.3.2" class="anchored" data-anchor-id="per-run-results"><span class="header-section-number">9.3.3.2</span> Per-run results</h4>
-<section id="without-warm-up-1" class="level5" data-number="9.3.3.2.1">
-<h5 data-number="9.3.3.2.1" class="anchored" data-anchor-id="without-warm-up-1"><span class="header-section-number">9.3.3.2.1</span> Without warm-up</h5>
+<section id="per-run-results" class="level4" data-number="10.3.3.2">
+<h4 data-number="10.3.3.2" class="anchored" data-anchor-id="per-run-results"><span class="header-section-number">10.3.3.2</span> Per-run results</h4>
+<section id="without-warm-up-1" class="level5" data-number="10.3.3.2.1">
+<h5 data-number="10.3.3.2.1" class="anchored" data-anchor-id="without-warm-up-1"><span class="header-section-number">10.3.3.2.1</span> Without warm-up</h5>
 <div id="cell-results_trial_level_head" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_trial_results.<span class="bu">round</span>(<span class="dv">2</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="results_trial_level_head" class="cell-output cell-output-display" data-execution_count="5">
@@ -1419,23 +1447,23 @@ Run Number
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>308.91</td>
+<td>330.33</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>247.01</td>
+<td>372.72</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>159.53</td>
+<td>263.65</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>509.50</td>
+<td>491.83</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>298.87</td>
+<td>498.21</td>
 </tr>
 </tbody>
 </table>
@@ -1445,8 +1473,8 @@ Run Number
 </div>
 </div>
 </section>
-<section id="with-warm-up-1" class="level5" data-number="9.3.3.2.2">
-<h5 data-number="9.3.3.2.2" class="anchored" data-anchor-id="with-warm-up-1"><span class="header-section-number">9.3.3.2.2</span> With warm-up</h5>
+<section id="with-warm-up-1" class="level5" data-number="10.3.3.2.2">
+<h5 data-number="10.3.3.2.2" class="anchored" data-anchor-id="with-warm-up-1"><span class="header-section-number">10.3.3.2.2</span> With warm-up</h5>
 <p>With the warm-up, our patient IDs start later.</p>
 <div id="cell-results_warmup_trial_level_head" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_trial_results_warmup.<span class="bu">round</span>(<span class="dv">2</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1469,23 +1497,23 @@ Run Number
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>330.27</td>
+<td>479.49</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>699.11</td>
+<td>519.03</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>644.95</td>
+<td>530.58</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>597.60</td>
+<td>440.71</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>646.80</td>
+<td>477.64</td>
 </tr>
 </tbody>
 </table>
@@ -1496,26 +1524,26 @@ Run Number
 </div>
 </section>
 </section>
-<section id="overall-results" class="level4" data-number="9.3.3.3">
-<h4 data-number="9.3.3.3" class="anchored" data-anchor-id="overall-results"><span class="header-section-number">9.3.3.3</span> Overall results</h4>
+<section id="overall-results" class="level4" data-number="10.3.3.3">
+<h4 data-number="10.3.3.3" class="anchored" data-anchor-id="overall-results"><span class="header-section-number">10.3.3.3</span> Overall results</h4>
 <p>Without the warm up, our overall average wait time is</p>
-<div id="837e1b7b" class="cell" data-execution_count="15">
+<div id="10aca40c" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>'340.08 minutes'</code></pre>
+<pre><code>'374.95 minutes'</code></pre>
 </div>
 </div>
 <p>With the warm up, our overall average wait time is</p>
-<div id="9aec2bb8" class="cell" data-execution_count="16">
+<div id="ad8ef705" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>'532.58 minutes'</code></pre>
+<pre><code>'501.38 minutes'</code></pre>
 </div>
 </div>
 <p>You can see overall that the warm-up time can have a very significant impact on our waiting times!</p>
 <p>Let’s look at this in a graph.</p>
 </section>
-<section id="results-over-time" class="level4" data-number="9.3.3.4">
-<h4 data-number="9.3.3.4" class="anchored" data-anchor-id="results-over-time"><span class="header-section-number">9.3.3.4</span> Results over time</h4>
-<div id="5b0b5b67" class="cell" data-execution_count="17">
+<section id="results-over-time" class="level4" data-number="10.3.3.4">
+<h4 data-number="10.3.3.4" class="anchored" data-anchor-id="results-over-time"><span class="header-section-number">10.3.3.4</span> Results over time</h4>
+<div id="22ccae30" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>df_trial_results <span class="op">=</span> df_trial_results.reset_index()</span>
@@ -1533,9 +1561,9 @@ Run Number
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>                            <div id="1597cfcd-08a4-4745-9487-6a03da467183" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("1597cfcd-08a4-4745-9487-6a03da467183")) {                    Plotly.newPlot(                        "1597cfcd-08a4-4745-9487-6a03da467183",                        [{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=0\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"0","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"0","offsetgroup":"0","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[308.91,330.27],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=1\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"1","offsetgroup":"1","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[247.01,699.11],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=2\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"2","offsetgroup":"2","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[159.53,644.95],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=3\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"3","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"3","offsetgroup":"3","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[509.5,597.6],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=4\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"4","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"4","offsetgroup":"4","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[298.87,646.8],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=5\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"5","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"5","offsetgroup":"5","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[390.75,544.46],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=6\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"6","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"6","offsetgroup":"6","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[303.56,312.24],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=7\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"7","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"7","offsetgroup":"7","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[317.09,464.14],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=8\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"8","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"8","offsetgroup":"8","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[561.91,529.05],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=9\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"9","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"9","offsetgroup":"9","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[185.16,565.05],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=10\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"10","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"10","offsetgroup":"10","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[348.76,504.24],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=11\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"11","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"11","offsetgroup":"11","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[292.71,773.05],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=12\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"12","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"12","offsetgroup":"12","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[344.37,591.39],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=13\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"13","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"13","offsetgroup":"13","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[246.1,427.14],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=14\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"14","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"14","offsetgroup":"14","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[418.34,465.64],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=15\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"15","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"15","offsetgroup":"15","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[339.26,761.0],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=16\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"16","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"16","offsetgroup":"16","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[354.56,301.18],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=17\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"17","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"17","offsetgroup":"17","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[406.19,375.37],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=18\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"18","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"18","offsetgroup":"18","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[348.84,709.03],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=19\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"19","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"19","offsetgroup":"19","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[420.2,409.87],"yaxis":"y","type":"histogram"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Warm Up"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"sum of Mean Q Time Nurse"}},"legend":{"title":{"text":"Run Number"},"tracegroupgap":0},"title":{"text":"Average Queue Times per Run - With and Without Warmups"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="ac20da4c-e8c6-41f2-a025-5a681847e30a" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("ac20da4c-e8c6-41f2-a025-5a681847e30a")) {                    Plotly.newPlot(                        "ac20da4c-e8c6-41f2-a025-5a681847e30a",                        [{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=0\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"0","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"0","offsetgroup":"0","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[330.33,479.49],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=1\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"1","offsetgroup":"1","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[372.72,519.03],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=2\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"2","offsetgroup":"2","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[263.65,530.58],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=3\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"3","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"3","offsetgroup":"3","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[491.83,440.71],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=4\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"4","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"4","offsetgroup":"4","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[498.21,477.64],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=5\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"5","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"5","offsetgroup":"5","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[371.33,424.74],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=6\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"6","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"6","offsetgroup":"6","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[306.48,320.92],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=7\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"7","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"7","offsetgroup":"7","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[301.01,309.14],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=8\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"8","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"8","offsetgroup":"8","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[370.55,632.41],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=9\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"9","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"9","offsetgroup":"9","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[516.04,589.45],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=10\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"10","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"10","offsetgroup":"10","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[357.55,500.26],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=11\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"11","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"11","offsetgroup":"11","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[479.2,439.89],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=12\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"12","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"12","offsetgroup":"12","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[343.92,405.5],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=13\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"13","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"13","offsetgroup":"13","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[256.43,590.92],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=14\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"14","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"14","offsetgroup":"14","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[480.68,359.08],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=15\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"15","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"15","offsetgroup":"15","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[500.47,689.99],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=16\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"16","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"16","offsetgroup":"16","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[343.75,487.87],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=17\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"17","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"17","offsetgroup":"17","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[236.56,629.17],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=18\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"18","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"18","offsetgroup":"18","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[391.37,605.08],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=19\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"19","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"19","offsetgroup":"19","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[287.01,595.65],"yaxis":"y","type":"histogram"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Warm Up"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"sum of Mean Q Time Nurse"}},"legend":{"title":{"text":"Run Number"},"tracegroupgap":0},"title":{"text":"Average Queue Times per Run - With and Without Warmups"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('1597cfcd-08a4-4745-9487-6a03da467183');
+var gd = document.getElementById('ac20da4c-e8c6-41f2-a025-5a681847e30a');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -1924,6 +1952,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -2315,13 +2487,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./extending_your_model.html" class="pagination-link" aria-label="extending_your_model.html">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">extending_your_model.html</span>
+      <a href="./reproducibility.html" class="pagination-link" aria-label="Reproducibility">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Reproducibility</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./visualising_model_metrics.html" class="pagination-link" aria-label="visualising_model_metrics.html">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">visualising_model_metrics.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./priority_based_queueing.html" class="pagination-link" aria-label="Priority-Based Queueing">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
