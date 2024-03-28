@@ -46,6 +46,16 @@ You can polish it all off by visualising the individual entities moving through 
 {{< video https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit/assets/29951987/1adc36a0-7bc0-4808-8d71-2d253a855b31 >}}
 
 
+## Runs and Trials
+
+In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.
+
+What if you had a run with unusually long activity times sampled (a run of “bad luck”)?  Or unusually long inter-arrival times (a run of “good luck”)?
+
+We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.
+
+A single run of a model for a simulated period of time is known as a **run**.  A batch of multiple runs with the same parameter values is known as a **trial**.
+
 ## Key DES Terminology
 
 ![](images/example_des_simple.png)

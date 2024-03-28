@@ -329,8 +329,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#simulation-time" id="toc-simulation-time" class="nav-link active" data-scroll-target="#simulation-time"><span class="header-section-number">3.1</span> Simulation Time</a></li>
-  <li><a href="#runs-and-trials" id="toc-runs-and-trials" class="nav-link" data-scroll-target="#runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</a></li>
-  <li><a href="#generator-functions" id="toc-generator-functions" class="nav-link" data-scroll-target="#generator-functions"><span class="header-section-number">3.3</span> Generator Functions</a></li>
+  <li><a href="#generator-functions" id="toc-generator-functions" class="nav-link" data-scroll-target="#generator-functions"><span class="header-section-number">3.2</span> Generator Functions</a></li>
   </ul>
 </nav>
     </div>
@@ -372,15 +371,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Strictly speaking, SimPy doesn’t run in time units ticking away one by one. Instead, it schedules events jumps to the next event. But don’t worry about that for your purposes. Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).</p>
 </div>
 </section>
-<section id="runs-and-trials" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="runs-and-trials"><span class="header-section-number">3.2</span> Runs and Trials</h2>
-<p>In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results. This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.</p>
-<p>What if you had a run with unusually long activity times sampled (a run of “bad luck”)? Or unusually long inter-arrival times (a run of “good luck”)?</p>
-<p>We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.</p>
-<p>A single run of a model for a simulated period of time is known as a run. A batch of multiple runs with the same parameter values is known as a trial.</p>
-</section>
-<section id="generator-functions" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="generator-functions"><span class="header-section-number">3.3</span> Generator Functions</h2>
+<section id="generator-functions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="generator-functions"><span class="header-section-number">3.2</span> Generator Functions</h2>
 <p>SimPy is built around a special type of function in Python known as a Generator Function.</p>
 <p>So let’s have a look at what we mean by a Generator Function.</p>
 <p>Conventional functions in Python are called, then run with some (optional) inputs, and then finish (usually by returning some output). When we call the function again, it runs again, from scratch.</p>

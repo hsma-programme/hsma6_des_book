@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-g-class" class="level3" data-number="12.2.1">
 <h3 data-number="12.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">12.2.1</span> The g class</h3>
 <p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency. Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
-<div id="72b53170" class="cell" data-execution_count="1">
+<div id="d78da793" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -442,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-obstruct_nurse-method" class="level4" data-number="12.2.3.1">
 <h4 data-number="12.2.3.1" class="anchored" data-anchor-id="the-obstruct_nurse-method"><span class="header-section-number">12.2.3.1</span> The obstruct_nurse method</h4>
 <p>We create a new method within the model class called <code>obstruct_nurse</code>.</p>
-<div id="35502da5" class="cell" data-execution_count="2">
+<div id="58a1ec60" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function to obstruct a nurse resource at specified intervals</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for specified amounts of time</span></span>
@@ -475,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-run-method" class="level4" data-number="12.2.3.2">
 <h4 data-number="12.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">12.2.3.2</span> The run method</h4>
 <p>In our run method, we now start up the <code>obstruct_nurse</code> process in addition to the <code>generator_patient_arrivals</code> process.</p>
-<div id="6bd4f78a" class="cell" data-execution_count="3">
+<div id="cd1e7b5e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -499,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="evaluating-the-outputs" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">12.3</span> Evaluating the outputs</h2>
-<div id="80ac568f" class="cell" data-execution_count="4">
+<div id="c9636e33" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -705,7 +705,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Let’s look at the printed output showing when our nurses were obstructed.</p>
 <p>The first number in each line of output shows the simulation time when the message was generated.</p>
-<div id="c558cacd" class="cell" data-execution_count="5">
+<div id="5abfd834" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>0.00: The nurse will go on a break at around time 120.00
 120.15: The nurse is now on a break and will be back at 135.15
@@ -772,12 +772,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
-<div id="572c7526" class="cell" data-execution_count="9">
+<div id="e49e8095" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are no nurse breaks is 143.18 minutes</code></pre>
 </div>
 </div>
-<div id="4421e254" class="cell" data-execution_count="10">
+<div id="3687fa33" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are nurse breaks is 299.7 minutes</code></pre>
 </div>

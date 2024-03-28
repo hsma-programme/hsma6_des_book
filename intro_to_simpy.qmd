@@ -24,17 +24,6 @@ For example, in an ED model, our time units may represent minutes.  So we specif
 Strictly speaking, SimPy doesn’t run in time units ticking away one by one.  Instead, it schedules events jumps to the next event.  But don’t worry about that for your purposes.  Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).
 :::
 
-## Runs and Trials
-
-In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.
-
-What if you had a run with unusually long activity times sampled (a run of “bad luck”)?  Or unusually long inter-arrival times (a run of “good luck”)?
-
-We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.
-
-A single run of a model for a simulated period of time is known as a run.  A batch of multiple runs with the same parameter values is known as a trial.
-
-
 ## Generator Functions
 
 SimPy is built around a special type of function in Python known as a Generator Function.

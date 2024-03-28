@@ -332,18 +332,19 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#why-use-des" id="toc-why-use-des" class="nav-link active" data-scroll-target="#why-use-des"><span class="header-section-number">2.1</span> Why use DES?</a></li>
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">2.2</span> An example</a></li>
-  <li><a href="#key-des-terminology" id="toc-key-des-terminology" class="nav-link" data-scroll-target="#key-des-terminology"><span class="header-section-number">2.3</span> Key DES Terminology</a>
+  <li><a href="#runs-and-trials" id="toc-runs-and-trials" class="nav-link" data-scroll-target="#runs-and-trials"><span class="header-section-number">2.3</span> Runs and Trials</a></li>
+  <li><a href="#key-des-terminology" id="toc-key-des-terminology" class="nav-link" data-scroll-target="#key-des-terminology"><span class="header-section-number">2.4</span> Key DES Terminology</a>
   <ul class="collapse">
-  <li><a href="#entities" id="toc-entities" class="nav-link" data-scroll-target="#entities"><span class="header-section-number">2.3.1</span> Entities</a></li>
-  <li><a href="#generators-and-inter-arrival" id="toc-generators-and-inter-arrival" class="nav-link" data-scroll-target="#generators-and-inter-arrival"><span class="header-section-number">2.3.2</span> Generators and Inter-Arrival</a></li>
-  <li><a href="#queues" id="toc-queues" class="nav-link" data-scroll-target="#queues"><span class="header-section-number">2.3.3</span> Queues</a></li>
-  <li><a href="#activities-and-activity-times" id="toc-activities-and-activity-times" class="nav-link" data-scroll-target="#activities-and-activity-times"><span class="header-section-number">2.3.4</span> Activities and Activity Times</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">2.3.5</span> Resources</a></li>
-  <li><a href="#sinks" id="toc-sinks" class="nav-link" data-scroll-target="#sinks"><span class="header-section-number">2.3.6</span> Sinks</a></li>
-  <li><a href="#branching-paths" id="toc-branching-paths" class="nav-link" data-scroll-target="#branching-paths"><span class="header-section-number">2.3.7</span> Branching Paths</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">2.3.8</span> Outputs</a></li>
+  <li><a href="#entities" id="toc-entities" class="nav-link" data-scroll-target="#entities"><span class="header-section-number">2.4.1</span> Entities</a></li>
+  <li><a href="#generators-and-inter-arrival" id="toc-generators-and-inter-arrival" class="nav-link" data-scroll-target="#generators-and-inter-arrival"><span class="header-section-number">2.4.2</span> Generators and Inter-Arrival</a></li>
+  <li><a href="#queues" id="toc-queues" class="nav-link" data-scroll-target="#queues"><span class="header-section-number">2.4.3</span> Queues</a></li>
+  <li><a href="#activities-and-activity-times" id="toc-activities-and-activity-times" class="nav-link" data-scroll-target="#activities-and-activity-times"><span class="header-section-number">2.4.4</span> Activities and Activity Times</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">2.4.5</span> Resources</a></li>
+  <li><a href="#sinks" id="toc-sinks" class="nav-link" data-scroll-target="#sinks"><span class="header-section-number">2.4.6</span> Sinks</a></li>
+  <li><a href="#branching-paths" id="toc-branching-paths" class="nav-link" data-scroll-target="#branching-paths"><span class="header-section-number">2.4.7</span> Branching Paths</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">2.4.8</span> Outputs</a></li>
   </ul></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">2.4</span> Exercise 1</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">2.5</span> Exercise 1</a></li>
   </ul>
 </nav>
     </div>
@@ -393,8 +394,15 @@ ul.task-list li input[type="checkbox"] {
 <p>You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what’s going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of theser changes themselves.</p>
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit/assets/29951987/1adc36a0-7bc0-4808-8d71-2d253a855b31"></video></div>
 </section>
-<section id="key-des-terminology" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="key-des-terminology"><span class="header-section-number">2.3</span> Key DES Terminology</h2>
+<section id="runs-and-trials" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="runs-and-trials"><span class="header-section-number">2.3</span> Runs and Trials</h2>
+<p>In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results. This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.</p>
+<p>What if you had a run with unusually long activity times sampled (a run of “bad luck”)? Or unusually long inter-arrival times (a run of “good luck”)?</p>
+<p>We need to run a stochastic simulation many times and take summary statistics over the results from each run to get more representative results from the model.</p>
+<p>A single run of a model for a simulated period of time is known as a <strong>run</strong>. A batch of multiple runs with the same parameter values is known as a <strong>trial</strong>.</p>
+</section>
+<section id="key-des-terminology" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="key-des-terminology"><span class="header-section-number">2.4</span> Key DES Terminology</h2>
 <p><img src="images/example_des_simple.png" class="img-fluid"></p>
 <p><strong>Entities</strong> are the things that are flowing through the sequential processes in the model (eg patients, test results, callers on a phone)</p>
 <p><strong>Generators</strong> are the way in which entities enter the model and come into being (eg arriving at ED by ambulance, self-presenting, referral from GP)</p>
@@ -405,8 +413,8 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Queues</strong> hold entities that are waiting for an activity. Entities wait in a queue until the activity has both the capacity and all required resources.</p>
 <p><strong>Sinks</strong> are how entities leave the model (the bit of system we’re modelling)</p>
 <p><img src="images/des_steps.png" class="img-fluid"></p>
-<section id="entities" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="entities"><span class="header-section-number">2.3.1</span> Entities</h3>
+<section id="entities" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="entities"><span class="header-section-number">2.4.1</span> Entities</h3>
 <p>Each entity may have certain “attributes” that it “carries with them” to help determine its journey through the modelled system. For example :</p>
 <ul>
 <li>whether it goes down path A or B</li>
@@ -416,16 +424,16 @@ ul.task-list li input[type="checkbox"] {
 <p>There may also be more than one type of entity in a model at the same time. For example, patients in a clinic, their test results, and phone calls into the clinic are all entities that we may want to capture when modelling the clinic.</p>
 <p><img src="images/des_entities.png" class="img-fluid"></p>
 </section>
-<section id="generators-and-inter-arrival" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="generators-and-inter-arrival"><span class="header-section-number">2.3.2</span> Generators and Inter-Arrival</h3>
+<section id="generators-and-inter-arrival" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="generators-and-inter-arrival"><span class="header-section-number">2.4.2</span> Generators and Inter-Arrival</h3>
 <p>A generator creates new entities to bring into the system. The rate at which new entities are generated is determined by an inter-arrival time.</p>
 <p>The inter-arrival time determines the time between one entity being generated, and the next one being generated.</p>
 <p>Inter-arrival times may be fixed, but are typically sampled (drawn) stochastically (randomly) from a distribution to capture variability (even if the variability is small).</p>
 <p>An Exponential Distribution is often used to sample inter-arrival times. More than one distribution may be used for the same generator (e.g.&nbsp;for different times of the day, day of week etc). You may also (often) have more than one generator in a system.</p>
 <p><img src="images/generators_iat.png" class="img-fluid"></p>
 </section>
-<section id="queues" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="queues"><span class="header-section-number">2.3.3</span> Queues</h3>
+<section id="queues" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="queues"><span class="header-section-number">2.4.3</span> Queues</h3>
 <p>Each activity in a Discrete Event Simulation has an associated queue. The queue holds entities whilst they wait for the activity to become available for them.</p>
 <p>Each queue has a queuing policy. This determines the order in which entities are released from the queue into the activity. The two most common queuing policies are:</p>
 <ul>
@@ -434,8 +442,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><img src="images/queue_types.png" class="img-fluid"></p>
 </section>
-<section id="activities-and-activity-times" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="activities-and-activity-times"><span class="header-section-number">2.3.4</span> Activities and Activity Times</h3>
+<section id="activities-and-activity-times" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="activities-and-activity-times"><span class="header-section-number">2.4.4</span> Activities and Activity Times</h3>
 <p>Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs : - An entity (drawn from the queue) - The required type and number of resource to be available</p>
 <p>Once the above conditions have been met, the activity begins. The entity, and the resource(s) are then locked in place for an amount of time – the Activity Time. The resource(s) cannot be used elsewhere until the activity time has passed.</p>
 <p>Activity times may be fixed, but are typically sampled stochastically from a distribution.</p>
@@ -454,8 +462,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="resources" class="level3" data-number="2.3.5">
-<h3 data-number="2.3.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">2.3.5</span> Resources</h3>
+<section id="resources" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">2.4.5</span> Resources</h3>
 <p>Resources are needed to undertake activities. An activity may require just a single resource, more than one resource of the same type, or multiple resources of different types.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -476,21 +484,21 @@ Tip
 <p>In some activities, having optional additional resource may speed up the activity (though rarely linearly).</p>
 <p><img src="images/resources_simple.png" class="img-fluid"></p>
 </section>
-<section id="sinks" class="level3" data-number="2.3.6">
-<h3 data-number="2.3.6" class="anchored" data-anchor-id="sinks"><span class="header-section-number">2.3.6</span> Sinks</h3>
+<section id="sinks" class="level3" data-number="2.4.6">
+<h3 data-number="2.4.6" class="anchored" data-anchor-id="sinks"><span class="header-section-number">2.4.6</span> Sinks</h3>
 <p>Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include : - an entity physically leaving a system (e.g.&nbsp;discharge from hospital) - an entity no longer existing (e.g.&nbsp;death, use of sample, end of telephone call) - an entity no longer needing to access activities that we’re interested in (e.g.&nbsp;they leave the bit of the system that we’re modelling)</p>
 <p>The most important thing to remember about a sink is that it doesn’t necessarily represent an entity leaving the system entirely.</p>
 <p>For example, the scope of your model may only cover the triage aspect of an Emergency Department. Therefore, a valid sink might be placed after their triage - they’ve left the scope of our model</p>
 <p><img src="images/sinks_simple.png" class="img-fluid"></p>
 </section>
-<section id="branching-paths" class="level3" data-number="2.3.7">
-<h3 data-number="2.3.7" class="anchored" data-anchor-id="branching-paths"><span class="header-section-number">2.3.7</span> Branching Paths</h3>
+<section id="branching-paths" class="level3" data-number="2.4.7">
+<h3 data-number="2.4.7" class="anchored" data-anchor-id="branching-paths"><span class="header-section-number">2.4.7</span> Branching Paths</h3>
 <p>Real world systems (and the models of those systems) are rarely linear. Often, different things will happen to different entities. In a Discrete Event Simulation, this means different entities flowing to different activities, or different sinks.</p>
 <p>We might differentiate based on : - an attribute of the patient (e.g.&nbsp;patients with a higher priority value flow through a different set of activities) - probability (e.g.&nbsp;we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time) - time (e.g.&nbsp;after a certain time of day, entities flow through a different set of activities)</p>
 <p><img src="images/branching_paths_simple.png" class="img-fluid"></p>
 </section>
-<section id="outputs" class="level3" data-number="2.3.8">
-<h3 data-number="2.3.8" class="anchored" data-anchor-id="outputs"><span class="header-section-number">2.3.8</span> Outputs</h3>
+<section id="outputs" class="level3" data-number="2.4.8">
+<h3 data-number="2.4.8" class="anchored" data-anchor-id="outputs"><span class="header-section-number">2.4.8</span> Outputs</h3>
 <p>As with any type of model, it’s important to think about what outputs you need your DES model to generate to answer your modelling questions. As a DES model is used to model queuing and resourcing problems, typical DES model outputs include average, min, max, xth percentile of :</p>
 <ul>
 <li>time entities are in system</li>
@@ -501,8 +509,8 @@ Tip
 <p><img src="images/output_example_simple.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="exercise-1" class="level2 callout-info" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">2.4</span> Exercise 1</h2>
+<section id="exercise-1" class="level2 callout-info" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">2.5</span> Exercise 1</h2>
 <p>Design a Discrete Event Simulation for a system of your choosing.</p>
 <p>Think about some different possibilities (and these don’t have to be health-related, they can be anything! A restaurant? Airport? Customer service line?).</p>
 <p>You should then draw up a design for the model. This should include : - The “what if?” question(s) you would use the model to answer - A process map of the system you are looking to model - A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map). Identify the types of entities, generators, activities, queues, resources and sinks. Describe what each of your inter-arrival times and activity times represent, and from where you might draw the data. Remember the training from session 1B - consider scope, level of detail etc when designing your model. What do you need to model to answer your question? How can you simplify?</p>
