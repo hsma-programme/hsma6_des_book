@@ -21,11 +21,11 @@ book:
     - exercise_gp.qmd
   - part: "Part 3 - Extending Your Model"
     chapters:
-    - reproducibility.qmd
     - model_warm_up.qmd
     - priority_based_queueing.qmd
     - modelling_resource_unavailability.qmd
     - choosing_distributions.qmd
+    - reproducibility.qmd
     - reneging_balking_jockeying.qmd
     - exercise_des_advanced.qmd
   - part: "Part 4 - Advanced Concepts"
@@ -54,6 +54,11 @@ book:
     style: docked
     logo: resources/logos/hsma_logo_transparent_background_large.png
     background: '#111111'
+  open-graph: true
+  # cookie-consent:
+  #   type: express
+  #   style: headline
+  #   palette: dark
 bibliography: references.bib
 format:
   html:

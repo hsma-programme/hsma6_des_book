@@ -179,6 +179,14 @@ To install the package, run
 pip install sim-tools
 ```
 
+You can then import a class with
+
+```{python}
+from sim_tools.distributions import Exponential
+```
+
+replacing Exponential with any of the supported distribution classes.
+
 An overview of how to use the classes, and of the different distributions included, is embedded below:
 
 ```{=html}

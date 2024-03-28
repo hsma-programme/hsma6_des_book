@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 5&nbsp; An example simpy model</title>
+<title>HSMA - the little book of DES - 6&nbsp; An example simpy model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./an_example_simpy_model_multiple_steps.html" rel="next">
-<link href="./recommended_structure_classes_for_des_models.html" rel="prev">
+<link href="./exercise_des_design.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -108,6 +108,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
+<meta property="og:title" content="HSMA - the little book of DES - 6&nbsp; An example simpy model">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -132,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -169,6 +172,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part 1 - DES Concepts and Design</span></span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_des_concepts.html" class="sidebar-item-text sidebar-link">
@@ -187,45 +194,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Your First SimPy Model</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+  <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Extending Your Model</span></a>
+ <span class="menu-text">Part 2 - Your First SimPy Model</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -233,10 +211,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3 - Extending Your Model</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
@@ -263,79 +270,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Advanced Concepts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Part 4 - Advanced Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -362,20 +375,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#import-statements" id="toc-import-statements" class="nav-link active" data-scroll-target="#import-statements"><span class="header-section-number">5.1</span> Import statements</a></li>
-  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">5.2</span> g Class</a></li>
-  <li><a href="#patient-entity-class" id="toc-patient-entity-class" class="nav-link" data-scroll-target="#patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) Class</a></li>
-  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">5.4</span> Model Class</a></li>
-  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">5.5</span> Trial Class</a></li>
+  <li><a href="#import-statements" id="toc-import-statements" class="nav-link active" data-scroll-target="#import-statements"><span class="header-section-number">6.1</span> Import statements</a></li>
+  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">6.2</span> g Class</a></li>
+  <li><a href="#patient-entity-class" id="toc-patient-entity-class" class="nav-link" data-scroll-target="#patient-entity-class"><span class="header-section-number">6.3</span> Patient (entity) Class</a></li>
+  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">6.4</span> Model Class</a></li>
+  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">6.5</span> Trial Class</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./an_example_simpy_model.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model</span></h1>
 </div>
 
 
@@ -395,10 +408,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the example we’re going to look at, we’ll model a very simple model - patients arriving at a clinic for a nurse consultation. One type of entity, one generator, one activity, one queue, one sink, one type of resource.</p>
 <p><img src="images/example_simplest_model.png" class="img-fluid"></p>
 <p>A SimPy model can seem quite complex at first, particularly for such a simple model as this. But the good news is the overall structure is always the same, regardless of complexity.</p>
-<section id="import-statements" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="import-statements"><span class="header-section-number">5.1</span> Import statements</h2>
+<section id="import-statements" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="import-statements"><span class="header-section-number">6.1</span> Import statements</h2>
 <p>First we need our import statements. The libraries you import will vary depending on your model and what you need, but these three are likely going to always be in there (the first must be!)</p>
-<div id="a0759499" class="cell" data-execution_count="1">
+<div id="2976447c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -417,10 +430,10 @@ Tip
 </div>
 </div>
 </section>
-<section id="g-class" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="g-class"><span class="header-section-number">5.2</span> g Class</h2>
+<section id="g-class" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="g-class"><span class="header-section-number">6.2</span> g Class</h2>
 <p>Remember - the g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.</p>
-<div id="799b7e8e" class="cell" data-execution_count="2">
+<div id="346288f2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store global parameter values.  We don't create an instance of this</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># class - we just refer to the class blueprint itself to access the numbers</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># inside.</span></span>
@@ -432,9 +445,9 @@ Tip
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="patient-entity-class" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) Class</h2>
-<div id="032c0b9c" class="cell" data-execution_count="3">
+<section id="patient-entity-class" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="patient-entity-class"><span class="header-section-number">6.3</span> Patient (entity) Class</h2>
+<div id="5bdef1af" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.  Here, patients have</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># two attributes that they carry with them - their ID, and the amount of time</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># they spent queuing for the nurse.  The ID is passed in when a new patient is</span></span>
@@ -445,9 +458,9 @@ Tip
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="model-class" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">5.4</span> Model Class</h2>
-<div id="264ca4a6" class="cell" data-execution_count="4">
+<section id="model-class" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">6.4</span> Model Class</h2>
+<div id="f27465c8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
@@ -601,9 +614,9 @@ Tip
 <span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.results_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="trial-class" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">5.5</span> Trial Class</h2>
-<div id="3e30b243" class="cell" data-execution_count="5">
+<section id="trial-class" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">6.5</span> Trial Class</h2>
+<div id="220f9362" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation - a batch of simulation runs.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
@@ -639,7 +652,7 @@ Tip
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.print_trial_results()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we just need to run the trial and print out the results!</p>
-<div id="ff915875" class="cell" data-execution_count="6">
+<div id="2b523d81" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -649,127 +662,115 @@ Tip
 <pre><code>Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         2.999002
-2               0.000000         1.856475
-3               0.000000         2.193540
-4               0.000000         6.575223
-5               3.668636         0.302096
-6               1.811972         0.146819
-7               0.000000         2.688152
-8               2.076836         6.782596
-9               6.034037         2.328943
-10              7.458316        12.659379
-11             12.202099        11.126469
-12             16.082458         6.934856
-13             16.786913        11.159083
-14             22.434102        18.877372
-15             39.304507         0.132664
-16             29.776849         1.483680
-17             29.300218         0.394784
-18             26.874140        10.255726
-19             23.037330         0.065794
-20             21.510282         4.014141
+1               0.000000         7.614744
+2               7.610065         5.109437
+3              10.143249         5.623511
+4              15.573619         5.613991
+5              21.123973         0.194743
+6               0.000000        13.927540
+7              11.032970         0.592822
+8               9.936472         9.314171
+9              15.140662         2.003631
+10             13.870360         3.975410
+11             15.322007         6.693202
+12              9.365970         1.199749
+13              5.754925         1.590947
+14              4.779997         1.154199
+15              0.173774         9.283888
+16              8.115193         0.106132
+17              0.295368         0.327732
+18              0.190066         5.239028
+19              4.019772         0.619420
+20              0.000000         9.151451
+21              0.000000        30.207258
 Run Number 1
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000        12.105278
-2               8.759520         0.733290
-3               8.440133        12.438580
-4              14.402787        16.300320
-5              29.573805         2.049393
-6              27.484700         3.094275
-7              29.801908         6.173991
-8              33.158781         1.085710
-9              32.912208        16.534099
-10             45.131755         1.642087
-11             45.311741         9.390093
-12             43.389976         0.060776
-13             41.501601         3.682034
-14             43.807252        21.121016
-15             58.475406         4.125422
-16             61.672363         3.253288
-17             63.466318         2.346027
-18             60.723716        10.986709
+1               0.000000         6.087908
+2               0.000000         0.571920
+3               0.000000         0.821938
+4               0.000000         0.186725
+5               0.000000         0.922527
+6               0.000000         0.889827
+7               0.000000         2.445888
+8               2.269606         0.817938
+9               0.000000         1.058017
+10              0.000000         0.601712
+11              0.000000         0.750404
+12              0.000000         0.977873
+13              0.000000         9.366462
+14              3.836580         9.014683
+15             11.835215         9.183815
+16             18.915777         6.700189
+17             24.793999         1.761926
+18             25.935836         0.887397
+19             25.500402        18.116778
 Run Number 2
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         0.308941
-2               0.005055         6.687847
-3               1.414465         3.777505
-4               4.824854        13.656366
-5              10.200763         9.480563
-6              12.077065         2.213058
-7              11.657196         8.251401
-8              10.187050        23.770094
-9              33.858349         1.132745
-10             33.991621         0.345505
-11             33.003199         3.070387
-12             32.791994         3.300420
-13             34.882549         3.225586
-14             32.926656         2.884663
-15             35.629229        17.501923
-16             38.374887         4.475804
-17             41.787625         1.549179
-18             40.978056         7.971044
-19             48.486599         3.612924
-20             51.142146         7.468752
+1               0.000000         1.315429
+2               0.000000         9.032973
+3               1.615955         5.789978
+4               0.153444         0.317371
+5               0.000000         1.566285
+6               0.250596         8.166204
+7               7.109212        19.727538
+8              11.094811         7.058286
+9              11.094779        16.116200
+10             16.532203        24.837476
+11             30.450152         1.411548
+12             27.258360         0.328869
+13             19.174615         3.410289
+14             19.516259         0.114131
+15             11.088819        12.373363
+16             18.062004         1.949140
 Run Number 3
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         7.639743
-2               5.312067        13.414690
-3              18.067342        15.736300
-4              33.691513         6.091741
-5              32.333968         8.584686
-6              36.284582        17.124481
-7              50.811107        13.727915
-8              46.926154         1.329752
-9              34.467285         0.082624
-10             31.547430        15.254117
-11             41.805755         0.372889
-12             30.482329         5.404088
-13             34.771580         0.268444
-14             34.054239         7.600884
-15             35.982202         1.950896
-16             37.872020         1.932939
-17             38.287105         4.711725
+1               0.000000         4.614368
+2               4.503168         2.848958
+3               1.995269        15.720112
+4               4.249591         1.581535
+5               0.000000         6.671167
+6               0.000000         1.390900
+7               0.000000         3.622535
+8               2.627607         5.990652
+9               4.359107         0.171452
+10              2.267437         5.249553
+11              5.858163        12.800432
+12             15.872869         2.229994
+13             11.814754         3.811712
+14             15.576049         6.745997
+15             14.040788        11.705691
+16             15.750828        14.363299
 Run Number 4
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         0.786885
-2               0.673082         4.937890
-3               4.308524         9.694404
-4              13.990772         0.047052
-5              11.413587         0.244733
-6               3.164399         3.545532
-7               4.373249         3.714559
-8               0.960648        32.518528
-9              32.376820         9.488002
-10             34.548643         0.973603
-11             29.149831         5.629770
-12             33.471641         0.975158
-13             29.937905         0.898245
-14             27.827671         3.687439
-15             24.009557         0.932962
-16             20.209509         2.083014
-17             17.979239         8.168283
-18             25.887624         4.255157
-19             22.765336         1.608921
-20             18.830278         3.888177
-21             15.136718         0.150437
-22              8.253231         4.584292
-23              9.184731         2.956499
-24             11.938971         1.368672
-25             12.616884         0.601190
-26             12.473223        12.327329
+1               0.000000         4.710096
+2               0.000000         7.159573
+3               0.000000         2.340939
+4               0.000000         1.265524
+5               0.000000        24.161333
+6              17.665351        14.986656
+7              29.713717         0.456137
+8               5.171719         3.102962
+9               6.209501         6.055216
+10             12.250901         0.560925
+11             11.094029         1.577752
+12              7.341313         1.602025
+13              6.340650         9.105710
+14              3.420609         4.909027
+15              0.000000         0.673251
+16              0.000000         6.715924
+17              5.519324        36.751986
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                   12.917935
-1                   36.000776
-2                   25.410968
-3                   31.923334
-4                   16.364695</code></pre>
+0                    7.259450
+1                    5.951969
+2                   10.837575
+3                    6.182227
+4                    6.160418</code></pre>
 </div>
 </div>
 
@@ -1669,13 +1670,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./recommended_structure_classes_for_des_models.html" class="pagination-link" aria-label="The Recommended Structure for DES Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span>
+      <a href="./exercise_des_design.html" class="pagination-link" aria-label="Exercise - Designing a DES">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./an_example_simpy_model_multiple_steps.html" class="pagination-link" aria-label="Adding Multiple Activities">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
