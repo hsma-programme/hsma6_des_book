@@ -517,7 +517,7 @@ Tip
 <section id="code-for-the-lognormal-distribution" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="code-for-the-lognormal-distribution"><span class="header-section-number">13.2</span> Code for the lognormal distribution</h2>
 <p>This code was written by <a href="https://orcid.org/0000-0003-2631-4481">Tom Monks</a>.</p>
-<div id="9d4375bc" class="cell" data-execution_count="1">
+<div id="b8ea3a71" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -568,7 +568,7 @@ Tip
 <p>Then we just need to make sure we have both a mean and standard deviation (SD) for activity times that we want to represent on Lognormal distributions</p>
 <p>When we need to sample an activity time, we create an instance of the Lognormal class with our mean and SD, and call the sample method.</p>
 <p>We are going to do this in the attend_clinic method of the Model class.</p>
-<div id="8583cb34" class="cell" data-execution_count="2">
+<div id="adcc8801" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nurse consultation activity</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -602,11 +602,11 @@ Tip
 <p>The sim-tools package makes it easy to make use of them without having to write lots of classes yourself.</p>
 <p>The source code for the package can be investigated in its <a href="https://github.com/TomMonks/sim-tools">Github Repository</a>.</p>
 <p>To install the package, run</p>
-<div id="2f438833" class="cell" data-execution_count="3">
+<div id="b3766e2d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pip install sim<span class="op">-</span>tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can then import a class with</p>
-<div id="498d8689" class="cell" data-execution_count="4">
+<div id="dbc833e7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Exponential</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>replacing Exponential with any of the supported distribution classes.</p>
