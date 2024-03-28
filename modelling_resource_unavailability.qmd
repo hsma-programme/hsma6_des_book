@@ -66,6 +66,14 @@ The patient class is unchanged.
 #### The obstruct_nurse method
 We create a new method within the model class called `obstruct_nurse`.
 
+::: {.callout-tip}
+Note that here we are using a priority value of -1.
+
+Negative priorities are higher (i.e. are seen first) compared to higher priorities; a priority value of -1 will be seen before a priority value of 1, but a priority value of 1 will be seen before a priority value of 2.
+
+This is a very helpful feature to use to keep your breaktime functions from clashing with high-priority patients.
+:::
+
 ```{python}
 ##NEW
 # Generator function to obstruct a nurse resource at specified intervals
