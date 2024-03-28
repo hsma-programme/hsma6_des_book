@@ -1,5 +1,5 @@
 ---
-title: An example simpy model - branching paths
+title: Adding Branching Paths
 execute:
   eval: true
 jupyter: python3

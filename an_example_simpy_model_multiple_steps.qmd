@@ -1,5 +1,5 @@
 ---
-title: An example simpy model - multiple activities
+title: Adding Multiple Activities
 execute:
   eval: true
 jupyter: python3

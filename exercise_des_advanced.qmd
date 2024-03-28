@@ -1,0 +1,6 @@
+---
+title: Exercise - Practicing Advanced Concepts
+execute:
+  eval: false
+jupyter: python3
+---

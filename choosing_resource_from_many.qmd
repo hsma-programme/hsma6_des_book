@@ -1,0 +1,6 @@
+---
+title: Choosing One Resource From Many
+execute:
+  eval: true
+jupyter: python3
+---

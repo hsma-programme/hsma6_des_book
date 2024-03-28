@@ -1,4 +1,9 @@
-# Reneging, balking and jockeying
+---
+title: Reneging, balking and jockeying
+execute:
+  eval: false
+jupyter: python3
+---
 
 Not all queues run “as planned”. We may wish to model behaviours where entities stop waiting, switch queues, or never join the queue in the first place.
 

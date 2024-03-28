@@ -1,0 +1,6 @@
+---
+title: Dealing with appointment bookings
+execute:
+  eval: false
+jupyter: python3
+---

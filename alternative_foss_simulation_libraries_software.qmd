@@ -1,0 +1,24 @@
+---
+title: Alternative Simulation Libraries and Software
+execute:
+  eval: false
+jupyter: python3
+---
+
+
+
+## Python Libraries
+
+### ciw
+
+###
+
+
+## R Libraries
+
+### simmeR
+
+
+## GUI Software
+
+### JaamSim

@@ -1,0 +1,6 @@
+---
+title: Requesting Multiple Resources Simultaneously
+execute:
+  eval: false
+jupyter: python3
+---
