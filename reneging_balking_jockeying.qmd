@@ -14,3 +14,928 @@ Not all queues run “as planned”. We may wish to model behaviours where entit
 **Jockeying** refers to an entity switching queues in the hope of reducing queuing time. (eg switching till queues at the supermarket)
 
 ![](images/reneging_balking_jockeying_overview.png)
+
+## Reneging
+
+Let’s imagine that each of our patients has a patience level - an amount of time they’re prepared to wait for the nurse.
+
+To model this, we :
+- Add patience level as an attribute to each patient, with some way of determining what a patient’s patience is
+- When we request a resource, we’ll tell SimPy to either wait until the request can be met OR until the patient’s patience has expired (whichever comes first)
+- We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged
+- We’ll add the number of patients that reneged to our outputs from each run, and take the average number of patients who reneged per run over the trial.
+
+### Coding a reneging examaple
+
+#### The g class
+The g class is unchanged.
+
+#### The patient class
+
+In the patient class, we add a patience attribute.
+
+This determines how long the patient is prepared to wait for the nurse.
+
+Here we just randomly sample an integer between 5 and 50 (so the patient will be
+prepared to wait for somewhere between 5 and 50 minutes in the queue),  but in a real world application you would probably want to have a  more refined way of allocating patience to patients (e.g basing probabilities off prior data, or using a non-uniform named distribution).
+
+You could have different patience levels for different queues, or just a general patience level.  Or even get creative and have a patience level that decreases the longer they've been in the system if your system has multiple steps!
+
+If we want to see the effect of this, we can try changing the patience levels - but you'll need to make the patience levels MUCH higher as this system is in bad shape (after 3 days patients are waiting on average over 3 hours... and a lot are waiting much longer!)
+
+Maybe try adding another nurse in to get the system under control first!
+
+```{python}
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+        self.priority = random.randint(1,5)
+
+        self.patience_nurse = random.randint(5, 50) ##NEW
+```
+
+#### The model class
+
+##### The __init__ method
+
+In the init method, we set up an additional attribute to track the number of people reneging.
+
+```{python}
+def __init__(self, run_number):
+    # Set up SimPy environment
+    self.env = simpy.Environment()
+
+    # Set up counters to use as entity IDs
+    self.patient_counter = 0
+
+    # Set up resources
+    self.nurse = simpy.PriorityResource(self.env,
+                                        capacity=g.number_of_nurses)
+
+    # Set run number from value passed in
+    self.run_number = run_number
+
+    # Set up DataFrame to store patient-level results
+    self.results_df = pd.DataFrame()
+    self.results_df["Patient ID"] = [1]
+    self.results_df["Q Time Nurse"] = [0.0]
+    self.results_df.set_index("Patient ID", inplace=True)
+
+    # Set up attributes that will store mean queuing times across the run
+    self.mean_q_time_nurse = 0
+
+    ##NEW - we'll set up a new attribute that will store the number of
+    # people that reneged from queues in the run (we only have one queue in
+    # this model)
+    self.num_reneged_nurse = 0
+
+    random.seed(42)
+```
+
+#### The attend_clinic method
+
+In the attend clinic, we now add in an OR statement (the vertical line | , also known as a pipe) to our request for the nurse.
+
+```{python}
+result_of_queue = (yield req | self.env.timeout(patient.patience_nurse))
+```
+
+It basically says "Wait for the request for the nurse to be fulfilled OR until the patient's patience level has passed, whichever comes first, and then store whatever the outcome was.
+
+We then need to check whether we got our req - the resource we requested - or whether the timeout occurred.
+
+We do this with conditional logic:
+
+```{python}
+if req in result_of_queue:
+```
+
+The indented code after this statement will only take place if the resource became available before the patient's patience ran out (i.e. if the resource became available before the patience period elapsed).
+
+```{python}
+def attend_clinic(self, patient):
+    # Nurse consultation activity
+    start_q_nurse = self.env.now
+
+    with self.nurse.request(priority=patient.priority) as req:
+        ##NEW
+        result_of_queue = (yield req |
+                            self.env.timeout(patient.patience_nurse))
+
+        ##NEW - we now need to check whether the patient waited or reneged,
+        # as we could have got to this point of the generator function
+        # either way.  We'll now only get them to see the nurse if they
+        # waited.  If they didn't wait, we'll add to our counter of how
+        # many patients reneged from the queue.
+        if req in result_of_queue:
+            end_q_nurse = self.env.now
+
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            if self.env.now > g.warm_up_period:
+                self.results_df.at[patient.id, "Q Time Nurse"] = (
+                    patient.q_time_nurse
+                )
+
+            sampled_nurse_act_time = Lognormal(
+                g.mean_n_consult_time, g.sd_n_consult_time).sample()
+
+            yield self.env.timeout(sampled_nurse_act_time)
+        else:
+            self.num_reneged_nurse += 1
+
+            print (f"Patient {patient.id} reneged after waiting",
+                    f"{patient.patience_nurse} minutes")
+
+```
+
+#### The run method
+
+The only change to the run method is adding a print statement to the end of it to print the patients who reneged.
+
+```{python}
+print (f"{self.num_reneged_nurse} patients reneged from nurse queue")
+```
+
+#### The Trial class
+
+##### The __init__ method
+
+In the init method, we add in an addiitonal attribute that is a placeholder column for the number of people in each run who reneged.
+
+```{python}
+def  __init__(self):
+    self.df_trial_results = pd.DataFrame()
+    self.df_trial_results["Run Number"] = [0]
+    self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+    ##NEW - additional column of trial results to store the number of
+    # patients that reneged in each run
+    self.df_trial_results["Reneged Q Nurse"] = [0]
+    self.df_trial_results.set_index("Run Number", inplace=True)
+```
+
+##### The calculate_means_over_trial method
+
+We also now need to calculate the mean number of patients reneging per run.
+
+```{python}
+def calculate_means_over_trial(self):
+    self.mean_q_time_nurse_trial = (
+        self.df_trial_results["Mean Q Time Nurse"].mean()
+    )
+
+    ##NEW
+    self.mean_reneged_q_nurse = (
+        self.df_trial_results["Reneged Q Nurse"].mean()
+    )
+
+```
+
+##### The print_trial_results method
+
+```{python}
+def print_trial_results(self):
+    print ("Trial Results")
+    print (self.df_trial_results)
+
+    print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+    ##NEW - we will also now print out the mean number of patients who
+    # reneged from the nurse's queue per run
+    print (f"Mean Reneged Q Nurse : {self.mean_reneged_q_nurse} patients")
+
+```
+
+##### The run_trial method
+
+We also need to add the number of patients who reneged from the nurse's queue as one of the results against each run.
+
+```{python}
+def run_trial(self):
+    for run in range(g.number_of_runs):
+        my_model = Model(run)
+        my_model.run()
+
+
+        self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse,
+                                            my_model.num_reneged_nurse] ##NEW
+
+    self.calculate_means_over_trial()
+    self.print_trial_results()
+```
+
+### Exploring the outputs
+
+The full code can be seen below:
+
+::: {.callout-note collapse="true"}
+```{python}
+#| eval: true
+
+import simpy
+import random
+import pandas as pd
+from sim_tools.distributions import Lognormal
+
+
+# Class to store global parameter values.
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+    sd_n_consult_time = 1
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    # Resource unavailability duration and frequency
+    unav_time_nurse = 15
+    unav_freq_nurse = 120
+
+    # Simulation meta parameters
+    sim_duration = 120
+    number_of_runs = 1
+    warm_up_period = 360
+
+    random.seed(42)
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+        self.priority = random.randint(1,5)
+
+        ##NEW - added a new patience attribute of the patient.  This determines
+        # how long the patient is prepared to wait for the nurse.  Here we just
+        # randomly sample an integer between 5 and 50 (so the patient will be
+        # prepared to wait for somewhere between 5 and 50 minutes in the queue),
+        # but in a real world application you would probably want to have a
+        # more refined way of allocating patience to patients (e.g basing
+        # probabilities off prior data, or using a non-uniform named
+        # distribution).  You could have different patience levels for different
+        # queues, or just a general patience level.  Or even get creative and
+        # have a patience level that decreases the longer they've been in the
+        # system!
+        # If we want to see the effect of this, we can try changing the patience
+        # levels - but you'll need to make the patience levels MUCH higher as
+        # this system is in bad shape (remember, after 3 days patients are
+        # waiting on average over 3 hours... and a lot are waiting much longer!)
+        # Maybe try adding another nurse in to get the system under control
+        # first!
+        self.patience_nurse = random.randint(5, 50)
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.PriorityResource(self.env,
+                                            capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+        ##NEW - we'll set up a new attribute that will store the number of
+        # people that reneged from queues in the run (we only have one queue in
+        # this model)
+        self.num_reneged_nurse = 0
+
+    # Generator function that represents the DES generator for patient arrivals
+    def generator_patient_arrivals(self):
+        while True:
+            self.patient_counter += 1
+
+            p = Patient(self.patient_counter)
+
+            self.env.process(self.attend_clinic(p))
+
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            yield self.env.timeout(sampled_inter)
+
+
+    # Generator function representing pathway for patients attending the
+    # clinic.
+    def attend_clinic(self, patient):
+        # Nurse consultation activity
+        start_q_nurse = self.env.now
+
+        with self.nurse.request(priority=patient.priority) as req:
+            ##NEW - this statement now uses a vertical bar (|) / pipe as an "or"
+            # statement.  It basically says "Wait for the request for the nurse
+            # to be fulfilled OR until the patient's patience level has passed,
+            # whichever comes first, and then store whatever the outcome was.
+            result_of_queue = (yield req |
+                               self.env.timeout(patient.patience_nurse))
+
+            ##NEW - we now need to check whether the patient waited or reneged,
+            # as we could have got to this point of the generator function
+            # either way.  We'll now only get them to see the nurse if they
+            # waited.  If they didn't wait, we'll add to our counter of how
+            # many patients reneged from the queue.
+            if req in result_of_queue:
+                end_q_nurse = self.env.now
+
+                patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+                if self.env.now > g.warm_up_period:
+                    self.results_df.at[patient.id, "Q Time Nurse"] = (
+                        patient.q_time_nurse
+                    )
+
+                sampled_nurse_act_time = Lognormal(
+                    g.mean_n_consult_time, g.sd_n_consult_time).sample()
+
+                yield self.env.timeout(sampled_nurse_act_time)
+            else:
+                self.num_reneged_nurse += 1
+
+                print (f"Patient {patient.id} reneged after waiting",
+                       f"{patient.patience_nurse} minutes")
+
+    # Method to calculate and store results over the run
+    def calculate_run_results(self):
+        self.results_df.drop([1], inplace=True)
+
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # Method to run a single run of the simulation
+    def run(self):
+        # Start up DES generators
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run for the duration specified in g class
+        self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+        # Calculate results over the run
+        self.calculate_run_results()
+
+        # Print patient level results for this run
+        print (f"Run Number {self.run_number}")
+        print (self.results_df)
+        ##NEW - we'll print out the number of patients that reneged from the
+        # nurse queue in this run of the model.
+        print (f"{self.num_reneged_nurse} patients reneged from nurse queue")
+
+# Class representing a Trial for our simulation
+class Trial:
+    # Constructor
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        ##NEW - additional column of trial results to store the number of
+        # patients that reneged in each run
+        self.df_trial_results["Reneged Q Nurse"] = [0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to calculate and store means across runs in the trial
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+        ##NEW - we also now need to calculate the mean number of patients
+        # reneging per run
+        self.mean_reneged_q_nurse = (
+            self.df_trial_results["Reneged Q Nurse"].mean()
+        )
+
+    # Method to print trial results, including averages across runs
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+        print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+        ##NEW - we will also now print out the mean number of patients who
+        # reneged from the nurse's queue per run
+        print (f"Mean Reneged Q Nurse : {self.mean_reneged_q_nurse} patients")
+
+    # Method to run trial
+    def run_trial(self):
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            my_model.run()
+
+            ##NEW - we also need to add the number of patients who reneged from
+            # the nurse's queue as one of the results against each run
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse,
+                                              my_model.num_reneged_nurse]
+
+        self.calculate_means_over_trial()
+        self.print_trial_results()
+```
+:::
+
+What are the outputs?
+
+```{python}
+#| eval: true
+# Create new instance of Trial and run it
+my_trial = Trial()
+my_trial.run_trial()
+```
+
+We can see that not every patient is reneging.
+
+We can also see that some patients who arrived in the system later balk earlier than patients who have been there longer (i.e. a patient with a later ID balks before a patient with an earlier ID). This is due to the randomly set reneging threshold for each patient - some people aren't willing to wait as long.
+
+## Balking
+
+For balking, there are two different ways in which balking can occur (and both could occur in the same model) :
+
+- An entity may choose not to join a queue because it is too long for their preferences / needs
+- An entity may not be able to join a queue because there is no capacity for them
+
+We will look at the latter, but the way we approach it is the same for both - the only difference is that, in the former, the maximum queue length is likely to be an attribute of the patient (and may be individual per patient) just like in the reneging example, rather than an attribute of the model.
+
+Here, we’ll imagine that in our clinic, there is only space for 3 people to wait to see the nurse, and if there is no space, they cannot wait.
+
+To model our balking requirements, we will :
+- Add a parameter to g class to store the maximum queue length allowed (if this were patient-decided balking, we’d put this in the patient class instead)
+- Add a list to our model attributes that will store all the patient objects currently in the queue for the nurse.  This is really useful as it allows us to see who is in the queue at any time, as well as how many etc
+- Whenever a patient joins or leaves the queue, we’ll update the list of patients in the queue
+- Before we ask for the nurse resource, we’ll first check if the queue is at maximum size.  If it is, the patient will never join the queue and we’ll record that.  If not, we’ll proceed as before.
+We’ll add results of number of patients who balked to our results
+
+### Coding a balking example
+
+#### The g Class
+
+We'll add a parameter value that will store the maximum length of the queue we allow for the nurse.
+
+Let's imagine there's only space for 3 people in the waiting room and so no more than 3 people can wait at any
+time.
+
+:::{.callout-note}
+Note - we could simulate balking from the perspective of the patient instead (or as well) - e.g. the patient will only wait if there  are no more than x people waiting etc.  If we did this, we'd probably want to make this level an attribute of the patient, as it may vary between patients.
+:::
+
+```{python}
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+    sd_n_consult_time = 1
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    # Resource unavailability duration and frequency
+    unav_time_nurse = 15
+    unav_freq_nurse = 120
+
+    ##NEW
+    max_q_nurse = 3
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    number_of_runs = 100
+    warm_up_period = 1440
+```
+
+#### The Patient Class
+
+This class is unchanged.
+
+#### The Model Class
+
+##### The __init__ method
+
+Here we add in an additional attribute to count the number of people who balk.
+
+We also we add a list that will store patient objects queuing for the nurse consultation.  This will allow us to see who is in the queue at any time, as well as the length of the queue etc.
+
+```{python}
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.PriorityResource(self.env,
+                                            capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+        # Set up attributes that will store queuing behaviour results across
+        # run
+        self.num_balked_nurse = 0 ##NEW
+
+        self.q_for_nurse_consult = [] ##NEW
+```
+
+##### The generator_patient_arrival method
+
+This method is unchanged.
+
+##### The attend_clinic method
+
+```{python}
+def attend_clinic(self, patient):
+        ##NEW - we now first check whether there is room for the patient to
+        # wait.  If there is, then proceed as before.  If not, then the patient
+        # never joins the queue, and we record that a patient balked.
+        if len(self.q_for_nurse_consult) < g.max_q_nurse:
+            # Nurse consultation activity
+            start_q_nurse = self.env.now
+
+            ##NEW - add the patient object to the list of patients queuing for
+            # the nurse
+            self.q_for_nurse_consult.append(patient)
+
+            with self.nurse.request(priority=patient.priority) as req:
+                yield req
+
+                ##NEW - remove the patient object from the list of patients
+                # queuing for the nurse (by putting it here, the patient will
+                # be removed whether they waited or reneged)
+                self.q_for_nurse_consult.remove(patient)
+
+                end_q_nurse = self.env.now
+
+                patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+                if self.env.now > g.warm_up_period:
+                    self.results_df.at[patient.id, "Q Time Nurse"] = (
+                        patient.q_time_nurse
+                    )
+
+                sampled_nurse_act_time = Lognormal.Lognormal(
+                    g.mean_n_consult_time, g.sd_n_consult_time).sample()
+
+                yield self.env.timeout(sampled_nurse_act_time)
+
+        else:
+            self.num_balked_nurse += 1
+```
+
+##### The calculate_run_results method
+
+This method is unchanged.
+
+##### The run method
+
+Here we have added a print message displaying how many patients balked in this run.
+
+```{python}
+def run(self):
+    # Start up DES generators
+    self.env.process(self.generator_patient_arrivals())
+
+    # Run for the duration specified in g class
+    self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+    # Calculate results over the run
+    self.calculate_run_results()
+
+    # Print patient level results for this run
+    print (f"Run Number {self.run_number}")
+    print (self.results_df)
+    print (f"{self.num_balked_nurse} patients balked at the nurse queue") ## NEW
+```
+
+#### The Trial Class
+
+##### The __init__ method
+
+First we add in a column to store the number who balked at the nurse queue in each run.
+
+```{python}
+def  __init__(self):
+    self.df_trial_results = pd.DataFrame()
+    self.df_trial_results["Run Number"] = [0]
+    self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+    self.df_trial_results["Balked Q Nurse"] = [0] ##NEW
+    self.df_trial_results.set_index("Run Number", inplace=True)
+```
+
+##### The calculate_means_over_trial method
+
+We add a calculation of mean number of patients who balked at the nurse queue per run.
+
+```{python}
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+        ##NEW
+        self.mean_balked_q_nurse = (
+            self.df_trial_results["Balked Q Nurse"].mean()
+        )
+```
+
+##### The print_trial_results method
+
+We add in a print message of mean number of patients balking at nurse queue per run.
+
+```{python}
+def print_trial_results(self):
+    print ("Trial Results")
+    print (self.df_trial_results)
+
+    print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+
+    print (f"Mean Balked Q Nurse : {self.mean_balked_q_nurse} patients") ##NEW
+
+```
+
+##### The run_trial method
+
+Finally we add the number that balked at the nurse queue to results in the run.
+
+```{python}
+def run_trial(self):
+    for run in range(g.number_of_runs):
+        my_model = Model(run)
+        my_model.run()
+
+        self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse,
+                                            my_model.num_balked_nurse] ##NEW
+
+    self.calculate_means_over_trial()
+    self.print_trial_results()
+```
+
+### Exploring the outputs
+
+The full code can be seen below:
+
+::: {.callout-note collapse="true"}
+```{python}
+#| eval: true
+
+import simpy
+import random
+import pandas as pd
+from sim_tools.distributions import Lognormal
+
+# Class to store global parameter values.
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+    sd_n_consult_time = 1
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    ##NEW - we'll add a parameter value that will store the maximum length of
+    # the queue we allow for the nurse.  Let's imagine there's only space for 3
+    # people in the waiting room and so no more than 3 people can wait at any
+    # time.  Note - we could simulate balking from the perspective of the
+    # patient instead (or as well) - e.g. the patient will only wait if there
+    # are no more than x people waiting etc.  If we did this, we'd probably
+    # want to make this level an attribute of the patient, as it may vary
+    # between patients.
+    max_q_nurse = 3
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    number_of_runs = 3
+    warm_up_period = 1440
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+        self.priority = random.randint(1,5)
+        self.patience_nurse = random.randint(5, 50)
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.PriorityResource(self.env,
+                                            capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+        # Set up attributes that will store queuing behaviour results across
+        # run
+        self.num_balked_nurse = 0 ##NEW - added to record number balking
+
+        ##NEW - we add a list that will store patient objects queuing for the
+        # nurse consultation.  This will allow us to see who is in the queue at
+        # any time, as well as the length of the queue etc
+        self.q_for_nurse_consult = []
+
+    # Generator function that represents the DES generator for patient arrivals
+    def generator_patient_arrivals(self):
+        while True:
+            self.patient_counter += 1
+
+            p = Patient(self.patient_counter)
+
+            self.env.process(self.attend_clinic(p))
+
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            yield self.env.timeout(sampled_inter)
+
+    # Generator function representing pathway for patients attending the
+    # clinic.
+    def attend_clinic(self, patient):
+        ##NEW - we now first check whether there is room for the patient to
+        # wait.  If there is, then proceed as before.  If not, then the patient
+        # never joins the queue, and we record that a patient balked.
+        if len(self.q_for_nurse_consult) < g.max_q_nurse:
+            # Nurse consultation activity
+            start_q_nurse = self.env.now
+
+            ##NEW - add the patient object to the list of patients queuing for
+            # the nurse
+            self.q_for_nurse_consult.append(patient)
+
+            with self.nurse.request(priority=patient.priority) as req:
+                yield req
+
+                ##NEW - remove the patient object from the list of patients
+                # queuing for the nurse (by putting it here, the patient will
+                # be removed whether they waited or reneged)
+                self.q_for_nurse_consult.remove(patient)
+
+                end_q_nurse = self.env.now
+
+                patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+                if self.env.now > g.warm_up_period:
+                    self.results_df.at[patient.id, "Q Time Nurse"] = (
+                        patient.q_time_nurse
+                    )
+
+                sampled_nurse_act_time = Lognormal(
+                    g.mean_n_consult_time, g.sd_n_consult_time).sample()
+
+                yield self.env.timeout(sampled_nurse_act_time)
+
+        else:
+            self.num_balked_nurse += 1
+
+    # Method to calculate and store results over the run
+    def calculate_run_results(self):
+        self.results_df.drop([1], inplace=True)
+
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # Method to run a single run of the simulation
+    def run(self):
+        # Start up DES generators
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run for the duration specified in g class
+        self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+        # Calculate results over the run
+        self.calculate_run_results()
+
+        # Print patient level results for this run
+        print (f"Run Number {self.run_number}")
+        print (self.results_df)
+        ##NEW - added print message displaying how many patients balked in this
+        # run
+        print (f"{self.num_balked_nurse} patients balked at the nurse queue")
+
+# Class representing a Trial for our simulation
+class Trial:
+    # Constructor
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        ##NEW - added column to store the number who balked at the nurse queue
+        # in each run
+        self.df_trial_results["Balked Q Nurse"] = [0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to calculate and store means across runs in the trial
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+        ##NEW - added calculation of mean number of patients who balked at the
+        # nurse queue per run
+        self.mean_balked_q_nurse = (
+            self.df_trial_results["Balked Q Nurse"].mean()
+        )
+
+    # Method to print trial results, including averages across runs
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+        print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+        ##NEW - added print message of mean number of patients balking at nurse
+        # queue per run
+        print (f"Mean Balked Q Nurse : {self.mean_balked_q_nurse} patients")
+
+    # Method to run trial
+    def run_trial(self):
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            my_model.run()
+
+            ##NEW - added number balked at nurse queue to results in the run
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse,
+                                              my_model.num_balked_nurse]
+
+        self.calculate_means_over_trial()
+        self.print_trial_results()
+
+```
+:::
+
+What are the outputs?
+
+We are doing three runs in this case.
+
+```{python}
+#| eval: true
+# Create new instance of Trial and run it
+my_trial = Trial()
+my_trial.run_trial()
+```
+
+We can see that we have patients reneging, but due to the random variation across the arrivals and consult times, the size of the queue is different at different points in time, so we get variation in the patients balking each time.
+
+## Jockeying
+
+True jockeying involves entities switching from one queue to another, typically because they make a decision that they will likely be seen faster if they do.
+
+In over 13 years, the author has never used jockeying to model a healthcare system.  SimPy documentation does not cover it either and makes a point of saying they won’t (which implies it’s complicated, though fundamentally you’d need a model of the behaviour in making that decision combined with removing the entity from one queue and placing it in another).
+
+There are likely to be few systems that you will model that would use jockeying.  However, you might encounter systems where entities pick which queue to join in the first place based on queue length (eg patients deciding which Minor Injury Unit or Emergency Department to attend based on live waiting time data online).
+
+For that reason, the example here will be based on this kind of model.
+
+### A 'choosing queues' example
+
+Let’s imagine a slight change to our nurse clinic model.
+
+Let’s imagine that, as well as the nurse, there is also a doctor that patients can see that offers the same service.  Patients can choose to join whichever queue they prefer - and they do this by joining the nurse queue if it’s shorter (and the nurse has capacity), and otherwise joining the doctor’s queue.
+
+The doctor’s queue has no limits on capacity, and the doctor does not take a break (or rather, there is always a doctor available).
+
+Consultation times with the doctor are slightly shorter on average (5 mins vs 6 mins for the nurse), but more variable (with a standard deviation of 3 mins vs 1 min for the nurse).
+
+We’re also going to imagine that word has got out that there’s now a doctor available too, and demand has more than doubled - patients are now arriving at the clinic every 2 minutes on average, compared to an average of every 5 minutes before.
+
+Due to the new logic, there should never be any patients balking (as they’d join the doctor’s queue if the nurse queue is full, and the doctor’s queue doesn’t have a capacity constraint), but we’ll still record these numbers so we can check that.
+
+### Coding the 'choosing queues' example

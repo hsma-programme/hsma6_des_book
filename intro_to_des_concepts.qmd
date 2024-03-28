@@ -183,20 +183,3 @@ As with any type of model, it’s important to think about what outputs you need
 - probability of exceeding a defined queue length / queue time / resource utilisation threshold (e.g. 4 hour wait in ED, overcrowding thresholds)
 
 ![](images/output_example_simple.png)
-
-
-:::{.callout-info}
-## Exercise 1
-
-Design a Discrete Event Simulation for a system of your choosing.
-
-Think about some different possibilities (and these don’t have to be health-related, they can be anything!  A restaurant?  Airport?  Customer service line?).
-
-You should then draw up a design for the model.  This should include :
-- The “what if?” question(s) you would use the model to answer
-- A process map of the system you are looking to model
-- A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).  Identify the types of entities, generators, activities, queues, resources and sinks.  Describe what each of your inter-arrival times and activity times represent, and from where you might draw the data.  Remember the training from session 1B - consider scope, level of detail etc when designing your model.  What do you need to model to answer your question?  How can you simplify?
-
-The website [draw.io (also known as diagrams.net)](https://app.diagrams.net/) is a great free resource for creating process maps.
-
-:::
