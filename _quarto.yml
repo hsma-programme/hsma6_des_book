@@ -11,6 +11,7 @@ book:
   - intro_to_des_concepts.qmd
   - intro_to_simpy.qmd
   - recommended_structure_classes_for_des_models.qmd
+  - exercise_des_design.qmd
   - part: "Your First SimPy Model"
     chapters:
     - an_example_simpy_model.qmd
