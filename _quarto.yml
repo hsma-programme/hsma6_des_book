@@ -8,17 +8,18 @@ book:
   chapters:
   - index.qmd
   - intro.qmd
+  - part: "Part 1 - DES Concepts and Design"
   - intro_to_des_concepts.qmd
   - intro_to_simpy.qmd
   - recommended_structure_classes_for_des_models.qmd
   - exercise_des_design.qmd
-  - part: "Your First SimPy Model"
+  - part: "Part 2 - Your First SimPy Model"
     chapters:
     - an_example_simpy_model.qmd
     - an_example_simpy_model_multiple_steps.qmd
     - an_example_simpy_model_branching.qmd
     - exercise_gp.qmd
-  - part: "Extending Your Model"
+  - part: "Part 3 - Extending Your Model"
     chapters:
     - reproducibility.qmd
     - model_warm_up.qmd
@@ -27,7 +28,7 @@ book:
     - choosing_distributions.qmd
     - reneging_balking_jockeying.qmd
     - exercise_des_advanced.qmd
-  - part: "Advanced Concepts"
+  - part: "Part 4 - Advanced Concepts"
     chapters:
     - tracking_resource_utilisation.qmd
     - visualising_model_metrics.qmd

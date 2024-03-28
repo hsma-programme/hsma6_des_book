@@ -4,3 +4,16 @@ execute:
   eval: false
 jupyter: python3
 ---
+
+In this section we’ve looked at how we can implement the following DES features in SimPy :
+- Simulation warm-up
+- Priority-based queuing
+- Resource unavailability
+- Use of the alternative distributions
+- Reneging
+- Balking
+- Entities choosing queues based on queue length
+
+Design and build a DES model in SimPy that uses **at least four of the features above**.
+
+The model can be of anything you like - you may choose to try to build the conceptual model you designed in the DES Design exercise at the end of section 1, or you might choose something completely different.

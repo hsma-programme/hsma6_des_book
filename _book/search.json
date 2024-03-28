@@ -505,5 +505,15 @@
     "crumbs": [
       "References"
     ]
+  },
+  {
+    "objectID": "exercise_des_design.html",
+    "href": "exercise_des_design.html",
+    "title": "5  Exercise - Designing a DES",
+    "section": "",
+    "text": "Design a Discrete Event Simulation for a system of your choosing.\nThink about some different possibilities (and these don’t have to be health-related, they can be anything! A restaurant? Airport? Customer service line?).\nYou should then draw up a design for the model. This should include : - The “what if?” question(s) you would use the model to answer - A process map of the system you are looking to model - A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).\nIdentify the types of entities, generators, activities, queues, resources and sinks.\nDescribe what each of your inter-arrival times and activity times represent, and from where you might draw the data.\nConsider the scope, level of detail etc when designing your model. What do you need to model to answer your question? How can you simplify your model?\n\n\n\n\n\n\nTip\n\n\n\nThe website draw.io (also known as diagrams.net) is a great free resource for creating process maps.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exercise - Designing a DES</span>"
+    ]
   }
 ]
