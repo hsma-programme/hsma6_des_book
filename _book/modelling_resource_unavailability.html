@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 12&nbsp; Modelling Resource Unavailability</title>
+<title>HSMA - the little book of DES - 13&nbsp; Modelling Resource Unavailability</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Extending Your Model</a></li><li class="breadcrumb-item"><a href="./modelling_resource_unavailability.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Part 3 - Extending Your Model</a></li><li class="breadcrumb-item"><a href="./modelling_resource_unavailability.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -169,6 +169,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Part 1 - DES Concepts and Design</span></span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_des_concepts.html" class="sidebar-item-text sidebar-link">
@@ -187,45 +191,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Your First SimPy Model</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+  <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Extending Your Model</span></a>
+ <span class="menu-text">Part 2 - Your First SimPy Model</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -233,44 +208,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+  <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./priority_based_queueing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span></a>
+  <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
+  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Advanced Concepts</span></a>
+ <span class="menu-text">Part 3 - Extending Your Model</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -286,56 +243,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./priority_based_queueing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Part 4 - Advanced Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -362,24 +372,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-approach" id="toc-the-approach" class="nav-link active" data-scroll-target="#the-approach"><span class="header-section-number">12.1</span> The approach</a></li>
-  <li><a href="#coding-the-approach" id="toc-coding-the-approach" class="nav-link" data-scroll-target="#coding-the-approach"><span class="header-section-number">12.2</span> Coding the approach</a>
+  <li><a href="#the-approach" id="toc-the-approach" class="nav-link active" data-scroll-target="#the-approach"><span class="header-section-number">13.1</span> The approach</a></li>
+  <li><a href="#coding-the-approach" id="toc-coding-the-approach" class="nav-link" data-scroll-target="#coding-the-approach"><span class="header-section-number">13.2</span> Coding the approach</a>
   <ul class="collapse">
-  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">12.2.1</span> The g class</a></li>
-  <li><a href="#the-patient-class" id="toc-the-patient-class" class="nav-link" data-scroll-target="#the-patient-class"><span class="header-section-number">12.2.2</span> The Patient class</a></li>
-  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">12.2.3</span> The Model class</a></li>
-  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">12.2.4</span> The Trial class</a></li>
+  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">13.2.1</span> The g class</a></li>
+  <li><a href="#the-patient-class" id="toc-the-patient-class" class="nav-link" data-scroll-target="#the-patient-class"><span class="header-section-number">13.2.2</span> The Patient class</a></li>
+  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">13.2.3</span> The Model class</a></li>
+  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">13.2.4</span> The Trial class</a></li>
   </ul></li>
-  <li><a href="#evaluating-the-outputs" id="toc-evaluating-the-outputs" class="nav-link" data-scroll-target="#evaluating-the-outputs"><span class="header-section-number">12.3</span> Evaluating the outputs</a></li>
+  <li><a href="#evaluating-the-outputs" id="toc-evaluating-the-outputs" class="nav-link" data-scroll-target="#evaluating-the-outputs"><span class="header-section-number">13.3</span> Evaluating the outputs</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Extending Your Model</a></li><li class="breadcrumb-item"><a href="./modelling_resource_unavailability.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducibility.html">Part 3 - Extending Your Model</a></li><li class="breadcrumb-item"><a href="./modelling_resource_unavailability.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></h1>
 </div>
 
 
@@ -404,14 +414,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s consider our nurse consultation model as an example. Let’s imagine that every 2 hours, our nurse has a 15 minute break.</p>
 <p>Let’s look at how we’d model that.</p>
 <p><img src="images/modelling_unavailability.png" class="img-fluid"></p>
-<section id="the-approach" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="the-approach"><span class="header-section-number">12.1</span> The approach</h2>
+<section id="the-approach" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="the-approach"><span class="header-section-number">13.1</span> The approach</h2>
 <p>Basically, we will : - Set up the frequency and duration of unavailability as parameter values in g class - Make sure that the nurse is set up as a PriorityResource - Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!) - Start this new generator running in our run method of the Model class.</p>
 </section>
-<section id="coding-the-approach" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="coding-the-approach"><span class="header-section-number">12.2</span> Coding the approach</h2>
-<section id="the-g-class" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">12.2.1</span> The g class</h3>
+<section id="coding-the-approach" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="coding-the-approach"><span class="header-section-number">13.2</span> Coding the approach</h2>
+<section id="the-g-class" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">13.2.1</span> The g class</h3>
 <p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency. Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
 <div id="d78da793" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
@@ -433,14 +443,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    warm_up_period <span class="op">=</span> <span class="dv">1440</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-patient-class" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">12.2.2</span> The Patient class</h3>
+<section id="the-patient-class" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">13.2.2</span> The Patient class</h3>
 <p>The patient class is unchanged.</p>
 </section>
-<section id="the-model-class" class="level3" data-number="12.2.3">
-<h3 data-number="12.2.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">12.2.3</span> The Model class</h3>
-<section id="the-obstruct_nurse-method" class="level4" data-number="12.2.3.1">
-<h4 data-number="12.2.3.1" class="anchored" data-anchor-id="the-obstruct_nurse-method"><span class="header-section-number">12.2.3.1</span> The obstruct_nurse method</h4>
+<section id="the-model-class" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">13.2.3</span> The Model class</h3>
+<section id="the-obstruct_nurse-method" class="level4" data-number="13.2.3.1">
+<h4 data-number="13.2.3.1" class="anchored" data-anchor-id="the-obstruct_nurse-method"><span class="header-section-number">13.2.3.1</span> The obstruct_nurse method</h4>
 <p>We create a new method within the model class called <code>obstruct_nurse</code>.</p>
 <div id="58a1ec60" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
@@ -472,8 +482,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(g.unav_time_nurse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-run-method" class="level4" data-number="12.2.3.2">
-<h4 data-number="12.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">12.2.3.2</span> The run method</h4>
+<section id="the-run-method" class="level4" data-number="13.2.3.2">
+<h4 data-number="13.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">13.2.3.2</span> The run method</h4>
 <p>In our run method, we now start up the <code>obstruct_nurse</code> process in addition to the <code>generator_patient_arrivals</code> process.</p>
 <div id="cd1e7b5e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
@@ -492,13 +502,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="the-trial-class" class="level3" data-number="12.2.4">
-<h3 data-number="12.2.4" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">12.2.4</span> The Trial class</h3>
+<section id="the-trial-class" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">13.2.4</span> The Trial class</h3>
 <p>The trial class is unchanged.</p>
 </section>
 </section>
-<section id="evaluating-the-outputs" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">12.3</span> Evaluating the outputs</h2>
+<section id="evaluating-the-outputs" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">13.3</span> Evaluating the outputs</h2>
 <div id="c9636e33" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -1680,12 +1690,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./priority_based_queueing.html" class="pagination-link" aria-label="Priority-Based Queueing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./choosing_distributions.html" class="pagination-link" aria-label="Choosing Distributions">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

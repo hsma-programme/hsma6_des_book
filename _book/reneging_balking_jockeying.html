@@ -386,6 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#a-choosing-queues-example" id="toc-a-choosing-queues-example" class="nav-link" data-scroll-target="#a-choosing-queues-example"><span class="header-section-number">15.3.1</span> A ‘choosing queues’ example</a></li>
   <li><a href="#coding-the-choosing-queues-example" id="toc-coding-the-choosing-queues-example" class="nav-link" data-scroll-target="#coding-the-choosing-queues-example"><span class="header-section-number">15.3.2</span> Coding the ‘choosing queues’ example</a></li>
+  <li><a href="#exploring-the-outputs-2" id="toc-exploring-the-outputs-2" class="nav-link" data-scroll-target="#exploring-the-outputs-2"><span class="header-section-number">15.3.3</span> Exploring the outputs</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -435,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You could have different patience levels for different queues, or just a general patience level. Or even get creative and have a patience level that decreases the longer they’ve been in the system if your system has multiple steps!</p>
 <p>If we want to see the effect of this, we can try changing the patience levels - but you’ll need to make the patience levels MUCH higher as this system is in bad shape (after 3 days patients are waiting on average over 3 hours… and a lot are waiting much longer!)</p>
 <p>Maybe try adding another nurse in to get the system under control first!</p>
-<div id="d0e812cf" class="cell" data-execution_count="1">
+<div id="86c48935" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -450,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-init-method" class="level5" data-number="15.1.1.3.1">
 <h5 data-number="15.1.1.3.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">15.1.1.3.1</span> The <strong>init</strong> method</h5>
 <p>In the init method, we set up an additional attribute to track the number of people reneging.</p>
-<div id="585ab718" class="cell" data-execution_count="2">
+<div id="e7b18238" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up SimPy environment</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
@@ -486,17 +487,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-attend_clinic-method" class="level4" data-number="15.1.1.4">
 <h4 data-number="15.1.1.4" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">15.1.1.4</span> The attend_clinic method</h4>
 <p>In the attend clinic, we now add in an OR statement (the vertical line | , also known as a pipe) to our request for the nurse.</p>
-<div id="1248bf07" class="cell" data-execution_count="3">
+<div id="0f49e636" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>result_of_queue <span class="op">=</span> (<span class="cf">yield</span> req <span class="op">|</span> <span class="va">self</span>.env.timeout(patient.patience_nurse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It basically says “Wait for the request for the nurse to be fulfilled OR until the patient’s patience level has passed, whichever comes first, and then store whatever the outcome was.</p>
 <p>We then need to check whether we got our req - the resource we requested - or whether the timeout occurred.</p>
 <p>We do this with conditional logic:</p>
-<div id="4e0c449c" class="cell" data-execution_count="4">
+<div id="02190a2f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> req <span class="kw">in</span> result_of_queue:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The indented code after this statement will only take place if the resource became available before the patient’s patience ran out (i.e.&nbsp;if the resource became available before the patience period elapsed).</p>
-<div id="337f4a55" class="cell" data-execution_count="5">
+<div id="9da95ed0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nurse consultation activity</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -535,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-run-method" class="level4" data-number="15.1.1.5">
 <h4 data-number="15.1.1.5" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">15.1.1.5</span> The run method</h4>
 <p>The only change to the run method is adding a print statement to the end of it to print the patients who reneged.</p>
-<div id="074074c4" class="cell" data-execution_count="6">
+<div id="1dd67062" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_reneged_nurse<span class="sc">}</span><span class="ss"> patients reneged from nurse queue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -544,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-init-method-1" class="level5" data-number="15.1.1.6.1">
 <h5 data-number="15.1.1.6.1" class="anchored" data-anchor-id="the-init-method-1"><span class="header-section-number">15.1.1.6.1</span> The <strong>init</strong> method</h5>
 <p>In the init method, we add in an addiitonal attribute that is a placeholder column for the number of people in each run who reneged.</p>
-<div id="cbf5e029" class="cell" data-execution_count="7">
+<div id="9aa4c285" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
@@ -558,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-calculate_means_over_trial-method" class="level5" data-number="15.1.1.6.2">
 <h5 data-number="15.1.1.6.2" class="anchored" data-anchor-id="the-calculate_means_over_trial-method"><span class="header-section-number">15.1.1.6.2</span> The calculate_means_over_trial method</h5>
 <p>We also now need to calculate the mean number of patients reneging per run.</p>
-<div id="8d859d81" class="cell" data-execution_count="8">
+<div id="d525b459" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
@@ -572,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-print_trial_results-method" class="level5" data-number="15.1.1.6.3">
 <h5 data-number="15.1.1.6.3" class="anchored" data-anchor-id="the-print_trial_results-method"><span class="header-section-number">15.1.1.6.3</span> The print_trial_results method</h5>
-<div id="6213052d" class="cell" data-execution_count="9">
+<div id="b87c3289" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
@@ -586,7 +587,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-run_trial-method" class="level5" data-number="15.1.1.6.4">
 <h5 data-number="15.1.1.6.4" class="anchored" data-anchor-id="the-run_trial-method"><span class="header-section-number">15.1.1.6.4</span> The run_trial method</h5>
 <p>We also need to add the number of patients who reneged from the nurse’s queue as one of the results against each run.</p>
-<div id="41cfe44f" class="cell" data-execution_count="10">
+<div id="4f9501f8" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        my_model <span class="op">=</span> Model(run)</span>
@@ -617,7 +618,7 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="ab139c62" class="cell" data-execution_count="11">
+<div id="deb59476" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -833,24 +834,27 @@ Note
 </div>
 </div>
 <p>What are the outputs?</p>
-<div id="f3602d51" class="cell" data-execution_count="12">
+<div id="506a072f" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new instance of Trial and run it</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Patient 4 reneged after waiting 10 minutes
+<pre><code>Patient 5 reneged after waiting 6 minutes
 Patient 9 reneged after waiting 22 minutes
 Patient 12 reneged after waiting 11 minutes
+Patient 16 reneged after waiting 10 minutes
 Patient 17 reneged after waiting 28 minutes
 Patient 21 reneged after waiting 15 minutes
 Patient 41 reneged after waiting 5 minutes
 Patient 34 reneged after waiting 32 minutes
 Patient 35 reneged after waiting 28 minutes
 Patient 40 reneged after waiting 38 minutes
+Patient 51 reneged after waiting 6 minutes
 Patient 61 reneged after waiting 12 minutes
 Patient 57 reneged after waiting 43 minutes
 Patient 63 reneged after waiting 19 minutes
 Patient 67 reneged after waiting 22 minutes
+Patient 74 reneged after waiting 8 minutes
 Patient 75 reneged after waiting 11 minutes
 Patient 80 reneged after waiting 5 minutes
 Patient 78 reneged after waiting 9 minutes
@@ -861,37 +865,38 @@ Patient 69 reneged after waiting 41 minutes
 Patient 92 reneged after waiting 10 minutes
 Patient 91 reneged after waiting 15 minutes
 Patient 95 reneged after waiting 20 minutes
-Patient 98 reneged after waiting 18 minutes
-Patient 101 reneged after waiting 25 minutes
+Patient 90 reneged after waiting 35 minutes
 Patient 97 reneged after waiting 41 minutes
 Run Number 0
             Q Time Nurse
 Patient ID              
-72             30.690298
-81              0.000000
-82              5.335394
-83              1.003551
-84              7.325070
+76             12.286746
+72             30.453929
+81              0.746759
+82              3.796790
+83              1.293375
+84              5.406081
 85              0.000000
-86              3.740072
-88              2.490657
-89              1.958695
-87             16.169597
-90             13.037624
-93              5.344795
-96              6.255361
-94             18.521438
-100             9.057456
-99             17.341500
-102             4.197583
-104             9.194685
-26 patients reneged from nurse queue
+86              3.250929
+88              1.406080
+89              0.906271
+87             15.186075
+93              0.726084
+96              1.165138
+94             10.373609
+100             1.825136
+98             13.649698
+99             13.598645
+101            12.439384
+102             4.076979
+104             7.136320
+28 patients reneged from nurse queue
 Trial Results
             Mean Q Time Nurse  Reneged Q Nurse
 Run Number                                    
-0                    8.425765               26
-Mean Q Nurse : 8.4 minutes
-Mean Reneged Q Nurse : 26.0 patients</code></pre>
+0                    6.986201               28
+Mean Q Nurse : 7.0 minutes
+Mean Reneged Q Nurse : 28.0 patients</code></pre>
 </div>
 </div>
 <p>We can see that not every patient is reneging.</p>
@@ -927,7 +932,7 @@ Note
 <p>Note - we could simulate balking from the perspective of the patient instead (or as well) - e.g.&nbsp;the patient will only wait if there are no more than x people waiting etc. If we did this, we’d probably want to make this level an attribute of the patient, as it may vary between patients.</p>
 </div>
 </div>
-<div id="8b812de7" class="cell" data-execution_count="13">
+<div id="8eb5d808" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -962,7 +967,7 @@ Note
 <h5 data-number="15.2.1.3.1" class="anchored" data-anchor-id="the-init-method-2"><span class="header-section-number">15.2.1.3.1</span> The <strong>init</strong> method</h5>
 <p>Here we add in an additional attribute to count the number of people who balk.</p>
 <p>We also we add a list that will store patient objects queuing for the nurse consultation. This will allow us to see who is in the queue at any time, as well as the length of the queue etc.</p>
-<div id="1f13f3bd" class="cell" data-execution_count="14">
+<div id="7c121bc7" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
@@ -1001,7 +1006,7 @@ Note
 </section>
 <section id="the-attend_clinic-method-1" class="level5" data-number="15.2.1.3.3">
 <h5 data-number="15.2.1.3.3" class="anchored" data-anchor-id="the-attend_clinic-method-1"><span class="header-section-number">15.2.1.3.3</span> The attend_clinic method</h5>
-<div id="1eb98d9d" class="cell" data-execution_count="15">
+<div id="e239029c" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - we now first check whether there is room for the patient to</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># wait.  If there is, then proceed as before.  If not, then the patient</span></span>
@@ -1031,7 +1036,7 @@ Note
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                        patient.q_time_nurse</span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>                    )</span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                sampled_nurse_act_time <span class="op">=</span> Lognormal.Lognormal(</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                sampled_nurse_act_time <span class="op">=</span> Lognormal(</span>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                    g.mean_n_consult_time, g.sd_n_consult_time).sample()</span>
 <span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span>
@@ -1047,7 +1052,7 @@ Note
 <section id="the-run-method-1" class="level5" data-number="15.2.1.3.5">
 <h5 data-number="15.2.1.3.5" class="anchored" data-anchor-id="the-run-method-1"><span class="header-section-number">15.2.1.3.5</span> The run method</h5>
 <p>Here we have added a print message displaying how many patients balked in this run.</p>
-<div id="bda67539" class="cell" data-execution_count="16">
+<div id="97c260d3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -1070,7 +1075,7 @@ Note
 <section id="the-init-method-3" class="level5" data-number="15.2.1.4.1">
 <h5 data-number="15.2.1.4.1" class="anchored" data-anchor-id="the-init-method-3"><span class="header-section-number">15.2.1.4.1</span> The <strong>init</strong> method</h5>
 <p>First we add in a column to store the number who balked at the nurse queue in each run.</p>
-<div id="4ba1f28e" class="cell" data-execution_count="17">
+<div id="64916c5a" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
@@ -1082,7 +1087,7 @@ Note
 <section id="the-calculate_means_over_trial-method-1" class="level5" data-number="15.2.1.4.2">
 <h5 data-number="15.2.1.4.2" class="anchored" data-anchor-id="the-calculate_means_over_trial-method-1"><span class="header-section-number">15.2.1.4.2</span> The calculate_means_over_trial method</h5>
 <p>We add a calculation of mean number of patients who balked at the nurse queue per run.</p>
-<div id="4accdc82" class="cell" data-execution_count="18">
+<div id="38881c7e" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
@@ -1097,7 +1102,7 @@ Note
 <section id="the-print_trial_results-method-1" class="level5" data-number="15.2.1.4.3">
 <h5 data-number="15.2.1.4.3" class="anchored" data-anchor-id="the-print_trial_results-method-1"><span class="header-section-number">15.2.1.4.3</span> The print_trial_results method</h5>
 <p>We add in a print message of mean number of patients balking at nurse queue per run.</p>
-<div id="4450d97e" class="cell" data-execution_count="19">
+<div id="331c2d12" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
@@ -1110,7 +1115,7 @@ Note
 <section id="the-run_trial-method-1" class="level5" data-number="15.2.1.4.4">
 <h5 data-number="15.2.1.4.4" class="anchored" data-anchor-id="the-run_trial-method-1"><span class="header-section-number">15.2.1.4.4</span> The run_trial method</h5>
 <p>Finally we add the number that balked at the nurse queue to results in the run.</p>
-<div id="4c7388a0" class="cell" data-execution_count="20">
+<div id="1170bb89" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        my_model <span class="op">=</span> Model(run)</span>
@@ -1140,7 +1145,7 @@ Note
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="623da665" class="cell" data-execution_count="21">
+<div id="66587e0b" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1170,7 +1175,7 @@ Note
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulation meta parameters</span></span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    sim_duration <span class="op">=</span> <span class="dv">2880</span></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    warm_up_period <span class="op">=</span> <span class="dv">1440</span></span>
 <span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.</span></span>
@@ -1343,7 +1348,8 @@ Note
 </div>
 </div>
 <p>What are the outputs?</p>
-<div id="e18b8270" class="cell" data-execution_count="22">
+<p>We are doing three runs in this case.</p>
+<div id="415ee844" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new instance of Trial and run it</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1351,46 +1357,65 @@ Note
 <pre><code>Run Number 0
             Q Time Nurse
 Patient ID              
-285             3.860799
-286             8.919273
-284            26.679736
+285             5.401187
+286             9.459875
+284            26.365614
 289             0.000000
-291             1.506052
+291             4.398295
 ...                  ...
-874             9.661833
-875            14.158863
-879             4.677457
-881             1.304379
-876            26.423907
+873             7.595819
+874            12.680480
+876            11.155791
+880             4.210414
+881             3.592837
 
-[448 rows x 1 columns]
+[445 rows x 1 columns]
 215 patients balked at the nurse queue
 Run Number 1
             Q Time Nurse
 Patient ID              
-267             2.894918
-268             4.592330
-270             2.467414
-271             5.934348
-272            11.291903
+266             3.336368
+268             1.640165
+270             0.232968
+271             2.921999
+267            22.858795
 ...                  ...
-836             3.526191
-837             0.631985
-831            40.915414
-839             0.309352
-840             6.503512
+837             0.822251
+838             2.091782
+839             0.033436
+840             3.260909
+832            52.283786
 
-[457 rows x 1 columns]
-158 patients balked at the nurse queue
+[461 rows x 1 columns]
+154 patients balked at the nurse queue
+Run Number 2
+            Q Time Nurse
+Patient ID              
+298             5.066144
+297            11.645913
+300             0.767703
+301             3.595984
+302             6.051337
+...                  ...
+907             5.423241
+908             0.315013
+899            36.474939
+909             2.527428
+911             2.116300
+
+[466 rows x 1 columns]
+210 patients balked at the nurse queue
 Trial Results
             Mean Q Time Nurse  Balked Q Nurse
 Run Number                                   
-0                   10.896671           215.0
-1                   10.452899           158.0
-Mean Q Nurse : 10.7 minutes
-Mean Balked Q Nurse : 186.5 patients</code></pre>
+0                   11.093989           215.0
+1                    9.976129           154.0
+2                   10.390898           210.0
+Mean Q Nurse : 10.5 minutes
+Mean Balked Q Nurse : 193.0 patients</code></pre>
 </div>
 </div>
+<p>We can see that we have patients reneging, but due to the random variation across the arrivals and consult times, the size of the queue is different at different points in time, so we get variation in the patients balking each time.</p>
 </section>
 </section>
 <section id="jockeying" class="level2" data-number="15.3">
@@ -1410,6 +1435,428 @@ Mean Balked Q Nurse : 186.5 patients</code></pre>
 </section>
 <section id="coding-the-choosing-queues-example" class="level3" data-number="15.3.2">
 <h3 data-number="15.3.2" class="anchored" data-anchor-id="coding-the-choosing-queues-example"><span class="header-section-number">15.3.2</span> Coding the ‘choosing queues’ example</h3>
+<p>The full code can be seen below.</p>
+<p>This example brings together code for - nurse breaks - reneging - balking - queue choosing</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="036be0df" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Lognormal</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store global parameter values.</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">2</span> <span class="co">##NEW - decreased time to generate more frequent arrivals</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Activity times</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    sd_n_consult_time <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    mean_d_consult_time <span class="op">=</span> <span class="dv">5</span> <span class="co">##NEW - added mean consult time for doctor</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    sd_d_consult_time <span class="op">=</span> <span class="dv">3</span> <span class="co">##NEW - added SD consult time for doctor</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Resource numbers</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    number_of_nurses <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    number_of_doctors <span class="op">=</span> <span class="dv">1</span> <span class="co">##NEW - added parameter to store number of doctors</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Resource unavailability duration and frequency</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    unav_time_nurse <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    unav_freq_nurse <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Maximum allowable queue lengths</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    max_q_nurse <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulation meta parameters</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    sim_duration <span class="op">=</span> <span class="dv">480</span> <span class="co">##NEW significantly shortened so can see clear queue plot</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>    warm_up_period <span class="op">=</span> <span class="dv">1440</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_doc <span class="op">=</span> <span class="dv">0</span> <span class="co">##NEW - attribute to store queuing time for doctor</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.priority <span class="op">=</span> random.randint(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patience_nurse <span class="op">=</span> random.randint(<span class="dv">5</span>, <span class="dv">50</span>)</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added random allocation of patience level to see doctor</span></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patience_doctor <span class="op">=</span> random.randint(<span class="dv">20</span>, <span class="dv">100</span>)</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up SimPy environment</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up counters to use as entity IDs</span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up resources</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse <span class="op">=</span> simpy.PriorityResource(<span class="va">self</span>.env,</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a>                                            capacity<span class="op">=</span>g.number_of_nurses)</span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added doctor resource also as PriorityResource</span></span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor <span class="op">=</span> simpy.PriorityResource(<span class="va">self</span>.env,</span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>                                             capacity<span class="op">=</span>g.number_of_doctors)</span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set run number from value passed in</span></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.run_number <span class="op">=</span> run_number</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up DataFrame to store patient-level results</span></span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Patient ID"</span>] <span class="op">=</span> [<span class="dv">1</span>]</span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added column to store queuing time for doctor for each patient</span></span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.set_index(<span class="st">"Patient ID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up attributes that will store mean queuing times across the run</span></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="dv">0</span> <span class="co">##NEW - store mean q time for doctor</span></span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up attributes that will store queuing behaviour results across</span></span>
+<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run</span></span>
+<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_reneged_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_balked_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added equivalent queuing behaviour attributes for doctor</span></span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a>        <span class="co"># though no balking should occur for the doctor or the nurse in this</span></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a>        <span class="co"># scenario - if there is no capacity in the nurse queue, the patient</span></span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a>        <span class="co"># will join the doctor queue, which has no limit</span></span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_reneged_doctor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_balked_doctor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up lists to store patient objects in each queue</span></span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_for_nurse_consult <span class="op">=</span> []</span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_for_doc_consult <span class="op">=</span> [] <span class="co">##NEW - list to store queue for doctor</span></span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pandas dataframe to record number in queue(s) over time</span></span>
+<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.queue_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.queue_df[<span class="st">"Time"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.queue_df[<span class="st">"Num in Q Nurse"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.queue_df[<span class="st">"Num in Q Doctor"</span>] <span class="op">=</span> [<span class="dv">0</span>] <span class="co">##NEW added column for doctor</span></span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generator function that represents the DES generator for patient arrivals</span></span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a>            p <span class="op">=</span> Patient(<span class="va">self</span>.patient_counter)</span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env.process(<span class="va">self</span>.attend_clinic(p))</span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a>            sampled_inter <span class="op">=</span> random.expovariate(<span class="fl">1.0</span> <span class="op">/</span> g.patient_inter)</span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_inter)</span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generator function to obstruct a nurse resource at specified intervals</span></span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for specified amounts of time</span></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> obstruct_nurse(<span class="va">self</span>):</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a>            <span class="co"># The generator first pauses for the frequency period</span></span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(g.unav_freq_nurse)</span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Once elapsed, the generator requests (demands?) a nurse with</span></span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a>            <span class="co"># a priority of -1.  This ensure it takes priority over any patients</span></span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (whose priority values start at 1).  But it also means that the</span></span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a>            <span class="co"># nurse won't go on a break until they've finished with the current</span></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patient</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="va">self</span>.nurse.request(priority<span class="op">=-</span><span class="dv">1</span>) <span class="im">as</span> req:</span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> req</span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Freeze with the nurse held in place for the unavailability</span></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a>                <span class="co"># time (ie duration of the nurse's break).  Here, both the</span></span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a>                <span class="co"># duration and frequency are fixed, but you could randomly</span></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a>                <span class="co"># sample them from a distribution too if preferred.</span></span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> <span class="va">self</span>.env.timeout(g.unav_time_nurse)</span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generator function representing pathway for patients attending the</span></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clinic.</span></span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - check whether queue for the nurse is shorter than the queue for</span></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the doctor AND that there is space in the nurse's queue (which is</span></span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a>        <span class="co"># constrained).  If both of these are true, then join the queue for the</span></span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a>        <span class="co"># nurse, otherwise join the queue for the doctor.</span></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ((<span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult) <span class="op">&lt;</span> <span class="bu">len</span>(<span class="va">self</span>.q_for_doc_consult)) <span class="kw">and</span></span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a>            (<span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult) <span class="op">&lt;</span> g.max_q_nurse)):</span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Nurse consultation activity</span></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>            start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.q_for_nurse_consult.append(patient)</span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Record number in queue alongside the current time</span></span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a>            <span class="co">##NEW need to also add length of current queue for doctor to the</span></span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a>            <span class="co"># list (need to add both even though this is just an update to the</span></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a>            <span class="co"># length of the nurse list)</span></span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.queue_df.loc[<span class="bu">len</span>(<span class="va">self</span>.queue_df)] <span class="op">=</span> [</span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.env.now,</span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult),</span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(<span class="va">self</span>.q_for_doc_consult)</span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a>                ]</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="va">self</span>.nurse.request(priority<span class="op">=</span>patient.priority) <span class="im">as</span> req:</span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>                result_of_queue <span class="op">=</span> (<span class="cf">yield</span> req <span class="op">|</span></span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.env.timeout(patient.patience_nurse))</span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.q_for_nurse_consult.remove(patient)</span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Record number in queue alongside the current time</span></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>                <span class="co">##NEW need to also add length of current queue for doctor to the</span></span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a>                <span class="co"># list (need to add both even though this is just an update to</span></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a>                <span class="co"># the length of the nurse list)</span></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.queue_df.loc[<span class="bu">len</span>(<span class="va">self</span>.queue_df)] <span class="op">=</span> [</span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.env.now,</span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult),</span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">len</span>(<span class="va">self</span>.q_for_doc_consult)</span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a>                    ]</span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> req <span class="kw">in</span> result_of_queue:</span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>                    end_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_nurse <span class="op">=</span> end_q_nurse <span class="op">-</span> start_q_nurse</span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Nurse"</span>] <span class="op">=</span> (</span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a>                            patient.q_time_nurse</span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a>                    sampled_nurse_act_time <span class="op">=</span> Lognormal(</span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a>                        g.mean_n_consult_time, g.sd_n_consult_time).sample()</span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.num_reneged_nurse <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a>            <span class="co">##NEW - logic for patient to join queue for the doctor instead.</span></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>            <span class="co"># In this system, there should be no balking as if the queue for the</span></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a>            <span class="co"># nurse has no more capacity, they'll just see the doctor which</span></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>            <span class="co"># doesn't have a limit.</span></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Doctor consultation activity</span></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a>            start_q_doc <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.q_for_doc_consult.append(patient)</span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Record number in queue alongside the current time</span></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.queue_df.loc[<span class="bu">len</span>(<span class="va">self</span>.queue_df)] <span class="op">=</span> [</span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.env.now,</span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult),</span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(<span class="va">self</span>.q_for_doc_consult)</span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a>                ]</span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="va">self</span>.doctor.request(priority<span class="op">=</span>patient.priority) <span class="im">as</span> req:</span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>                result_of_queue <span class="op">=</span> (<span class="cf">yield</span> req <span class="op">|</span></span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.env.timeout(patient.patience_doctor))</span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.q_for_doc_consult.remove(patient)</span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Record number in queue alongside the current time</span></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.queue_df.loc[<span class="bu">len</span>(<span class="va">self</span>.queue_df)] <span class="op">=</span> [</span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.env.now,</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">len</span>(<span class="va">self</span>.q_for_nurse_consult),</span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">len</span>(<span class="va">self</span>.q_for_doc_consult)</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a>                    ]</span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> req <span class="kw">in</span> result_of_queue:</span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a>                    end_q_doc <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_doc <span class="op">=</span> end_q_doc <span class="op">-</span> start_q_doc</span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> <span class="va">self</span>.env.now <span class="op">&gt;</span> g.warm_up_period:</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Doctor"</span>] <span class="op">=</span> (</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a>                            patient.q_time_doc</span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>                    sampled_doc_act_time <span class="op">=</span> Lognormal(</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a>                        g.mean_d_consult_time, g.sd_d_consult_time).sample()</span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_doc_act_time)</span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.num_reneged_doctor <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to calculate and store results over the run</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_run_results(<span class="va">self</span>):</span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.drop([<span class="dv">1</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>].mean()</span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - added calculation for mean queuing time for doctor</span></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>].mean()</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to run a single run of the simulation</span></span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Start up DES generators</span></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.obstruct_nurse())</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run for the duration specified in g class</span></span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span>(g.sim_duration <span class="op">+</span> g.warm_up_period))</span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate results over the run</span></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_run_results()</span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print patient level results for this run</span></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Run Number </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>run_number<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.results_df)</span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_reneged_nurse<span class="sc">}</span><span class="ss"> patients reneged from nurse queue"</span>)</span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_balked_nurse<span class="sc">}</span><span class="ss"> patients balked at the nurse queue"</span>)</span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW added print statements for reneging and balking from doctor queue</span></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_reneged_doctor<span class="sc">}</span><span class="ss"> patients reneged from the doctor"</span>,</span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a>               <span class="st">"queue"</span>)</span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_balked_doctor<span class="sc">}</span><span class="ss"> patients balked at the doctor queue"</span>)</span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print queues over time dataframe for this run</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Queues over time"</span>)</span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.queue_df)</span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation</span></span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Reneged Q Nurse"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Balked Q Nurse"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW added columns to store number trial results relating to doctor</span></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Reneged Q Doctor"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Balked Q Doctor"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results.set_index(<span class="st">"Run Number"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to calculate and store means across runs in the trial</span></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_reneged_q_nurse <span class="op">=</span> (</span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Reneged Q Nurse"</span>].mean()</span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_balked_q_nurse <span class="op">=</span> (</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Balked Q Nurse"</span>].mean()</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW added calculations for doctor queue and activity across trial</span></span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doc_trial <span class="op">=</span> (</span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Doctor"</span>].mean()</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_reneged_q_doc <span class="op">=</span> (</span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Reneged Q Doctor"</span>].mean()</span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_balked_q_doc <span class="op">=</span> (</span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Balked Q Doctor"</span>].mean()</span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to print trial results, including averages across runs</span></span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Q Nurse : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_q_time_nurse_trial<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Reneged Q Nurse : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_reneged_q_nurse<span class="sc">}</span><span class="ss"> patients"</span>)</span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Balked Q Nurse : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_balked_q_nurse<span class="sc">}</span><span class="ss"> patients"</span>)</span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW added print statements for trial results related to doctor</span></span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Q Doctor : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_q_time_doc_trial<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Reneged Q Doctor : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_reneged_q_doc<span class="sc">}</span><span class="ss"> patients"</span>)</span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"Mean Balked Q Doctor : </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mean_balked_q_doc<span class="sc">}</span><span class="ss"> patients"</span>)</span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to run trial</span></span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>            my_model <span class="op">=</span> Model(run)</span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>            my_model.run()</span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>            <span class="co">##NEW added doctor results to end of list of results to add for this</span></span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>            <span class="co"># run</span></span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results.loc[run] <span class="op">=</span> [my_model.mean_q_time_nurse,</span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a>                                              my_model.num_reneged_nurse,</span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a>                                              my_model.num_balked_nurse,</span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a>                                              my_model.mean_q_time_doctor,</span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a>                                              my_model.num_reneged_doctor,</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a>                                              my_model.num_balked_doctor]</span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_means_over_trial()</span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.print_trial_results()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-the-outputs-2" class="level3" data-number="15.3.3">
+<h3 data-number="15.3.3" class="anchored" data-anchor-id="exploring-the-outputs-2"><span class="header-section-number">15.3.3</span> Exploring the outputs</h3>
+<div id="03460b4a" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Run Number 0
+            Q Time Nurse  Q Time Doctor
+Patient ID                             
+718                  NaN       8.079078
+715            13.664500            NaN
+696                  NaN      55.962904
+704                  NaN      47.281993
+717            17.171906            NaN
+...                  ...            ...
+967             4.300251            NaN
+973                  NaN       1.530465
+975                  NaN       2.031642
+970             4.996284            NaN
+969                  NaN      11.885688
+
+[178 rows x 2 columns]
+209 patients reneged from nurse queue
+0 patients balked at the nurse queue
+90 patients reneged from the doctor queue
+0 patients balked at the doctor queue
+Queues over time
+            Time  Num in Q Nurse  Num in Q Doctor
+0       0.000000             0.0              0.0
+1    1440.447541             4.0              6.0
+2    1440.550052             5.0              6.0
+3    1441.816771             4.0              6.0
+4    1443.550145             5.0              6.0
+..           ...             ...              ...
+511  1915.039087             4.0              4.0
+512  1915.435042             4.0              5.0
+513  1916.951406             4.0              4.0
+514  1917.028903             3.0              4.0
+515  1919.981870             3.0              3.0
+
+[516 rows x 3 columns]
+Trial Results
+            Mean Q Time Nurse  Reneged Q Nurse  Balked Q Nurse  \
+Run Number                                                       
+0                     9.61135              209               0   
+
+            Mean Q Time Doctor  Reneged Q Doctor  Balked Q Doctor  
+Run Number                                                         
+0                    13.161806                90                0  
+Mean Q Nurse : 9.6 minutes
+Mean Reneged Q Nurse : 209.0 patients
+Mean Balked Q Nurse : 0.0 patients
+Mean Q Doctor : 13.2 minutes
+Mean Reneged Q Doctor : 90.0 patients
+Mean Balked Q Doctor : 0.0 patients</code></pre>
+</div>
+</div>
 
 
 </section>
