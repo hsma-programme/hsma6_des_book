@@ -19,6 +19,7 @@ book:
     - exercise_gp.qmd
   - part: "Extending Your Model"
     chapters:
+    - reproducibility.qmd
     - model_warm_up.qmd
     - priority_based_queueing.qmd
     - modelling_resource_unavailability.qmd

@@ -30,3 +30,436 @@ Basically, we will :
 - Start this new generator running in our run method of the Model class.
 
 ## Coding the approach
+
+### The g class
+
+In the g class, we have added values to specify how long nurse is unavailable and at what frequency.
+Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.
+
+```{python}
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    unav_time_nurse = 15 ##NEW
+    unav_freq_nurse = 120 ##NEW
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    number_of_runs = 1
+    warm_up_period = 1440
+
+```
+
+### The Patient class
+
+The patient class is unchanged.
+
+### The Model class
+
+#### The obstruct_nurse method
+We create a new method within the model class called `obstruct_nurse`.
+
+```{python}
+##NEW
+# Generator function to obstruct a nurse resource at specified intervals
+# for specified amounts of time
+def obstruct_nurse(self):
+    while True:
+        print (f"{self.env.now:.2f}: The nurse will go on a break at around time",
+                f"{(self.env.now + g.unav_freq_nurse):.2f}")
+
+        # The generator first pauses for the frequency period
+        yield self.env.timeout(g.unav_freq_nurse)
+
+        # Once elapsed, the generator requests (demands?) a nurse with
+        # a priority of -1.  This ensure it takes priority over any patients
+        # (whose priority values start at 1).  But it also means that the
+        # nurse won't go on a break until they've finished with the current
+        # patient
+        with self.nurse.request(priority=-1) as req:
+            yield req
+
+            print (f"{self.env.now:.2f}: The nurse is now on a break and will be back at",
+                    f"{(self.env.now + g.unav_time_nurse):.2f}")
+
+            # Freeze with the nurse held in place for the unavailability
+            # time (ie duration of the nurse's break).  Here, both the
+            # duration and frequency are fixed, but you could randomly
+            # sample them from a distribution too if preferred.
+            yield self.env.timeout(g.unav_time_nurse)
+```
+
+#### The run method
+
+In our run method, we now start up the `obstruct_nurse` process in addition to the `generator_patient_arrivals` process.
+
+```{python}
+def run(self):
+    # Start up DES generators
+    self.env.process(self.generator_patient_arrivals())
+    ##NEW - we also need to start up the obstructor generator now too
+    self.env.process(self.obstruct_nurse())
+
+    # Run for the duration specified in g class
+    self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+    # Calculate results over the run
+    self.calculate_run_results()
+
+    return self.results_df
+```
+
+### The Trial class
+
+The trial class is unchanged.
+
+## Evaluating the outputs
+
+```{python}
+#| echo: true
+#| eval: true
+
+import simpy
+import random
+import pandas as pd
+
+# Class to store global parameter values.
+class g:
+    # Inter-arrival times
+    patient_inter = 5
+
+    # Activity times
+    mean_n_consult_time = 6
+
+    # Resource numbers
+    number_of_nurses = 1
+
+    ##NEW - added values to specify how long nurse is unavailable and at what
+    # frequency (in this example, every 2 hours, the nurse will be unavailable
+    # for 15 minutes)
+    unav_time_nurse = 15
+    unav_freq_nurse = 120
+
+    # Simulation meta parameters
+    sim_duration = 2880
+    number_of_runs = 1
+    warm_up_period = 1440
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id):
+        self.id = p_id
+        self.q_time_nurse = 0
+        self.priority = random.randint(1,5)
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.PriorityResource(self.env,
+                                            capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+        random.seed(42)
+
+    # Generator function that represents the DES generator for patient arrivals
+    def generator_patient_arrivals(self):
+        while True:
+            self.patient_counter += 1
+
+            p = Patient(self.patient_counter)
+
+            self.env.process(self.attend_clinic(p))
+
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            yield self.env.timeout(sampled_inter)
+
+    ##NEW
+    # Generator function to obstruct a nurse resource at specified intervals
+    # for specified amounts of time
+    def obstruct_nurse(self):
+        while True:
+            print (f"{self.env.now:.2f}: The nurse will go on a break at around time",
+                   f"{(self.env.now + g.unav_freq_nurse):.2f}")
+
+            # The generator first pauses for the frequency period
+            yield self.env.timeout(g.unav_freq_nurse)
+
+            # Once elapsed, the generator requests (demands?) a nurse with
+            # a priority of -1.  This ensure it takes priority over any patients
+            # (whose priority values start at 1).  But it also means that the
+            # nurse won't go on a break until they've finished with the current
+            # patient
+            with self.nurse.request(priority=-1) as req:
+                yield req
+
+                print (f"{self.env.now:.2f}: The nurse is now on a break and will be back at",
+                       f"{(self.env.now + g.unav_time_nurse):.2f}")
+
+                # Freeze with the nurse held in place for the unavailability
+                # time (ie duration of the nurse's break).  Here, both the
+                # duration and frequency are fixed, but you could randomly
+                # sample them from a distribution too if preferred.
+                yield self.env.timeout(g.unav_time_nurse)
+
+    # Generator function representing pathway for patients attending the
+    # clinic.
+    def attend_clinic(self, patient):
+        # Nurse consultation activity
+        start_q_nurse = self.env.now
+
+        with self.nurse.request(priority=patient.priority) as req:
+            yield req
+
+            end_q_nurse = self.env.now
+
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            if self.env.now > g.warm_up_period:
+                self.results_df.at[patient.id, "Q Time Nurse"] = (
+                    patient.q_time_nurse
+                )
+
+            sampled_nurse_act_time = random.expovariate(1.0 /
+                                                        g.mean_n_consult_time)
+
+            yield self.env.timeout(sampled_nurse_act_time)
+
+    # Method to calculate and store results over the run
+    def calculate_run_results(self):
+        self.results_df.drop([1], inplace=True)
+
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # Method to run a single run of the simulation
+    def run(self):
+        # Start up DES generators
+        self.env.process(self.generator_patient_arrivals())
+        ##NEW - we also need to start up the obstructor generator now too
+        self.env.process(self.obstruct_nurse())
+
+        # Run for the duration specified in g class
+        self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+        # Calculate results over the run
+        self.calculate_run_results()
+
+        return self.results_df
+
+# Class representing a Trial for our simulation
+class Trial:
+    # Constructor
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to calculate and store means across runs in the trial
+    def calculate_means_over_trial(self):
+        self.mean_q_time_nurse_trial = (
+            self.df_trial_results["Mean Q Time Nurse"].mean()
+        )
+
+    def run_trial(self):
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results and store it against
+        # the run number in the trial results dataframe. We also return the
+        # full patient-level dataframes.
+
+        # First, create an empty list for storing our patient-level dataframes.
+        results_dfs = []
+
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            patient_level_results = my_model.run()
+
+            # First let's record our mean wait time for this run
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
+
+            # Next let's work on our patient-level results dataframes
+            # We start by rounding everything to 2 decimal places
+            patient_level_results = patient_level_results.round(2)
+            # Add a new column recording the run
+            patient_level_results['run'] = run
+            # Now we're just going to add this to our empty list (or, after the first
+            # time we loop through, as an extra dataframe in our list)
+            results_dfs.append(patient_level_results)
+
+        all_results_patient_level = pd.concat(results_dfs)
+
+        # This calculates the attribute self.mean_q_time_nurse_trial
+        self.calculate_means_over_trial()
+
+        # Once the trial (ie all runs) has completed, return the results
+        return self.df_trial_results, all_results_patient_level, self.mean_q_time_nurse_trial
+
+    # Method to print trial results, including averages across runs
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+        print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
+```
+
+Let's look at the printed output showing when our nurses were obstructed.
+
+The first number in each line of output shows the simulation time when the message was generated.
+
+```{python}
+#| echo: false
+#| eval: true
+# Create new instance of Trial and run it
+my_trial = Trial()
+
+df_trial_results, all_results_patient_level, means_over_trial = my_trial.run_trial()
+```
+
+
+Now let's look at some of the other outputs and compare them with a version without the nurse obstruction.
+
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Class representing our model of the clinic.
+class Model:
+    # Constructor
+    def __init__(self, run_number):
+        # Set up SimPy environment
+        self.env = simpy.Environment()
+
+        # Set up counters to use as entity IDs
+        self.patient_counter = 0
+
+        # Set up resources
+        self.nurse = simpy.PriorityResource(self.env,
+                                            capacity=g.number_of_nurses)
+
+        # Set run number from value passed in
+        self.run_number = run_number
+
+        # Set up DataFrame to store patient-level results
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Set up attributes that will store mean queuing times across the run
+        self.mean_q_time_nurse = 0
+
+        random.seed(42)
+
+    # Generator function that represents the DES generator for patient arrivals
+    def generator_patient_arrivals(self):
+        while True:
+            self.patient_counter += 1
+
+            p = Patient(self.patient_counter)
+
+            self.env.process(self.attend_clinic(p))
+
+            sampled_inter = random.expovariate(1.0 / g.patient_inter)
+
+            yield self.env.timeout(sampled_inter)
+
+
+    # Generator function representing pathway for patients attending the
+    # clinic.
+    def attend_clinic(self, patient):
+        # Nurse consultation activity
+        start_q_nurse = self.env.now
+
+        with self.nurse.request(priority=patient.priority) as req:
+            yield req
+
+            end_q_nurse = self.env.now
+
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            if self.env.now > g.warm_up_period:
+                self.results_df.at[patient.id, "Q Time Nurse"] = (
+                    patient.q_time_nurse
+                )
+
+            sampled_nurse_act_time = random.expovariate(1.0 /
+                                                        g.mean_n_consult_time)
+
+            yield self.env.timeout(sampled_nurse_act_time)
+
+    # Method to calculate and store results over the run
+    def calculate_run_results(self):
+        self.results_df.drop([1], inplace=True)
+
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+
+    # Method to run a single run of the simulation
+    def run(self):
+        # Start up DES generators
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run for the duration specified in g class
+        self.env.run(until=(g.sim_duration + g.warm_up_period))
+
+        # Calculate results over the run
+        self.calculate_run_results()
+
+        return self.results_df
+```
+
+```{python}
+#| echo: false
+#| eval: true
+my_trial_no_breaks = Trial()
+```
+
+Now let's look at some of the other outputs and compare them with a version without the nurse obstruction.
+
+```{python}
+#| echo: false
+#| eval: true
+df_trial_results_no_breaks, all_results_patient_level_no_breaks, means_over_trial_no_breaks = my_trial_no_breaks.run_trial()
+```
+
+```{python}
+#| echo: false
+#| eval: true
+
+print(f"The average wait when there are no nurse breaks is {means_over_trial_no_breaks.round(2)} minutes")
+```
+
+```{python}
+#| echo: false
+#| eval: true
+
+print(f"The average wait when there are nurse breaks is {means_over_trial.round(2)} minutes")
+```
