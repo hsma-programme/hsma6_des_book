@@ -4,3 +4,11 @@ execute:
   eval: false
 jupyter: python3
 ---
+
+In your models, you may sometimes require multiple kinds of resources to be available for a single step.
+
+For example, in an emergency department, you may need both a cubicle and a nurse to be available so a patient can be seen. Cubicles may be released slower than nurses if the patient in the cubicle is now waiting for a different step of their journey in the cubicle, such as having an x-ray, seeing a different type of practitioner, or waiting for a bed to become available within the hospital so they can be admitted.
+
+Imagine this department is having problems seeing patients fast enough. They have 15 cubicles, and 8 nurses. They can either increase the number of nurses on shift to 9, or increase the capacity to 18 cubicles. Which should they do?
+
+By setting up a model where we look at how both kinds of resources are used, we can begin to explore these questions.
