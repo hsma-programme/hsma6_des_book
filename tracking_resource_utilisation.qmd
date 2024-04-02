@@ -1,7 +1,7 @@
 ---
 title: Tracking Resource Utilisation
 execute:
-  eval: true
+  eval: false
 jupyter: python3
 ---
 
@@ -12,6 +12,10 @@ When running a model, it's useful to be able to track a few things about your re
 
 For example, it would be useful to know that your nurse resources are being utilised 89% of the time.
 
+However, it may also be useful to know that due to fluctuations in demand throughout the day, at 4pm the average utilisation across several runs is 60%, but at 8pm the average utilisation is at 95%.
+
+Monitoring utilisation of resources in both of these ways can be helpful to show the performance of your model.
+
 :::{.callout-tip}
 You often don't want utilisation to be too close to 100% - though exactly where you want utilisation to sit can depend a lot on the kind of service you run, and how big it is.
 
@@ -19,8 +23,104 @@ In services where rapid access is crucial - such as a cancer service, a high dep
 
 Chasing very high utilisation figures can also be a false economy - for example, is it cheaper to have a 12 bed mental health ward that usually runs at an average 70% occupancy, or a 9 bed ward running at an average 95% occupancy, but with high levels of staff burnout, infection control issues, and a constant need to purchase additional capacity from the private sector or place patients in other wards owned by the trust, which are further from the patient's home and support network, potentially slowing recovery and leading to a longer stay, and also incurring additional costs for patient transport. **While you don't want lots of beds sitting empty, understanding the knock-on effects can be crucial to ensuring utilisation metrics are used and interpreted well - and this often requires you having conversations with your stakeholders to understand the wider implications.**
 
-Keep in mind that they themselves may not be that confident with using anything other than 'average demand' for capacity planning. This video from the demand and capacity team (formerly part of NHS England) is a great resource for helping stakeholders to understand the impact of variation in demand.
+Keep in mind that they themselves may not be that confident with using anything other than 'average demand' for capacity planning. This video from the demand and capacity team (formerly part of NHS England) is a great resource for helping stakeholders to understand the impact of variation in demand and how it might impact their decisions on the **capacity** planning of the service.
 
 {{< video https://www.youtube.com/watch?v=YnOJ5EnWrtM >}}
 
+Note that this is slightly different from the resource utilisation, but the ideas all tie together!
+
 :::
+
+
+## Looking at resource utilisation
+
+To calculate the percentage of time a resource was being utilised overall, we need to start tracking how long each entity in our model spent using a resource.
+
+What we can then do is
+- add this up across every entity who passes through our model
+-
+
+
+
+## Interval Audits
+
+One option for monitoring resource usage is to set up a new interval audit process.
+
+We create a new interval_audit_utilisation() function that we pass
+- a list of resources we want to monitor
+- a time interval at which to snapshot the utilisation in the process
+
+```{python}
+ self.env.process(self.interval_audit_utilisation(
+                resources=resources_list,
+                interval=5
+            )
+        )
+```
+
+First, we create an empty list to hold our utilisation audit in our `Model` class.
+
+```{python}
+
+    def __init__(self, args):
+        self.env = simpy.Environment()
+
+        ## ... other attributes here ... ##
+
+        self.utilisation_audit = []
+```
+
+
+Then we add the `interval_audit_utilisation` function to our `Model` class.
+
+The code for this function looks like the below.
+
+```{python}
+ def interval_audit_utilisation(self, resources, interval=1):
+        '''
+        Record utilisation at defined intervals.
+
+        Needs to be passed to env.process when running model.
+
+        Parameters:
+        ------
+        resource: SimPy resource object
+            The resource to monitor
+            OR
+            a list of dictionaries containing simpy resource objects in the format
+            [{'resource_name':'my_resource', 'resource_object': resource},
+            {'resource_name':'my_second_resource', 'resource_object': resource_2}
+            ]
+            where resource and resource_2 in the examples above are simpy resources.
+
+        interval: int:
+            Time between audits.
+            In simpy time units
+            Default: 1
+        '''
+
+        # Keep doing the below as long as the simulation is running
+        while True:
+
+            # Code for what to do if we pass in a list of resources
+            if isinstance(resources, list):
+                for i in range(len(resources)):
+                    self.utilisation_audit.append({
+                        'resource_name': resources[i]['resource_name'], # The provided name for the resource
+                        'simulation_time': self.env.now,  # The current simulation time
+                        'number_utilised': len(resources[i]['resource_object'].items), # The number of users
+                        'number_available': resources[i]['resource_object'].capacity, # The total resource available
+                    })
+
+            else:
+
+                # Code for what to do if we just pass in a single resource to monitor
+                self.utilisation_audit.append({
+                    'simulation_time': self.env.now,  # The current simulation time
+                    'number_utilised': len(resources.items),  # The number of users
+                    'number_available': resources.capacity, # The total resource available
+                })
+
+            # Trigger next audit after desired interval has passed.
+            yield self.env.timeout(interval)
+```
