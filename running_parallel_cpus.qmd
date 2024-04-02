@@ -24,10 +24,51 @@ Simpy is a good candidate for running code in parallel! By running our simpy cod
 You may not be able to use parallelisation when deploying your code to the web - it will vary depending on your deployment/hosting choices.
 :::
 
+## A simple joblib example
+
+
+First, it may be helpful to see a simpler example of joblib.
+
+Let's start by looking at a for loop to square the numbers 1 to 10.
+
+```{python}
+#| eval: true
+
+squared_numbers = []
+for i in range(1, 11, 1):
+  squared_numbers.append(i * i)
+
+print(squared_numbers)
+```
+
+We can simplify the code above into a list comprehension.
+
+```{python}
+#| eval: true
+
+[i*i for i in range(1, 11, 1)]
+
+```
+
+Why is this important? Well, to use joblib, it's easiest to write our loop as a list comprehension.
+
+Instead of doing i * i to square our number, we have made a new **function** that does the same thing.
+
+```{python}
+#| eval: true
+
+from joblib import Parallel, delayed
+
+def multiply_by_self(input_number):
+  return input_number * input_number
+
+Parallel(n_jobs=2)(delayed(multiply_by_self)(i) for i in range(1, 11, 1))
+
+```
+
 ## A code example
 
-:::
-{.callout-note}
+::: {.callout-note}
 Thanks go to [Michael Allen](https://orcid.org/0000-0002-8746-9957) for providing an example of how this can be achieved in SimPy. His repository can be found [here](https://github.com/MichaelAllen1966/2004_simple_simpy_parallel).
 :::
 
@@ -35,25 +76,100 @@ We will make use of the [Joblib](https://joblib.readthedocs.io/en/latest/paralle
 
 We will take the model created in the Reproducibility chapter (@sec-reproducibility) and add parallelisation to it.
 
+### Library imports
+
+We will need to import `Parallel` and `delayed` from the joblib library.
+
+You will need to run `!pip install joblib` if you have not previously made use of this library.
 
 ```{python}
 from joblib import Parallel, delayed
 ```
 
+### The g, Patient and Model classes
+
+Our g, patient and model classes are unchanged.
+
+### The trial class
+
+In the trial class, we need to change a number of functions, tweak our attributes, and make use of the joblib library.
+
+:::{.callout-warning}
+Because of the way joblib executes things, if we try to keep track of our results in the same way we have so far - setting up a dummy dataframe and then using the .loc accessor to write our results to the correct row of the dataframe for each run - we will end up with an empty results list.
+
+Instead, we will create an empty list. Into this list we will place a **dictionary** of results from the run.
+:::
+
+#### The __init__ method
+
+Let's start by adjusting our `__init__` method for our new way of carrying out the results collection.
+
 ```{python}
-def run_trial(self, scenario):
-    """Runs trial of a single scenario over multiple CPU cores.
-    n_jobs = max cores to use; ise -1 for all available cores. Use of
-    `delayed` ensures different random  numbers in each run"""
-    trial_output = Parallel(n_jobs=-1)(delayed(self.single_run)(scenario, i)
-            for i in range(self.replications))
+def  __init__(self):
+    self.df_trial_results = []
+```
+
+#### The process_trial_results method
+
+Next we want to create a new method that will turn our list of dictionaries into a Python dataframe.
+
+All we need to do is call `pd.DataFrame` on that object. In this case, we overwrite the original df_trial_results object.
+
+Next we set the index of the dataframe to the run number, which is how it was set up in the original code.
+
+```{python}
+def process_trial_results(self):
+  self.df_trial_results = pd.DataFrame(self.df_trial_results)
+  self.df_trial_results.set_index("Run Number", inplace=True)
+```
+
+#### the print_trial_results method
+
+Because we went to the effort of setting the index in the step above, this method can remain unchanged.
+
+#### the run_single method
+
+First, let's look back at how our `run_trial` function was written before.
+
+```{python}
+def run_trial(self):
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
+        print("") # Print a blank line
+
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+
+        for run in range(g.number_of_runs):
+            random.seed(run)
+
+            my_model = Model(run)
+            patient_level_results = my_model.run()
+
+            self.df_trial_results.loc[run] = [
+                len(patient_level_results),
+                my_model.mean_q_time_recep,
+                my_model.mean_q_time_nurse,
+                my_model.mean_q_time_doctor
+                ]
+
+        # Once the trial (ie all runs) has completed, print the final results
+        self.print_trial_results()
 ```
 
 
+To use parallelisation, we now split this out into two separate functions. The first is the `run_single` method.
+
+**Note that it's very similar to the indented part of the `for` loop from the code above.**
+
+The main change is how the results are stored - they are now put into a dictionary. Remember, dictionaries use the format {"key":value} - here we have made our column names the 'keys' and our results the 'values'.
+
+Finally, it's important to **return** the results object from the function.
 
 ```{python}
-# Method to run a trial
-
 def run_single(self, run):
     # For each run, we create a new instance of the Model class and call its
     # run method, which sets everything else in motion.  Once the run has
@@ -65,24 +181,60 @@ def run_single(self, run):
     my_model = Model(run)
     patient_level_results = my_model.run()
 
-    self.df_trial_results.loc[run] = [
-        len(patient_level_results),
-        my_model.mean_q_time_recep,
-        my_model.mean_q_time_nurse,
-        my_model.mean_q_time_doctor
-        ]
+    results = {"Run Number":run,
+        "Arrivals": len(patient_level_results),
+        "Mean Q Time Recep": my_model.mean_q_time_recep,
+        "Mean Q Time Nurse": my_model.mean_q_time_nurse,
+        "Mean Q Time Doctor": my_model.mean_q_time_doctor
+        }
 
+    return results
+```
+
+#### the run_trial method
+
+Finally, we need to do a few things.
+
+The key one is making our trial now use the Parallel class and delayed function.
+
+We set up an instance of the Parallel class and set the number of jobs to `-1`.
+
+:::{.callout-tip}
+`-1` just means that the joblib library will use every available core to run the code.
+
+You can instead specify a particular number of cores to use as a positive integer value.
+:::
+
+We then pass in the `self.run_single` function to the `delayed` function.
+
+Finally, we pass in the arguments that are required for the `self.run_single` function, which is just the run number.
+
+The syntax can appear a little bit strange - just take a close look at the full line below and try and understand it.
+
+```{python}
+self.df_trial_results = Parallel(n_jobs=-1)(delayed(self.run_single)(run) for run in range(g.number_of_runs))
+```
+
+We assign all of this to the self.df_trial_results attribute of our class.
+
+Now the only additional step is to run our new `process_trial_results()` function before we run `print_trial_results()`.
+
+```{python}
 def run_trial(self):
     print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
     print("") # Print a blank line
-    # Run the simulation for the number of runs specified in g class.
 
-    Parallel(n_jobs=-1)(delayed(self.run_single)(run) for run in range(g.number_of_runs))
+    # Run the simulation for the number of runs specified in g class.
+    self.df_trial_results = Parallel(n_jobs=-1)(delayed(self.run_single)(run) for run in range(g.number_of_runs))
 
     # Once the trial (ie all runs) has completed, print the final results
+    self.process_trial_results()
     self.print_trial_results()
 ```
 
+Voila! Our model is now set up to use parallelisation. Let's take a look at how much faster this can make things.
+
+## Evaluating the code outputs
 
 First, let's run this the original way and time how long it takes.
 
@@ -398,7 +550,7 @@ my_trial = Trial()
 my_trial.run_trial()
 
 print("")
-print(f"It took {(time.time() - start_time):.4f} seconds to do 1000 runs without parallelisation")
+print(f"It took {(time.time() - start_time):.4f} seconds to do 10 runs without parallelisation")
 ```
 
 Now let's run it again with parallisation.
@@ -659,8 +811,8 @@ class Model:
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
 class Trial:
-    # The constructor sets up a pandas dataframe that will store the key
-    # results from each run against run number, with run number as the index.
+    # The constructor sets up an empty list, which we will place dictionaries
+    # into. Each dictionary will be the results from a single run.
     def  __init__(self):
         self.df_trial_results = [] ## NEW
 
@@ -727,5 +879,142 @@ my_trial = Trial()
 my_trial.run_trial()
 
 print("")
-print(f"It took {(time.time() - start_time):.4f} seconds to do 1000 runs **with** parallelisation")
+print(f"It took {(time.time() - start_time):.4f} seconds to do 10 runs **with** parallelisation")
+```
+
+## Evaluating speed gains
+
+Let's run the model a few times, specifying a different number of cores to run it on each time.
+
+This book is being compiled on a machine with a 14 core processor.
+
+```{python}
+#| eval: true
+#| echo: false
+#|
+class Trial:
+    # The constructor sets up an empty list, which we will place dictionaries
+    # into. Each dictionary will be the results from a single run.
+    def  __init__(self):
+        self.df_trial_results = [] ## NEW
+
+    ## NEW
+    def process_trial_results(self):
+      self.df_trial_results = pd.DataFrame(self.df_trial_results)
+      self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to print out the results from the trial.  In real world models,
+    # you'd likely save them as well as (or instead of) printing them
+    def print_trial_results(self):
+        print("Trial Results")
+        print(self.df_trial_results.round(2))
+        print(self.df_trial_results.mean().round(2))
+
+    def run_single(self, run):
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+        random.seed(run)
+
+        my_model = Model(run)
+        patient_level_results = my_model.run()
+
+        results = {"Run Number":run,
+            "Arrivals": len(patient_level_results),
+            "Mean Q Time Recep": my_model.mean_q_time_recep,
+            "Mean Q Time Nurse": my_model.mean_q_time_nurse,
+            "Mean Q Time Doctor": my_model.mean_q_time_doctor
+            }
+
+        return results
+
+
+    def run_trial(self, cores):
+        # Run the simulation for the number of runs specified in g class.
+
+        self.df_trial_results = Parallel(n_jobs=cores)(delayed(self.run_single)(run) for run in range(g.number_of_runs))
+```
+
+An argument has been added to the run_trial function to allow us to pass in the number of cores to use.
+
+The results below all relate to 100 runs of the simulation.
+
+```{python}
+#| eval: true
+
+speed = []
+
+g.number_of_runs = 100
+
+for i in range(1, 15, 1):
+    start_time = time.time()
+    # Create an instance of the Trial class
+    my_trial = Trial()
+
+    # Call the run_trial method of our Trial object
+    my_trial.run_trial(cores=i)
+
+    run_time = round((time.time() - start_time), 3)
+
+    speed.append({"Cores":i, "Run Time (seconds)": run_time})
+
+timing_results = pd.DataFrame(speed)
+
+print(timing_results)
+```
+
+```{python}
+#| eval: true
+#| echo: false
+
+import plotly.express as px
+
+fig = px.line(timing_results, x="Cores", y="Run Time (seconds)")
+
+fig.show()
+```
+
+
+Let's run it again and look at the speed gains when doing 1000 runs of the simulation.
+
+Notice that doubling the number of cores doesn't halve the time - there is fixed overhead that will take a certain amount of time. This can be even more noticeable with a smaller number of runs.
+
+We make big gains at the beginning, but the fixed overheads mean that higher numbers of cores start to have less and less of an effect.
+
+```{python}
+#| eval: true
+#| echo: false
+
+speed = []
+
+g.number_of_runs = 1000
+
+for i in range(1, 15, 1):
+    start_time = time.time()
+    # Create an instance of the Trial class
+    my_trial = Trial()
+
+    # Call the run_trial method of our Trial object
+    my_trial.run_trial(cores=i)
+
+    run_time = round((time.time() - start_time), 3)
+
+    speed.append({"Cores":i, "Run Time (seconds)": run_time})
+
+timing_results = pd.DataFrame(speed)
+
+print(timing_results)
+```
+
+```{python}
+#| eval: true
+#| echo: false
+
+import plotly.express as px
+
+fig = px.line(timing_results, x="Cores", y="Run Time (seconds)")
+
+fig.show()
 ```
