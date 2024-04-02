@@ -182,7 +182,7 @@ Let's compare the results we get with and without the warm-up period.
 
 ### Editing our results method
 
-To make it easier to look at the outputs, I'm going to modify two methods slightl.
+To make it easier to look at the outputs, I'm going to modify two methods slightly.
 
 First, we modify the `run` method of the `Model` class slightly to swap from print the patient level dataframes to returning them as an output.
 
@@ -423,7 +423,8 @@ class Trial:
     # Method to print trial results, including averages across runs
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results)
+        # EDIT: We are omitting the printouts of the patient level data for now
+        # print (self.df_trial_results)
 
         print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
 
