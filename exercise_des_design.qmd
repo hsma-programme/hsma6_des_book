@@ -5,6 +5,7 @@ Design a Discrete Event Simulation for a system of your choosing.
 Think about some different possibilities (and these don’t have to be health-related, they can be anything!  A restaurant?  Airport?  Customer service line?).
 
 You should then draw up a design for the model.  This should include :
+
 - The “what if?” question(s) you would use the model to answer
 - A process map of the system you are looking to model
 - A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).
