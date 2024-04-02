@@ -9,10 +9,11 @@ book:
   - index.qmd
   - intro.qmd
   - part: "Part 1 - DES Concepts and Design"
-  - intro_to_des_concepts.qmd
-  - intro_to_simpy.qmd
-  - recommended_structure_classes_for_des_models.qmd
-  - exercise_des_design.qmd
+    chapters:
+    - intro_to_des_concepts.qmd
+    - intro_to_simpy.qmd
+    - recommended_structure_classes_for_des_models.qmd
+    - exercise_des_design.qmd
   - part: "Part 2 - Your First SimPy Model"
     chapters:
     - an_example_simpy_model.qmd
