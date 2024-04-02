@@ -40,7 +40,9 @@ book:
     - appointment_style_booking_models.qmd
     - testing_large_numbers_scenarios.qmd
     - running_parallel_cpus.qmd
+    - intro_creating_web_apps.qmd
   - alternative_foss_simulation_libraries_software.qmd
+  - further_reading.qmd
   - references.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png

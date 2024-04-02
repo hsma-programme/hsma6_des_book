@@ -1,0 +1,66 @@
+---
+title: Creating Web Apps
+execute:
+  eval: false
+jupyter: python3
+---
+
+As part of the HSMA programme, we teach how to use the Streamlit web application framework to produce a front-end for a discrete event simulation model.
+
+This can be a hugely powerful way of distributing your model. By creating a web application, stakeholders can interact with the model and adjust parameters themselves, seeing the impact this has. A carefully designed web app can guide them through the process of understanding the impact of different changes to the system.
+
+It is beyond the scope of this book to give a full treatment of this topic at this time, though it may be expanded on in the future (by the end of 2024).
+
+In the meantime, there are several resources available to you.
+
+## Video guide: creating a streamlit web app interface for a DES model
+
+This video is the masterclass on Streamlit interfaces from the fifth round of the HSMA programme. This is delivered by [Tom Monks](https://orcid.org/0000-0003-2631-4481), another member of the PenCHORD team.
+
+{{ < video https://youtu.be/6e0OPsjRYQ8?si=YxA80wwKm5J-UjAb >}}
+
+The classes and structure used for the model are very slightly different to the style used in this book, but overall the techniques are very applicable.
+
+### Book
+
+A book has also been written to accompany the above tutorial.
+
+The book can be accessed (here)[https://health-data-science-or.github.io/simpy-streamlit-tutorial/content/03_streamlit/01_intro.html].
+
+## Example apps
+
+### The DES Playground
+
+The following app contains a range of pages that allow users to explore a DES model of growing complexity.
+
+You can see the range of sliders and inputs that you can make available to your end users.
+
+```{=html}
+<iframe width="780" height="720" src="https://hsma-programme.github.io/Teaching_DES_Concepts_Streamlit/" title="DES Streamlit example 1"></iframe>
+```
+
+:::{.callout-warning}
+Note that this link will not work if you are viewing this book in Firefox. All other major browsers should work, including mobile browsers.
+::
+
+The full code can be seen [here](https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit).
+
+Look at the code within the **pages** subfolder to see how different features are implemented.
+
+Other features that may be useful to adapt for your own use include
+- the ability to save and compare the results from multiple scenarios
+- a range of interactive visualisations of simulation metrics
+
+### The HSMA SimPy Example Library
+
+As part of the SimPy visualisation library project, a range of different SimPy models have been created with a Streamlit frontend.
+
+```{=html}
+<iframe width="780" height="720" src="https://simpy-visualisation.streamlit.app/" title="DES Streamlit example 2"></iframe>
+```
+
+The code for all of these examples can be explored in this [Github Repository](https://github.com/Bergam0t/simpy_visualisation).
+
+In each case, the code for the model classes, simulation execution and simulation summary functions can be found inside a subfolder within the **examples** folder.
+
+Note that again the classes and format used for these models differs slightly from the examples given in this book, but are fundamentally very similar so should be possible to adapt.

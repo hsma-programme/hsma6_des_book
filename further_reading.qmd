@@ -1,0 +1,11 @@
+---
+title: Further Reading
+execute:
+  eval: false
+jupyter: python3
+---
+
+
+## SimPy Examples
+
+A list of additional SimPy examples is kept up-to-date [here](https://github.com/stars/Bergam0t/lists/simpy-examples).
