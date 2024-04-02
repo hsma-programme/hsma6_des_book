@@ -1,0 +1,6 @@
+---
+title: Scheduling Arrivals
+execute:
+  eval: false
+jupyter: python3
+---

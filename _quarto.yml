@@ -38,6 +38,7 @@ book:
     - modelling_variable_arrival_rates.qmd
     - requesting_multiple_resources.qmd
     - choosing_resource_from_many.qmd
+    - scheduling_arrivals.qmd
     - appointment_style_booking_models.qmd
     - testing_large_numbers_scenarios.qmd
     - running_parallel_cpus.qmd
