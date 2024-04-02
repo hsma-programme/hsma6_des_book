@@ -4,3 +4,5 @@ execute:
   eval: false
 jupyter: python3
 ---
+
+It is often the case that arrivals to a system do not occur completely regularly throughout the day.

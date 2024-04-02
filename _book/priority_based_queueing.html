@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Attribution and Acknowledgements</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,33 +197,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Part 1 - DES Concepts and Design</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part 1 - DES Concepts and Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_des_concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -254,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -329,50 +336,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -380,7 +405,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -455,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Lower value = higher priority :::</p>
 <p>In this example, we just randomly pick a value between 1 and 5, but you can use whatever logic you like.</p>
 <p>In reality, you’d likely have probabilities to determine what priority a patient is based on your data - maybe there’s a 20% chance they are a high priority and an 80% chance they are a low priority.</p>
-<div id="fe2c8256" class="cell" data-execution_count="1">
+<div id="847c3d8c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -469,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="init" class="level4" data-number="11.1.3.1">
 <h4 data-number="11.1.3.1" class="anchored" data-anchor-id="init"><span class="header-section-number">11.1.3.1</span> _init</h4>
 <p>Here we set up the nurse as an instance of PriorityResource rather than Resource</p>
-<div id="eec395c1" class="cell" data-execution_count="2">
+<div id="d7f7647d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set up SimPy environment</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
@@ -515,7 +546,7 @@ Tip
 </div>
 <p>Now that the nurse is set up as a PriorityResource, we can pass in the value that we want it to look at to determine who’s seen next when we request the resource (here, that’s the priority attribute of the patient we set up in the Patient class).</p>
 <p>We have also added a step that records the patient priority to our dataframe of individual patient results.</p>
-<div id="a843aa06" class="cell" data-execution_count="3">
+<div id="7b05f297" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function representing pathway for patients attending the</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clinic.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
@@ -575,7 +606,7 @@ Note
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div id="1f8ac2ec" class="cell" data-execution_count="4">
+<div id="c684826f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -781,24 +812,24 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 1 with priority 2 is queuing for the nurse.
 Patient 1 with priority 2 is being seen at minute 0
-Patient 2 with priority 5 is queuing for the nurse.
-Patient 2 with priority 5 is being seen at minute 7.040120217791894
-Patient 3 with priority 3 is queuing for the nurse.
-Patient 3 with priority 3 is being seen at minute 10.175418939254904
-Patient 4 with priority 5 is queuing for the nurse.
-Patient 4 with priority 5 is being seen at minute 12.702459296343863
+Patient 2 with priority 3 is queuing for the nurse.
+Patient 3 with priority 2 is queuing for the nurse.
+Patient 3 with priority 2 is being seen at minute 4.051975397099871
+Patient 2 with priority 3 is being seen at minute 8.128634916663529
+Patient 4 with priority 4 is queuing for the nurse.
+Patient 4 with priority 4 is being seen at minute 28.847854140820342
 Patient 5 with priority 3 is queuing for the nurse.
-Patient 5 with priority 3 is being seen at minute 14.283372279966024
+Patient 5 with priority 3 is being seen at minute 30.76666370584145
 Patient 6 with priority 1 is queuing for the nurse.
-Patient 6 with priority 1 is being seen at minute 17.36898542966842
-Patient 7 with priority 3 is queuing for the nurse.
-Patient 7 with priority 3 is being seen at minute 24.671375485835114
-Patient 8 with priority 2 is queuing for the nurse.
-Patient 8 with priority 2 is being seen at minute 28.423346408841002
-Patient 9 with priority 4 is queuing for the nurse.
-Patient 10 with priority 5 is queuing for the nurse.
-Patient 9 with priority 4 is being seen at minute 106.60622154549533
-Patient 10 with priority 5 is being seen at minute 797.9938874799685
+Patient 6 with priority 1 is being seen at minute 36.941199725353464
+Patient 7 with priority 4 is queuing for the nurse.
+Patient 8 with priority 5 is queuing for the nurse.
+Patient 9 with priority 1 is queuing for the nurse.
+Patient 9 with priority 1 is being seen at minute 42.92519458134357
+Patient 7 with priority 4 is being seen at minute 44.62292686834568
+Patient 10 with priority 2 is queuing for the nurse.
+Patient 10 with priority 2 is being seen at minute 45.926265404259155
+Patient 8 with priority 5 is being seen at minute 47.24540527647517
             Mean Q Time Nurse
 Run Number                   
 0                         0.0</code></pre>
@@ -811,7 +842,7 @@ Run Number
 <section id="evaluating-the-outputs" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">11.3</span> Evaluating the outputs</h2>
 <p>First let’s look at some sample patients.</p>
-<div id="dca50aba" class="cell" data-execution_count="5">
+<div id="43dd6df9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_results_patient_level.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -841,26 +872,26 @@ Run Number
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.00</td>
-<td>5.0</td>
+<td data-quarto-table-cell-role="th">3</td>
+<td>2.60</td>
+<td>2.0</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.83</td>
+<td data-quarto-table-cell-role="th">2</td>
+<td>7.59</td>
 <td>3.0</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4</td>
 <td>0.00</td>
-<td>5.0</td>
+<td>4.0</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>1.27</td>
+<td>0.00</td>
 <td>3.0</td>
 <td>0</td>
 </tr>
@@ -872,7 +903,7 @@ Run Number
 </div>
 </div>
 <p>Let’s calculate the mean queue time by priority.</p>
-<div id="4e23bbef" class="cell" data-execution_count="6">
+<div id="d071a2a3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(all_results_patient_level</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">'Priority'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">'Priority'</span>:<span class="st">'size'</span>, <span class="st">'Q Time Nurse'</span>:<span class="st">'mean'</span>}) <span class="op">\</span></span>
@@ -900,28 +931,28 @@ Run Number
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">1.0</td>
-<td>199</td>
-<td>6.83</td>
+<td>166</td>
+<td>7.66</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2.0</td>
-<td>212</td>
-<td>14.16</td>
+<td>201</td>
+<td>12.84</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3.0</td>
-<td>201</td>
-<td>33.31</td>
+<td>196</td>
+<td>27.68</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4.0</td>
-<td>188</td>
-<td>179.07</td>
+<td>202</td>
+<td>115.01</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5.0</td>
-<td>31</td>
-<td>1995.59</td>
+<td>90</td>
+<td>1037.86</td>
 </tr>
 </tbody>
 </table>
@@ -936,15 +967,15 @@ Run Number
 <p>This means that there may be lots of people - particularly those with a higher priority number (and therefore the least important to see as far as the model is concerned) who are still sitting waiting to be seen when our model stops running.</p>
 <p>Think about ways you might try to account for that.</p>
 </div>
-<div id="62223081" class="cell" data-execution_count="7">
+<div id="815c3100" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.box(all_results_patient_level.reset_index(), x<span class="op">=</span><span class="st">"Priority"</span>, y<span class="op">=</span><span class="st">"Q Time Nurse"</span>, points<span class="op">=</span><span class="st">"all"</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>                            <div id="60c08027-fac1-4a67-92d9-74fc14c44026" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("60c08027-fac1-4a67-92d9-74fc14c44026")) {                    Plotly.newPlot(                        "60c08027-fac1-4a67-92d9-74fc14c44026",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"Priority=%{x}\u003cbr\u003eQ Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa"},"name":"","notched":false,"offsetgroup":"","orientation":"v","showlegend":false,"x":[1.0,5.0,3.0,5.0,3.0,1.0,3.0,2.0,1.0,1.0,2.0,3.0,1.0,2.0,2.0,2.0,3.0,3.0,4.0,4.0,1.0,1.0,2.0,2.0,4.0,1.0,4.0,2.0,4.0,1.0,3.0,1.0,1.0,3.0,3.0,4.0,1.0,1.0,2.0,3.0,3.0,1.0,2.0,3.0,2.0,4.0,4.0,3.0,4.0,4.0,1.0,2.0,3.0,1.0,2.0,1.0,2.0,1.0,2.0,2.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,2.0,3.0,1.0,2.0,2.0,1.0,3.0,2.0,2.0,3.0,3.0,2.0,2.0,2.0,3.0,3.0,3.0,4.0,1.0,1.0,3.0,4.0,4.0,4.0,4.0,1.0,3.0,1.0,3.0,2.0,3.0,2.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,2.0,1.0,1.0,2.0,2.0,3.0,4.0,4.0,1.0,3.0,4.0,4.0,4.0,4.0,5.0,4.0,4.0,5.0,5.0,4.0,1.0,2.0,4.0,5.0,5.0,3.0,3.0,1.0,2.0,2.0,3.0,2.0,3.0,3.0,3.0,3.0,4.0,2.0,4.0,1.0,3.0,4.0,4.0,2.0,4.0,1.0,2.0,1.0,2.0,2.0,2.0,1.0,2.0,3.0,2.0,1.0,2.0,1.0,1.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,4.0,1.0,3.0,1.0,1.0,3.0,3.0,3.0,3.0,4.0,1.0,4.0,1.0,4.0,3.0,4.0,4.0,4.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,2.0,2.0,3.0,1.0,2.0,1.0,4.0,4.0,4.0,4.0,3.0,4.0,4.0,2.0,3.0,3.0,3.0,3.0,1.0,3.0,3.0,4.0,1.0,4.0,2.0,4.0,4.0,4.0,2.0,1.0,2.0,2.0,2.0,3.0,2.0,3.0,1.0,4.0,1.0,3.0,4.0,1.0,3.0,1.0,4.0,2.0,2.0,3.0,2.0,3.0,3.0,2.0,3.0,3.0,3.0,1.0,3.0,1.0,2.0,3.0,3.0,3.0,4.0,1.0,3.0,4.0,3.0,2.0,4.0,4.0,1.0,3.0,4.0,4.0,4.0,4.0,2.0,1.0,1.0,4.0,3.0,1.0,1.0,1.0,2.0,1.0,2.0,1.0,1.0,4.0,4.0,4.0,1.0,2.0,1.0,3.0,1.0,3.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,2.0,2.0,3.0,3.0,4.0,4.0,4.0,4.0,5.0,4.0,1.0,2.0,3.0,4.0,5.0,1.0,2.0,2.0,3.0,3.0,5.0,5.0,5.0,5.0,2.0,4.0,5.0,5.0,2.0,5.0,5.0,1.0,2.0,1.0,1.0,2.0,2.0,1.0,3.0,3.0,4.0,1.0,2.0,4.0,4.0,4.0,5.0,5.0,5.0,5.0,5.0,5.0,2.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,3.0,3.0,4.0,4.0,2.0,2.0,1.0,2.0,3.0,1.0,2.0,2.0,2.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,1.0,3.0,3.0,1.0,1.0,1.0,2.0,1.0,1.0,2.0,1.0,1.0,3.0,2.0,3.0,3.0,3.0,3.0,3.0,3.0,2.0,2.0,3.0,1.0,2.0,2.0,2.0,3.0,3.0,2.0,4.0,2.0,2.0,1.0,3.0,2.0,4.0,3.0,4.0,1.0,3.0,4.0,4.0,2.0,4.0,4.0,4.0,4.0,4.0,3.0,1.0,4.0,4.0,1.0,2.0,2.0,3.0,4.0,4.0,4.0,4.0,3.0,4.0,1.0,1.0,2.0,2.0,2.0,2.0,2.0,1.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,2.0,3.0,2.0,2.0,3.0,4.0,3.0,1.0,1.0,1.0,2.0,4.0,1.0,4.0,2.0,3.0,4.0,4.0,4.0,2.0,3.0,2.0,2.0,3.0,3.0,1.0,2.0,2.0,2.0,3.0,4.0,1.0,1.0,2.0,1.0,3.0,1.0,2.0,2.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,4.0,4.0,1.0,2.0,1.0,2.0,4.0,4.0,1.0,1.0,1.0,1.0,3.0,4.0,4.0,1.0,1.0,1.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,1.0,4.0,4.0,4.0,4.0,4.0,1.0,1.0,1.0,1.0,3.0,3.0,2.0,1.0,3.0,2.0,3.0,3.0,1.0,2.0,2.0,2.0,2.0,1.0,3.0,4.0,4.0,2.0,2.0,3.0,4.0,2.0,4.0,2.0,2.0,1.0,3.0,4.0,1.0,4.0,1.0,1.0,1.0,2.0,2.0,4.0,4.0,1.0,4.0,3.0,4.0,4.0,3.0,2.0,4.0,2.0,3.0,2.0,4.0,4.0,5.0,5.0,5.0,5.0,5.0,1.0,1.0,1.0,1.0,1.0,1.0,3.0,1.0,1.0,2.0,3.0,2.0,3.0,2.0,3.0,2.0,2.0,1.0,1.0,2.0,2.0,1.0,2.0,3.0,3.0,3.0,3.0,3.0,3.0,2.0,1.0,3.0,3.0,3.0,1.0,3.0,1.0,1.0,1.0,2.0,3.0,3.0,1.0,1.0,2.0,1.0,2.0,2.0,2.0,3.0,3.0,2.0,2.0,3.0,4.0,4.0,4.0,1.0,4.0,4.0,4.0,3.0,4.0,1.0,1.0,1.0,4.0,2.0,2.0,3.0,1.0,1.0,1.0,2.0,3.0,4.0,3.0,2.0,4.0,4.0,4.0,4.0,2.0,1.0,1.0,2.0,2.0,2.0,3.0,3.0,4.0,4.0,4.0,3.0,1.0,1.0,2.0,1.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,5.0,3.0,3.0,4.0,4.0,3.0,5.0,3.0,4.0,4.0,5.0,1.0,2.0,1.0,2.0,2.0,2.0,2.0,1.0,2.0,2.0,2.0,2.0,3.0,1.0,3.0,1.0,1.0,3.0,1.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,2.0,2.0,2.0,3.0,1.0,1.0,3.0,1.0,1.0,2.0,2.0,2.0,2.0,1.0,1.0,3.0,2.0,3.0,3.0,3.0,2.0,2.0,1.0,3.0,1.0,3.0,2.0,2.0,1.0,2.0,3.0,3.0,3.0,3.0,3.0,3.0,4.0,4.0,4.0,4.0,1.0,4.0,2.0,1.0,3.0,4.0,2.0,4.0,4.0,3.0,2.0,4.0,1.0,3.0,3.0,2.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,1.0,1.0,4.0],"x0":" ","xaxis":"x","y":[0.0,0.0,0.83,0.0,1.27,0.0,3.25,0.0,2.31,7.74,13.08,24.35,15.71,12.35,12.41,12.82,60.85,40.05,75.92,15.85,3.5,3.45,12.57,9.22,21.9,8.73,32.04,1.57,28.8,0.36,12.92,16.78,0.45,10.7,7.3,39.43,9.11,1.79,22.81,36.38,37.58,4.95,5.51,4.89,5.63,89.47,77.21,0.48,37.64,18.84,9.28,9.97,9.78,4.67,9.93,17.01,18.62,9.87,7.92,24.18,22.7,17.64,71.59,69.5,29.3,3.03,110.23,82.59,59.57,38.85,15.43,40.89,2.31,6.75,5.02,7.01,62.83,20.17,10.93,73.28,75.76,6.83,8.88,24.54,85.13,85.59,30.89,361.59,5.27,8.96,8.99,315.27,316.01,254.07,193.88,6.87,1.41,13.7,13.05,0.8,6.81,1.33,10.81,219.29,216.78,212.14,200.5,190.35,6.72,3.17,4.93,8.61,22.45,21.95,10.42,208.14,203.67,10.78,1.09,170.39,81.25,81.41,64.86,766.28,20.51,0.19,765.31,761.55,1.52,5.39,4.44,11.96,760.5,766.06,8.53,13.86,6.07,13.45,5.07,23.44,25.3,40.39,27.56,15.6,5.97,66.9,0.66,57.5,0.4,5.51,63.4,57.49,0.22,83.25,7.92,8.63,15.18,23.83,25.62,13.18,4.4,5.45,38.16,6.63,2.53,14.78,2.92,1.86,27.86,28.63,21.23,70.98,48.71,45.56,12.6,8.78,144.01,0.58,3.47,14.58,21.7,22.62,21.27,25.56,27.32,161.97,2.22,158.34,7.4,111.67,5.68,96.09,94.99,84.98,84.45,2.43,9.66,20.21,16.39,0.12,1.63,1.8,10.02,3.26,45.21,9.88,6.5,0.73,174.7,168.61,153.02,99.27,2.64,65.1,49.51,18.83,2.38,3.24,3.53,4.52,10.24,12.03,13.21,123.19,2.52,125.77,11.6,86.03,83.53,71.34,7.04,11.85,27.36,27.25,15.31,26.64,2.69,2.56,0.54,120.96,0.37,11.7,120.02,6.01,0.62,6.27,93.44,16.21,16.55,13.47,11.91,40.02,31.03,5.07,35.87,13.94,13.95,2.68,12.58,17.92,10.32,40.59,42.02,6.65,188.96,11.63,2.37,196.76,2.18,3.59,193.2,190.37,13.6,4.93,172.33,154.92,151.06,151.96,2.15,0.36,1.55,107.56,1.05,1.22,10.19,7.37,0.67,0.52,10.3,1.03,0.12,140.9,113.94,38.03,1.36,10.47,0.06,17.97,5.22,6.88,2.45,11.76,19.06,18.6,10.21,32.23,20.8,3.08,5.92,33.81,18.15,109.39,97.45,98.23,76.8,1853.72,2.1,6.88,5.75,5.84,12.7,1873.17,8.91,10.29,2.81,19.88,18.87,1887.01,1873.81,1859.91,1851.71,11.71,15.41,1870.88,1848.47,0.74,1851.5,1831.66,10.09,22.34,10.63,16.5,41.48,22.92,3.79,39.17,8.38,52.81,3.35,11.33,70.27,56.7,8.21,1916.86,1916.1,1902.43,1855.62,1847.98,1833.88,3.97,7.48,9.32,1.36,4.98,34.3,23.21,22.39,37.37,31.49,50.85,38.82,6.69,0.21,1.05,8.0,18.42,12.9,19.78,5.08,4.46,3.38,21.76,22.74,22.42,23.02,27.11,21.05,14.6,0.04,0.76,72.22,56.03,52.04,17.81,129.04,81.58,64.17,25.34,0.33,30.14,28.98,1.4,0.53,0.1,10.11,0.64,0.32,14.85,4.88,5.75,69.11,2.0,72.68,68.31,63.13,59.58,37.57,37.47,10.68,3.59,28.91,5.25,10.47,2.48,0.67,43.41,5.97,0.5,385.4,3.57,0.91,0.08,12.86,4.11,403.23,15.74,380.67,5.82,4.45,368.3,335.92,0.06,284.77,283.96,294.26,273.44,268.84,0.89,4.24,247.92,237.09,11.72,5.85,13.4,23.93,200.33,182.44,154.15,85.96,6.79,62.43,22.18,30.76,49.3,49.62,54.69,55.2,51.81,0.83,23.62,10.38,70.36,68.52,20.37,45.8,49.07,5.4,63.45,11.16,3.34,82.43,274.97,2.84,0.43,4.34,2.79,7.23,314.75,4.05,330.43,0.79,5.81,326.15,281.47,260.18,3.85,7.66,1.07,11.55,20.03,7.49,2.9,9.25,20.95,6.93,39.12,247.35,4.52,4.48,29.14,5.77,17.2,3.68,9.77,8.79,21.52,19.09,274.29,245.35,239.6,240.97,150.68,10.09,168.31,167.33,0.33,11.17,0.07,3.87,189.79,168.97,0.49,12.68,12.43,4.64,1.51,210.76,205.53,8.78,13.76,11.31,12.08,1.11,30.37,44.01,41.25,27.71,27.93,21.93,2.52,285.48,279.53,277.7,286.61,229.63,0.54,232.12,189.25,165.78,156.84,138.51,9.73,10.02,7.86,2.84,15.3,19.06,3.63,3.21,36.74,3.17,21.98,6.23,6.73,10.51,11.26,8.2,8.74,4.01,28.14,176.8,178.66,5.16,6.41,8.98,184.56,4.17,162.32,2.7,1.71,0.38,6.97,167.11,5.56,95.47,2.49,18.43,3.01,36.04,3.68,92.63,86.36,2.5,77.94,8.57,80.24,73.46,4.69,9.22,69.87,2.97,1.22,0.32,39.07,5.62,3380.85,3340.82,3346.91,3292.98,3291.55,14.63,13.92,0.24,17.22,17.09,8.4,60.95,12.88,10.75,18.02,96.67,0.85,97.55,13.53,95.83,1.38,20.16,1.71,2.36,29.14,24.97,3.72,2.29,111.29,108.2,109.59,82.45,75.55,76.42,1.96,2.42,88.82,79.3,67.99,0.55,67.36,0.28,13.46,4.52,27.4,69.52,65.25,13.08,2.44,16.25,0.99,21.1,18.19,6.47,47.13,33.02,5.37,4.46,46.6,290.53,246.94,235.96,6.01,222.74,220.16,191.84,3.73,186.74,13.16,11.89,5.56,194.84,10.66,8.58,2.21,0.08,0.87,9.96,2.38,24.4,214.69,4.83,2.09,228.12,218.99,216.36,192.75,3.1,13.05,22.92,18.43,18.35,8.41,30.86,7.97,199.46,185.44,175.03,0.48,1.26,0.24,3.5,2.84,183.28,181.72,113.49,107.36,87.15,82.34,81.48,59.74,3830.71,12.39,7.01,28.35,17.17,0.4,3846.45,0.3,11.94,9.51,3838.73,2.83,9.03,10.93,20.83,18.31,7.83,29.29,3.04,52.01,33.03,25.31,17.96,103.68,2.12,66.45,5.67,9.37,31.87,1.05,14.1,7.27,4.61,2.7,41.37,26.39,25.55,27.18,25.55,10.23,95.96,1.67,0.83,43.46,5.57,15.43,29.39,15.79,18.67,16.34,13.01,8.48,108.47,0.52,80.38,83.36,85.23,15.78,12.05,1.07,99.91,8.75,52.53,13.87,10.12,9.81,26.25,91.21,66.93,45.85,3.55,0.69,3.44,463.63,464.57,449.26,429.76,0.58,409.64,2.23,7.27,6.14,437.36,7.97,438.6,428.24,4.41,2.37,430.39,10.3,12.2,8.62,0.02,449.16,448.34,417.95,410.5,393.22,355.78,351.52,332.29,320.04,3.67,0.63,323.58],"y0":" ","yaxis":"y","type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Priority"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Q Time Nurse"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="438e2f31-e705-4f01-b779-1cb06b41cdd8" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("438e2f31-e705-4f01-b779-1cb06b41cdd8")) {                    Plotly.newPlot(                        "438e2f31-e705-4f01-b779-1cb06b41cdd8",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"Priority=%{x}\u003cbr\u003eQ Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa"},"name":"","notched":false,"offsetgroup":"","orientation":"v","showlegend":false,"x":[1.0,2.0,3.0,4.0,3.0,1.0,1.0,4.0,2.0,5.0,1.0,5.0,5.0,5.0,5.0,2.0,3.0,3.0,1.0,1.0,1.0,2.0,2.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,3.0,3.0,4.0,1.0,4.0,2.0,1.0,3.0,3.0,4.0,4.0,2.0,2.0,2.0,2.0,1.0,1.0,3.0,4.0,1.0,3.0,3.0,1.0,4.0,1.0,4.0,4.0,4.0,5.0,1.0,3.0,3.0,5.0,1.0,4.0,4.0,5.0,5.0,5.0,5.0,5.0,5.0,4.0,1.0,5.0,5.0,1.0,1.0,1.0,1.0,1.0,2.0,2.0,2.0,3.0,2.0,1.0,3.0,3.0,3.0,4.0,4.0,4.0,2.0,3.0,2.0,4.0,5.0,3.0,5.0,3.0,3.0,5.0,5.0,5.0,1.0,5.0,5.0,3.0,3.0,2.0,2.0,3.0,3.0,3.0,1.0,3.0,1.0,1.0,1.0,2.0,3.0,3.0,2.0,2.0,3.0,3.0,3.0,4.0,4.0,2.0,4.0,1.0,1.0,3.0,4.0,4.0,4.0,4.0,4.0,4.0,3.0,4.0,4.0,3.0,4.0,1.0,3.0,4.0,5.0,4.0,5.0,1.0,2.0,3.0,4.0,3.0,4.0,3.0,1.0,1.0,1.0,2.0,2.0,2.0,1.0,1.0,1.0,2.0,3.0,3.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,1.0,3.0,2.0,4.0,5.0,5.0,5.0,2.0,5.0,5.0,5.0,5.0,5.0,3.0,3.0,2.0,4.0,5.0,5.0,5.0,2.0,1.0,1.0,1.0,3.0,4.0,1.0,1.0,1.0,2.0,2.0,3.0,3.0,1.0,3.0,4.0,2.0,3.0,4.0,4.0,4.0,3.0,3.0,5.0,5.0,3.0,4.0,5.0,5.0,5.0,5.0,3.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,1.0,3.0,3.0,1.0,2.0,2.0,4.0,4.0,4.0,1.0,2.0,5.0,2.0,5.0,5.0,1.0,1.0,2.0,5.0,5.0,5.0,5.0,1.0,2.0,3.0,1.0,4.0,2.0,2.0,1.0,1.0,1.0,4.0,2.0,1.0,2.0,2.0,1.0,2.0,2.0,1.0,2.0,3.0,1.0,1.0,3.0,4.0,1.0,1.0,1.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,2.0,2.0,1.0,2.0,2.0,2.0,2.0,1.0,1.0,2.0,2.0,2.0,1.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,4.0,3.0,2.0,3.0,3.0,1.0,1.0,3.0,3.0,4.0,4.0,4.0,4.0,1.0,2.0,3.0,2.0,1.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,4.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,1.0,4.0,4.0,4.0,3.0,5.0,5.0,1.0,1.0,2.0,3.0,3.0,1.0,2.0,2.0,2.0,3.0,4.0,4.0,4.0,2.0,3.0,2.0,4.0,4.0,4.0,2.0,2.0,4.0,5.0,5.0,5.0,5.0,1.0,4.0,1.0,2.0,2.0,1.0,3.0,3.0,2.0,2.0,2.0,3.0,3.0,2.0,3.0,4.0,4.0,5.0,3.0,3.0,3.0,3.0,4.0,5.0,4.0,5.0,5.0,5.0,3.0,1.0,3.0,3.0,3.0,5.0,5.0,2.0,2.0,3.0,4.0,4.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,1.0,1.0,3.0,3.0,3.0,3.0,4.0,4.0,2.0,1.0,1.0,2.0,1.0,2.0,2.0,3.0,1.0,4.0,3.0,1.0,3.0,4.0,4.0,4.0,2.0,4.0,1.0,3.0,4.0,1.0,2.0,2.0,3.0,4.0,3.0,1.0,2.0,2.0,2.0,3.0,1.0,2.0,3.0,2.0,3.0,2.0,1.0,3.0,3.0,1.0,2.0,3.0,3.0,1.0,4.0,4.0,4.0,4.0,3.0,2.0,3.0,1.0,3.0,1.0,2.0,4.0,4.0,4.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,4.0,5.0,5.0,3.0,5.0,5.0,5.0,1.0,4.0,5.0,5.0,3.0,1.0,2.0,2.0,2.0,1.0,2.0,2.0,2.0,1.0,2.0,3.0,3.0,2.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,2.0,2.0,1.0,2.0,1.0,2.0,3.0,3.0,1.0,1.0,3.0,3.0,3.0,3.0,4.0,3.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,2.0,4.0,4.0,4.0,2.0,2.0,3.0,4.0,4.0,4.0,4.0,4.0,1.0,4.0,4.0,1.0,2.0,1.0,2.0,2.0,2.0,2.0,3.0,1.0,3.0,3.0,4.0,2.0,4.0,4.0,2.0,3.0,1.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,1.0,3.0,3.0,4.0,4.0,4.0,4.0,4.0,1.0,2.0,4.0,2.0,2.0,4.0,1.0,2.0,3.0,4.0,4.0,2.0,4.0,4.0,1.0,4.0,4.0,4.0,2.0,3.0,4.0,4.0,4.0,4.0,1.0,3.0,4.0,1.0,2.0,2.0,3.0,1.0,2.0,3.0,1.0,2.0,1.0,2.0,3.0,3.0,3.0,3.0,1.0,2.0,4.0,3.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,2.0,4.0,1.0,4.0,2.0,2.0,3.0,1.0,3.0,2.0,2.0,1.0,2.0,1.0,2.0,2.0,3.0,3.0,3.0,1.0,1.0,2.0,4.0,3.0,4.0,4.0,1.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,3.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,2.0,2.0,1.0,1.0,1.0,1.0,2.0,2.0,1.0,1.0,2.0,4.0,4.0,4.0,4.0,4.0,5.0,4.0,5.0,1.0,1.0,2.0,4.0,4.0,5.0,5.0,1.0,3.0,3.0,5.0,2.0,5.0,5.0,3.0,3.0,2.0,3.0,3.0,3.0,3.0,4.0,3.0,4.0,1.0,1.0,2.0,2.0,2.0,1.0,2.0,2.0,3.0,1.0,2.0,3.0,3.0,3.0,4.0,3.0,2.0,2.0,2.0,4.0,4.0,5.0,2.0,2.0,2.0,4.0,5.0,5.0,1.0,5.0,5.0,5.0,5.0,1.0,3.0,5.0,5.0,3.0,4.0,4.0,5.0,5.0,2.0,2.0,2.0,3.0,3.0,4.0,5.0,2.0,5.0,5.0,5.0,2.0,3.0,3.0,1.0,3.0,4.0,4.0,1.0,1.0,4.0,3.0,1.0,4.0,1.0,1.0,1.0,2.0,4.0,4.0,2.0,4.0,1.0,1.0,2.0,2.0,1.0,2.0,2.0,2.0,2.0,3.0,3.0,3.0,3.0,3.0],"x0":" ","xaxis":"x","y":[0.0,2.6,7.59,0.0,0.0,0.0,0.04,7.47,1.13,5.56,8.43,2.14,0.0,1.83,4.51,5.5,12.29,8.96,1.37,2.41,1.59,4.19,2.85,16.22,13.02,15.91,12.76,14.58,6.95,7.64,1.7,5.28,22.83,20.25,26.49,30.26,55.55,19.72,2.07,104.95,0.43,104.72,1.99,8.41,6.37,2.84,115.2,71.5,7.03,10.69,2.98,1.92,3.21,2.64,9.57,63.65,8.22,1.04,0.04,4.4,66.83,0.5,76.04,69.22,51.16,191.61,1.94,1.26,3.1,197.81,1.36,4.89,3.85,185.08,185.8,152.04,140.38,115.11,98.51,3.71,5.77,107.41,53.72,4.8,28.4,30.58,17.15,5.64,13.04,11.83,4.47,57.66,3.64,2.76,45.38,34.57,3.69,60.8,56.47,51.46,2.06,0.89,0.61,19.65,122.85,3.65,119.3,3.22,0.91,88.21,73.54,64.63,1.5,69.08,49.0,6.7,8.02,13.31,2.63,37.85,12.19,13.57,0.11,20.08,2.58,23.74,3.84,27.07,28.08,19.14,10.48,2.93,23.26,0.32,6.6,158.11,143.52,4.04,136.14,4.98,4.43,5.66,155.71,126.43,124.61,100.64,75.08,67.52,10.28,77.55,11.24,2.1,10.6,0.84,13.05,21.2,318.28,1.41,295.59,2.3,1.41,0.46,3.66,5.72,6.32,7.55,13.49,19.22,11.65,2.35,4.29,5.24,2.29,7.92,12.67,11.43,100.43,95.31,78.45,2.81,71.4,60.67,23.71,20.37,31.73,5.42,8.54,13.79,0.5,32.25,465.95,476.55,477.64,0.99,447.67,434.14,421.5,233.6,204.71,0.73,9.69,0.57,17.92,246.48,247.1,244.09,3.54,12.11,2.45,2.73,34.89,30.36,29.17,15.48,11.86,21.19,22.65,45.71,30.48,0.55,22.78,35.52,6.17,6.48,35.52,30.63,26.14,8.81,5.39,390.19,361.58,11.51,4.05,352.53,297.89,283.52,209.19,8.19,17.85,19.47,21.82,17.25,15.84,6.5,40.95,1.73,41.64,35.28,2.73,5.22,2.78,72.86,65.99,39.17,1.5,1.91,313.98,3.33,332.24,304.72,0.3,1.93,3.49,306.98,306.45,302.24,272.54,13.15,1.09,26.71,0.23,8.11,14.27,18.77,0.49,13.76,0.31,40.07,2.64,1.72,16.77,13.94,4.49,20.11,11.58,2.46,6.31,26.61,6.33,12.32,33.41,113.13,10.56,15.4,34.08,35.01,19.71,37.32,2.31,7.03,15.58,81.91,82.88,63.18,8.16,72.65,66.36,27.93,25.54,13.01,8.24,37.75,13.27,1.28,3.07,189.15,177.85,166.08,139.0,119.12,70.01,66.74,57.54,246.39,232.12,206.98,194.76,168.48,5.69,180.86,0.08,8.79,15.43,8.92,8.24,6.15,15.06,20.86,200.5,44.73,14.1,12.1,5.33,5.06,15.71,8.57,4.03,34.45,28.86,20.73,71.61,66.33,69.41,68.56,20.8,112.1,0.71,14.62,27.24,15.52,8.97,12.98,3.91,4.07,173.53,129.39,138.02,59.14,39.96,4.82,24.72,23.26,16.75,1.91,957.06,957.65,1.6,8.31,23.46,20.9,10.76,0.37,17.79,16.29,9.91,13.05,32.18,27.68,21.93,3.26,4.88,3.86,32.31,35.25,32.35,7.58,4.01,24.07,1086.84,1084.59,1035.51,1040.0,3.12,4.39,0.99,5.87,7.17,10.92,36.57,35.02,16.97,16.0,9.2,51.67,8.99,0.73,2.72,78.35,65.56,1069.9,0.9,6.45,5.46,1.86,3.09,1061.12,4.44,1058.78,1029.74,1031.67,0.56,2.39,3.79,5.34,0.52,1048.59,1032.16,11.57,12.85,5.58,24.32,17.17,6.99,10.79,6.98,3.86,15.5,5.14,4.38,5.92,18.43,57.83,24.61,8.77,9.07,110.91,104.43,11.31,8.96,2.54,19.18,10.08,42.59,34.56,20.81,0.06,72.05,12.54,1.39,12.14,101.0,93.56,103.25,1.54,92.44,1.4,21.09,121.72,2.75,12.28,13.36,7.7,137.7,1.31,2.68,37.82,30.02,4.83,47.67,5.5,2.89,62.75,7.11,64.72,0.37,3.28,2.99,3.79,11.19,1.95,13.18,16.2,3.26,257.46,268.41,267.66,238.23,2.54,12.89,13.09,8.71,9.91,0.96,18.61,292.93,281.59,278.86,280.93,2.22,237.57,239.99,200.02,198.08,13.72,6.57,19.46,1633.63,1626.69,4.82,1627.46,1610.29,1582.73,2.62,4.69,1590.44,1592.78,1.86,9.26,16.41,16.26,18.09,1.32,33.97,36.8,43.2,5.94,30.6,89.64,70.73,20.09,19.2,11.7,8.78,2.68,102.62,97.51,74.89,80.8,0.82,18.09,0.85,15.93,3.47,9.23,107.88,112.5,16.84,11.39,80.18,68.95,28.39,13.67,256.57,1.79,9.08,11.08,35.65,12.6,13.11,5.79,48.3,3.14,312.91,301.98,282.47,3.29,8.87,12.69,298.04,282.74,241.63,168.69,163.58,2.25,158.13,114.27,2.81,12.05,3.07,11.39,11.06,11.43,4.46,53.88,1.11,31.71,11.93,197.7,3.0,188.08,197.9,11.65,14.67,27.26,17.11,24.94,7.18,13.42,5.02,63.33,13.27,0.2,1.39,4.72,280.46,257.7,246.78,228.06,226.83,8.39,12.32,239.53,1.36,0.52,235.76,12.04,5.12,5.6,249.41,233.76,7.94,243.59,243.21,16.7,274.36,270.99,281.12,1.35,4.86,291.15,291.86,279.65,256.56,6.45,4.91,271.47,7.72,7.8,8.02,27.62,7.79,1.81,42.94,2.02,5.77,1.08,0.05,57.95,38.14,9.52,5.23,4.89,8.86,315.64,0.54,298.18,0.66,297.01,288.95,280.06,206.44,169.98,2.41,158.7,0.07,120.64,7.74,7.37,15.4,6.14,17.78,14.85,5.0,13.13,15.61,3.7,12.07,14.24,78.55,79.05,20.23,15.78,6.43,22.65,228.18,8.46,218.89,182.11,9.55,182.02,182.08,178.03,161.49,125.08,130.62,126.23,5.7,141.28,141.94,125.77,57.49,49.41,22.11,19.36,3.73,0.21,19.96,26.27,11.11,7.13,24.06,13.09,0.11,0.6,27.25,90.99,87.66,59.54,62.84,17.68,2766.64,1.31,2756.27,14.01,16.05,30.08,36.11,32.51,2649.07,2606.15,2.67,7.94,4.44,2602.8,4.81,2606.71,2599.75,5.51,8.45,8.29,24.42,18.61,3.79,7.85,45.95,0.19,15.56,2.43,2.48,41.02,27.25,1.74,0.74,6.36,1.91,66.17,16.17,17.05,27.93,38.43,14.08,105.49,6.04,7.92,10.64,6.53,111.81,79.32,2814.13,4.92,3.72,5.12,14.57,2829.19,2713.93,2.53,2694.63,2644.74,2619.98,2616.72,4.64,2.27,2622.43,2577.87,10.82,7.64,1.42,2586.35,2552.63,12.15,9.63,3.31,33.37,7.88,24.92,2573.09,2.56,2573.05,2537.8,2530.64,0.71,2.8,1.46,3.06,3.72,25.79,23.28,5.21,5.47,33.98,0.81,0.26,43.34,10.53,7.08,0.06,23.08,49.51,28.91,6.16,36.28,3.5,5.5,19.71,13.61,1.04,29.64,12.38,16.74,5.16,82.17,83.41,86.98,50.59,44.03],"y0":" ","yaxis":"y","type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Priority"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Q Time Nurse"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('60c08027-fac1-4a67-92d9-74fc14c44026');
+var gd = document.getElementById('438e2f31-e705-4f01-b779-1cb06b41cdd8');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 25&nbsp; Dealing with appointment bookings</title>
+<title>HSMA - the little book of DES - 18&nbsp; Other Model Metrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./testing_large_numbers_scenarios.html" rel="next">
-<link href="./scheduling_arrivals.html" rel="prev">
+<link href="./visualising_model_metrics.html" rel="next">
+<link href="./tracking_resource_utilisation.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -74,7 +74,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 25&nbsp; Dealing with appointment bookings">
+<meta property="og:title" content="HSMA - the little book of DES - 18&nbsp; Other Model Metrics">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -100,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./other_model_metrics.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -277,7 +278,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
+  <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
@@ -319,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link active">
+  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
@@ -367,14 +368,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#arrivals" id="toc-arrivals" class="nav-link active" data-scroll-target="#arrivals"><span class="header-section-number">18.1</span> Arrivals</a></li>
+  <li><a href="#of-entities-meeting-a-target" id="toc-of-entities-meeting-a-target" class="nav-link" data-scroll-target="#of-entities-meeting-a-target"><span class="header-section-number">18.2</span> % of entities meeting a target</a></li>
+  <li><a href="#throughput" id="toc-throughput" class="nav-link" data-scroll-target="#throughput"><span class="header-section-number">18.3</span> Throughput</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./other_model_metrics.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></h1>
 </div>
 
 
@@ -391,8 +400,41 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>There are some other things it can be useful to measure in our model.</p>
+<section id="arrivals" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="arrivals"><span class="header-section-number">18.1</span> Arrivals</h2>
+<p>Monitoring the number of arrivals can be useful to see how much variation we may expect in our system.</p>
+<p>This can also be helpful to ensure the model is running as expected - we already did this in the Reproducibility section (<a href="reproducibility.html" class="quarto-xref"><span>Chapter 14</span></a>).</p>
+</section>
+<section id="of-entities-meeting-a-target" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="of-entities-meeting-a-target"><span class="header-section-number">18.2</span> % of entities meeting a target</h2>
+<p>While there is a lot of controversy around the value of targets like the 4 hour wait from arrival to admission, transfer or discharge for A&amp;E departments, they do have some value and can be a useful metric to consider as part of a wider package of metrics.</p>
+<p>Other examples of this may relate to length of stay - for example, mental health wards may have a target for the maximum length of stay.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider whether there may be anything in the historical data patterns that may be due to trying to meet targets.</p>
+<p>For example, <a href="https://thepsc.co.uk/news-insights/entry/reaffirming-the-nhs-4-hour-ae-target-why-it-matters">this article from the PSC</a> refers to some NHS England analysis that shows “17% of all admissions to Type 1 A&amp;Es between January and December 2018 occurred between 3 hours 50 minutes and 4 hours, prompting criticism that the 4-hour target has encouraged the NHS to ‘treat the target rather than the patient’. Evidence suggests that hospital processes, rather than clinical judgement, are responsible for this spike in admissions or discharge in the immediate period before a patient breaches the standard.”</p>
+<p><img src="https://thepsc.co.uk/downloads/Screenshot_2023-03-06_at_09.32.37.png" class="img-fluid"> Source: NHS England analysis of Secondary Uses Services (SUS) data, via <a href="https://thepsc.co.uk/news-insights/entry/reaffirming-the-nhs-4-hour-ae-target-why-it-matters">The PSC</a></p>
+<p>If the target was removed, would this result in a change in behaviour? How might the predictions of our model be affected by this?</p>
+</div>
+</div>
+</section>
+<section id="throughput" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="throughput"><span class="header-section-number">18.3</span> Throughput</h2>
+<p>Throughput refers to the % of people entering our system who have left by the time our model stops running.</p>
+<p>A very low throughput suggests a severe bottleneck somewhere in the system.</p>
+<p>This can be a useful measure to track as a quick way of assessing whether different scenarios are leading to severe bottlenecks, but it is not that useful as a standalone measure.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1287,13 +1329,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./scheduling_arrivals.html" class="pagination-link" aria-label="Scheduling Arrivals">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></span>
+      <a href="./tracking_resource_utilisation.html" class="pagination-link" aria-label="Tracking Resource Utilisation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./testing_large_numbers_scenarios.html" class="pagination-link" aria-label="Testing Large Numbers of Scenarios">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./visualising_model_metrics.html" class="pagination-link" aria-label="Visualising Model Metrics">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Attribution and Acknowledgements</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -173,33 +173,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Part 1 - DES Concepts and Design</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part 1 - DES Concepts and Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_des_concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -230,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Required outputs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,50 +312,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_resource_from_many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -356,7 +381,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Alternative Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -426,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-g-class" class="level3" data-number="12.2.1">
 <h3 data-number="12.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">12.2.1</span> The g class</h3>
 <p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency. Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
-<div id="30b78680" class="cell" data-execution_count="1">
+<div id="6976b882" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -470,7 +501,7 @@ Tip
 <p>This is a very helpful feature to use to keep your breaktime functions from clashing with high-priority patients.</p>
 </div>
 </div>
-<div id="e95d8c42" class="cell" data-execution_count="2">
+<div id="9914eba9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function to obstruct a nurse resource at specified intervals</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for specified amounts of time</span></span>
@@ -503,7 +534,7 @@ Tip
 <section id="the-run-method" class="level4" data-number="12.2.3.2">
 <h4 data-number="12.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">12.2.3.2</span> The run method</h4>
 <p>In our run method, we now start up the <code>obstruct_nurse</code> process in addition to the <code>generator_patient_arrivals</code> process.</p>
-<div id="528b3e05" class="cell" data-execution_count="3">
+<div id="01f04171" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -527,7 +558,7 @@ Tip
 </section>
 <section id="evaluating-the-outputs" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">12.3</span> Evaluating the outputs</h2>
-<div id="67c7546e" class="cell" data-execution_count="4">
+<div id="51cbc510" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -733,7 +764,7 @@ Tip
 </div>
 <p>Let’s look at the printed output showing when our nurses were obstructed.</p>
 <p>The first number in each line of output shows the simulation time when the message was generated.</p>
-<div id="41f412c4" class="cell" data-execution_count="5">
+<div id="87fac44b" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>0.00: The nurse will go on a break at around time 120.00
 120.15: The nurse is now on a break and will be back at 135.15
@@ -800,12 +831,12 @@ Tip
 </div>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
-<div id="cd592db8" class="cell" data-execution_count="9">
+<div id="c867e0fb" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are no nurse breaks is 143.18 minutes</code></pre>
 </div>
 </div>
-<div id="42f50854" class="cell" data-execution_count="10">
+<div id="48f4807c" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are nurse breaks is 299.7 minutes</code></pre>
 </div>

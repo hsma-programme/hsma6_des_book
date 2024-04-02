@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 25&nbsp; Dealing with appointment bookings</title>
+<title>HSMA - the little book of DES - 24&nbsp; Scheduling Arrivals</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./testing_large_numbers_scenarios.html" rel="next">
-<link href="./scheduling_arrivals.html" rel="prev">
+<link href="./appointment_style_booking_models.html" rel="next">
+<link href="./choosing_resource_from_many.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 25&nbsp; Dealing with appointment bookings">
+<meta property="og:title" content="HSMA - the little book of DES - 24&nbsp; Scheduling Arrivals">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./scheduling_arrivals.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -313,13 +313,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link">
+  <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link active">
+  <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span></a>
   </div>
 </li>
@@ -372,9 +372,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tracking_resource_utilisation.html">Part 4 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./scheduling_arrivals.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></h1>
+<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></h1>
 </div>
 
 
@@ -1287,13 +1287,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./scheduling_arrivals.html" class="pagination-link" aria-label="Scheduling Arrivals">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scheduling Arrivals</span></span>
+      <a href="./choosing_resource_from_many.html" class="pagination-link" aria-label="Choosing One Resource From Many">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choosing One Resource From Many</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./testing_large_numbers_scenarios.html" class="pagination-link" aria-label="Testing Large Numbers of Scenarios">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./appointment_style_booking_models.html" class="pagination-link" aria-label="Dealing with appointment bookings">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing with appointment bookings</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
