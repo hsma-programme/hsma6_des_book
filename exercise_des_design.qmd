@@ -1,4 +1,4 @@
-## Exercise - Designing a DES
+# Exercise - Designing a DES
 
 Design a Discrete Event Simulation for a system of your choosing.
 
