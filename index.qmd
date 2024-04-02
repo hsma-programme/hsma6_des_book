@@ -1,5 +1,13 @@
-# Preface {.unnumbered}
+# Attribution and Acknowledgements {.unnumbered}
 
-This is a Quarto book.
+The content in this book is a combined effort, bringing together the knowledge of the Peninsula Collaborative for Operational Research and Design (PenCHORD) on the topic.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+The content in part 1 and a large amount of part 2 is from a series of sessions given on discrete event simulation as part of the HSMA programme. These lectures and accompanying code examples were written by Dr Daniel Chalk and made available under the **C BY-NC-SA 4.0** licence. The chapters often replicate the wording of these lectures nearly exactly, with minor tweaks and additions for readability and to better suit the format of a book made by Sammi Rosser.
+
+The content in parts 3 and 4 is more of a mixture of content from the HSMA lectures along with brand new content written for this book, drawing on a range of work done by the wider PenCHORD team. Adaptation into book format has been done throughout by Sammi Rosser.
+
+**HSMA 6: Lecture 1** - [Slides](https://docs.google.com/presentation/d/1HO0wXTocHRZgeuLadkGvqf5yC8BEmQzTcgo8QHOd0yY/edit?usp=sharing) - [Github](https://github.com/hsma-programme/h6_2a_intro_to_des)
+
+**HSMA 6: Lecture 2** - [Slides](https://docs.google.com/presentation/d/15bQX0yxfDgjNVJSQORNzBCWVvbKI_LaTcbtYVKsvYcU/edit?usp=sharing) - [Github](https://github.com/hsma-programme/h6_simpy_part_1)
+
+**HSMA 6: Lecture 3**- [Slides](https://docs.google.com/presentation/d/1y7S7bjJtdLQCquzzZ2vjYzRx9-RwXE-SWgWf88fLc4o/edit?usp=sharing) - [Github](https://github.com/hsma-programme/h6_simpy_part_2)
