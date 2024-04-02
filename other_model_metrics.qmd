@@ -1,0 +1,40 @@
+---
+title: Other Model Metrics
+execute:
+  eval: false
+jupyter: python3
+---
+
+There are some other things it can be useful to measure in our model.
+
+## Arrivals
+
+Monitoring the number of arrivals can be useful to see how much variation we may expect in our system.
+
+This can also be helpful to ensure the model is running as expected - we already did this in the Reproducibility section (@sec-reproducibility).
+
+
+## % of entities meeting a target
+
+While there is a lot of controversy around the value of targets like the 4 hour wait from arrival to admission, transfer or discharge for A&E departments, they do have some value and can be a useful metric to consider as part of a wider package of metrics.
+
+Other examples of this may relate to length of stay - for example, mental health wards may have a target for the maximum length of stay.
+
+:::{.callout-warning}
+Consider whether there may be anything in the historical data patterns that may be due to trying to meet targets.
+
+For example, [this article from the PSC](https://thepsc.co.uk/news-insights/entry/reaffirming-the-nhs-4-hour-ae-target-why-it-matters) refers to some NHS England analysis that shows "17% of all admissions to Type 1 A&Es between January and December 2018 occurred between 3 hours 50 minutes and 4 hours, prompting criticism that the 4-hour target has encouraged the NHS to ‘treat the target rather than the patient’. Evidence suggests that hospital processes, rather than clinical judgement, are responsible for this spike in admissions or discharge in the immediate period before a patient breaches the standard."
+
+![](https://thepsc.co.uk/downloads/Screenshot_2023-03-06_at_09.32.37.png)
+Source: NHS England analysis of Secondary Uses Services (SUS) data, via [The PSC](https://thepsc.co.uk/news-insights/entry/reaffirming-the-nhs-4-hour-ae-target-why-it-matters)
+
+If the target was removed, would this result in a change in behaviour? How might the predictions of our model be affected by this?
+:::
+
+## Throughput
+
+Throughput refers to the % of people entering our system who have left by the time our model stops running.
+
+A very low throughput suggests a severe bottleneck somewhere in the system.
+
+This can be a useful measure to track as a quick way of assessing whether different scenarios are leading to severe bottlenecks, but it is not that useful as a standalone measure.
