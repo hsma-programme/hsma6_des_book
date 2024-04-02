@@ -4,3 +4,23 @@ execute:
   eval: true
 jupyter: python3
 ---
+
+When running a model, it's useful to be able to track a few things about your resources.
+
+- How much are resources being utilised overall
+- How much are resources being utilised at specific points in time
+
+For example, it would be useful to know that your nurse resources are being utilised 89% of the time.
+
+:::{.callout-tip}
+You often don't want utilisation to be too close to 100% - though exactly where you want utilisation to sit can depend a lot on the kind of service you run, and how big it is.
+
+In services where rapid access is crucial - such as a cancer service, a high dependency unit, a crisis hotline, or an emergency department - a slightly lower average utilisation may be seen, but could be necessary to safely cope with spikes in demand. At that point, you may need to look elsewhere in the system to see if it is possible to make that demand less 'spiky', or whether it is just an inherent feature of that kind of work that can't be avoided.
+
+Chasing very high utilisation figures can also be a false economy - for example, is it cheaper to have a 12 bed mental health ward that usually runs at an average 70% occupancy, or a 9 bed ward running at an average 95% occupancy, but with high levels of staff burnout, infection control issues, and a constant need to purchase additional capacity from the private sector or place patients in other wards owned by the trust, which are further from the patient's home and support network, potentially slowing recovery and leading to a longer stay, and also incurring additional costs for patient transport. **While you don't want lots of beds sitting empty, understanding the knock-on effects can be crucial to ensuring utilisation metrics are used and interpreted well - and this often requires you having conversations with your stakeholders to understand the wider implications.**
+
+Keep in mind that they themselves may not be that confident with using anything other than 'average demand' for capacity planning. This video from the demand and capacity team (formerly part of NHS England) is a great resource for helping stakeholders to understand the impact of variation in demand.
+
+{{< video https://www.youtube.com/watch?v=YnOJ5EnWrtM >}}
+
+:::
