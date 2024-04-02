@@ -40,6 +40,7 @@ The cubicle is released for the next patient after seeing the nurse IF the patie
 import simpy
 import random
 import pandas as pd
+import numpy as np ##NEW
 
 # Class to store global parameter values.  We don't create an instance of this
 # class - we just refer to the class blueprint itself to access the numbers
@@ -54,7 +55,7 @@ class g:
     number_of_doctors = 2
     number_of_cubicles = 5
     prob_seeing_doctor = 0.6
-    sim_duration = 1200
+    sim_duration = 1800
     number_of_runs = 10
 
 # Class representing patients coming in to the clinic.
@@ -64,6 +65,7 @@ class Patient:
         self.q_time_recep = 0
         self.q_time_nurse = 0
         self.q_time_doctor = 0
+        self.q_time_cubicle = 0 ##NEW
 
 # Class representing our model of the clinic.
 class Model:
@@ -80,7 +82,7 @@ class Model:
         self.receptionist = simpy.Resource(self.env, capacity=g.number_of_receptionists)
         self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
         self.doctor = simpy.Resource(self.env, capacity=g.number_of_doctors)
-        self.cubicles = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
+        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
 
         # Store the passed in run number
         self.run_number = run_number
@@ -95,6 +97,8 @@ class Model:
         self.results_df["Time with Nurse"] = [0.0]
         self.results_df["Q Time Doctor"] = [0.0]
         self.results_df["Time with Doctor"] = [0.0]
+        self.results_df["Q Time Cubicle"] = [0.0] ##NEW
+        self.results_df["Time Using Cubicle"] = [0.0] ##NEW
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create an attribute to store the mean queuing times across this run of
@@ -102,6 +106,7 @@ class Model:
         self.mean_q_time_recep = 0
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
+        self.mean_q_time_cubicle = 0 ##NEW
 
     # A generator function that represents the DES generator for patient
     # arrivals
@@ -165,69 +170,91 @@ class Model:
         # Here's where the patient finishes with the receptionist, and starts
         # queuing for the nurse
         # NEW: They will also be queueing for a cubicle at this point.
+        #
 
         # Record the time the patient started queuing for a nurse
         start_q_nurse = self.env.now
-        start_q_cubicle = self.env.now
+        start_q_cubicle = self.env.now ##NEW
 
-        # NEW: As we are going to require the cubicle for the entire time period from
+        ########
+        ##NEW
+        ########
+        # As we are going to require the cubicle for the entire time period from
         # here on, and won't release it until they exit the system, we will request
         # the cubicle here and indent all of the existing code by one level.
 
-        with self.cubicle.request() as req:
-          yield req
-        # This code says request a nurse resource, and do all of the following
-        # block of code with that nurse resource held in place (and therefore
-        # not usable by another patient)
-        with self.nurse.request() as req:
-            # Freeze the function until the request for a nurse can be met.
-            # The patient is currently queuing.
-            yield req
+        nurse_request = self.nurse.request()  ##NEW
+        cubicle_request = self.cubicle.request() ##NEW
 
-            # When we get to this bit of code, control has been passed back to
-            # the generator function, and therefore the request for a nurse has
-            # been met.  We now have the nurse, and have stopped queuing, so we
-            # can record the current time as the time we finished queuing.
+        clinic_resource = yield self.env.any_of([nurse_request,cubicle_request]) ##NEW
+
+        # First, check if both were available at once. If so, we can continue.
+
+        clinic_resource_list = list(clinic_resource.keys()) ##NEW
+
+        if len(clinic_resource_list) < 2:
+            ## Work out which we didn't get and wait for that one
+            got_resource = clinic_resource_list[0]
+
+            if got_resource == nurse_request:
+                end_q_nurse = self.env.now
+                yield(cubicle_request)
+                end_q_cubicle = self.env.now
+            else:
+                end_q_cubicle = self.env.now
+                yield(nurse_request)
+                end_q_nurse = self.env.now
+        else:
+            end_q_cubicle = self.env.now
             end_q_nurse = self.env.now
 
-            # Calculate the time this patient was queuing for the nurse, and
-            # record it in the patient's attribute for this.
-            patient.q_time_nurse = end_q_nurse - start_q_nurse
+            self.results_df.at[patient.id, "Q Time Cubicle"] = (
+                 end_q_cubicle - start_q_cubicle
+            )
+        ########
+        ##END NEW
+        ########
 
-            # Now we'll randomly sample the time this patient with the nurse.
-            # Here, we use an Exponential distribution for simplicity, but you
-            # would typically use a Log Normal distribution for a real model
-            # (we'll come back to that).  As with sampling the inter-arrival
-            # times, we grab the mean from the g class, and pass in 1 / mean
-            # as the lambda value.
-            sampled_nurse_act_time = random.expovariate(1.0 /
-                                                        g.mean_n_consult_time)
+        # Calculate the time this patient was queuing for the nurse, and
+        # record it in the patient's attribute for this.
+        patient.q_time_nurse = end_q_nurse - start_q_nurse
 
-            # Here we'll store the queuing time for the nurse and the sampled
-            # time to spend with the nurse in the results DataFrame against the
-            # ID for this patient.  In real world models, you may not want to
-            # bother storing the sampled activity times - but as this is a
-            # simple model, we'll do it here.
-            # We use a handy property of pandas called .at, which works a bit
-            # like .loc.  .at allows us to access (and therefore change) a
-            # particular cell in our DataFrame by providing the row and column.
-            # Here, we specify the row as the patient ID (the index), and the
-            # column for the value we want to update for that patient.
-            self.results_df.at[patient.id, "Q Time Nurse"] = (
-                patient.q_time_nurse)
-            self.results_df.at[patient.id, "Time with Nurse"] = (
-                sampled_nurse_act_time)
+        # Now we'll randomly sample the time this patient with the nurse.
+        # Here, we use an Exponential distribution for simplicity, but you
+        # would typically use a Log Normal distribution for a real model
+        # (we'll come back to that).  As with sampling the inter-arrival
+        # times, we grab the mean from the g class, and pass in 1 / mean
+        # as the lambda value.
+        sampled_nurse_act_time = random.expovariate(1.0 /
+                                                    g.mean_n_consult_time)
 
-            # Freeze this function in place for the activity time we sampled
-            # above.  This is the patient spending time with the nurse.
-            yield self.env.timeout(sampled_nurse_act_time)
+        # Here we'll store the queuing time for the nurse and the sampled
+        # time to spend with the nurse in the results DataFrame against the
+        # ID for this patient.  In real world models, you may not want to
+        # bother storing the sampled activity times - but as this is a
+        # simple model, we'll do it here.
+        # We use a handy property of pandas called .at, which works a bit
+        # like .loc.  .at allows us to access (and therefore change) a
+        # particular cell in our DataFrame by providing the row and column.
+        # Here, we specify the row as the patient ID (the index), and the
+        # column for the value we want to update for that patient.
+        self.results_df.at[patient.id, "Q Time Nurse"] = (
+            patient.q_time_nurse)
+        self.results_df.at[patient.id, "Time with Nurse"] = (
+            sampled_nurse_act_time)
 
-            # When the time above elapses, the generator function will return
-            # here.  As there's nothing more that we've written, the function
-            # will simply end.  This is a sink.  We could choose to add
-            # something here if we wanted to record something - e.g. a counter
-            # for number of patients that left, recording something about the
-            # patients that left at a particular sink etc.
+        # Freeze this function in place for the activity time we sampled
+        # above.  This is the patient spending time with the nurse.
+        yield self.env.timeout(sampled_nurse_act_time)
+
+        # When the time above elapses, the generator function will return
+        # here.  As there's nothing moref that we've written, the function
+        # will simply end.  This is a sink.  We could choose to add
+        # something here if we wanted to record something - e.g. a counter
+        # for number of patients that left, recording something about the
+        # patients that left at a particular sink etc.
+
+        self.nurse.release(nurse_request) ##NEW
 
         # Conditional logic to see if patient goes on to see doctor
         # We sample from the uniform distribution between 0 and 1.  If the value
@@ -259,6 +286,21 @@ class Model:
 
                 yield self.env.timeout(sampled_doctor_act_time)
 
+                self.results_df.at[patient.id, "Time Using Cubicle"] = ( ##NEW
+                    self.env.now - end_q_cubicle
+                )
+
+                self.cubicle.release(cubicle_request) ##NEW
+
+
+        else: ## NEW
+
+              self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
+                    self.env.now - end_q_cubicle
+                    )
+              self.cubicle.release(cubicle_request) ##NEW
+
+
     # This method calculates results over a single run.  Here we just calculate
     # a mean, but in real world models you'd probably want to calculate more.
     def calculate_run_results(self):
@@ -266,7 +308,8 @@ class Model:
         # model.
         self.mean_q_time_recep = self.results_df["Q Time Recep"].mean()
         self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
-        self.mean_q_time_doctor = self.results_df["Q Time Doctor"].mean() ##NEW
+        self.mean_q_time_doctor = self.results_df["Q Time Doctor"].mean()
+        self.mean_q_time_cubicle = self.results_df["Q Time Cubicle"].mean() ##NEW
 
     # The run method starts up the DES entity generators, runs the simulation,
     # and in turns calls anything we need to generate results for the run
@@ -285,8 +328,9 @@ class Model:
 
         # Print the run number with the patient-level results from this run of
         # the model
-        print (f"Run Number {self.run_number}")
-        print (self.results_df)
+        # EDIT: Omit patient-level results in this model
+        # print (f"Run Number {self.run_number}")
+        # print (self.results_df)
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
 class Trial:
@@ -298,13 +342,14 @@ class Trial:
         self.df_trial_results["Mean Q Time Recep"] = [0.0]
         self.df_trial_results["Mean Q Time Nurse"] = [0.0]
         self.df_trial_results["Mean Q Time Doctor"] = [0.0]
+        self.df_trial_results["Mean Q Time Cubicle"] = [0.0] ##NEW
         self.df_trial_results.set_index("Run Number", inplace=True)
 
     # Method to print out the results from the trial.  In real world models,
     # you'd likely save them as well as (or instead of) printing them
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results)
+        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
 
     # Method to run a trial
     def run_trial(self):
@@ -320,9 +365,49 @@ class Trial:
 
             self.df_trial_results.loc[run] = [my_model.mean_q_time_recep,
                                               my_model.mean_q_time_nurse,
-                                              my_model.mean_q_time_doctor]
+                                              my_model.mean_q_time_doctor,
+                                              my_model.mean_q_time_cubicle ##NEW
+                                              ]
 
         # Once the trial (ie all runs) has completed, print the final results
+        self.df_trial_results['nurse_queue_longer'] = np.where(self.df_trial_results['Mean Q Time Nurse'] > self.df_trial_results['Mean Q Time Cubicle'], True, False)
+
         self.print_trial_results()
 
+```
+
+## Evaluating the outputs
+```{python}
+#| eval: true
+#| echo: false
+random.seed(1953)
+```
+
+
+```{python}
+#| eval: true
+#| echo: false
+print(f"{g.number_of_cubicles} cubicles, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+my_trial.run_trial()
+```
+
+
+
+```{python}
+#| eval: true
+#| echo: false
+g.number_of_cubicles = 3
+
+print(f"{g.number_of_cubicles} cubicles, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+my_trial.run_trial()
 ```
