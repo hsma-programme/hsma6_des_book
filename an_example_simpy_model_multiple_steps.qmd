@@ -22,9 +22,13 @@ Just make sure you write the next bit outside of the with statement.  Otherwise 
 Of course, in some cases, you might want that - perhaps if you’re modelling a bed as a resource, for example, but then want to model using an additional resource like a nurse for some parts of the process.
 :::
 
+## Coding the model
+
 :::{.callout-tip}
 Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
 :::
+
+### The g class
 
 First, lets add some additional parameters to our g class.
 
@@ -40,6 +44,8 @@ class g:
     number_of_runs = 5
 ```
 
+### The Patient class
+
 Next we'll add an additional attribute - think of it as an extra box on their clipboard that they need to fill in - to record how long they are queuing for the receptionist.
 
 ```{python}
@@ -51,6 +57,8 @@ class Patient:
         self.q_time_recep = 0 ##NEW
         self.q_time_nurse = 0
 ```
+
+### The Model class
 
 Now we move to our **model** class. Let's start by looking at the init method - the list of things that are set up when we create an instance of our model class.
 
@@ -197,7 +205,16 @@ Everything at one level of indentation within this now relates to the use of the
             # patients that left at a particular sink etc.
 ```
 
+### The trial class
+
+The trial class is unchanged.
+
+## Evaluating the outputs
+
 Below is the full code for our updated model. Look out for the lines that end with #NEW to find the bits we've added.
+
+:::{.callout-note collapse="true"}
+### Click here to view the full code
 
 ```{python}
 import simpy
@@ -214,7 +231,7 @@ class g:
     number_of_receptionists = 1 ##NEW
     number_of_nurses = 1
     sim_duration = 120
-    number_of_runs = 5
+    number_of_runs = 2
 
 # Class representing patients coming in to the clinic.
 class Patient:
@@ -443,7 +460,11 @@ class Trial:
 
 ```
 
+:::
+
 Let's run the updated code and see the outputs.
+
+We can see we now get results for the time queueing for and the time spent with the receptionist and the nurse, displayed separately, and that these times are different from each other.
 
 ```{python}
 # Create an instance of the Trial class
