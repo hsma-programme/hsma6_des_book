@@ -346,6 +346,8 @@ self.df_trial_results['nurse_queue_longer'] = np.where(self.df_trial_results['Me
 
 # Print the final results
 self.print_trial_results()
+
+print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_results['nurse_queue_longer'].values)} trials of {g.number_of_runs}")
 ```
 
 ## Evaluating the outputs
@@ -376,8 +378,8 @@ class g:
     number_of_doctors = 2
     number_of_cubicles = 5 ##NEW
     prob_seeing_doctor = 0.6
-    sim_duration = 1800
-    number_of_runs = 10
+    sim_duration = 600
+    number_of_runs = 100
 
 # Class representing patients coming in to the clinic.
 class Patient:
@@ -518,14 +520,19 @@ class Model:
             got_resource = clinic_resource_list[0]
 
             if got_resource == nurse_request:
+                #print(f"{patient.id} got nurse first at {self.env.now}")
                 end_q_nurse = self.env.now
                 yield(cubicle_request)
                 end_q_cubicle = self.env.now
+                #print(f"{patient.id} got cubicle at {self.env.now}")
             else:
+                #print(f"{patient.id} got cubicle first at {self.env.now}")
                 end_q_cubicle = self.env.now
                 yield(nurse_request)
                 end_q_nurse = self.env.now
+                #print(f"{patient.id} got nurse at {self.env.now}")
         else:
+            #print(f"{patient.id} got both resources simultaneously at {self.env.now}")
             end_q_cubicle = self.env.now
             end_q_nurse = self.env.now
 
@@ -545,8 +552,6 @@ class Model:
         ########
         ##END NEW
         ########
-
-
 
         # Now we'll randomly sample the time this patient with the nurse.
         # Here, we use an Exponential distribution for simplicity, but you
@@ -619,13 +624,12 @@ class Model:
 
                 self.cubicle.release(cubicle_request) ##NEW
 
-
         else: ## NEW
 
-              self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
-                    self.env.now - end_q_cubicle
-                    )
-              self.cubicle.release(cubicle_request) ##NEW
+            self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
+                  self.env.now - end_q_cubicle
+                  )
+            self.cubicle.release(cubicle_request) ##NEW
 
 
     # This method calculates results over a single run.  Here we just calculate
@@ -702,14 +706,23 @@ class Trial:
         # Print the final results
         self.print_trial_results()
 
+        print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_results['nurse_queue_longer'].values)} trials of {g.number_of_runs}")
+
 ```
 
+:::
+
+
+:::{.callout-warning}
+We haven't fully controlled the randomness in our trials here, so the different trials will each have slightly differing arrival times and activity times. Even though we have run a high number of trials to compensate, this is not an ideal solution.
+
+For information on how to properly control for randomness across trials, make sure to read the reproducibility section (@sec-reproducibility).
 :::
 
 ```{python}
 #| eval: true
 #| echo: false
-random.seed(1953)
+random.seed(102)
 ```
 
 
@@ -717,7 +730,7 @@ random.seed(1953)
 #| eval: true
 #| echo: false
 
-g.number_of_cubicles = 7
+g.number_of_cubicles = 9
 
 print(f"{g.number_of_cubicles} cubicles, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
 
@@ -728,7 +741,11 @@ my_trial = Trial()
 my_trial.run_trial()
 ```
 
-
+```{python}
+#| eval: true
+#| echo: false
+random.seed(102)
+```
 
 ```{python}
 #| eval: true
@@ -743,3 +760,157 @@ my_trial = Trial()
 # Call the run_trial method of our Trial object
 my_trial.run_trial()
 ```
+
+```{python}
+#| eval: true
+#| echo: false
+random.seed(102)
+```
+
+
+```{python}
+#| eval: true
+#| echo: false
+
+g.number_of_cubicles = 12
+
+print(f"{g.number_of_cubicles} cubicles, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors")
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+my_trial.run_trial()
+```
+
+
+### Exploring the number of cubicles
+
+Let's tweak our output to see the impact of changing the number of cubicles while keeping the number of receptionists, nurses and doctors consistent.
+
+
+```{python}
+#| eval: true
+# Class representing a Trial for our simulation - a batch of simulation runs.
+class Trial:
+    # The constructor sets up a pandas dataframe that will store the key
+    # results from each run against run number, with run number as the index.
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Q Time Recep"] = [0.0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results["Mean Q Time Doctor"] = [0.0]
+        self.df_trial_results["Mean Q Time Cubicle"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to print out the results from the trial.  In real world models,
+    # you'd likely save them as well as (or instead of) printing them
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
+
+    # Method to run a trial
+    def run_trial(self):
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+        for run in range(g.number_of_runs):
+            random.seed(run)
+            my_model = Model(run)
+            my_model.run()
+
+            self.df_trial_results.loc[run] = [my_model.mean_q_time_recep,
+                                              my_model.mean_q_time_nurse,
+                                              my_model.mean_q_time_doctor,
+                                              my_model.mean_q_time_cubicle
+                                              ]
+
+        # Once the trial (ie all runs) has completed, add an additional column
+        self.df_trial_results['nurse_queue_longer'] = np.where(self.df_trial_results['Mean Q Time Nurse'] > self.df_trial_results['Mean Q Time Cubicle'], True, False)
+
+        return (sum(self.df_trial_results['nurse_queue_longer'].values) / g.number_of_runs) ##NEW
+```
+
+```{python}
+#| eval: true
+
+results = []
+
+for num_cubicles in range(1, 20, 1):
+    g.number_of_cubicles = num_cubicles
+
+    # Create an instance of the Trial class
+    my_trial = Trial()
+
+    # Call the run_trial method of our Trial object
+    trial_results = my_trial.run_trial()
+
+    results.append({"Number of cubicles": num_cubicles,
+      "% of Trials with longer nurse queue time than cubicle queue time": trial_results})
+
+results_df = pd.DataFrame(results)
+
+results_df
+```
+
+```{python}
+#| eval: true
+import plotly.express as px
+
+px.line(
+  results_df,
+  x="Number of cubicles",
+  y="% of Trials with longer nurse queue time than cubicle queue time",
+  title=f"Impact of cubicle numbers with {g.number_of_nurses} nurses"
+  )
+
+```
+
+Now, our rate limiting step might actually be the number of doctors, as their consultations take longer on average (20 minutes on average with roughly 60% of patients needing to see a doctor after seeing the nurse; nurse consults take on average 6 minutes but every patient sees a nurse). Let's fix the number of cubicles at 8 and look at the impact of changing the number of doctors instead.
+
+```{python}
+#| eval: true
+
+g.number_of_cubicles = 8
+
+results = []
+
+for num_doctors in range(1, 20, 1):
+    g.number_of_doctors = num_doctors
+
+    # Create an instance of the Trial class
+    my_trial = Trial()
+
+    # Call the run_trial method of our Trial object
+    trial_results = my_trial.run_trial()
+
+    results.append({"Number of doctors": num_doctors,
+      "% of Trials with longer nurse queue time than cubicle queue time": trial_results})
+
+results_df = pd.DataFrame(results)
+
+results_df
+```
+
+```{python}
+#| eval: true
+
+px.line(
+  results_df,
+  x="Number of doctors",
+  y="% of Trials with longer nurse queue time than cubicle queue time",
+  title=f"Impact of doctor numbers with {g.number_of_nurses} nurses and {g.number_of_cubicles} cubicles"
+  )
+
+```
+
+You can see that with more doctors we very quickly start to see the number of nurses being the rate limiting factor rather than the number of nurses.
+
+
+:::{.callout-note}
+Take a look at the chapter "Testing Large Numbers of Scenarios" (@sec-test-scenarios) to see how you could automatically try out different combinations of nurse, doctor and cubicle numbers to find the optiumum value.
+:::
