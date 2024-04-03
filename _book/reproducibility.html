@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Part 4 - Advanced Concepts</span></a>
+ <span class="menu-text">Part 4 - Advanced Performance Tracking and Visualisation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -328,6 +328,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part 5 - Advanced Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
@@ -468,7 +479,7 @@ Warning
 <p>The best place to do this is in our trial class.</p>
 <p>In our run_trial method within that class, we can set the seed so that it matches the run number.</p>
 <p>This will ensure each run has a different seed, but that the seed is the same across different runs.</p>
-<div id="7271c259" class="cell" data-execution_count="1">
+<div id="eadc7d40" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run the simulation for the number of runs specified in g class.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each run, we create a new instance of the Model class and call its</span></span>
@@ -491,7 +502,7 @@ Warning
 </div>
 <p>Let’s look at the output now.</p>
 <p>Let’s run 100 trials and look at the outputs.</p>
-<div id="3f035690" class="cell" data-execution_count="3">
+<div id="b92661b2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -523,7 +534,7 @@ dtype: float64</code></pre>
 </div>
 <p>Now let’s run 100 trials again. Are the results the same?</p>
 <p>Let’s run 100 trials and look at the outputs.</p>
-<div id="70edbab8" class="cell" data-execution_count="4">
+<div id="f737c636" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -557,7 +568,7 @@ dtype: float64</code></pre>
 <p>Now let’s compare this when we start changing the number of nurses.</p>
 <p>This is going to change the queue times for nurses and, by extension, for doctors (as people will be turning up to the doctors at different times).</p>
 <p>However, the number of arrivals should remain unchanged.</p>
-<div id="64146747" class="cell" data-execution_count="5">
+<div id="fec09d37" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>Trial Results
             Arrivals  Mean Q Time Recep  Mean Q Time Nurse  Mean Q Time Doctor
@@ -582,7 +593,7 @@ Mean Q Time Doctor     35.10
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="1303aaf8" class="cell" data-execution_count="6">
+<div id="abb7bf50" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>Trial Results
             Arrivals  Mean Q Time Recep  Mean Q Time Nurse  Mean Q Time Doctor
@@ -622,7 +633,7 @@ Note
 <p>This is because of the way random number generation occurs.</p>
 <p>The order the random numbers are generated in matters - and as the order of events changes (in this case, as we have more nurses, they can see more patients quicker, changing the order that subsequent events happen in).</p>
 <p>Let’s investigate this with two examples.</p>
-<div id="b9101eb4" class="cell" data-execution_count="7">
+<div id="2decd935" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1: inter-arrival time 1 </span><span class="sc">{</span>random<span class="sc">.</span>expovariate(<span class="fl">1.0</span> <span class="op">/</span> g.patient_inter)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
@@ -636,7 +647,7 @@ Note
 4: inter-arrival time 3 1.26</code></pre>
 </div>
 </div>
-<div id="ec0d20b4" class="cell" data-execution_count="8">
+<div id="17db29f0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1: inter-arrival time 1 </span><span class="sc">{</span>random<span class="sc">.</span>expovariate(<span class="fl">1.0</span> <span class="op">/</span> g.patient_inter)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
@@ -675,11 +686,11 @@ Warning
 <p>The easiest way to implement this is to switch from using the <code>random</code> library to using the distributions provided in simtools.</p>
 <p>We will replace <code>random.expovariate</code> with the <code>Exponential</code> class.</p>
 <p>First, we need to import this class.</p>
-<div id="20668589" class="cell" data-execution_count="9">
+<div id="f078a5db" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Exponential</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now set up the distributions when initialising the model.</p>
-<div id="84c51161" class="cell" data-execution_count="10">
+<div id="6449f679" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create a new model.</span></span>
@@ -741,13 +752,13 @@ Warning
 </div>
 <p>Next, everywhere we have previously used <code>random.expovariate</code>, we replace this with the .sample() method of our newly initialised distributions.</p>
 <p>For example</p>
-<div id="c64f85c8" class="cell" data-execution_count="11">
+<div id="d3b788dd" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sampled_doctor_act_time <span class="op">=</span> random.expovariate(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.0</span> <span class="op">/</span> g.mean_d_consult_time</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>becomes</p>
-<div id="4f854d87" class="cell" data-execution_count="12">
+<div id="19b1bb43" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sampled_doctor_act_time <span class="op">=</span> <span class="va">self</span>.doctor_consult_time_dist.sample()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s update all the code and run our previous experiment again.</p>
@@ -763,7 +774,7 @@ Note
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="a3e2e668" class="cell" data-execution_count="13">
+<div id="2495dd46" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1059,7 +1070,7 @@ Note
 </div>
 <section id="evaluating-the-outputs" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">14.2.1</span> Evaluating the outputs</h3>
-<div id="5d23cd07" class="cell" data-execution_count="14">
+<div id="dc25b703" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-stdout">
 <pre><code>1 receptionists, 1 nurses, 2 doctors
 
@@ -1086,7 +1097,7 @@ Mean Q Time Doctor      0.48
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="59690800" class="cell" data-execution_count="15">
+<div id="03ae41a8" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-stdout">
 <pre><code>1 receptionists, 2 nurses, 2 doctors
 

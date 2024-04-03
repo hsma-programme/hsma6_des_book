@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Part 4 - Advanced Concepts</span></a>
+ <span class="menu-text">Part 4 - Advanced Performance Tracking and Visualisation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -328,6 +328,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Entity Flow</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part 5 - Advanced Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
@@ -477,7 +488,7 @@ Tip
 <section id="the-g-class" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">7.1.1</span> The g class</h3>
 <p>First, lets add some additional parameters to our g class.</p>
-<div id="d20eb583" class="cell" data-execution_count="1">
+<div id="854d33ad" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span> <span class="co">##NEW</span></span>
@@ -491,7 +502,7 @@ Tip
 <section id="the-patient-class" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">7.1.2</span> The Patient class</h3>
 <p>Next we’ll add an additional attribute - think of it as an extra box on their clipboard that they need to fill in - to record how long they are queuing for the receptionist.</p>
-<div id="feb4e033" class="cell" data-execution_count="2">
+<div id="7bd09623" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -505,7 +516,7 @@ Tip
 <p>First, we have added in a new type of resource - a receptionist, pulling in the number of receptionist to create from our g class.</p>
 <p>We’ve then added two additional fields to our results dataframe - how long each patient queues for a receptionist, and how long each patient spends with the receptionist.</p>
 <p>Finally, we add in an attribute that we will use to store the mean average queuing time for receptionists across the whole model.</p>
-<div id="2937635f" class="cell" data-execution_count="3">
+<div id="b6b4896e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a SimPy environment in which everything will live</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
@@ -540,11 +551,11 @@ Tip
 <p>Our <strong>generator_patient_arrivals</strong> method remains unchanged as nothing has been tweaked about how patients turn up to the system.</p>
 <p>Our <strong>attend_clinic</strong> method is where we make the actual change to the process the patient goes through.</p>
 <p>Note that we have a new line with an indended section inside it.</p>
-<div id="a2304a1c" class="cell" data-execution_count="4">
+<div id="5a1ad75c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="va">self</span>.receptionist.request() <span class="im">as</span> req:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Everything at one level of indentation within this now relates to the use of the receptionist resource.</p>
-<div id="99c12dd3" class="cell" data-execution_count="5">
+<div id="00596c18" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># A generator function that represents the pathway for a patient going</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># through the clinic.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The patient object is passed in to the generator function so we can</span></span>
@@ -653,7 +664,7 @@ Click here to view the full code
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="13b6028b" class="cell" data-execution_count="6">
+<div id="e6ac999e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -899,8 +910,8 @@ Click here to view the full code
 </div>
 </div>
 <p>Let’s run the updated code and see the outputs.</p>
-<p>We can see we now get results for the time queueing for the receptionist and the nurse, displayed separately, and that these times are different from each other.</p>
-<div id="61c28fbe" class="cell" data-execution_count="7">
+<p>We can see we now get results for the time queueing for and the time spent with the receptionist and the nurse, displayed separately, and that these times are different from each other.</p>
+<div id="46dbfb02" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -910,71 +921,65 @@ Click here to view the full code
 <pre><code>Run Number 0
             Q Time Recep  Time with Recep  Q Time Nurse  Time with Nurse
 Patient ID                                                              
-1               0.000000         4.113821      0.000000         1.002462
-2               0.000000         3.807567      0.000000         1.468918
-3               0.000000         0.610361      0.291823         0.120271
-4               0.000000         3.409282      0.000000         5.528566
-5               0.072471         0.548538      4.980028         0.884583
-6               0.000000         0.106192      5.720739         8.745302
-7               0.000000         4.506153      2.751686         2.618617
-8               0.000000         2.611213      0.000000        15.314629
-9               0.000000         0.307820     11.332659         0.333344
-10              0.000000         2.942478      8.676678         0.099103
-11              0.000000         5.343575      0.000000         0.447506
-12              0.642362         0.580454      0.000000         1.020268
-13              0.000000         0.388448      0.000000         1.819763
-14              0.000000         0.759413      0.000000         0.346514
-15              0.507189         0.279366      0.067148        11.704645
-16              0.000000         0.430827     10.112729         2.224671
-17              0.000000         6.406857      5.846417         6.074029
-18              0.457936         2.961589      8.958857         6.956792
-19              0.000000         1.278561     13.576606         1.704759
-20              0.668038         4.215223     11.066142         1.458905
-21              2.650542         2.274458     10.250589        13.918780
-22              0.000000        15.212027      7.150764        18.336951
-23              8.584180         2.743572           NaN              NaN
-24              6.619193         4.931135           NaN              NaN
-25              5.223848         0.183815           NaN              NaN
-26              0.000000         1.109976           NaN              NaN
-27              0.000000         0.259605           NaN              NaN
-28              0.000000         0.711530           NaN              NaN
+1               0.000000         2.080208      0.000000         0.688225
+2               0.688612         0.671889      0.016336         1.329558
+3               0.000000         3.536598      0.000000         2.420938
+4               0.000000         6.059485      0.000000         1.411790
+5               0.000000         0.785604      0.000000         1.798061
+6               0.000000         1.597590      0.036910         1.148423
+7               0.137902         8.351869      0.000000         1.820477
+8               1.804367         0.098978      1.721499         0.780204
+9               0.000000         2.423567      0.000000        11.492233
+10              0.000000         6.333564      0.000000         6.746350
+11              0.000000         1.822769      0.817105         0.119991
+12              0.000000         0.358930      0.000000         9.488186
+13              0.000000         0.787142      7.540964         3.587576
+14              0.080156         2.127840      9.000700         2.397510
+15              0.778188         0.015374     11.382836         7.994216
+16              0.000000         0.626568     17.036008         0.622324
+17              0.000000         1.676246      7.472609         0.110722
+18              0.000000         0.776518      2.470130         2.839899
+19              0.000000         3.517983      1.410939        27.783922
+20              0.323421         1.004260           NaN              NaN
+21              0.136405         3.098718           NaN              NaN
+22              3.172008         3.686825           NaN              NaN
+23              0.324398         6.176201           NaN              NaN
 Run Number 1
             Q Time Recep  Time with Recep  Q Time Nurse  Time with Nurse
 Patient ID                                                              
-1               0.000000         0.822462      0.000000         0.614638
-2               0.000000         1.682879      0.000000         5.098035
-3               0.000000         3.229751      0.000000         1.509995
-4               1.209762         0.831814      0.678180        13.308238
-5               1.403736         1.521669     12.464749         0.460927
-6               0.000000         4.272836      8.170806         1.230904
-7               4.252292         1.158464      8.243246         1.517973
-8               0.000000         1.031509      0.000000         0.443764
-9               0.000000         1.943522      0.000000         1.453472
-10              0.805880         6.252881      0.000000         5.106332
-11              4.875634         0.510159      4.596173         1.109372
-12              0.000000         0.701133      0.000000        10.728360
-13              0.000000         0.758583      2.754052         6.816330
-14              0.000000         1.933178      7.243597         3.952696
-15              1.134551         1.244747      9.951546         3.402401
-16              0.000000         1.637920      9.965049        17.573821
-17              0.000000         2.983120     18.691894         4.247192
-18              0.000000         3.584997     17.787184         0.017003
-19              0.000000         0.103065     17.063027         2.868386
-20              0.000000         1.971157     17.630580        14.904918
-21              0.000000         0.374933     30.710808         8.863612
-22              0.000000         2.245777           NaN              NaN
-23              2.050007         1.611430           NaN              NaN
-24              2.381690         1.289245           NaN              NaN
-25              0.349248         2.982096           NaN              NaN
-26              0.000000         3.308304           NaN              NaN
-27              2.701777         6.789064           NaN              NaN
-28              4.405720         5.227017           NaN              NaN
-29              8.776494         4.322850           NaN              NaN
+1               0.000000         0.934501      0.000000         2.065049
+2               0.243428         2.973067      0.000000         8.166197
+3               0.000000         3.382912      3.285127         0.148957
+4               2.117860         0.598691      2.835393         0.270016
+5               0.000000         2.848009      0.000000         0.698048
+6               0.901261         2.039871      0.000000        14.616544
+7               0.000000         3.592580      8.582967        21.134593
+8               2.384895         4.286941     25.430619         0.310236
+9               5.804088         2.257568     23.483287        16.841273
+10              3.614747         4.981223     35.343337         3.059416
+11              4.029756         6.481502     31.921251        23.417917
+12              5.592167         4.992004     50.347164         4.269321
+13              7.426684         2.225044     52.391442         3.305773
+14              2.570958         0.512422     55.184792         7.728965
+15              0.000000         2.756185     59.952534         4.351830
+16              2.645880         2.600895           NaN              NaN
+17              5.019042         1.568761           NaN              NaN
+18              0.000000         9.035937           NaN              NaN
+19              8.471142         0.362262           NaN              NaN
+20              4.915512         3.163487           NaN              NaN
+21              6.987463         0.910664           NaN              NaN
+22              0.715613         1.779379           NaN              NaN
+23              0.564519         1.644803           NaN              NaN
+24              0.000000         1.305457           NaN              NaN
+25              0.000000         5.253504           NaN              NaN
+26              0.000000         1.211772           NaN              NaN
+27              0.000000         1.670386           NaN              NaN
+28              0.000000         2.954350           NaN              NaN
 Trial Results
             Mean Q Time Recep  Mean Q Time Nurse
 Run Number                                      
-0                    0.908063           4.581039
-1                    1.184372           7.902423</code></pre>
+0                    0.323715           3.100318
+1                    2.285893          23.250528</code></pre>
 </div>
 </div>
 
