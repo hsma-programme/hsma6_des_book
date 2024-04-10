@@ -28,6 +28,7 @@ book:
     - choosing_distributions.qmd
     - reproducibility.qmd
     - reneging_balking_jockeying.qmd
+    - modelling_variable_arrival_rates.qmd
     - exercise_des_advanced.qmd
   - part: "Part 4 - Advanced Performance Tracking and Visualisation"
     chapters:
@@ -37,7 +38,6 @@ book:
     - visualising_des_models.qmd
   - part: "Part 5 - Advanced Concepts"
     chapters:
-    - modelling_variable_arrival_rates.qmd
     - requesting_multiple_resources.qmd
     - choosing_resource_from_many.qmd
     - scheduling_arrivals.qmd
@@ -82,3 +82,5 @@ format:
       - resources/fonts/css/lexend.css
     grid:
       sidebar-width: 250px
+  pdf:
+    output-file: hsma_des_book

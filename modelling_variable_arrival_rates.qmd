@@ -6,3 +6,201 @@ jupyter: python3
 ---
 
 It is often the case that arrivals to a system do not occur completely regularly throughout the day.
+
+For example, in an emergency department, we may find that the number of arrivals climb in the afternoon and early evening before dropping off again overnight.
+
+One way to implement this is to return to the `sim-tools` package by [Tom Monks](https://orcid.org/0000-0003-2631-4481), which we used in (@sec-distributions): Choosing Distributions and @sec-reproducibility: Reproducibility. We will use a class that creates a non-stationary poisson process via thinning.
+
+## The principle used
+
+The documentation of the in sim tools says the following about the approach we will be using.
+> Thinning is an acceptance-rejection approach to sampling inter-arrival times (IAT) from a time dependent distribution where each time period follows its own exponential distribution.
+
+```{python}
+#| eval: true
+#| echo: false
+
+from sim_tools.time_dependent import NSPPThinning
+import plotly.express as px
+```
+
+The NSPP thinning class takes in a dataframe with two columns:
+- the first, called 't', is a list of time points at which the arrival rate changes
+- the second, called 'arrival_rate', is the arrival rate in the form of the average inter-arrival time in time units
+
+Let's look at an example of the sort of dataframe we would create and pass in.
+
+```{python}
+#| eval: true
+#| echo: false
+
+import pandas as pd
+nspp_df_example = pd.read_csv("_book/resources/logos/nspp_example_1.csv")
+nspp_df_example
+```
+
+Let's add a few more columns so we can better understand what's going on.
+
+```{python}
+#| eval: true
+#| echo: false
+
+from datetime import datetime, timedelta
+
+time_object = datetime(2021, 1, 1, 0, 0, 0)
+
+nspp_df_example['time_minutes'] = nspp_df_example['t'].apply(lambda x: (time_object + timedelta(minutes=x)).strftime("%H:%M:%S") )
+
+nspp_df_example['arrival_rate'] = nspp_df_example['mean_iat'].apply(lambda x: f"1/{x}")
+
+nspp_df_example['arrivals_per_hour'] = nspp_df_example['mean_iat'].apply(lambda x: round(60/x,1))
+
+nspp_df_example[['t', 'time_minutes', 'mean_iat', 'arrival_rate', 'arrivals_per_hour']]
+```
+
+Let's visualise this in a graph.
+
+```{python}
+#| eval: true
+#| echo: false
+
+px.line(nspp_df_example, x='time_minutes', y='arrivals_per_hour', title="Average Arrivals per Hour to Simulated Emergency Department")
+```
+
+:::{.callout-tip}
+The key things to note here are
+
+- A higher inter-arrival time means there are fewer arrivals per hour
+- We store the time as a number of simulation units. Here we are interpreting this as the number of minutes, but we could correspond this instead to days, which we will do in a later example.
+:::
+
+
+:::{.callout-note collapse="true"}
+### Click here for a more in-depth breakdown about how the NSPPThinning class works under the hood
+
+The NSPP thinning class uses this table to do a few things
+
+- set up an exponential distribution using the **highest** observed arrival rate.
+- works out the time interval between our dataframe rows
+
+Let's first look at 20,000 samples taken from the exponential distribution that is set up using the maximum arrival rate (1 divided by the lowest inter-arrival time).
+
+```{python}
+#| eval: true
+#| echo: false
+import numpy as np
+
+nspp_df_example['arrival_rate'] = nspp_df_example['mean_iat'].apply(lambda x: 1/x)
+lambda_max = nspp_df_example["arrival_rate"].max()
+arr_rng = np.random.default_rng(42)
+
+samples_original = arr_rng.exponential(1 / lambda_max, size=20000)
+
+px.histogram(samples_original)
+```
+
+Now let's take a look at the distribution that is generated when the code thinks the simulation time is 480.
+
+```{python}
+#| eval: true
+#| echo: false
+
+simulation_time=480
+interval = int(nspp_df_example.iloc[1]["t"] - nspp_df_example.iloc[0]["t"])
+
+t = int(simulation_time // interval) % len(nspp_df_example)
+
+print(f"The index of the row to return from the dataframe - is {t}")
+
+lambda_t = nspp_df_example["arrival_rate"].iloc[t]
+
+print(f"The value of lambda at this time is {lambda_t}")
+```
+
+```{python}
+#| eval: true
+#| echo: false
+class_example = NSPPThinning(data=nspp_df_example, random_seed1=42, random_seed2=88)
+
+samples_thinned = [class_example.sample(simulation_time=480) for i in range(20000)]
+
+samples_comparison_df = pd.DataFrame(dict(
+    series = np.concatenate((["lambda_max"]*len(samples_original), ["thinned"]*len(samples_thinned))),
+    data = np.concatenate((samples_original,samples_thinned))
+))
+
+
+px.histogram(samples_comparison_df, x="data", color="series", barmode="overlay")
+```
+
+Let's repeat this for all the different time periods in our dataset.
+
+```{python}
+#| eval: true
+#| echo: false
+dfs = []
+
+for simulation_time in nspp_df_example.t.values:
+    samples_thinned = [class_example.sample(simulation_time=simulation_time) for i in range(20000)]
+
+    samples_comparison_df = pd.DataFrame(dict(
+        series = np.concatenate((["lambda_max"]*len(samples_original), ["thinned"]*len(samples_thinned))),
+        data = np.concatenate((samples_original,samples_thinned)),
+        simulation_time = simulation_time
+    ))
+
+    dfs.append(samples_comparison_df)
+
+
+px.histogram(pd.concat(dfs), x="data", color="series", barmode="overlay", facet_col="simulation_time", facet_col_wrap=4, height=1200, opacity=0.4, facet_row_spacing=0.03, facet_col_spacing=0.02)
+
+```
+
+The wider distributions - where more of the blue 'unthinned' distribution is still visible - indicate that the sampled inter-arrival time is likely to be longer.
+
+:::
+
+## Coding the variable arrival rates
+
+### Imports
+
+In addition to our existing imports, we need to import the `NSPPThinning` class from the `time_dependent` module as follows.
+
+```{python}
+from sim_tools.time_dependent import NSPPThinning
+```
+
+### g class
+
+We need to add a new dataframe to our g class.
+
+This will be used by the NSPPThinning class to determine the arrival rate depending on the current simulation time.
+
+We will also remove our
+
+```{python}
+class g:
+    g.arrivals_time_dependent_df =
+    mean_n_consult_time = 6
+    number_of_nurses = 1
+    sim_duration = 120
+    number_of_runs = 5
+
+```
+
+### Patient class
+
+
+
+### Model class
+
+#### _init
+
+
+## Modifying this example - varying arrivals across the course of a week
+
+
+
+
+
+## Taking it further - variation within days and across days
