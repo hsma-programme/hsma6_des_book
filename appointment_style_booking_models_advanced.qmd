@@ -1,0 +1,19 @@
+# Advanced Appointment Booking Model Features
+
+## Adding in priority and carve-out
+
+:::{.callout-note}
+This section is coming soon.
+:::
+
+## Adding multiple clinics
+
+:::{.callout-note}
+This section is coming soon.
+:::
+
+## Pooling of clinics
+
+:::{.callout-note}
+This section is coming soon.
+:::

@@ -41,6 +41,8 @@ book:
     - requesting_multiple_resources.qmd
     - scheduling_arrivals.qmd
     - appointment_style_booking_models.qmd
+    - appointment_style_booking_models_advanced.qmd
+    - appointment_style_booking_models_multistep.qmd
     - testing_large_numbers_scenarios.qmd
     - running_parallel_cpus.qmd
     - intro_creating_web_apps.qmd
@@ -83,3 +85,7 @@ format:
       sidebar-width: 250px
   pdf:
     output-file: hsma_des_book
+    toc: true
+    number-sections: true
+    colorlinks: true
+    toc-depth: 2
