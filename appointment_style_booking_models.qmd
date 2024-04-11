@@ -57,6 +57,8 @@ To begin with, let's assume that
 #| echo: false
 
 import pandas as pd
+import simpy
+import numpy as np
 ```
 
 ```{python}
@@ -81,6 +83,8 @@ In the final new parameter, we will
 Next, we return to parameters we have used before - the sim duration, which we have this time set as two years (365 days times 2). Note that compared to our previous model, where we interpreted each simpy time unit as 1 minute, we are now interpreting a single time unit as one *day*. We do not change anything in simpy itself to do this - but we just need to be careful that we remain consistent in our application of this throughout the rest of the model.
 
 ```{python}
+#| eval: true
+
 shifts_df = pd.read_csv("resources/shifts_simplest.csv")
 
 # Class to store global parameter values.  We don't create an instance of this
@@ -94,6 +98,7 @@ class g:
 
     sim_duration = 365 * 2
     number_of_runs = 100
+
 ```
 
 ### The Patient (entity) class
@@ -105,6 +110,8 @@ We have a new attribute named 'booker' that we will create shortly.
 We will also create a space to record the time patients arrive into the model, and the time they have their appointment.
 
 ```{python}
+#| eval: true
+
 # Class representing patients coming in to the clinic.
 class Patient:
     def __init__(self, p_id, booker):
@@ -116,10 +123,231 @@ class Patient:
 ```
 
 
+### The model class
+
+#### The __init__method
+
+We now need to make some important changes to the __init__method of the model, as well as create a few extra methods we can call on.
+
+One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to
+
+- extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running)
+- create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when
+
+:::{.callout-tip}
+Note that we are using numpy throughout for the operations relating to the bookings. This is just due to the speed advantage of numpy in this context.
+:::
+
+```{python}
+#| eval: true
+class Model:
+    # Constructor to set up the model for a run.  We pass in a run number when
+    # we create a new model.
+    def __init__(self, run_number):
+        # Create a SimPy environment in which everything will live
+        self.env = simpy.Environment()
+
+        # Create a patient counter (which we'll use as a patient ID)
+        self.patient_counter = 0
+
+        # Store the passed in run number
+        self.run_number = run_number
+
+        ## NEW
+        self.available_slots = None
+        self.bookings = None
+
+        # Create a new Pandas DataFrame that will store some results against
+        # the patient ID (which we'll use as the index).
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Appointment"] = [0.0] ##NEW
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Create an attribute to store the mean waiting time for an appointment
+        # across this run of the model
+        self.mean_wait_time_appointment = 0
+
+    ########################################
+    ## ---------- NEW ------------------- ##
+    ########################################
+
+    def create_slots(self):
+
+        available_slots = g.shifts.astype(np.uint8)
+        template = available_slots.copy()
+
+        #longer than run length as patients will need to book ahead
+        for day in range(int((g.sim_duration/len(g.shifts))*3)):
+            available_slots = pd.concat([available_slots, template.copy()],
+                                         ignore_index=True)
+
+        available_slots.index.rename('day', inplace=True)
+        model.available_slots = available_slots
+
+    def create_bookings(self):
+        bookings = np.zeros(shape=(len(g.shifts), len(g.shifts.columns)), dtype=np.uint8)
+
+        columns = [f'clinic_{i}' for i in range(1, len(g.shifts.columns)+1)]
+        bookings_template = pd.DataFrame(bookings, columns=columns)
+
+        bookings = bookings_template.copy()
+
+        #longer than run length as patients will need to book ahead
+        for day in range(int((g.sim_duration/len(g.shifts))*3)):
+            bookings = pd.concat([bookings, bookings_template.copy()],
+                                 ignore_index=True)
+
+        bookings.index.rename('day', inplace=True)
+        model.bookings = bookings
+
+    ########################################
+    ## ---------- END NEW --------------- ##
+    ########################################
+```
+
+Let's look at the outputs from this.
+
+```{python}
+#| eval: true
+model = Model(run_number=1)
+
+model.create_slots()
+model.available_slots
+```
+
+```{python}
+#| eval: true
+model.create_bookings()
+model.bookings
+```
+
 ### The booker class
 
+Before we continue making changes to our model class, we want to introduce a new class that will deal with patient bookings.
 
-### The Model class
+:::{.callout-tip}
+While at this stage these methods could easily be incorporated elsewhere - such as into the model class itself - separating it out into its own class will give us more flexibility in the future when we wish to add in features such as pooling of clinic resources or different booking protocols for high and low priority patients.
+
+In this case, this is also the motivation for adding in a 'clinic ID' parameter that is passed in when making the booking. While we only have a single clinic in this version of the model, allowing for a situation where we have multiple clinics a client could attend, and can make a choice to send them to whichever of these potential clinics have the earliest available appointment.
+:::
+
+```{python}
+#| eval: true
+class Booker():
+    '''
+    Booking class.
+    '''
+    def __init__(self, model):
+        self.priority = 1
+        self.model = model
+
+    def find_slot(self, t, clinic_id):
+        '''
+        Finds a slot in a diary of available slot
+
+        Params:
+        ------
+        t: int,
+            current simulation time in days
+            required to prevent booking an appointment
+            in the past
+
+        clinic_id: int,
+            index of clinic to look up slots for
+
+        Returns:
+        -------
+        (int, int)
+        (booking_t, best_clinic_idx)
+
+        '''
+        # to reduce runtime - drop down to numpy
+        available_slots_np = self.model.available_slots.to_numpy()
+
+        # get the clinic slots t + min_wait forward
+        clinic_slots = available_slots_np[t + g.min_wait: , clinic_id]
+
+        # get the earliest day number (its the name of the series)
+        best_t = np.where((clinic_slots.reshape(len(clinic_slots),1).sum(axis=1) > 0))[0][0]
+
+        # Note that to get the index (day) of the actual booking, we
+        # need to add the simulation time (t) and the minimum wait to the
+        # index of the best time we found
+        booking_t = t + g.min_wait + best_t
+
+        return booking_t, clinic_id
+
+
+    def book_slot(self, booking_t, clinic_id):
+        '''
+        Book a slot on day t for clinic c
+
+        A slot is removed from args.available_slots
+        A appointment is recorded in args.bookings.iat
+
+        Params:
+        ------
+        booking_t: int
+            Day of booking
+
+        clinic_id: int
+            the clinic identifier
+        '''
+
+        # Reduce the number of available slots by one at the point of the booking
+        self.model.available_slots.iat[booking_t, clinic_id] -= 1
+
+        # Increase the number of bookings we have on that day
+        self.model.bookings.iat[booking_t, clinic_id] += 1
+
+```
+
+
+Let's take a look at the output of these.
+
+```{python}
+#| eval: true
+
+sample_booker = Booker(model)
+
+booking_t, clinic_id = sample_booker.find_slot(t=10, clinic_id=0)
+print(f"Booking t: {booking_t}")
+print(f"Clinic Index: {clinic_id}")
+```
+
+```{python}
+#| eval: true
+
+booking_t, clinic_id = sample_booker.find_slot(t=320, clinic_id=0)
+print(f"Booking t: {booking_t}")
+print(f"Clinic Index: {clinic_id}")
+```
+
+
+```{python}
+#| eval: true
+
+booking_t, clinic_id = sample_booker.find_slot(t=0, clinic_id=0)
+print(f"Booking t: {booking_t}")
+print(f"Clinic Index: {clinic_id}")
+
+sample_booker.book_slot(booking_t=booking_t, clinic_id=clinic_id)
+
+model.available_slots
+```
+
+```{python}
+#| eval: true
+model.bookings
+```
+
+
+### Further changes to the Model class
+
+Now we have our booker method, we can make the remaining changes required to the model class.
+
+
 
 
 ### The trial class
@@ -164,13 +392,19 @@ class Trial:
 
 ## Adding in priority and carve-out
 
-
-
-
-
+:::{.callout-note}
+This section is coming soon.
+:::
 
 ## Adding multiple clinics
 
+:::{.callout-note}
+This section is coming soon.
+:::
 
 
 ## Pooling of clinics
+
+:::{.callout-note}
+This section is coming soon.
+:::
