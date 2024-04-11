@@ -5,7 +5,16 @@ execute:
 jupyter: python3
 ---
 
-
 ## SimPy Examples
 
+:::{.callout-warning}
+Note that the linked examples will generally not follow the exact structure we have used throughout this book. However, the fundamental concepts remain unchanged, and the knowledge you have acquired from this book should help you to read and understand most simpy models out there.
+:::
+
+### General Examples
+
 A list of additional SimPy examples is kept up-to-date [here](https://github.com/stars/Bergam0t/lists/simpy-examples).
+
+### Visualisation Examples
+
+A library of simpy visualisation examples, which may also prove useful due to containing code for a range of different types of healthcare model, can be found [here](https://github.com/Bergam0t/simpy_visualisation).
