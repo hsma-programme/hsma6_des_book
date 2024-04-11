@@ -1,5 +1,6 @@
 ---
-title: Dealing with appointment bookings
+title: Dealing With Appointment Bookings
+code-annotations: hover
 execute:
   eval: false
 jupyter: python3
@@ -138,6 +139,18 @@ One of the key things we need to do is create two new dataframes based on our sh
 Note that we are using numpy throughout for the operations relating to the bookings. This is just due to the speed advantage of numpy in this context.
 :::
 
+When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class.
+
+For more information on these functions, refer to #sec-reproducibility and #sec-distributions.
+
+We will be using the `Poisson` class from the `sim-tools` package, so first need to run the following line.
+
+```{python}
+#| eval: true
+
+from sim_tools.distributions import Poisson
+```
+
 ```{python}
 #| eval: true
 class Model:
@@ -156,6 +169,14 @@ class Model:
         ## NEW
         self.available_slots = None
         self.bookings = None
+
+        ## NEW - run the new methods we have created below
+        self.create_slots() ##NEW
+        self.create_bookings() ##NEW
+
+        ## NEW
+        self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
+                                    random_seed=run_number*42) # <2>
 
         # Create a new Pandas DataFrame that will store some results against
         # the patient ID (which we'll use as the index).
@@ -183,7 +204,7 @@ class Model:
                                          ignore_index=True)
 
         available_slots.index.rename('day', inplace=True)
-        model.available_slots = available_slots
+        self.available_slots = available_slots
 
     def create_bookings(self):
         bookings = np.zeros(shape=(len(g.shifts), len(g.shifts.columns)), dtype=np.uint8)
@@ -199,12 +220,14 @@ class Model:
                                  ignore_index=True)
 
         bookings.index.rename('day', inplace=True)
-        model.bookings = bookings
+        self.bookings = bookings
 
     ########################################
     ## ---------- END NEW --------------- ##
     ########################################
 ```
+1. The parameter we pass to the poisson distribution is the average number of daily arrivals; this will be the average number of yearly arrivals divided by the number of weeks in a year and the number of days in a week.
+2. This will ensure we have a different random pattern of arrivals per run, but that the number of arrivals is reproducible across trials.
 
 Let's look at the outputs from this.
 
@@ -231,6 +254,7 @@ While at this stage these methods could easily be incorporated elsewhere - such 
 
 In this case, this is also the motivation for adding in a 'clinic ID' parameter that is passed in when making the booking. While we only have a single clinic in this version of the model, allowing for a situation where we have multiple clinics a client could attend, and can make a choice to send them to whichever of these potential clinics have the earliest available appointment.
 :::
+
 
 ```{python}
 #| eval: true
@@ -347,8 +371,87 @@ model.bookings
 
 Now we have our booker method, we can make the remaining changes required to the model class.
 
+#### The generator_patient_arrivals method
 
+This method changes quite significantly from our existing models.
 
+Instead of generating a patient, calculating the length of time that elapses until the next patient arrives and then waiting for that time to elapse, we mode through the simulation one day at a time, performing the following steps:
+
+- calculating (sampling) the number of arrivals per day
+- looping through each referral and creating a new patient object
+- creating an instance of the booker class for each patient
+- starting a referral process for that patient
+
+When this is complete for every patient who is generated for that day, we can step forward to the next day by waiting for one time unit to elapse.
+
+```{python}
+def generator_patient_arrivals(self):
+    for t in itertools.count():
+
+        #total number of referrals today
+        n_referrals = self.arrival_dist.sample()
+
+        #loop through all referrals recieved that day
+        for i in range(n_referrals):
+            self.patient_counter += 1
+
+            booker = Booker(model=self)
+
+            # Create instance of Patient
+            p = Patient(p_id=self.patient_counter, booker=booker)
+
+            # Start a referral assessment process for patient.
+            self.env.process(self.attend_clinic(p))
+
+        #timestep by one day
+        yield self.env.timeout(1)
+```
+
+#### The attend_clinic method
+
+This method also needs to change quite significantly.
+
+```{python}
+def attend_clinic(self, patient):
+    patient.arrival_time = self.env.now
+
+    best_t, clinic_id = (
+            patient.booker.find_slot(
+              t = patient.arrival_time, # <1>
+              clinic_id = 0 # <2>
+              )
+    )
+
+    #book slot at clinic = time of referral + waiting_time
+    #
+    patient.booker.book_slot(best_t, clinic_id)
+
+    # Wait for the time until the appointment to elapse
+    yield self.env.timeout(best_t - patient.arrival_time)
+
+    patient.waiting_time = self.env.now - patient.arrival_time
+
+    self.results_df.at[patient.id, "Q Time Appointment"] = (
+               patient.waiting_time
+               )
+```
+1. The arrival time of the patient is passed in so that only appointments in the future are considered as eligible slots.
+2. In this example we are only looking at a single clinic. In later versions of this model, patients who arrive will also have a preferred 'home' clinic, which will mean that different clinic IDs can be passed in at this stage.
+
+#### The calculate_run_results method
+
+Here, we are just altering the column name we refer to when calculating our metric of interest.
+
+```{python}
+    def calculate_run_results(self):
+        # Take the mean of the queuing times for the nurse across patients in
+        # this run of the model.
+        self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+```
+
+#### The run method
+
+The run method is unchanged.
 
 ### The trial class
 
@@ -388,6 +491,305 @@ class Trial:
 
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
+```
+
+### The full code
+
+:::{.callout-note collapse="true"}
+### Click here to view the full code
+
+
+```{python}
+#| eval: true
+
+from sim_tools.distributions import Poisson
+import pandas as pd
+import numpy as np
+import simpy
+import itertools
+
+shifts_df = pd.read_csv("resources/shifts_simplest.csv")
+
+# Class to store global parameter values.  We don't create an instance of this
+# class - we just refer to the class blueprint itself to access the numbers
+# inside.
+class g:
+    annual_demand = 3500
+    shifts = shifts_df
+
+    min_wait = 7
+
+    sim_duration = 365 * 2
+    number_of_runs = 5
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id, booker):
+        self.id = p_id
+        self.booker = booker
+
+        self.arrival_time = 0
+        self.waiting_time = 0
+
+class Booker():
+    '''
+    Booking class.
+    '''
+    def __init__(self, model):
+        self.priority = 1
+        self.model = model
+
+    def find_slot(self, t, clinic_id):
+        '''
+        Finds a slot in a diary of available slot
+
+        Params:
+        ------
+        t: int,
+            current simulation time in days
+            required to prevent booking an appointment
+            in the past
+
+        clinic_id: int,
+            index of clinic to look up slots for
+
+        Returns:
+        -------
+        (int, int)
+        (booking_t, best_clinic_idx)
+
+        '''
+        # to reduce runtime - drop down to numpy
+        available_slots_np = self.model.available_slots.to_numpy()
+
+        # get the clinic slots t + min_wait forward
+        clinic_slots = available_slots_np[t + g.min_wait: , clinic_id]
+
+        # get the earliest day number (its the name of the series)
+        best_t = np.where((clinic_slots.reshape(len(clinic_slots),1).sum(axis=1) > 0))[0][0]
+
+        # Note that to get the index (day) of the actual booking, we
+        # need to add the simulation time (t) and the minimum wait to the
+        # index of the best time we found
+        booking_t = t + g.min_wait + best_t
+
+        return booking_t, clinic_id
+
+
+    def book_slot(self, booking_t, clinic_id):
+        '''
+        Book a slot on day t for clinic c
+
+        A slot is removed from args.available_slots
+        A appointment is recorded in args.bookings.iat
+
+        Params:
+        ------
+        booking_t: int
+            Day of booking
+
+        clinic_id: int
+            the clinic identifier
+        '''
+
+        # Reduce the number of available slots by one at the point of the booking
+        self.model.available_slots.iat[booking_t, clinic_id] -= 1
+
+        # Increase the number of bookings we have on that day
+        self.model.bookings.iat[booking_t, clinic_id] += 1
+
+class Model:
+    # Constructor to set up the model for a run.  We pass in a run number when
+    # we create a new model.
+    def __init__(self, run_number):
+        # Create a SimPy environment in which everything will live
+        self.env = simpy.Environment()
+
+        # Create a patient counter (which we'll use as a patient ID)
+        self.patient_counter = 0
+
+        # Store the passed in run number
+        self.run_number = run_number
+
+        ## NEW
+        self.available_slots = None
+        self.bookings = None
+
+        ## Populate these two items
+        self.create_slots() ##NEW
+        self.create_bookings() ##NEW
+
+
+        ## NEW
+        self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
+                                    random_seed=run_number*42) # <2>
+
+        # Create a new Pandas DataFrame that will store some results against
+        # the patient ID (which we'll use as the index).
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Q Time Appointment"] = [0.0] ##NEW
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Create an attribute to store the mean waiting time for an appointment
+        # across this run of the model
+        self.mean_wait_time_appointment = 0
+
+    ########################################
+    ## ---------- NEW ------------------- ##
+    ########################################
+
+    def create_slots(self):
+
+        available_slots = g.shifts.astype(np.uint8)
+        template = available_slots.copy()
+
+        #longer than run length as patients will need to book ahead
+        for day in range(int((g.sim_duration/len(g.shifts))*3)):
+            available_slots = pd.concat([available_slots, template.copy()],
+                                         ignore_index=True)
+
+        available_slots.index.rename('day', inplace=True)
+        self.available_slots = available_slots
+
+    def create_bookings(self):
+        bookings = np.zeros(shape=(len(g.shifts), len(g.shifts.columns)), dtype=np.uint8)
+
+        columns = [f'clinic_{i}' for i in range(1, len(g.shifts.columns)+1)]
+        bookings_template = pd.DataFrame(bookings, columns=columns)
+
+        bookings = bookings_template.copy()
+
+        #longer than run length as patients will need to book ahead
+        for day in range(int((g.sim_duration/len(g.shifts))*3)):
+            bookings = pd.concat([bookings, bookings_template.copy()],
+                                 ignore_index=True)
+
+        bookings.index.rename('day', inplace=True)
+        self.bookings = bookings
+
+    def generator_patient_arrivals(self):
+        for t in itertools.count():
+
+            #total number of referrals today
+            n_referrals = self.arrival_dist.sample()
+
+            #loop through all referrals recieved that day
+            for i in range(n_referrals):
+                self.patient_counter += 1
+
+                booker = Booker(model=self)
+                print(type(self))
+                print(self.available_slots)
+
+                # Create instance of Patient
+                p = Patient(p_id=self.patient_counter, booker=booker)
+
+                # Start a referral assessment process for patient.
+                self.env.process(self.attend_clinic(p))
+
+            #timestep by one day
+            yield self.env.timeout(1)
+
+    def attend_clinic(self, patient):
+        patient.arrival_time = self.env.now
+
+        best_t, clinic_id = (
+                patient.booker.find_slot(
+                  t = patient.arrival_time, # <1>
+                  clinic_id = 0 # <2>
+                  )
+        )
+
+        #book slot at clinic = time of referral + waiting_time
+        #
+        patient.booker.book_slot(best_t, clinic_id)
+
+        # Wait for the time until the appointment to elapse
+        yield self.env.timeout(best_t - patient.arrival_time)
+
+        patient.waiting_time = self.env.now - patient.arrival_time
+
+        self.results_df.at[patient.id, "Q Time Appointment"] = (
+                  patient.waiting_time
+                  )
+
+    def calculate_run_results(self):
+        # Take the mean of the queuing times for the nurse across patients in
+        # this run of the model.
+        self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+
+    # The run method starts up the DES entity generators, runs the simulation,
+    # and in turns calls anything we need to generate results for the run
+    def run(self):
+
+        # Start up our DES entity generators that create new patients.  We've
+        # only got one in this model, but we'd need to do this for each one if
+        # we had multiple generators.
+        self.env.process(self.generator_patient_arrivals())
+
+        # Run the model for the duration specified in g class
+        self.env.run(until=g.sim_duration)
+
+        # Now the simulation run has finished, call the method that calculates
+        # run results
+        self.calculate_run_results()
+
+        # Print the run number with the patient-level results from this run of
+        # the model
+        print (f"Run Number {self.run_number}")
+        print (self.results_df)
+
+    ########################################
+    ## ---------- END NEW --------------- ##
+    ########################################
+
+# Class representing a Trial for our simulation - a batch of simulation runs.
+class Trial:
+    # The constructor sets up a pandas dataframe that will store the key
+    # results from each run (just the mean queuing time for the nurse here)
+    # against run number, with run number as the index.
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Mean Wait Time for Appointment"] = [0.0] ##NEW
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to print out the results from the trial.  In real world models,
+    # you'd likely save them as well as (or instead of) printing them
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results)
+
+    # Method to run a trial
+    def run_trial(self):
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+        for run in range(g.number_of_runs):
+            my_model = Model(run)
+            my_model.run()
+
+            self.df_trial_results.loc[run] = [my_model.mean_wait_time_appointment] ##NEW
+
+        # Once the trial (ie all runs) has completed, print the final results
+        self.print_trial_results()
+```
+:::
+
+### Evaluating the results
+
+```{python}
+#| eval: true
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+my_trial.run_trial()
 ```
 
 ## Adding in priority and carve-out
