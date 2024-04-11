@@ -941,28 +941,14 @@ class Model:
         #########
         ## NEW ##
         #########
-        #self.available_slots.to_csv(f"{self.run_number}_{g.annual_demand}_available_slots.csv")
-        #self.bookings.to_csv(f"{self.run_number}_{g.annual_demand}_bookings.csv")
 
         slots_unused = self.available_slots.clinic_1.values[ : g.sim_duration]
-        #print("Unused")
-        #print(slots_unused)
-        #print(type(slots_unused))
 
         slots_used = self.bookings.clinic_1.values[ : g.sim_duration]
 
-        #print("Used")
-        #print(slots_used)
-        #print(type(slots_used))
-        #print("Total Available")
-
         total_slots_available_daily = np.add(slots_unused, slots_used)
 
-        #print(total_slots_available_daily)
-
         self.percentage_slots_used = (sum(slots_used) / sum(total_slots_available_daily))
-
-        #print("----------------")
 
     # The run method starts up the DES entity generators, runs the simulation,
     # and in turns calls anything we need to generate results for the run
