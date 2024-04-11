@@ -401,8 +401,8 @@ class g:
     arrivals_time_dependent_df = arrivals_df ##NEW
     mean_n_consult_time = 6
     number_of_nurses = 1
-    sim_duration = 6000
-    number_of_runs = 10
+    sim_duration = 1440
+    number_of_runs = 100
 
 # Class representing patients coming in to the clinic.  Here, patients have
 # two attributes that they carry with them - their ID, and the amount of time
@@ -641,6 +641,8 @@ arrival_times = my_trial.run_trial()
 
 arrival_times_df = pd.concat(arrival_times)
 
+arrival_times_df['arr_time_bins'] = pd.cut(arrival_times_df['arrival_times'], bins=[i for i in range(0, g.sim_duration+1, 60)], include_lowest=True, right=False)
+
 arrival_times_df.head(10)
 ```
 
@@ -650,22 +652,146 @@ arrival_times_df.head(10)
 arrival_times_df.tail(10)
 ```
 
+Let's count the number of arrivals that have turned up during each 60-minute interval across the hundred runs we have done.
+
 ```{python}
 #| eval: true
+#| echo: true
+#| output: false
+#| warning: false
 
-px.scatter(
-    arrival_times_df,
-    x="arrival_times",
-    y="run",
-    color="run"
+arrival_times_df_grouped = (
+  arrival_times_df
+  .groupby("arr_time_bins")
+  .count()
+  .reset_index()
+)
+
+```
+
+```{python}
+#| eval: true
+#| warning: false
+
+arrival_times_df_grouped['arr_time_bins_str'] = (
+  arrival_times_df_grouped['arr_time_bins'].astype('str')
+)
+
+arrival_times_df_grouped["mean_arrivals_in_period_per_run"] = (
+  arrival_times_df_grouped["arrival_times"] / g.number_of_runs
+)
+
+px.line(
+  arrival_times_df_grouped,
+  x="arr_time_bins_str",
+  y="mean_arrivals_in_period_per_run"
 )
 ```
 
-
 ## Modifying this example - varying arrivals across the course of a week
 
+```{python}
+#| eval: true
 
+g.sim_duration = 1440 * 7
 
+arrivals_df_weekly = pd.read_csv("resources/nspp_example_2.csv")
+arrivals_df_weekly["arrival_rate"] = arrivals_df_weekly['mean_iat'].apply(lambda x: 1/x)
 
+g.arrivals_time_dependent_df = arrivals_df_weekly
+```
 
-## Taking it further - variation within days and across days
+### Evaluating the outputs
+
+Let's count the number of arrivals that have turned up during each daily interval (1440 minutes) across the hundred runs we have done.
+
+```{python}
+#| eval: true
+#| echo: true
+#| output: false
+#| warning: false
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+arrival_times = my_trial.run_trial()
+
+arrival_times_df = pd.concat(arrival_times)
+
+arrival_times_df['arr_time_bins'] = pd.cut(arrival_times_df['arrival_times'], bins=[i for i in range(0, g.sim_duration+1, 1440)], include_lowest=True, right=False)
+
+arrival_times_df_grouped = (
+  arrival_times_df
+  .groupby("arr_time_bins")
+  .count()
+  .reset_index()
+)
+
+```
+
+```{python}
+#| eval: true
+#| warning: false
+
+arrival_times_df_grouped['arr_time_bins_str'] = (
+  arrival_times_df_grouped['arr_time_bins'].astype('str')
+)
+
+arrival_times_df_grouped["mean_arrivals_in_period_per_run"] = (
+  arrival_times_df_grouped["arrival_times"] / g.number_of_runs
+)
+
+px.line(
+  arrival_times_df_grouped,
+  x="arr_time_bins_str",
+  y="mean_arrivals_in_period_per_run"
+)
+```
+
+If we run this over a period of several weeks, we can see that the pattern repeats - despite going past the duration we specified in our csv. This means we only need to write in one repeat of the pattern.
+
+```{python}
+#| eval: true
+
+g.sim_duration = 1440 * 7 * 5
+
+```
+
+```{python}
+#| eval: true
+#| echo: false
+#| output: true
+#| warning: false
+
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+arrival_times = my_trial.run_trial()
+
+arrival_times_df = pd.concat(arrival_times)
+
+arrival_times_df['arr_time_bins'] = pd.cut(arrival_times_df['arrival_times'], bins=[i for i in range(0, g.sim_duration+1, 1440)], include_lowest=True, right=False)
+
+arrival_times_df_grouped = (
+  arrival_times_df
+  .groupby("arr_time_bins")
+  .count()
+  .reset_index()
+)
+
+arrival_times_df_grouped['arr_time_bins_str'] = (
+  arrival_times_df_grouped['arr_time_bins'].astype('str')
+)
+
+arrival_times_df_grouped["mean_arrivals_in_period_per_run"] = (
+  arrival_times_df_grouped["arrival_times"] / g.number_of_runs
+)
+
+px.line(
+  arrival_times_df_grouped,
+  x="arr_time_bins_str",
+  y="mean_arrivals_in_period_per_run"
+)
+```
