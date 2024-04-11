@@ -529,7 +529,7 @@ class g:
     min_wait = 7
 
     sim_duration = 365 * 2
-    number_of_runs = 5
+    number_of_runs = 10
 
 # Class representing patients coming in to the clinic.
 class Patient:
@@ -759,7 +759,7 @@ class Trial:
     def  __init__(self):
         self.df_trial_results = pd.DataFrame()
         self.df_trial_results["Run Number"] = [0]
-        self.df_trial_results["Mean Wait Time for Appointment"] = [0.0] ##NEW
+        self.df_trial_results["Mean Appointment Wait (Days)"] = [0.0] ##NEW
         self.df_trial_results["Average Yearly Arrivals"] = [0.0] ##NEW
         self.df_trial_results.set_index("Run Number", inplace=True)
 
@@ -781,7 +781,7 @@ class Trial:
             my_model = Model(run)
             my_model.run()
 
-            self.df_trial_results.loc[run, "Mean Wait Time for Appointment"] = [my_model.mean_wait_time_appointment] ##NEW
+            self.df_trial_results.loc[run, "Mean Appointment Wait (Days)"] = [my_model.mean_wait_time_appointment] ##NEW
             self.df_trial_results.loc[run, "Average Yearly Arrivals"] = [my_model.mean_yearly_arrivals] ##NEW
 
         # Once the trial (ie all runs) has completed, print the final results
