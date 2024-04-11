@@ -5,19 +5,62 @@ execute:
 jupyter: python3
 ---
 
+While the focus of this book is on simpy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
 
 ## Python Libraries
 
 ### ciw
 
+> "Ciw is a discrete event simulation library for open queueing networks. Its core features include the capability to simulate networks of queues, multiple customer classes, and implementation of Type I blocking for restricted networks. A number of other features are also implemented, including priorities, baulking, reneging, schedules, slotted services, batch arrivals, service disciplines, dynamic customer classes, and deadlock detection.
+
+> The name Ciw is the Welsh word for a queue."
+
+- [Ciw documentation](https://ciw.readthedocs.io/en/latest/)
+
+An example of a ciw simulation of an urgent care call centre can be found in [this repository](https://github.com/TomMonks/ciw-urgent-care-call-centre).
+
+There is also a more detailed description of the steps required to convert a model from simpy to ciw in [this tutorial](https://health-data-science-or.github.io/simpy-streamlit-tutorial/content/03_streamlit/13_ciw_backend.html) by [Monks](https://orcid.org/0000-0003-2631-4481).
+
 ### salabim
 
+> "Salabim is a package for discrete event simulation in Python. It follows the methodology of process description as originally demonstrated in Simula and later in Prosim, Must and Tomas.
+> The process interaction methods are also quite similar to the Python package SimPy version 2.
+
+> The package comprises discrete event simulation, queue handling, resources, stores, statistical sampling and monitoring. And -last but not least- real time 2D- and 3D-animation and video production."
+
+- [Salabim documentation](https://www.salabim.org/manual/Overview.html)
+
+Salabim is thoroughly documented and sets itself apart by providing methods for 2D and 3D animation.
 
 ## R Libraries
 
 ### simmeR
 
+> simmer is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like SimPy or SimJulia, it leverages the power of Rcpp to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of trajectory: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the magrittr package.
+
+- [simmer documentation](https://r-simmer.org/)
+
+The documentation is notable for containing details on translating models from simpy to simmer.
+
+[Link](https://r-simmer.org/articles/simmer-05-simpy)
+
+Users of R in the NHS community have been exploring the use of simpy for healthcare examples for several years.
+
+[This tutorial](https://the-strategy-unit.github.io/des_simmer_workshop/) from the strategy unit covers the creation of a simple model.
+
+One key benefit is being able to plot a flow diagram of the steps in a simmer model.
+
+![Simmer Plot: credit to Stacey Croft, Anastasiia Zharinova and Tom Jemmett ^[https://the-strategy-unit.github.io/des_simmer_workshop/]](images/simmer_plot.png)
+
 
 ## GUI Software
 
 ### JaamSim
+
+JaamSim is quite different from all of the other offerings discussed so far due to it providing a graphical, drag and drop interface for simulations.
+
+You can read more, and download the software, on their [website](https://jaamsim.com/).
+
+One big benefit of JaamSim, in addition to its lower barrier to entry, is the ability to visually demonstrate the movement of entities to stakeholders, as well as generating graphs which update live as the simulation is run.
+
+{{< video https://youtu.be/cwU3-dNI_hY?si=jbKgzdIOZ8_Dz4rp >}}
