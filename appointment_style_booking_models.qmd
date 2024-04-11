@@ -40,6 +40,10 @@ In this model, patients
 - wait until the appointment is carried out
 - exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system
 
+:::{.callout-note}
+The contents of this section is based off the method employed by [Monks](https://orcid.org/0000-0003-2631-4481) in this [code](https://github.com/health-data-science-OR/stochastic_systems/tree/master/labs/simulation/lab5).
+:::
+
 ## The appointment book
 
 The key difference in this model is that we will feed in an additional object that represents the capacity of the clinic to see new clients.
@@ -679,8 +683,6 @@ class Model:
                 self.patient_counter += 1
 
                 booker = Booker(model=self)
-                print(type(self))
-                print(self.available_slots)
 
                 # Create instance of Patient
                 p = Patient(p_id=self.patient_counter, booker=booker)
