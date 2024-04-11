@@ -1,9 +1,10 @@
 ---
-title: Warm Up Periods
 execute:
   eval: false
 jupyter: python3
 ---
+
+# Warm Up Periods {#sec-warmup}
 
 In the models we've created so far patients start coming in when the service opens, and then all leave when it closes.
 
