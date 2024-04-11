@@ -448,9 +448,11 @@ Here, we are just altering the column name we refer to when calculating our metr
 
 ```{python}
     def calculate_run_results(self):
-        # Take the mean of the queuing times for the nurse across patients in
-        # this run of the model.
+        # Take the mean of the queuing times for an appointment across this run of the model
         self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+        # use our patient counter to track how many patients turn up on average during each
+        # year of the simulation.
+        self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
 ```
 
 #### The run method
@@ -470,7 +472,8 @@ class Trial:
     def  __init__(self):
         self.df_trial_results = pd.DataFrame()
         self.df_trial_results["Run Number"] = [0]
-        self.df_trial_results["Mean Wait Time for Appointment"] = [0.0] ##NEW
+        self.df_trial_results["Mean Appointment Wait (Days)"] = [0.0] ##NEW
+        self.df_trial_results["Average Yearly Arrivals"] = [0.0] ##NEW
         self.df_trial_results.set_index("Run Number", inplace=True)
 
     # Method to print out the results from the trial.  In real world models,
@@ -491,7 +494,9 @@ class Trial:
             my_model = Model(run)
             my_model.run()
 
-            self.df_trial_results.loc[run] = [my_model.mean_wait_time_appointment] ##NEW
+            self.df_trial_results.loc[run, "Mean Appointment Wait (Days)"] = [my_model.mean_wait_time_appointment] ##NEW
+            self.df_trial_results.loc[run, "Average Yearly Arrivals"] = [my_model.mean_yearly_arrivals] ##NEW
+
 
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
@@ -704,7 +709,6 @@ class Model:
         )
 
         #book slot at clinic = time of referral + waiting_time
-        #
         patient.booker.book_slot(best_t, clinic_id)
 
         # Wait for the time until the appointment to elapse
@@ -720,6 +724,7 @@ class Model:
         # Take the mean of the queuing times for the nurse across patients in
         # this run of the model.
         self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+        self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
 
     # The run method starts up the DES entity generators, runs the simulation,
     # and in turns calls anything we need to generate results for the run
@@ -755,6 +760,7 @@ class Trial:
         self.df_trial_results = pd.DataFrame()
         self.df_trial_results["Run Number"] = [0]
         self.df_trial_results["Mean Wait Time for Appointment"] = [0.0] ##NEW
+        self.df_trial_results["Average Yearly Arrivals"] = [0.0] ##NEW
         self.df_trial_results.set_index("Run Number", inplace=True)
 
     # Method to print out the results from the trial.  In real world models,
@@ -775,7 +781,8 @@ class Trial:
             my_model = Model(run)
             my_model.run()
 
-            self.df_trial_results.loc[run] = [my_model.mean_wait_time_appointment] ##NEW
+            self.df_trial_results.loc[run, "Mean Wait Time for Appointment"] = [my_model.mean_wait_time_appointment] ##NEW
+            self.df_trial_results.loc[run, "Average Yearly Arrivals"] = [my_model.mean_yearly_arrivals] ##NEW
 
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
