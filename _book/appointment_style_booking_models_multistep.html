@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 29&nbsp; Creating Web Apps</title>
+<title>HSMA - the little book of DES - 26&nbsp; Multi-step Appointment Booking Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./alternative_foss_simulation_libraries_software.html" rel="next">
-<link href="./running_parallel_cpus.html" rel="prev">
+<link href="./testing_large_numbers_scenarios.html" rel="next">
+<link href="./appointment_style_booking_models_advanced.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -74,8 +74,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 29&nbsp; Creating Web Apps">
-<meta property="og:description" content="">
+<meta property="og:title" content="HSMA - the little book of DES - 26&nbsp; Multi-step Appointment Booking Models">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -101,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./requesting_multiple_resources.html">Part 5 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./intro_creating_web_apps.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./requesting_multiple_resources.html">Part 5 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models_multistep.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Multi-step Appointment Booking Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -337,7 +336,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appointment_style_booking_models_multistep.html" class="sidebar-item-text sidebar-link">
+  <a href="./appointment_style_booking_models_multistep.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Multi-step Appointment Booking Models</span></span></a>
   </div>
 </li>
@@ -355,7 +354,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
@@ -385,28 +384,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#video-guide-creating-a-streamlit-web-app-interface-for-a-des-model" id="toc-video-guide-creating-a-streamlit-web-app-interface-for-a-des-model" class="nav-link active" data-scroll-target="#video-guide-creating-a-streamlit-web-app-interface-for-a-des-model"><span class="header-section-number">29.1</span> Video guide: creating a streamlit web app interface for a DES model</a>
-  <ul class="collapse">
-  <li><a href="#book" id="toc-book" class="nav-link" data-scroll-target="#book"><span class="header-section-number">29.1.1</span> Book</a></li>
-  </ul></li>
-  <li><a href="#example-apps" id="toc-example-apps" class="nav-link" data-scroll-target="#example-apps"><span class="header-section-number">29.2</span> Example apps</a>
-  <ul class="collapse">
-  <li><a href="#the-des-playground" id="toc-the-des-playground" class="nav-link" data-scroll-target="#the-des-playground"><span class="header-section-number">29.2.1</span> The DES Playground</a></li>
-  <li><a href="#the-hsma-simpy-example-library" id="toc-the-hsma-simpy-example-library" class="nav-link" data-scroll-target="#the-hsma-simpy-example-library"><span class="header-section-number">29.2.2</span> The HSMA SimPy Example Library</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./requesting_multiple_resources.html">Part 5 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./intro_creating_web_apps.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./requesting_multiple_resources.html">Part 5 - Advanced Concepts</a></li><li class="breadcrumb-item"><a href="./appointment_style_booking_models_multistep.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Multi-step Appointment Booking Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></h1>
+<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Multi-step Appointment Booking Models</span></h1>
 </div>
 
 
@@ -423,44 +408,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>As part of the HSMA programme, we teach how to use the Streamlit web application framework to produce a front-end for a discrete event simulation model.</p>
-<p>This can be a hugely powerful way of distributing your model. By creating a web application, stakeholders can interact with the model and adjust parameters themselves, seeing the impact this has. A carefully designed web app can guide them through the process of understanding the impact of different changes to the system.</p>
-<p>It is beyond the scope of this book to give a full treatment of this topic at this time, though it may be expanded on in the future (by the end of 2024).</p>
-<p>In the meantime, there are several resources available to you.</p>
-<section id="video-guide-creating-a-streamlit-web-app-interface-for-a-des-model" class="level2" data-number="29.1">
-<h2 data-number="29.1" class="anchored" data-anchor-id="video-guide-creating-a-streamlit-web-app-interface-for-a-des-model"><span class="header-section-number">29.1</span> Video guide: creating a streamlit web app interface for a DES model</h2>
-<p>This video is the masterclass on Streamlit interfaces from the fifth round of the HSMA programme. This is delivered by <a href="https://orcid.org/0000-0003-2631-4481">Tom Monks</a>, another member of the PenCHORD team.</p>
-<p>{{ &lt; video https://youtu.be/6e0OPsjRYQ8?si=YxA80wwKm5J-UjAb &gt;}}</p>
-<p>The classes and structure used for the model are very slightly different to the style used in this book, but overall the techniques are very applicable.</p>
-<section id="book" class="level3" data-number="29.1.1">
-<h3 data-number="29.1.1" class="anchored" data-anchor-id="book"><span class="header-section-number">29.1.1</span> Book</h3>
-<p>A book has also been written to accompany the above tutorial.</p>
-<p>The book can be accessed (here)[https://health-data-science-or.github.io/simpy-streamlit-tutorial/content/03_streamlit/01_intro.html].</p>
-</section>
-</section>
-<section id="example-apps" class="level2" data-number="29.2">
-<h2 data-number="29.2" class="anchored" data-anchor-id="example-apps"><span class="header-section-number">29.2</span> Example apps</h2>
-<section id="the-des-playground" class="level3" data-number="29.2.1">
-<h3 data-number="29.2.1" class="anchored" data-anchor-id="the-des-playground"><span class="header-section-number">29.2.1</span> The DES Playground</h3>
-<p>The following app contains a range of pages that allow users to explore a DES model of growing complexity.</p>
-<p>You can see the range of sliders and inputs that you can make available to your end users.</p>
-<iframe width="780" height="720" src="https://hsma-programme.github.io/Teaching_DES_Concepts_Streamlit/" title="DES Streamlit example 1"></iframe>
-<p>:::{.callout-warning} Note that this link will not work if you are viewing this book in Firefox. All other major browsers should work, including mobile browsers. ::</p>
-<p>The full code can be seen <a href="https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit">here</a>.</p>
-<p>Look at the code within the <strong>pages</strong> subfolder to see how different features are implemented.</p>
-<p>Other features that may be useful to adapt for your own use include - the ability to save and compare the results from multiple scenarios - a range of interactive visualisations of simulation metrics</p>
-</section>
-<section id="the-hsma-simpy-example-library" class="level3" data-number="29.2.2">
-<h3 data-number="29.2.2" class="anchored" data-anchor-id="the-hsma-simpy-example-library"><span class="header-section-number">29.2.2</span> The HSMA SimPy Example Library</h3>
-<p>As part of the SimPy visualisation library project, a range of different SimPy models have been created with a Streamlit frontend.</p>
-<iframe width="780" height="720" src="https://simpy-visualisation.streamlit.app/" title="DES Streamlit example 2"></iframe>
-<p>The code for all of these examples can be explored in this <a href="https://github.com/Bergam0t/simpy_visualisation">Github Repository</a>.</p>
-<p>In each case, the code for the model classes, simulation execution and simulation summary functions can be found inside a subfolder within the <strong>examples</strong> folder.</p>
-<p>Note that again the classes and format used for these models differs slightly from the examples given in this book, but are fundamentally very similar so should be possible to adapt.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is coming soon.</p>
+</div>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script>
@@ -1355,13 +1317,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./running_parallel_cpus.html" class="pagination-link" aria-label="Parallelisation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Parallelisation</span></span>
+      <a href="./appointment_style_booking_models_advanced.html" class="pagination-link" aria-label="Advanced Appointment Booking Model Features">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Advanced Appointment Booking Model Features</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./alternative_foss_simulation_libraries_software.html" class="pagination-link" aria-label="Alternative FOSS Simulation Libraries and Software">
-        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./testing_large_numbers_scenarios.html" class="pagination-link" aria-label="Testing Large Numbers of Scenarios">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
