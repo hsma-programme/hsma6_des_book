@@ -8,7 +8,6 @@ book:
   date: 26/03/2024
   chapters:
   - index.qmd
-  - intro.qmd
   - part: "Part 1 - DES Concepts and Design"
     chapters:
     - intro_to_des_concepts.qmd
