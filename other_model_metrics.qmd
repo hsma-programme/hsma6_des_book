@@ -5,6 +5,10 @@ execute:
 jupyter: python3
 ---
 
+:::{.callout-note}
+This section is a work in progress.
+:::
+
 There are some other things it can be useful to measure in our model.
 
 ## Arrivals

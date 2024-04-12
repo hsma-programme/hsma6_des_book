@@ -128,7 +128,14 @@ def run(self):
 
 The trial class is unchanged.
 
-## Evaluating the outputs
+
+
+## The full code
+
+The full code is given below.
+
+:::{.callout-note collapse="true}
+### Click here to view the full code
 
 ```{python}
 #| echo: true
@@ -337,6 +344,10 @@ class Trial:
 
         print (f"Mean Q Nurse : {self.mean_q_time_nurse_trial:.1f} minutes")
 ```
+
+:::
+
+## Evaluating the outputs
 
 Let's look at the printed output showing when our nurses were obstructed.
 

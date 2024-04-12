@@ -350,7 +350,7 @@ self.print_trial_results()
 print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_results['nurse_queue_longer'].values)} trials of {g.number_of_runs}")
 ```
 
-## Evaluating the outputs
+## The Full Code
 
 :::{.callout-note collapse="true"}
 
@@ -712,6 +712,8 @@ class Trial:
 
 :::
 
+
+## Evaluating the outputs
 
 :::{.callout-warning}
 We haven't fully controlled the randomness in our trials here, so the different trials will each have slightly differing arrival times and activity times. Even though we have run a high number of trials to compensate, this is not an ideal solution.

@@ -17,7 +17,7 @@ In the meantime, there are several resources available to you.
 
 This video is the masterclass on Streamlit interfaces from the fifth round of the HSMA programme. This is delivered by [Tom Monks](https://orcid.org/0000-0003-2631-4481), another member of the PenCHORD team.
 
-{{ < video https://youtu.be/6e0OPsjRYQ8?si=YxA80wwKm5J-UjAb >}}
+{{< video https://youtu.be/6e0OPsjRYQ8?si=YxA80wwKm5J-UjAb >}}
 
 The classes and structure used for the model are very slightly different to the style used in this book, but overall the techniques are very applicable.
 
@@ -41,7 +41,7 @@ You can see the range of sliders and inputs that you can make available to your 
 
 :::{.callout-warning}
 Note that this link will not work if you are viewing this book in Firefox. All other major browsers should work, including mobile browsers.
-::
+:::
 
 The full code can be seen [here](https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit).
 

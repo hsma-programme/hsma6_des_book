@@ -144,6 +144,8 @@ The trial class is unchanged.
 The full code is given below.
 
 :::{.callout-note collapse="true}
+### Click here to view the full code
+
 ```{python}
 #| eval: true
 import simpy

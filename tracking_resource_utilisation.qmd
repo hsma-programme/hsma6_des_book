@@ -326,7 +326,7 @@ If we have a model run time of 600 time units, and someone reaches the nurse at 
 You could adapt the code above to account for that - for example, you could check whether the time remaining in the model run (`g.sim_duration - self.env.now`) is greater than the activity time that is sampled, and record whichever is the smaller of the two as the patient attribute.
 :::
 
-### Evaluating the output
+### The full code
 
 :::{.callout-note collapse="true"}
 #### Click here to view the full code
@@ -558,6 +558,8 @@ class Trial:
 ```
 
 :::
+
+### Evaluating the output
 
 ```{python}
 #| eval: true
@@ -832,7 +834,7 @@ def get_interval_audits(self):
   return pd.concat(self.interval_audit_list)
 ```
 
-### Evaluating the outputs
+### The full code
 
 :::{.callout-note collapse="true"}
 #### Click here to view the full code
@@ -1122,6 +1124,8 @@ class Trial:
 ```
 
 :::
+
+### Evaluating the outputs
 
 ```{python}
 #| eval: true
