@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 book:
   title: HSMA - the little book of DES
   subtitle: An introduction to writing discrete event simulation models for healthcare (and beyond) in SimPy
