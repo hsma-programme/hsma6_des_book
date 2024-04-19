@@ -427,7 +427,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Discrete Event Simulation (DES) is a simulation modelling approach that allows us to model queuing problems. Queuing problems are those in which “things” (usually people, but not always) are waiting for a service or services.</p>
 <p>In a Discrete Event Simulation, entities flow through (and queue for) discrete sequential processes that use resources. The queues may be physical (people physically waiting) or more abstract (people on a waiting list, waiting for an appointment etc).</p>
 <p><img src="images/example.png" class="img-fluid"></p>
-<p>In healthcare, DES models can be used to model : - Patient pathways - Phone systems - The transit of test results And more!</p>
+<p>In healthcare, DES models can be used to model :</p>
+<ul>
+<li>Patient pathways</li>
+<li>Phone systems</li>
+<li>The transit of test results And more!</li>
+</ul>
 <p>DES models are extremely useful for asking what if? questions about process / pathway changes.</p>
 <section id="why-use-des" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="why-use-des"><span class="header-section-number">1.1</span> Why use DES?</h2>
@@ -438,12 +443,23 @@ ul.task-list li input[type="checkbox"] {
 <li>See whether a system can cope on bad days as well as good days</li>
 <li>Predict how long it will take to clear an existing backlog</li>
 </ul>
-<p>This can allow you to optimize a system, leading to better balance and better flow, which can in turn lead to - A safer environment - Less stress for staff - Improved patient experience - Meeting targets</p>
+<p>This can allow you to optimize a system, leading to better balance and better flow, which can in turn lead to</p>
+<ul>
+<li>A safer environment</li>
+<li>Less stress for staff</li>
+<li>Improved patient experience</li>
+<li>Meeting targets</li>
+</ul>
 </section>
 <section id="an-example" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="an-example"><span class="header-section-number">1.2</span> An example</h2>
 <p>Imagine being able to create a model of an emergency department.</p>
-<p>In this model, you can change all sorts of things - how many doctors, nurses and receptionists there are at each step - how long it takes for people to be seen - how many people go into the trauma pathway versus the non-trauma pathway</p>
+<p>In this model, you can change all sorts of things</p>
+<ul>
+<li>how many doctors, nurses and receptionists there are at each step</li>
+<li>how long it takes for people to be seen</li>
+<li>how many people go into the trauma pathway versus the non-trauma pathway</li>
+</ul>
 <p>Then sprinkle in a dose of randomness - because in real life, you’re not going to have each appointment taking the exact same amount of time, or people arriving exactly every five minutes - and then you can start to explore just how well a system will perform, what changes might have the most impact, and what configuration is likely to perform best. Then you can run it 1000 times with slightly different random days to see how well it performs on both good days and bad.</p>
 <p>You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what’s going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of theser changes themselves.</p>
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit/assets/29951987/1adc36a0-7bc0-4808-8d71-2d253a855b31"></video></div>
@@ -498,7 +514,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="activities-and-activity-times" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="activities-and-activity-times"><span class="header-section-number">1.4.4</span> Activities and Activity Times</h3>
-<p>Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs : - An entity (drawn from the queue) - The required type and number of resource to be available</p>
+<p>Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs :</p>
+<ul>
+<li>An entity (drawn from the queue)</li>
+<li>The required type and number of resource to be available</li>
+</ul>
 <p>Once the above conditions have been met, the activity begins. The entity, and the resource(s) are then locked in place for an amount of time – the Activity Time. The resource(s) cannot be used elsewhere until the activity time has passed.</p>
 <p>Activity times may be fixed, but are typically sampled stochastically from a distribution.</p>
 <p><img src="images/activity_activity_times.png" class="img-fluid"></p>
@@ -540,7 +560,12 @@ Tip
 </section>
 <section id="sinks" class="level3" data-number="1.4.6">
 <h3 data-number="1.4.6" class="anchored" data-anchor-id="sinks"><span class="header-section-number">1.4.6</span> Sinks</h3>
-<p>Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include : - an entity physically leaving a system (e.g.&nbsp;discharge from hospital) - an entity no longer existing (e.g.&nbsp;death, use of sample, end of telephone call) - an entity no longer needing to access activities that we’re interested in (e.g.&nbsp;they leave the bit of the system that we’re modelling)</p>
+<p>Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include :</p>
+<ul>
+<li>an entity physically leaving a system (e.g.&nbsp;discharge from hospital)</li>
+<li>an entity no longer existing (e.g.&nbsp;death, use of sample, end of telephone call)</li>
+<li>an entity no longer needing to access activities that we’re interested in (e.g.&nbsp;they leave the bit of the system that we’re modelling)</li>
+</ul>
 <p>The most important thing to remember about a sink is that it doesn’t necessarily represent an entity leaving the system entirely.</p>
 <p>For example, the scope of your model may only cover the triage aspect of an Emergency Department. Therefore, a valid sink might be placed after their triage - they’ve left the scope of our model</p>
 <p><img src="images/sinks_simple.png" class="img-fluid"></p>
@@ -548,7 +573,12 @@ Tip
 <section id="branching-paths" class="level3" data-number="1.4.7">
 <h3 data-number="1.4.7" class="anchored" data-anchor-id="branching-paths"><span class="header-section-number">1.4.7</span> Branching Paths</h3>
 <p>Real world systems (and the models of those systems) are rarely linear. Often, different things will happen to different entities. In a Discrete Event Simulation, this means different entities flowing to different activities, or different sinks.</p>
-<p>We might differentiate based on : - an attribute of the patient (e.g.&nbsp;patients with a higher priority value flow through a different set of activities) - probability (e.g.&nbsp;we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time) - time (e.g.&nbsp;after a certain time of day, entities flow through a different set of activities)</p>
+<p>We might differentiate based on :</p>
+<ul>
+<li>an attribute of the patient (e.g.&nbsp;patients with a higher priority value flow through a different set of activities)</li>
+<li>probability (e.g.&nbsp;we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time)</li>
+<li>time (e.g.&nbsp;after a certain time of day, entities flow through a different set of activities)</li>
+</ul>
 <p><img src="images/branching_paths_simple.png" class="img-fluid"></p>
 </section>
 <section id="outputs" class="level3" data-number="1.4.8">

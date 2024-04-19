@@ -411,15 +411,14 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>SimPy is a Python package that allows us to create powerful Discrete Event Simulation (DES) models.</p>
-<p>SimPy is built around Python Generator Functions, which we covered in the previous session.</p>
-<p>SimPy also has some tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/.</p>
+<p>You can read SimPy’s own tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/ - but we’d recommend working through at least the first few chapters in this book first.</p>
 <div class="callout-info">
 <p>To install SimPy, we need to <code>pip install simpy</code>. However, it is recommended that you use a separate environment. Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!</p>
 </div>
 <p>Before we look at how we put together a SimPy model, there’s a couple concepts we need to cover first that are important to understand.</p>
 <section id="simulation-time" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="simulation-time"><span class="header-section-number">2.1</span> Simulation Time</h2>
-<p>SimPy simulations run in time units*. These units of time can represent any real world amount of time we like as long as we are consistent within the same model.</p>
+<p>SimPy simulations run in time units. These units of time can represent any real world amount of time we like as long as we are consistent within the same model.</p>
 <p>Our time units should represent the lowest level of real world time that we need to represent in the model. In models of pathways where people arrive for a service, this will likely be minutes (seconds is too much, and hours is probably not enough, unless all the processes are slow). But we may have pathways where we measure time in days or weeks (e.g.&nbsp;referral pathways).</p>
 <p>For example, in an ED model, our time units may represent minutes. So we specify everything in minutes - inter-arrival times, activity times etc.</p>
 <div class="calllout-info">

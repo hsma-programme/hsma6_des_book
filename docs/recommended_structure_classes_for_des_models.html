@@ -463,17 +463,38 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>There are two main ways of programming in python - <strong>functional</strong> and <strong>object oriented</strong>. These are known as coding <strong>paradigms</strong>.</p>
-<p>In functional programming, you write <strong>functions</strong> that are (ideally) designed to do one thing and do it well. You then use these functions in some sort of sequence to achieve what you’re trying to do.</p>
+<p>In functional programming, you write <strong>functions</strong> that are (ideally) designed to do one thing and do it well.</p>
+<p>You then use these functions in some sort of sequence to achieve what you’re trying to do.</p>
 <p>This can make a lot of sense for a lot of data analysis and data science workflows.</p>
-<p>In comparison, in object oriented programming (OOP) everything is centred around objects that have their own - attributes (variables that belong to them) and - methods (which are what functions are called when they belong to objects).</p>
+<p>In comparison, in object oriented programming (OOP) everything is centred around objects that have their own</p>
+<ul>
+<li>attributes (variables that belong to them) and</li>
+<li>methods (which are what functions are called when they belong to objects).</li>
+</ul>
 <p><strong>Objects</strong> are created as <strong>instances</strong> of <strong>classes</strong>.</p>
 <p>Classes are essentially generalised blueprints for how certain types of objects should work!</p>
-<p>This can be really useful in situations where you have either - a lot of logic that makes sense to attach and organise with the thing that uses that logic (like a process) - a need to make copies of a very similar thing (like lots of patients to populate a model)</p>
+<p>This can be really useful in situations where you have either</p>
+<ul>
+<li>a lot of logic that makes sense to attach and organise with the thing that uses that logic (like a process)</li>
+<li>a need to make copies of a very similar thing (like lots of patients to populate a model)</li>
+</ul>
 <p>Let’s look at an example.</p>
 <p>Let’s say we want to write code that defines how an ambulance works.</p>
-<p>There will be properties the ambulance has. Things like : - The organisation it belongs to - The registration number - Whether a patient is currently on board - Whether the siren is currently going off</p>
-<p>There will also be things the ambulance does : - Driving - Parking - Having patients loaded into it / out of it - Switching the siren on and off</p>
-<p>In Object Oriented Programming, the things it has are known as attributes and the things it does are methods.</p>
+<p>There will be properties the ambulance has. Things like :</p>
+<ul>
+<li>The organisation it belongs to</li>
+<li>The registration number</li>
+<li>Whether a patient is currently on board</li>
+<li>Whether the siren is currently going off</li>
+</ul>
+<p>There will also be things the ambulance does :</p>
+<ul>
+<li>Driving</li>
+<li>Parking</li>
+<li>Having patients loaded into it / out of it</li>
+<li>Switching the siren on and off</li>
+</ul>
+<p>In Object Oriented Programming, the things it <strong>has</strong> are known as <strong>attributes</strong> and the things it <em>does</em> are <em>methods</em>.</p>
 </div>
 </div>
 <p>Specifically, we’re going to have 4 different classes: g, entity, model, and trial.</p>
@@ -495,17 +516,21 @@ Note
 <p>Over time, you’ll likely find a style used by someone else that you find particularly easy to follow and you want to adopt and adapt.</p>
 </div>
 </div>
-<p><strong>g Class</strong> This is a special class that will store our global level parameters for the model.</p>
+<p><strong>g Class</strong></p>
+<p>This is a special class that will store our global level parameters for the model.</p>
 <p>Unlike most OOP cases, we won’t create an instance of this class (hence the lower case) - we’ll just refer to the blueprint directly.</p>
-<p><strong>Entity</strong> This class will represent our entity.</p>
+<p><strong>Entity</strong></p>
+<p>This class will represent our entity.</p>
 <p>An entity could be a customer, a passenger, etc., but often in our healthcare models, our entities will be patients.</p>
 <p>Entities will carry with them information that we can record to and / or read from (e.g.&nbsp;an ID, how long they spent queuing, their condition etc).</p>
 <p>If we had more than one entity, we’d need a class for each.</p>
 <p>Multiple entities could be different types of patients - e.g.&nbsp;trauma patients and non-trauma patients.</p>
-<p><strong>Model</strong> This is the big one that represents the system that we are modelling.</p>
+<p><strong>Model</strong></p>
+<p>This is the big one that represents the system that we are modelling.</p>
 <p>This could be a phone helpline, a clinic, an emergency department, an airport terminal, a healthcare clinic that runs appointments - many processes are suitable.</p>
 <p>It’ll have our generators, our entity journeys and more, and it’s where our SimPy environment (where everything lives) will be kept.</p>
-<p><strong>Trial</strong> This class will represent a batch of runs of our simulation, and will have methods to run a trial, extract results etc.</p>
+<p><strong>Trial</strong></p>
+<p>This class will represent a batch of runs of our simulation, and will have methods to run a trial, extract results etc.</p>
 <section id="class-breakdown" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="class-breakdown"><span class="header-section-number">3.1</span> Class breakdown</h2>
 <p>Let’s look at the purpose and recommended structure of each class in a bit more detail.</p>
@@ -531,7 +556,7 @@ Example g class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="b5c7b323" class="cell" data-execution_count="1">
+<div id="f9e9650b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    time_units_between_customer_arrivals <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_customer_service_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -557,7 +582,7 @@ Example entity class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="4565d37a" class="cell" data-execution_count="2">
+<div id="b54707ea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -576,16 +601,39 @@ Example entity class
 <h4 data-number="3.1.3.1" class="anchored" data-anchor-id="des-generator---arrivals-of-entities-to-the-system"><span class="header-section-number">3.1.3.1</span> DES generator - arrivals of entities to the system</h4>
 <p>Within the Model Class we have a <strong>generator function</strong> that will represent our DES generator for entities <strong>arriving into our process</strong>.</p>
 <p>Here’s basically how it works:</p>
-<p><em>KEEP REPEATING THE FOLLOWING FOREVER (until the simulation stops running) :</em> 1. Increment the counter to get ID for next entity 2. Create a new entity and give them that ID 3. Start up an instance of the generator function for their journey through the process and chuck them in it 4. Sample the time until the next entity arrives 5. FREEZE this function until that time elapses 6. Return to 1</p>
+<p><em>KEEP REPEATING THE FOLLOWING FOREVER (until the simulation stops running) :</em></p>
+<ol type="1">
+<li>Increment the counter to get ID for next entity</li>
+<li>Create a new entity and give them that ID</li>
+<li>Start up an instance of the generator function for their journey through the process and chuck them in it</li>
+<li>Sample the time until the next entity arrives</li>
+<li>FREEZE this function until that time elapses</li>
+<li>Return to 1</li>
+</ol>
 </section>
 <section id="des-generator---the-entity-journey" class="level4" data-number="3.1.3.2">
 <h4 data-number="3.1.3.2" class="anchored" data-anchor-id="des-generator---the-entity-journey"><span class="header-section-number">3.1.3.2</span> DES Generator - the entity journey</h4>
 <p>Now, let’s look at the big one. The other generator function - the one that represents an entity’s journey through the system (this is the one we lobbed the new entities generated by the previous generator).</p>
-<p>Here’s how this works : 1. Record time started queuing for first activity 2. Request resource for first activity 3. Wait until resource is free 4. Once resource is free, grab the resource and keep hold of the resource until finished with them. Record time finished queuing and calculate queue time. 5. Sample how long will spend in this activity. 6. FREEZE this instance of the function until that time elapses (freezing the resource with it, so it’s not available to anyone else) 7. If there’s another activity, do the same again for that one. If not, end (and therefore entity leaves the model).</p>
+<p>Here’s how this works :</p>
+<ol type="1">
+<li>Record time started queuing for first activity</li>
+<li>Request resource for first activity</li>
+<li>Wait until resource is free</li>
+<li>Once resource is free, grab the resource and keep hold of the resource until finished with them. Record time finished queuing and calculate queue time.</li>
+<li>Sample how long will spend in this activity.</li>
+<li>FREEZE this instance of the function until that time elapses (freezing the resource with it, so it’s not available to anyone else)</li>
+<li>If there’s another activity, do the same again for that one. If not, end (and therefore entity leaves the model).</li>
+</ol>
 </section>
 <section id="running-the-model" class="level4" data-number="3.1.3.3">
 <h4 data-number="3.1.3.3" class="anchored" data-anchor-id="running-the-model"><span class="header-section-number">3.1.3.3</span> Running the model</h4>
-<p>Finally, we need a run method in our Model class. Basically, the run method will : - Start up our DES generators (our arrival points) - we only have one here. - Tell the simulation to run for the duration specified in g Class. - Call the calculate run results method in the previous slide. - Print out the run number with the patient-level results from this run.</p>
+<p>Finally, we need a run method in our Model class. Basically, the run method will</p>
+<ul>
+<li>start up our DES generators (our arrival points) - we only have one here.</li>
+<li>tell the simulation to run for the duration specified in g Class.</li>
+<li>call the calculate run results method in the previous slide.</li>
+<li>print out the run number with the patient-level results from this run.</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -596,7 +644,7 @@ Full Example model class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="f9d02670" class="cell" data-execution_count="3">
+<div id="38dacc6e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create a new model.</span></span>
@@ -771,7 +819,7 @@ Example trial class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="fdcf16c8" class="cell" data-execution_count="4">
+<div id="4b1b010a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># results from each run (just the mean queuing time for the nurse here)</span></span>

@@ -7,6 +7,7 @@ In a Discrete Event Simulation, entities flow through (and queue for) discrete s
 ![](images/example.png)
 
 In healthcare, DES models can be used to model :
+
 - Patient pathways
 - Phone systems
 - The transit of test results
@@ -25,6 +26,7 @@ Discrete event simulation allows you to
 - Predict how long it will take to clear an existing backlog
 
 This can allow you to optimize a system, leading to  better balance and better flow, which can in turn lead to
+
 - A safer environment
 - Less stress for staff
 - Improved patient experience
@@ -35,6 +37,7 @@ This can allow you to optimize a system, leading to  better balance and better f
 Imagine being able to create a model of an emergency department.
 
 In this model, you can change all sorts of things
+
 - how many doctors, nurses and receptionists there are at each step
 - how long it takes for people to be seen
 - how many people go into the trauma pathway versus the non-trauma pathway
@@ -116,6 +119,7 @@ Each queue has a queuing policy. This determines the order in which entities are
 ### Activities and Activity Times
 
 Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs :
+
 - An entity (drawn from the queue)
 - The required type and number of resource to be available
 
@@ -152,6 +156,7 @@ In some activities, having optional additional resource may speed up the activit
 ### Sinks
 
 Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include :
+
 - an entity physically leaving a system (e.g. discharge from hospital)
 - an entity no longer existing (e.g. death, use of sample, end of telephone call)
 - an entity no longer needing to access activities that we’re interested in (e.g. they leave the bit of the system that we’re modelling)
@@ -167,6 +172,7 @@ For example, the scope of your model may only cover the triage aspect of an Emer
 Real world systems (and the models of those systems) are rarely linear. Often, different things will happen to different entities. In a Discrete Event Simulation, this means different entities flowing to different activities, or different sinks.
 
 We might differentiate based on :
+
 - an attribute of the patient (e.g. patients with a higher priority value flow through a different set of activities)
 - probability (e.g. we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time)
 - time (e.g. after a certain time of day, entities flow through a different set of activities)
