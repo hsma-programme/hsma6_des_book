@@ -11,11 +11,11 @@ book:
   - part: "Part 1 - DES Concepts and Design"
     chapters:
     - intro_to_des_concepts.qmd
-    - intro_to_simpy.qmd
-    - recommended_structure_classes_for_des_models.qmd
     - exercise_des_design.qmd
   - part: "Part 2 - Your First SimPy Model"
     chapters:
+    - intro_to_simpy.qmd
+    - recommended_structure_classes_for_des_models.qmd
     - an_example_simpy_model.qmd
     - an_example_simpy_model_multiple_steps.qmd
     - an_example_simpy_model_branching.qmd
@@ -70,6 +70,7 @@ book:
 bibliography: references.bib
 format:
   html:
+    highlight-style: github
     css: include/webex.css
     include-after-body: include/webex.js
     theme:
@@ -86,6 +87,7 @@ format:
   pdf:
     output-file: hsma_des_book
     toc: true
+    highlight-style: github
     number-sections: true
     colorlinks: true
     toc-depth: 2

@@ -207,20 +207,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,6 +222,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
@@ -645,7 +645,7 @@ Tip
 <h3 data-number="9.3.1" class="anchored" data-anchor-id="editing-our-results-method"><span class="header-section-number">9.3.1</span> Editing our results method</h3>
 <p>To make it easier to look at the outputs, I’m going to modify two methods slightly.</p>
 <p>First, we modify the <code>run</code> method of the <code>Model</code> class slightly to swap from print the patient level dataframes to returning them as an output.</p>
-<div id="43984834" class="cell" data-execution_count="7">
+<div id="7fea521f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method to run a single run of the simulation</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
@@ -887,232 +887,232 @@ Run Number
 0                         0.0
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
+0                  454.978338
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
+0                  454.978338
+1                  847.085838
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
+0                  454.978338
+1                  847.085838
+2                  456.854169
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
-14                 473.404525
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
+14                 547.238423
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
-14                 473.404525
-15                 770.909675
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
+14                 547.238423
+15                 515.537215
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
-14                 473.404525
-15                 770.909675
-16                 545.791553
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
+14                 547.238423
+15                 515.537215
+16                 553.756027
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
-14                 473.404525
-15                 770.909675
-16                 545.791553
-17                 510.435849
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
+14                 547.238423
+15                 515.537215
+16                 553.756027
+17                 670.573217
             Mean Q Time Nurse
 Run Number                   
-0                  553.479781
-1                  596.407343
-2                  547.710044
-3                  423.196937
-4                  434.337510
-5                  578.360469
-6                  482.237445
-7                  490.944018
-8                  473.751442
-9                  461.618725
-10                 414.169078
-11                 673.732681
-12                 500.875245
-13                 348.398947
-14                 473.404525
-15                 770.909675
-16                 545.791553
-17                 510.435849
-18                 693.278941</code></pre>
+0                  454.978338
+1                  847.085838
+2                  456.854169
+3                  453.090182
+4                  461.721011
+5                  560.431404
+6                  388.809317
+7                  486.178013
+8                  365.653748
+9                  565.536564
+10                 451.326940
+11                 531.487612
+12                 452.723393
+13                 608.788514
+14                 547.238423
+15                 515.537215
+16                 553.756027
+17                 670.573217
+18                 450.600980</code></pre>
 </div>
 </div>
 <div id="code_full_no_warm_up" class="cell" data-execution_count="10">
@@ -1122,232 +1122,232 @@ Run Number
 0                         0.0
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
+0                  416.485098
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
+0                  416.485098
+1                  395.418411
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
+0                  416.485098
+1                  395.418411
+2                  297.645879
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
-14                 288.418623
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
+14                 571.615085
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
-14                 288.418623
-15                 382.160704
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
+14                 571.615085
+15                 269.980539
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
-14                 288.418623
-15                 382.160704
-16                 519.393455
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
+14                 571.615085
+15                 269.980539
+16                 185.655453
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
-14                 288.418623
-15                 382.160704
-16                 519.393455
-17                 350.968850
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
+14                 571.615085
+15                 269.980539
+16                 185.655453
+17                 469.294294
             Mean Q Time Nurse
 Run Number                   
-0                  300.228918
-1                  341.650019
-2                  363.377319
-3                  370.602764
-4                  356.258589
-5                  473.555661
-6                  193.308260
-7                  332.425437
-8                  287.559410
-9                  328.636354
-10                 265.975712
-11                 486.833114
-12                 374.535944
-13                 349.221057
-14                 288.418623
-15                 382.160704
-16                 519.393455
-17                 350.968850
-18                 595.323558</code></pre>
+0                  416.485098
+1                  395.418411
+2                  297.645879
+3                  471.915600
+4                  508.119620
+5                  303.336442
+6                  312.262815
+7                  334.658198
+8                  542.132028
+9                  276.495911
+10                 326.117425
+11                 229.414863
+12                 224.584288
+13                 408.710333
+14                 571.615085
+15                 269.980539
+16                 185.655453
+17                 469.294294
+18                 486.464494</code></pre>
 </div>
 </div>
 </section>
@@ -1385,31 +1385,31 @@ Run Number
 <tr class="odd">
 <td data-quarto-table-cell-role="th">1</td>
 <td>0.00</td>
-<td>3.68</td>
+<td>7.03</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2</td>
-<td>1.24</td>
-<td>3.35</td>
+<td>3.21</td>
+<td>9.38</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td>3.36</td>
-<td>15.09</td>
+<td>9.27</td>
+<td>1.68</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4</td>
-<td>14.66</td>
-<td>2.78</td>
+<td>2.94</td>
+<td>25.17</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>15.40</td>
-<td>4.78</td>
+<td>27.11</td>
+<td>7.11</td>
 <td>0</td>
 </tr>
 </tbody>
@@ -1445,28 +1445,28 @@ Run Number
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">238</td>
-<td>222.35</td>
+<td data-quarto-table-cell-role="th">247</td>
+<td>331.36</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">239</td>
-<td>223.85</td>
+<td data-quarto-table-cell-role="th">248</td>
+<td>327.49</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">240</td>
-<td>221.43</td>
+<td data-quarto-table-cell-role="th">249</td>
+<td>336.76</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">241</td>
-<td>220.12</td>
+<td data-quarto-table-cell-role="th">250</td>
+<td>340.21</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">242</td>
-<td>232.87</td>
+<td data-quarto-table-cell-role="th">251</td>
+<td>333.79</td>
 <td>0</td>
 </tr>
 </tbody>
@@ -1503,23 +1503,23 @@ Run Number
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>300.23</td>
+<td>416.49</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>341.65</td>
+<td>395.42</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>363.38</td>
+<td>297.65</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>370.60</td>
+<td>471.92</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>356.26</td>
+<td>508.12</td>
 </tr>
 </tbody>
 </table>
@@ -1553,23 +1553,23 @@ Run Number
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>553.48</td>
+<td>454.98</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>596.41</td>
+<td>847.09</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>547.71</td>
+<td>456.85</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>423.20</td>
+<td>453.09</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>434.34</td>
+<td>461.72</td>
 </tr>
 </tbody>
 </table>
@@ -1583,15 +1583,15 @@ Run Number
 <section id="overall-results" class="level4" data-number="9.3.3.3">
 <h4 data-number="9.3.3.3" class="anchored" data-anchor-id="overall-results"><span class="header-section-number">9.3.3.3</span> Overall results</h4>
 <p>Without the warm up, our overall average wait time is</p>
-<div id="c323881f" class="cell" data-execution_count="15">
+<div id="30abfeb9" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>'363.55 minutes'</code></pre>
+<pre><code>'367.2 minutes'</code></pre>
 </div>
 </div>
 <p>With the warm up, our overall average wait time is</p>
-<div id="231d45ae" class="cell" data-execution_count="16">
+<div id="292bcf6a" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>'524.45 minutes'</code></pre>
+<pre><code>'527.96 minutes'</code></pre>
 </div>
 </div>
 <p>You can see overall that the warm-up time can have a very significant impact on our waiting times!</p>
@@ -1599,7 +1599,7 @@ Run Number
 </section>
 <section id="results-over-time" class="level4" data-number="9.3.3.4">
 <h4 data-number="9.3.3.4" class="anchored" data-anchor-id="results-over-time"><span class="header-section-number">9.3.3.4</span> Results over time</h4>
-<div id="d0579694" class="cell" data-execution_count="17">
+<div id="8d147374" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>df_trial_results <span class="op">=</span> df_trial_results.reset_index()</span>
@@ -1617,9 +1617,9 @@ Run Number
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>                            <div id="180458bf-dd8b-45ab-b409-190d29973153" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("180458bf-dd8b-45ab-b409-190d29973153")) {                    Plotly.newPlot(                        "180458bf-dd8b-45ab-b409-190d29973153",                        [{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=0\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"0","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"0","offsetgroup":"0","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[300.23,553.48],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=1\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"1","offsetgroup":"1","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[341.65,596.41],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=2\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"2","offsetgroup":"2","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[363.38,547.71],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=3\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"3","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"3","offsetgroup":"3","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[370.6,423.2],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=4\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"4","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"4","offsetgroup":"4","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[356.26,434.34],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=5\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"5","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"5","offsetgroup":"5","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[473.56,578.36],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=6\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"6","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"6","offsetgroup":"6","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[193.31,482.24],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=7\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"7","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"7","offsetgroup":"7","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[332.43,490.94],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=8\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"8","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"8","offsetgroup":"8","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[287.56,473.75],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=9\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"9","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"9","offsetgroup":"9","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[328.64,461.62],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=10\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"10","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"10","offsetgroup":"10","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[265.98,414.17],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=11\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"11","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"11","offsetgroup":"11","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[486.83,673.73],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=12\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"12","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"12","offsetgroup":"12","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[374.54,500.88],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=13\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"13","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"13","offsetgroup":"13","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[349.22,348.4],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=14\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"14","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"14","offsetgroup":"14","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[288.42,473.4],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=15\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"15","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"15","offsetgroup":"15","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[382.16,770.91],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=16\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"16","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"16","offsetgroup":"16","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[519.39,545.79],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=17\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"17","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"17","offsetgroup":"17","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[350.97,510.44],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=18\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"18","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"18","offsetgroup":"18","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[595.32,693.28],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=19\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"19","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"19","offsetgroup":"19","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[310.62,515.97],"yaxis":"y","type":"histogram"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Warm Up"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"sum of Mean Q Time Nurse"}},"legend":{"title":{"text":"Run Number"},"tracegroupgap":0},"title":{"text":"Average Queue Times per Run - With and Without Warmups"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="77353b8f-c531-467c-ab4d-1f5e720c817c" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("77353b8f-c531-467c-ab4d-1f5e720c817c")) {                    Plotly.newPlot(                        "77353b8f-c531-467c-ab4d-1f5e720c817c",                        [{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=0\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"0","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"0","offsetgroup":"0","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[416.49,454.98],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=1\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"1","offsetgroup":"1","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[395.42,847.09],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=2\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"2","offsetgroup":"2","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[297.65,456.85],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=3\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"3","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"3","offsetgroup":"3","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[471.92,453.09],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=4\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"4","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"4","offsetgroup":"4","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[508.12,461.72],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=5\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"5","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"5","offsetgroup":"5","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[303.34,560.43],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=6\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"6","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"6","offsetgroup":"6","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[312.26,388.81],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=7\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"7","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"7","offsetgroup":"7","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[334.66,486.18],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=8\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"8","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"8","offsetgroup":"8","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[542.13,365.65],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=9\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"9","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"9","offsetgroup":"9","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[276.5,565.54],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=10\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"10","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"10","offsetgroup":"10","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[326.12,451.33],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=11\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"11","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"11","offsetgroup":"11","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[229.41,531.49],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=12\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"12","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"12","offsetgroup":"12","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[224.58,452.72],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=13\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"13","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"13","offsetgroup":"13","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[408.71,608.79],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=14\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"14","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"14","offsetgroup":"14","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[571.62,547.24],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=15\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"15","marker":{"color":"#19d3f3","pattern":{"shape":""}},"name":"15","offsetgroup":"15","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[269.98,515.54],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=16\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"16","marker":{"color":"#FF6692","pattern":{"shape":""}},"name":"16","offsetgroup":"16","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[185.66,553.76],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=17\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"17","marker":{"color":"#B6E880","pattern":{"shape":""}},"name":"17","offsetgroup":"17","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[469.29,670.57],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=18\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"18","marker":{"color":"#FF97FF","pattern":{"shape":""}},"name":"18","offsetgroup":"18","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[486.46,450.6],"yaxis":"y","type":"histogram"},{"alignmentgroup":"True","bingroup":"x","histfunc":"sum","hovertemplate":"Run Number=19\u003cbr\u003eWarm Up=%{x}\u003cbr\u003esum of Mean Q Time Nurse=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"19","marker":{"color":"#FECB52","pattern":{"shape":""}},"name":"19","offsetgroup":"19","orientation":"v","showlegend":true,"x":["No Warm Up","With Warm Up"],"xaxis":"x","y":[313.79,736.88],"yaxis":"y","type":"histogram"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Warm Up"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"sum of Mean Q Time Nurse"}},"legend":{"title":{"text":"Run Number"},"tracegroupgap":0},"title":{"text":"Average Queue Times per Run - With and Without Warmups"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('180458bf-dd8b-45ab-b409-190d29973153');
+var gd = document.getElementById('77353b8f-c531-467c-ab4d-1f5e720c817c');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{

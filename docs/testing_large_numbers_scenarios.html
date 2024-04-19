@@ -186,20 +186,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
       </ul>
@@ -213,6 +201,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
@@ -446,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When working out the best possible configuration for a service, you may wish to try out a large number of scenarios.</p>
 <p>Let’s return to our branching model (with the reproducibility set via sim-tools as described in chapter <a href="reproducibility.html" class="quarto-xref"><span>Chapter 13</span></a>).</p>
 <p>We have a number of parameters available to us in this model:</p>
-<div id="fc6a44fe" class="cell" data-execution_count="2">
+<div id="4370968f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -473,7 +473,7 @@ Warning
 <p>Be careful - the total number of possible permutations starts to grow very rapidly when you have lots of parameters with multiple options for each!</p>
 </div>
 </div>
-<div id="9d010bf3" class="cell" data-execution_count="3">
+<div id="652d6fe8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'patient_inter'</span>: [<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mean_reception_time'</span>: [<span class="dv">2</span>, <span class="dv">3</span>],</span>
@@ -512,7 +512,7 @@ Tip
 <p>For a small number of possibilities, setting the variables by hand will be fine.</p>
 <p>For a larger number, you may want to use the <code>range</code> function.</p>
 <p>e.g.&nbsp;to get 6, 10, 14 you would do</p>
-<div id="b448da3f" class="cell" data-execution_count="4">
+<div id="a02d150e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>[i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>, <span class="dv">15</span>, <span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[6, 10, 14]</code></pre>
@@ -521,7 +521,7 @@ Tip
 </div>
 </div>
 <p>Next we use the itertools package to create every possible permutation of the scenarios.</p>
-<div id="b026c332" class="cell" data-execution_count="5">
+<div id="3ab1ea45" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate all scenarios:</span></span>
@@ -532,7 +532,7 @@ Tip
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(<span class="bu">zip</span>(scenarios.keys(), p)) <span class="cf">for</span> p <span class="kw">in</span> all_scenarios_tuples]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at the first 3 scenario dictionaries.</p>
-<div id="6078af67" class="cell" data-execution_count="6">
+<div id="65b4ccf8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_scenarios_dicts[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[{'patient_inter': 4,
@@ -563,14 +563,14 @@ Tip
 </div>
 <p>We can see that all that has changed is the probability of seeing a doctor (the last key-value pair in each dictionary).</p>
 <p>How many scenarios have we created?</p>
-<div id="3d03b65d" class="cell" data-execution_count="7">
+<div id="d1fd1a96" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(all_scenarios_dicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>1296</code></pre>
 </div>
 </div>
 <p>Now let’s update our g class. We’ll just modify it to add in a space to add a scenario name.</p>
-<div id="1b0389f3" class="cell" data-execution_count="8">
+<div id="675d262d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -585,7 +585,7 @@ Tip
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    scenario_name <span class="op">=</span> <span class="dv">0</span> <span class="co">## New</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s now create all of the scenario objects.</p>
-<div id="22794b36" class="cell" data-execution_count="10">
+<div id="08dd3bd1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, scenario_to_run <span class="kw">in</span> <span class="bu">enumerate</span>(all_scenarios_dicts):</span>
@@ -949,7 +949,7 @@ Tip
 </div>
 </div>
 <p>Finally the following will give you a nice dictionary of all of your scenarios.</p>
-<div id="6dc7f25f" class="cell" data-execution_count="11">
+<div id="f87b4691" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(all_scenarios_dicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>

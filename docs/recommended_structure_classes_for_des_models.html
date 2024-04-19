@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - the little book of DES - 3&nbsp; The Recommended Structure for DES Models</title>
+<title>HSMA - the little book of DES - 4&nbsp; The Recommended Structure for DES Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exercise_des_design.html" rel="next">
+<link href="./an_example_simpy_model.html" rel="next">
 <link href="./intro_to_simpy.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 3&nbsp; The Recommended Structure for DES Models">
+<meta property="og:title" content="HSMA - the little book of DES - 4&nbsp; The Recommended Structure for DES Models">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
@@ -135,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_des_concepts.html">Part 1 - DES Concepts and Design</a></li><li class="breadcrumb-item"><a href="./recommended_structure_classes_for_des_models.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./recommended_structure_classes_for_des_models.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,20 +183,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
       </ul>
@@ -210,6 +198,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
@@ -417,12 +417,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#class-breakdown" id="toc-class-breakdown" class="nav-link active" data-scroll-target="#class-breakdown"><span class="header-section-number">3.1</span> Class breakdown</a>
+  <li><a href="#class-breakdown" id="toc-class-breakdown" class="nav-link active" data-scroll-target="#class-breakdown"><span class="header-section-number">4.1</span> Class breakdown</a>
   <ul class="collapse">
-  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">3.1.1</span> g Class</a></li>
-  <li><a href="#entity-class" id="toc-entity-class" class="nav-link" data-scroll-target="#entity-class"><span class="header-section-number">3.1.2</span> Entity class</a></li>
-  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">3.1.3</span> Model Class</a></li>
-  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">3.1.4</span> Trial class</a></li>
+  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">4.1.1</span> g Class</a></li>
+  <li><a href="#entity-class" id="toc-entity-class" class="nav-link" data-scroll-target="#entity-class"><span class="header-section-number">4.1.2</span> Entity class</a></li>
+  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">4.1.3</span> Model Class</a></li>
+  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">4.1.4</span> Trial class</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -430,9 +430,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_des_concepts.html">Part 1 - DES Concepts and Design</a></li><li class="breadcrumb-item"><a href="./recommended_structure_classes_for_des_models.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./recommended_structure_classes_for_des_models.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></h1>
 </div>
 
 
@@ -531,12 +531,12 @@ Note
 <p>It’ll have our generators, our entity journeys and more, and it’s where our SimPy environment (where everything lives) will be kept.</p>
 <p><strong>Trial</strong></p>
 <p>This class will represent a batch of runs of our simulation, and will have methods to run a trial, extract results etc.</p>
-<section id="class-breakdown" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="class-breakdown"><span class="header-section-number">3.1</span> Class breakdown</h2>
+<section id="class-breakdown" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="class-breakdown"><span class="header-section-number">4.1</span> Class breakdown</h2>
 <p>Let’s look at the purpose and recommended structure of each class in a bit more detail.</p>
 <p>Here, the example code given relates to a customer support helpline. Customers call a helpline, wait on hold until a customer support agent is ready to speak to them, speak to the agent for a period of time, and then the call ends and the agent connects to the next person who is waiting on hold. If there is no-one on hold at the time, the agent will get a break until someone else arrives!</p>
-<section id="g-class" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">3.1.1</span> g Class</h3>
+<section id="g-class" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">4.1.1</span> g Class</h3>
 <p>The g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios. This includes :</p>
 <ul>
 <li>Values to define inter-arrival time distributions (eg mean, standard deviation etc)</li>
@@ -556,7 +556,7 @@ Example g class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="f9e9650b" class="cell" data-execution_count="1">
+<div id="95c9c382" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    time_units_between_customer_arrivals <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_customer_service_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -567,8 +567,8 @@ Example g class
 </div>
 </div>
 </section>
-<section id="entity-class" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="entity-class"><span class="header-section-number">3.1.2</span> Entity class</h3>
+<section id="entity-class" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="entity-class"><span class="header-section-number">4.1.2</span> Entity class</h3>
 <p>The entity class represents our entity in the model - which, for healthcare models, will often be patients.</p>
 <p>We can store attributes here that entities carry with them that we may want to access (think of a person carrying a clipboard with them with information on it).</p>
 <p>In a simple model, an entity may just carry their ID and how long they spent queuing for a resource (once known). But more advanced models could store things like their condition, their priority, probability of going down path x, etc.</p>
@@ -582,7 +582,7 @@ Example entity class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="b54707ea" class="cell" data-execution_count="2">
+<div id="ce11fdc4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -591,14 +591,14 @@ Example entity class
 </div>
 </div>
 </section>
-<section id="model-class" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">3.1.3</span> Model Class</h3>
+<section id="model-class" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">4.1.3</span> Model Class</h3>
 <p>The Model Class represents the system we are modelling - this might be a clinic, for example. As such, there’s a lot more to unpack here, so let’s take this bit by bit.</p>
 <p>First, we’ll look at the constructor for our model.</p>
 <p>The constructor will set up - a SimPy Environment (basically where everything lives) - an entity counter (which we’ll use to give entities - such as patients - a simple ID) - the resources we need (for example, our nurses) - a DataFrame to store per-entity results in a single run of the model - attributes to store things like how long the entities queued for each activity</p>
 <p>What the constructor sets up doesn’t have to be limited to these things - anything relating to the system as a whole that makes sense to store here could be included.</p>
-<section id="des-generator---arrivals-of-entities-to-the-system" class="level4" data-number="3.1.3.1">
-<h4 data-number="3.1.3.1" class="anchored" data-anchor-id="des-generator---arrivals-of-entities-to-the-system"><span class="header-section-number">3.1.3.1</span> DES generator - arrivals of entities to the system</h4>
+<section id="des-generator---arrivals-of-entities-to-the-system" class="level4" data-number="4.1.3.1">
+<h4 data-number="4.1.3.1" class="anchored" data-anchor-id="des-generator---arrivals-of-entities-to-the-system"><span class="header-section-number">4.1.3.1</span> DES generator - arrivals of entities to the system</h4>
 <p>Within the Model Class we have a <strong>generator function</strong> that will represent our DES generator for entities <strong>arriving into our process</strong>.</p>
 <p>Here’s basically how it works:</p>
 <p><em>KEEP REPEATING THE FOLLOWING FOREVER (until the simulation stops running) :</em></p>
@@ -611,8 +611,8 @@ Example entity class
 <li>Return to 1</li>
 </ol>
 </section>
-<section id="des-generator---the-entity-journey" class="level4" data-number="3.1.3.2">
-<h4 data-number="3.1.3.2" class="anchored" data-anchor-id="des-generator---the-entity-journey"><span class="header-section-number">3.1.3.2</span> DES Generator - the entity journey</h4>
+<section id="des-generator---the-entity-journey" class="level4" data-number="4.1.3.2">
+<h4 data-number="4.1.3.2" class="anchored" data-anchor-id="des-generator---the-entity-journey"><span class="header-section-number">4.1.3.2</span> DES Generator - the entity journey</h4>
 <p>Now, let’s look at the big one. The other generator function - the one that represents an entity’s journey through the system (this is the one we lobbed the new entities generated by the previous generator).</p>
 <p>Here’s how this works :</p>
 <ol type="1">
@@ -625,8 +625,8 @@ Example entity class
 <li>If there’s another activity, do the same again for that one. If not, end (and therefore entity leaves the model).</li>
 </ol>
 </section>
-<section id="running-the-model" class="level4" data-number="3.1.3.3">
-<h4 data-number="3.1.3.3" class="anchored" data-anchor-id="running-the-model"><span class="header-section-number">3.1.3.3</span> Running the model</h4>
+<section id="running-the-model" class="level4" data-number="4.1.3.3">
+<h4 data-number="4.1.3.3" class="anchored" data-anchor-id="running-the-model"><span class="header-section-number">4.1.3.3</span> Running the model</h4>
 <p>Finally, we need a run method in our Model class. Basically, the run method will</p>
 <ul>
 <li>start up our DES generators (our arrival points) - we only have one here.</li>
@@ -644,7 +644,7 @@ Full Example model class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="38dacc6e" class="cell" data-execution_count="3">
+<div id="d0c4a9be" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create a new model.</span></span>
@@ -806,8 +806,8 @@ Full Example model class
 </div>
 </section>
 </section>
-<section id="trial-class" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">3.1.4</span> Trial class</h3>
+<section id="trial-class" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">4.1.4</span> Trial class</h3>
 <p>Our final class is the Trial class. This represents a batch of simulation runs, and will contain methods to run a batch of runs, as well as store, record and display results from the trial.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -819,7 +819,7 @@ Example trial class
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="4b1b010a" class="cell" data-execution_count="4">
+<div id="6fe6f6ed" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># results from each run (just the mean queuing time for the nurse here)</span></span>
@@ -1755,12 +1755,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./intro_to_simpy.html" class="pagination-link" aria-label="An Introduction to SimPy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exercise_des_design.html" class="pagination-link" aria-label="Exercise - Designing a DES">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./an_example_simpy_model.html" class="pagination-link" aria-label="An example simpy model">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
