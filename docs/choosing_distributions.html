@@ -90,7 +90,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -153,10 +152,22 @@ window.Quarto = {
     <span class="navbar-title">HSMA - the little book of DES</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/hsma-programme/hsma6_des_book"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -559,7 +570,7 @@ Tip
 <section id="code-for-the-lognormal-distribution" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="code-for-the-lognormal-distribution"><span class="header-section-number">12.2</span> Code for the lognormal distribution</h2>
 <p>This code was written by <a href="https://orcid.org/0000-0003-2631-4481">Tom Monks</a>.</p>
-<div id="25d29e6f" class="cell" data-execution_count="1">
+<div id="e3583856" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -610,7 +621,7 @@ Tip
 <p>Then we just need to make sure we have both a mean and standard deviation (SD) for activity times that we want to represent on Lognormal distributions</p>
 <p>When we need to sample an activity time, we create an instance of the Lognormal class with our mean and SD, and call the sample method.</p>
 <p>We are going to do this in the attend_clinic method of the Model class.</p>
-<div id="0d9d81fe" class="cell" data-execution_count="2">
+<div id="c9f5029e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nurse consultation activity</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -644,11 +655,11 @@ Tip
 <p>The sim-tools package makes it easy to make use of them without having to write lots of classes yourself.</p>
 <p>The source code for the package can be investigated in its <a href="https://github.com/TomMonks/sim-tools">Github Repository</a>.</p>
 <p>To install the package, run</p>
-<div id="8dc1ecf3" class="cell" data-execution_count="3">
+<div id="a0d934c4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pip install sim<span class="op">-</span>tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can then import a class with</p>
-<div id="f0842010" class="cell" data-execution_count="4">
+<div id="45463c93" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Exponential</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>replacing Exponential with any of the supported distribution classes.</p>

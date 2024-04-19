@@ -5,7 +5,7 @@ book:
   title: HSMA - the little book of DES
   subtitle: An introduction to writing discrete event simulation models for healthcare (and beyond) in SimPy
   author: Dan Chalk and Sammi Rosser
-  date: 26/03/2024
+  date: 2024/02/26
   chapters:
   - index.qmd
   - part: "Part 1 - DES Concepts and Design"
@@ -49,14 +49,19 @@ book:
   - alternative_foss_simulation_libraries_software.qmd
   - further_reading.qmd
   - references.qmd
-  cover-image: resources/logos/hsma_logo_transparent_background_large.png
+  cover-image: resources/logos/cover_image_bing_image_generator.jpeg
   favicon: resources/logos/hsma_logo_transparent_background_large.png
-  search: true
+  search:
+    location: navbar
+    type: overlay
   page-navigation: true
   back-to-top-navigation: true
   navbar:
-    search: false
     background: '#8A1E1E'
+    right:
+      - icon: github
+        href: https://github.com/hsma-programme/hsma6_des_book
+        aria-label: GitHub
   sidebar:
     search: true
     style: docked
@@ -83,7 +88,10 @@ format:
       - theme-light.scss
       - resources/fonts/css/lexend.css
     grid:
-      sidebar-width: 250px
+      sidebar-width: 300px
+      body-width: 900px
+      margin-width: 300px
+      gutter-width: 1.5rem
   pdf:
     output-file: hsma_des_book
     toc: true

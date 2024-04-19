@@ -90,7 +90,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -127,10 +126,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">HSMA - the little book of DES</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/hsma-programme/hsma6_des_book"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -446,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When working out the best possible configuration for a service, you may wish to try out a large number of scenarios.</p>
 <p>Let’s return to our branching model (with the reproducibility set via sim-tools as described in chapter <a href="reproducibility.html" class="quarto-xref"><span>Chapter 13</span></a>).</p>
 <p>We have a number of parameters available to us in this model:</p>
-<div id="4370968f" class="cell" data-execution_count="2">
+<div id="ab3f13b8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -473,7 +484,7 @@ Warning
 <p>Be careful - the total number of possible permutations starts to grow very rapidly when you have lots of parameters with multiple options for each!</p>
 </div>
 </div>
-<div id="652d6fe8" class="cell" data-execution_count="3">
+<div id="f8b478de" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'patient_inter'</span>: [<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mean_reception_time'</span>: [<span class="dv">2</span>, <span class="dv">3</span>],</span>
@@ -512,7 +523,7 @@ Tip
 <p>For a small number of possibilities, setting the variables by hand will be fine.</p>
 <p>For a larger number, you may want to use the <code>range</code> function.</p>
 <p>e.g.&nbsp;to get 6, 10, 14 you would do</p>
-<div id="a02d150e" class="cell" data-execution_count="4">
+<div id="1bf2ca96" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>[i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>, <span class="dv">15</span>, <span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[6, 10, 14]</code></pre>
@@ -521,7 +532,7 @@ Tip
 </div>
 </div>
 <p>Next we use the itertools package to create every possible permutation of the scenarios.</p>
-<div id="3ab1ea45" class="cell" data-execution_count="5">
+<div id="5aefa055" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate all scenarios:</span></span>
@@ -532,7 +543,7 @@ Tip
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(<span class="bu">zip</span>(scenarios.keys(), p)) <span class="cf">for</span> p <span class="kw">in</span> all_scenarios_tuples]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at the first 3 scenario dictionaries.</p>
-<div id="65b4ccf8" class="cell" data-execution_count="6">
+<div id="2e5ed893" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_scenarios_dicts[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[{'patient_inter': 4,
@@ -563,14 +574,14 @@ Tip
 </div>
 <p>We can see that all that has changed is the probability of seeing a doctor (the last key-value pair in each dictionary).</p>
 <p>How many scenarios have we created?</p>
-<div id="d1fd1a96" class="cell" data-execution_count="7">
+<div id="5e760a57" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(all_scenarios_dicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>1296</code></pre>
 </div>
 </div>
 <p>Now let’s update our g class. We’ll just modify it to add in a space to add a scenario name.</p>
-<div id="675d262d" class="cell" data-execution_count="8">
+<div id="207fb352" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -585,7 +596,7 @@ Tip
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    scenario_name <span class="op">=</span> <span class="dv">0</span> <span class="co">## New</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s now create all of the scenario objects.</p>
-<div id="08dd3bd1" class="cell" data-execution_count="10">
+<div id="8756904f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, scenario_to_run <span class="kw">in</span> <span class="bu">enumerate</span>(all_scenarios_dicts):</span>
@@ -949,7 +960,7 @@ Tip
 </div>
 </div>
 <p>Finally the following will give you a nice dictionary of all of your scenarios.</p>
-<div id="f87b4691" class="cell" data-execution_count="11">
+<div id="b4c93f58" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(all_scenarios_dicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>

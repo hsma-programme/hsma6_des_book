@@ -90,7 +90,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -124,10 +123,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">HSMA - the little book of DES</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/hsma-programme/hsma6_des_book"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -483,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You could have different patience levels for different queues, or just a general patience level. Or even get creative and have a patience level that decreases the longer they’ve been in the system if your system has multiple steps!</p>
 <p>If we want to see the effect of this, we can try changing the patience levels - but you’ll need to make the patience levels MUCH higher as this system is in bad shape (after 3 days patients are waiting on average over 3 hours… and a lot are waiting much longer!)</p>
 <p>Maybe try adding another nurse in to get the system under control first!</p>
-<div id="a40fa08f" class="cell" data-execution_count="1">
+<div id="e23cb86c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -498,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-init-method" class="level5" data-number="14.1.1.3.1">
 <h5 data-number="14.1.1.3.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">14.1.1.3.1</span> The <strong>init</strong> method</h5>
 <p>In the init method, we set up an additional attribute to track the number of people reneging.</p>
-<div id="95164871" class="cell" data-execution_count="2">
+<div id="e1870d25" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up SimPy environment</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
@@ -534,17 +545,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-attend_clinic-method" class="level4" data-number="14.1.1.4">
 <h4 data-number="14.1.1.4" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">14.1.1.4</span> The attend_clinic method</h4>
 <p>In the attend clinic, we now add in an OR statement (the vertical line | , also known as a pipe) to our request for the nurse.</p>
-<div id="78dd7fb9" class="cell" data-execution_count="3">
+<div id="20c47a47" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>result_of_queue <span class="op">=</span> (<span class="cf">yield</span> req <span class="op">|</span> <span class="va">self</span>.env.timeout(patient.patience_nurse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It basically says “Wait for the request for the nurse to be fulfilled OR until the patient’s patience level has passed, whichever comes first, and then store whatever the outcome was.</p>
 <p>We then need to check whether we got our req - the resource we requested - or whether the timeout occurred.</p>
 <p>We do this with conditional logic:</p>
-<div id="fa6ce793" class="cell" data-execution_count="4">
+<div id="47893a62" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> req <span class="kw">in</span> result_of_queue:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The indented code after this statement will only take place if the resource became available before the patient’s patience ran out (i.e.&nbsp;if the resource became available before the patience period elapsed).</p>
-<div id="6f2c4337" class="cell" data-execution_count="5">
+<div id="30568112" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nurse consultation activity</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -583,7 +594,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-run-method" class="level4" data-number="14.1.1.5">
 <h4 data-number="14.1.1.5" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">14.1.1.5</span> The run method</h4>
 <p>The only change to the run method is adding a print statement to the end of it to print the patients who reneged.</p>
-<div id="e07e721b" class="cell" data-execution_count="6">
+<div id="7cd27010" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>num_reneged_nurse<span class="sc">}</span><span class="ss"> patients reneged from nurse queue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -592,7 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-init-method-1" class="level5" data-number="14.1.1.6.1">
 <h5 data-number="14.1.1.6.1" class="anchored" data-anchor-id="the-init-method-1"><span class="header-section-number">14.1.1.6.1</span> The <strong>init</strong> method</h5>
 <p>In the init method, we add in an addiitonal attribute that is a placeholder column for the number of people in each run who reneged.</p>
-<div id="37bdcc2d" class="cell" data-execution_count="7">
+<div id="5898c12b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
@@ -606,7 +617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-calculate_means_over_trial-method" class="level5" data-number="14.1.1.6.2">
 <h5 data-number="14.1.1.6.2" class="anchored" data-anchor-id="the-calculate_means_over_trial-method"><span class="header-section-number">14.1.1.6.2</span> The calculate_means_over_trial method</h5>
 <p>We also now need to calculate the mean number of patients reneging per run.</p>
-<div id="e949f6c7" class="cell" data-execution_count="8">
+<div id="83d26eb8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
@@ -620,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-print_trial_results-method" class="level5" data-number="14.1.1.6.3">
 <h5 data-number="14.1.1.6.3" class="anchored" data-anchor-id="the-print_trial_results-method"><span class="header-section-number">14.1.1.6.3</span> The print_trial_results method</h5>
-<div id="4dcb3bb1" class="cell" data-execution_count="9">
+<div id="2c878e21" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
@@ -634,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-run_trial-method" class="level5" data-number="14.1.1.6.4">
 <h5 data-number="14.1.1.6.4" class="anchored" data-anchor-id="the-run_trial-method"><span class="header-section-number">14.1.1.6.4</span> The run_trial method</h5>
 <p>We also need to add the number of patients who reneged from the nurse’s queue as one of the results against each run.</p>
-<div id="f5975872" class="cell" data-execution_count="10">
+<div id="864431ee" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        my_model <span class="op">=</span> Model(run)</span>
@@ -664,7 +675,7 @@ Click here to view the full code
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="bb65e77b" class="cell" data-execution_count="11">
+<div id="805a52f5" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -883,20 +894,19 @@ Click here to view the full code
 <section id="exploring-the-outputs" class="level3" data-number="14.1.3">
 <h3 data-number="14.1.3" class="anchored" data-anchor-id="exploring-the-outputs"><span class="header-section-number">14.1.3</span> Exploring the outputs</h3>
 <p>What are the outputs?</p>
-<div id="b7e0464d" class="cell" data-execution_count="12">
+<div id="ac1014e8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new instance of Trial and run it</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 9 reneged after waiting 22 minutes
-Patient 12 reneged after waiting 11 minutes
 Patient 8 reneged after waiting 31 minutes
-Patient 17 reneged after waiting 28 minutes
+Patient 16 reneged after waiting 10 minutes
 Patient 21 reneged after waiting 15 minutes
 Patient 41 reneged after waiting 5 minutes
 Patient 34 reneged after waiting 32 minutes
-Patient 35 reneged after waiting 28 minutes
 Patient 40 reneged after waiting 38 minutes
+Patient 51 reneged after waiting 6 minutes
 Patient 61 reneged after waiting 12 minutes
 Patient 56 reneged after waiting 40 minutes
 Patient 57 reneged after waiting 43 minutes
@@ -907,43 +917,42 @@ Patient 80 reneged after waiting 5 minutes
 Patient 78 reneged after waiting 9 minutes
 Patient 70 reneged after waiting 31 minutes
 Patient 79 reneged after waiting 11 minutes
-Patient 72 reneged after waiting 31 minutes
 Patient 77 reneged after waiting 16 minutes
 Patient 69 reneged after waiting 41 minutes
 Patient 92 reneged after waiting 10 minutes
 Patient 91 reneged after waiting 15 minutes
 Patient 95 reneged after waiting 20 minutes
+Patient 98 reneged after waiting 18 minutes
 Patient 101 reneged after waiting 25 minutes
 Patient 97 reneged after waiting 41 minutes
 Run Number 0
             Q Time Nurse
 Patient ID              
-76             16.744550
+72             27.577241
 81              0.000000
-82              2.332089
+82              4.349316
 83              0.000000
-84              3.563609
+84              5.267252
 85              0.000000
-86              3.210458
-88              0.656061
-89              0.547200
-87             15.100278
-90             13.277975
-93              4.244108
-96              3.614753
-94             13.847945
-100             4.547338
-98             17.583777
-99             17.923050
-102             3.808237
-104             5.489776
-27 patients reneged from nurse queue
+86              3.250806
+88              1.223197
+89              0.606182
+87             15.097022
+90             12.547652
+93              4.656345
+96              4.262053
+94             16.248611
+100             8.153274
+99             15.750153
+102             1.980767
+104             3.770671
+26 patients reneged from nurse queue
 Trial Results
             Mean Q Time Nurse  Reneged Q Nurse
 Run Number                                    
-0                    6.657432               27
-Mean Q Nurse : 6.7 minutes
-Mean Reneged Q Nurse : 27.0 patients</code></pre>
+0                     6.93003               26
+Mean Q Nurse : 6.9 minutes
+Mean Reneged Q Nurse : 26.0 patients</code></pre>
 </div>
 </div>
 <p>We can see that not every patient is reneging.</p>
@@ -979,7 +988,7 @@ Note
 <p>Note - we could simulate balking from the perspective of the patient instead (or as well) - e.g.&nbsp;the patient will only wait if there are no more than x people waiting etc. If we did this, we’d probably want to make this level an attribute of the patient, as it may vary between patients.</p>
 </div>
 </div>
-<div id="0777855f" class="cell" data-execution_count="13">
+<div id="b9b7648e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -1014,7 +1023,7 @@ Note
 <h5 data-number="14.2.1.3.1" class="anchored" data-anchor-id="the-init-method-2"><span class="header-section-number">14.2.1.3.1</span> The <strong>init</strong> method</h5>
 <p>Here we add in an additional attribute to count the number of people who balk.</p>
 <p>We also we add a list that will store patient objects queuing for the nurse consultation. This will allow us to see who is in the queue at any time, as well as the length of the queue etc.</p>
-<div id="1bcfa520" class="cell" data-execution_count="14">
+<div id="fdd5d7dc" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
@@ -1053,7 +1062,7 @@ Note
 </section>
 <section id="the-attend_clinic-method-1" class="level5" data-number="14.2.1.3.3">
 <h5 data-number="14.2.1.3.3" class="anchored" data-anchor-id="the-attend_clinic-method-1"><span class="header-section-number">14.2.1.3.3</span> The attend_clinic method</h5>
-<div id="f7245c7a" class="cell" data-execution_count="15">
+<div id="710cfd78" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - we now first check whether there is room for the patient to</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># wait.  If there is, then proceed as before.  If not, then the patient</span></span>
@@ -1099,7 +1108,7 @@ Note
 <section id="the-run-method-1" class="level5" data-number="14.2.1.3.5">
 <h5 data-number="14.2.1.3.5" class="anchored" data-anchor-id="the-run-method-1"><span class="header-section-number">14.2.1.3.5</span> The run method</h5>
 <p>Here we have added a print message displaying how many patients balked in this run.</p>
-<div id="42fd25ba" class="cell" data-execution_count="16">
+<div id="70a4f4f4" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -1122,7 +1131,7 @@ Note
 <section id="the-init-method-3" class="level5" data-number="14.2.1.4.1">
 <h5 data-number="14.2.1.4.1" class="anchored" data-anchor-id="the-init-method-3"><span class="header-section-number">14.2.1.4.1</span> The <strong>init</strong> method</h5>
 <p>First we add in a column to store the number who balked at the nurse queue in each run.</p>
-<div id="e0cdb55f" class="cell" data-execution_count="17">
+<div id="855384f9" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
@@ -1134,7 +1143,7 @@ Note
 <section id="the-calculate_means_over_trial-method-1" class="level5" data-number="14.2.1.4.2">
 <h5 data-number="14.2.1.4.2" class="anchored" data-anchor-id="the-calculate_means_over_trial-method-1"><span class="header-section-number">14.2.1.4.2</span> The calculate_means_over_trial method</h5>
 <p>We add a calculation of mean number of patients who balked at the nurse queue per run.</p>
-<div id="e25d50a4" class="cell" data-execution_count="18">
+<div id="e46d58c9" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_means_over_trial(<span class="va">self</span>):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse_trial <span class="op">=</span> (</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>].mean()</span>
@@ -1149,7 +1158,7 @@ Note
 <section id="the-print_trial_results-method-1" class="level5" data-number="14.2.1.4.3">
 <h5 data-number="14.2.1.4.3" class="anchored" data-anchor-id="the-print_trial_results-method-1"><span class="header-section-number">14.2.1.4.3</span> The print_trial_results method</h5>
 <p>We add in a print message of mean number of patients balking at nurse queue per run.</p>
-<div id="bc678145" class="cell" data-execution_count="19">
+<div id="e16fe38e" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="va">self</span>.df_trial_results)</span>
@@ -1162,7 +1171,7 @@ Note
 <section id="the-run_trial-method-1" class="level5" data-number="14.2.1.4.4">
 <h5 data-number="14.2.1.4.4" class="anchored" data-anchor-id="the-run_trial-method-1"><span class="header-section-number">14.2.1.4.4</span> The run_trial method</h5>
 <p>Finally we add the number that balked at the nurse queue to results in the run.</p>
-<div id="5a9c6ec5" class="cell" data-execution_count="20">
+<div id="62923d4f" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        my_model <span class="op">=</span> Model(run)</span>
@@ -1192,7 +1201,7 @@ Click here to view the full code
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="e0f43693" class="cell" data-execution_count="21">
+<div id="2e540c25" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1399,7 +1408,7 @@ Click here to view the full code
 <h3 data-number="14.2.3" class="anchored" data-anchor-id="exploring-the-outputs-1"><span class="header-section-number">14.2.3</span> Exploring the outputs</h3>
 <p>What are the outputs?</p>
 <p>We are doing three runs in this case.</p>
-<div id="be3c39c4" class="cell" data-execution_count="22">
+<div id="7d9c489a" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new instance of Trial and run it</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1407,62 +1416,62 @@ Click here to view the full code
 <pre><code>Run Number 0
             Q Time Nurse
 Patient ID              
-285             5.384388
-286            12.217013
-284            31.037862
+285             4.672445
+286            10.796740
+284            30.697595
 289             0.000000
-291             1.142186
+291             0.077450
 ...                  ...
-874             8.096207
-876             6.710851
-879             3.380225
-880             4.138339
-881             2.979335
+874            10.396766
+875            13.966853
+879             4.898583
+876            18.626047
+881             5.428366
 
-[446 rows x 1 columns]
-216 patients balked at the nurse queue
+[456 rows x 1 columns]
+204 patients balked at the nurse queue
 Run Number 1
             Q Time Nurse
 Patient ID              
-268             0.468403
-267             8.348745
-270             2.123026
-271             5.407639
-273             0.790601
+267             2.831969
+268             5.627255
+271             0.458958
+270            10.019265
+272            10.892886
 ...                  ...
-836             5.604017
-837             5.049914
-839             1.135765
-840             4.397849
-841             0.624460
+835            10.715810
+837             4.335750
+838             6.811333
+839             3.853039
+840             7.240548
 
-[460 rows x 1 columns]
-155 patients balked at the nurse queue
+[457 rows x 1 columns]
+161 patients balked at the nurse queue
 Run Number 2
             Q Time Nurse
 Patient ID              
-296             5.441140
-297             9.384575
-295            22.542141
-300             6.420763
-302             3.984031
+298             3.230334
+297            12.446277
+300             1.640471
+301             3.345033
+302             3.723749
 ...                  ...
-907             6.745381
-908             2.007237
-899            39.334588
-909             7.106986
-911             3.740970
+908             2.219467
+899            36.779371
+909             4.260036
+911             0.249929
+910             6.056169
 
 [468 rows x 1 columns]
 215 patients balked at the nurse queue
 Trial Results
             Mean Q Time Nurse  Balked Q Nurse
 Run Number                                   
-0                   11.111206           216.0
-1                   10.193099           155.0
-2                   10.074888           215.0
-Mean Q Nurse : 10.5 minutes
-Mean Balked Q Nurse : 195.33333333333334 patients</code></pre>
+0                   10.436588           204.0
+1                   10.250003           161.0
+2                   10.301521           215.0
+Mean Q Nurse : 10.3 minutes
+Mean Balked Q Nurse : 193.33333333333334 patients</code></pre>
 </div>
 </div>
 <p>We can see that we have patients reneging, but due to the random variation across the arrivals and consult times, the size of the queue is different at different points in time, so we get variation in the patients balking each time.</p>
@@ -1499,7 +1508,7 @@ Click here to view the full code
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="de74cdef" class="cell" data-execution_count="23">
+<div id="d2ab552a" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1855,58 +1864,58 @@ Click here to view the full code
 </section>
 <section id="exploring-the-outputs-2" class="level3" data-number="14.3.3">
 <h3 data-number="14.3.3" class="anchored" data-anchor-id="exploring-the-outputs-2"><span class="header-section-number">14.3.3</span> Exploring the outputs</h3>
-<div id="114e9f2a" class="cell" data-execution_count="24">
+<div id="951551f2" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>my_trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Run Number 0
             Q Time Nurse  Q Time Doctor
 Patient ID                             
-722             5.127194            NaN
-718                  NaN      11.557206
-726             0.289247            NaN
-728                  NaN       0.831241
-729             4.077367            NaN
+717                  NaN       6.954690
+718             5.942472            NaN
+719            12.732188            NaN
+728             0.550733            NaN
+729                  NaN       2.115945
 ...                  ...            ...
-962             4.260179            NaN
-958            13.836367            NaN
-961            15.859098            NaN
-963                  NaN      14.317844
-966                  NaN      12.073605
+953                  NaN      27.786390
+956            25.085737            NaN
+968                  NaN       2.249347
+966             5.321667            NaN
+973             3.163426            NaN
 
-[158 rows x 2 columns]
-222 patients reneged from nurse queue
+[163 rows x 2 columns]
+202 patients reneged from nurse queue
 0 patients balked at the nurse queue
-90 patients reneged from the doctor queue
+78 patients reneged from the doctor queue
 0 patients balked at the doctor queue
 Queues over time
             Time  Num in Q Nurse  Num in Q Doctor
 0       0.000000             0.0              0.0
-1    1440.447541             3.0              5.0
-2    1440.550052             4.0              5.0
-3    1441.816771             3.0              5.0
-4    1443.550145             4.0              5.0
+1    1440.464920             5.0              4.0
+2    1440.550052             5.0              5.0
+3    1441.816771             4.0              5.0
+4    1441.874647             3.0              5.0
 ..           ...             ...              ...
-501  1914.375700             7.0              7.0
-502  1914.919764             7.0              8.0
-503  1915.435042             8.0              8.0
-504  1916.332824             7.0              8.0
-505  1917.976287             7.0              7.0
+504  1913.508621             5.0              5.0
+505  1914.375700             5.0              6.0
+506  1914.919764             6.0              6.0
+507  1915.435042             6.0              7.0
+508  1916.672047             5.0              7.0
 
-[506 rows x 3 columns]
+[509 rows x 3 columns]
 Trial Results
             Mean Q Time Nurse  Reneged Q Nurse  Balked Q Nurse  \
 Run Number                                                       
-0                    9.698541              222               0   
+0                   10.929959              202               0   
 
             Mean Q Time Doctor  Reneged Q Doctor  Balked Q Doctor  
 Run Number                                                         
-0                    14.325115                90                0  
-Mean Q Nurse : 9.7 minutes
-Mean Reneged Q Nurse : 222.0 patients
+0                    10.902317                78                0  
+Mean Q Nurse : 10.9 minutes
+Mean Reneged Q Nurse : 202.0 patients
 Mean Balked Q Nurse : 0.0 patients
-Mean Q Doctor : 14.3 minutes
-Mean Reneged Q Doctor : 90.0 patients
+Mean Q Doctor : 10.9 minutes
+Mean Reneged Q Doctor : 78.0 patients
 Mean Balked Q Doctor : 0.0 patients</code></pre>
 </div>
 </div>
