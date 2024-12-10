@@ -33,4 +33,4 @@
 		}
 
 	},
-        "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f environment/requirements.txt ] && pip3 install --user -r environment/requirements.txt; echo '✅ Packages installed and Requirements met';cd code_examples/quarto/interactive_report && quarto add --no-prompt r-wasm/quarto-live; echo '✅ Quarto live installed in interactive report demo project'"
+        "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; echo '✅ Packages installed and Requirements met';"
