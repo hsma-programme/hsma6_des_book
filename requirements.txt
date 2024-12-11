@@ -10,6 +10,7 @@ nbclient==0.10.0
 numpy==1.26.4
 pandas==2.2.1
 pandocfilters==1.5.1
+plotly
 pytz==2024.1
 QtPy==2.4.1
 quarto==0.1.0
