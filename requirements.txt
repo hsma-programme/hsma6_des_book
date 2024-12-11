@@ -16,4 +16,7 @@ QtPy==2.4.1
 quarto==0.1.0
 requests==2.31.0
 simpy==4.1.1
+sim-tools
+vidigi
 widgetsnbextension==4.0.10
+
