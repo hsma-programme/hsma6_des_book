@@ -6,9 +6,8 @@
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
             "installChromium": true
         },
-	"ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
-		"useTesting": true
-	},
+        "ghcr.io/rocker-org/devcontainer-features/r-rig:latest": {}
+    ,
         "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
             "packages": "chromium"
         }
