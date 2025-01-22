@@ -1,0 +1,301 @@
+---
+title: A Model with Multiple Entity Types
+format:
+    html:
+        code-fold: false
+jupyter: python3
+---
+
+Let's now make our model more complex by adding in some additional patient classes.
+
+What we do here will scale to any number of entity types.
+
+## The Approach
+
+:::{.callout-tip}
+The basic rule of thumb is have different generators if the entities (and / or what happens to them) is different if they come in via a different route
+:::
+
+However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**. Full details can be found in the [reproducibility chapter](/reproducibility.qmd), but we will cover the key changes in this section as well.
+
+In short, what we will do in our model is
+
+- move the setup of our sampling distributions into our model class
+- add additional attributes to our g class for our different types of patients
+- create multiple generators that will cause our different patient types to arrive at the appropriate rate
+
+
+:::{.callout-note}
+There are different approaches you can take to having multiple types of entities - this is one of the situations in which the flexiblity of Python and SimPy start to become apparent, and there isn't necessarily one 'right' way.
+
+For example, let's imagine a scenario where we have two types of patient arriving at different rates - let's split them into 'seriously injured' and 'mildly injured'.
+
+### Approaches to Managing Arrivals
+
+We could filter our historical data by patient type, work out the inter-arrival time between the 'seriously injured' patients and set up a generator for these patients, and then repeat this for the 'mildly injured' patients.
+
+However - you could instead have stuck with a single generator, like in our previous approach, but instead sampled whether the incoming patient is a
+
+### Approaches to Patient Classes
+
+Similarly, when it comes to our patient classes, there are multiple ways we could handle it.
+
+We could use the concept of inheritance to have a main patient class, then have multiple 'child' classes who inherit the properties of the parent class while also recording their own special , with the different processes generating the relevant patient type.
+
+However, if our patients are following the same or a sufficiently similar route that means that the attributes of the patient classes don't substantially change, it may be simpler to add an additional attribute that we set when initialising a patient to track their 'type', allowing us to then filter and subset patient groups in our results.
+
+:::
+
+In this example, we will be working with three 'tiers' of patients and
+- keeping a single patient class
+- using multiple generators
+
+## Coding the model
+
+### Imports
+
+As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential function from the sim_tools library.
+
+:::{.callout-tip}
+If you don't already have sim-tools in your environment, install it with `pip install sim-tools`.
+
+Note that we use a hyphen in the package name when installing it, but an underscore when importing it into our script.
+:::
+
+```{python}
+import simpy
+import random
+import pandas as pd
+from sim_tools.distributions import Exponential ##NEW
+```
+
+### the g class
+
+We need to add a few additional parameters to our g class.
+
+As the number of parameters in our g class continues to increase, it can be worth reordering them and splitting them up with some comments to make it clear.
+
+```{python}
+#| eval: true
+# Class to store global parameter values.  We don't create an instance of this
+# class - we just refer to the class blueprint itself to access the numbers
+# inside.
+class g:
+    # Simulation Parameters
+    sim_duration = 120
+    number_of_runs = 5
+
+    # Shared Parameters between patient classes
+    mean_reception_time = 2
+
+    # Resource Numbers
+    number_of_receptionists = 1
+    number_of_nurses = 1
+    number_of_doctors = 2
+
+    # Inter-arrival times
+
+    patient_inter_arrival_time_mean = {
+        't1': 25,
+        't2': 15,
+        't3': 5
+    }
+
+    # -- Entity Parameters -- #
+    # Tier 1 Patients - Very Ill
+    t1_patient = {
+        'mean_n_consult_time': 5,
+        'mean_d_consult_time': 45,
+        'prob_seeing_doctor': 1.0
+    }
+
+    # Tier 2 Patients - Somewhat Ill
+    t2_patient = {
+        'mean_n_consult_time': 10,
+        'mean_d_consult_time': 20,
+        'prob_seeing_doctor': 0.6
+    }
+
+    # Tier 3 Patients - Mildly Ill
+    t3_patient = {
+        'mean_n_consult_time': 8,
+        'mean_d_consult_time': 10,
+        'prob_seeing_doctor': 0.2
+    }
+
+```
+
+
+### The Patient class
+
+In our patient class, we're going to add a new label that will relate to the severity of our patients. We will pass this in when initialising the patients later on.
+
+```{python}
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id, severity):
+        self.id = p_id
+
+        self.severity = severity
+
+        self.q_time_recep = 0
+        self.q_time_nurse = 0
+        self.seen_doctor = False ## NEW
+        self.q_time_doctor = 0
+```
+
+
+### The Model Class
+
+#### The __init__ method
+
+First, we will be
+
+
+:::{.callout-note}
+One of the big changes here is that we will be setting up our sampling distributions here too.
+
+To see how this is done with a single patient class, head over to the [reproducibility](reproducibility.qmd) chapter.
+
+The setup of a sampling distribution follows a repeatable pattern.
+
+```{python}
+self.patient_inter_arrival_dist = Exponential(
+    mean = g.patient_inter,
+    random_seed = self.run_number*2
+    )
+```
+
+```{python}
+self.patient_reception_time_dist = Exponential(
+    mean = g.mean_reception_time,
+    random_seed = self.run_number*3
+    )
+```
+
+By using the run number as part of the random seed, we can ensure reproducibility across the same run in different trials.
+
+To avoid getting identical numbers in the instance that we had two distributions with the same mean, we multiply the random seed by a number. It doesn't matter what the number is (as long as you're not randomly generating it in the code!)
+
+:::
+
+```{python}
+class Model:
+    # Constructor to set up the model for a run.  We pass in a run number when
+    # we create a new model.
+    def __init__(self, run_number):
+        # Create a SimPy environment in which everything will live
+        self.env = simpy.Environment()
+
+        # Create a patient counter (which we'll use as a patient ID)
+        self.patient_counter = 0
+
+        # Create our resources
+        self.receptionist = simpy.Resource(
+            self.env, capacity=g.number_of_receptionists
+        )
+        self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
+        self.doctor = simpy.Resource(
+            self.env, capacity=g.number_of_doctors)
+
+        # Store the passed in run number
+        self.run_number = run_number
+
+        # Create a new Pandas DataFrame that will store some results against
+        # the patient ID (which we'll use as the index).
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Patient Severity"] = [""] ## NEW # <1>
+        self.results_df["Q Time Recep"] = [0.0]
+        self.results_df["Time with Recep"] = [0.0]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df["Time with Nurse"] = [0.0]
+        self.results_df["Q Time Doctor"] = [0.0]
+        self.results_df["Time with Doctor"] = [0.0]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Create an attribute to store the mean queuing times across this run of
+        # the model
+        self.mean_q_time_recep = 0
+        self.mean_q_time_nurse = 0
+        self.mean_q_time_doctor = 0
+
+        # Now we will set
+
+        self.patient_inter_arrival_dist = { # <2>
+            't1': Exponential(
+                mean = g.patient_inter_arrival_time_mean['t1'],
+                random_seed = self.run_number*2
+                ),
+            't2': Exponential(
+                mean = g.patient_inter_arrival_time_mean['t2'],
+                random_seed = self.run_number*2
+                ),
+            't3': Exponential(
+                mean = g.patient_inter_arrival_time_mean['t3'],
+                random_seed = self.run_number*2
+                )
+
+        }
+
+        self.t1_patient_dists = {
+
+        }
+
+
+
+        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
+        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
+        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+```
+1. We add in an additional column in our dataframe where we will store the patient severity. This wll help us to summarise results for different patient groups later.
+2. Next, we need to set up our inter-arrival time distributions. By having a single attribute but setting these up as a dictionary, we will be able to access the relevant distribution with `self.patient_inter_arrival_dist['t1']`, replacing 't1' with the tier of patient (or, in a different model, whichever identifier we have opted to use for our different patients)
+3. For the
+
+
+
+#### The generator_patient_arrivals method
+
+Here, the key thing we need to do is make it possible to vary the inter-arrival time depending on the class of patient we are working with.
+
+We will call this method three times later in our code - one per severity of patient. You could call it as many times as needed for different patients, or even do this in a loop if you had an unusually large number of entities.
+
+```{python}
+# A generator function that represents the DES generator for patient
+    # arrivals
+    def generator_patient_arrivals(self, patient_severity): # <1>
+        # We use an infinite loop here to keep doing this indefinitely whilst
+        # the simulation runs
+        while True:
+            # Increment the patient counter by 1 (this means our first patient
+            # will have an ID of 1)
+            self.patient_counter += 1 # <2>
+
+            # Create a new patient - an instance of the Patient Class we
+            # defined above.  Remember, we pass in the ID when creating a
+            # patient - so here we pass the patient counter to use as the ID.
+            p = Patient(self.patient_counter, patient_severity) # <3>
+
+            # Tell SimPy to start up the attend_clinic generator function with
+            # this patient (the generator function that will model the
+            # patient's journey through the system)
+            self.env.process(self.attend_clinic(p)) # <4>
+
+            # Randomly sample the time to the next patient arriving.  Here, we
+            # sample from an exponential distribution (common for inter-arrival
+            # times), and pass in a lambda value of 1 / mean.  The mean
+            # inter-arrival time is stored in the g class.
+            sampled_inter = self.patient_inter_arrival_dist[patient_severity].sample() # <5>
+
+            # Freeze this instance of this function in place until the
+            # inter-arrival time we sampled above has elapsed.  Note - time in
+            # SimPy progresses in "Time Units", which can represent anything
+            # you like (just make sure you're consistent within the model)
+            yield self.env.timeout(sampled_inter) # <6>
+```
+1. We begin by adding an extra parameter that will get passed into our patient generator method. By passing in 't1', 't2' or 't3', we will be able to look up the appropriate inter-arrival time and ensure we set up our patient objects with the correct severity indicator.
+2. As we have defined the patient counter at the model level, we will not end up with overlapping IDs across our different patient severities - they will remain unique.
+3. Here, we will pass in the patient severity to the patient constructor so that it can be added as a patient attribute.
+4. Our attend_clinic method will be updated to cope with patients of different severity and pull back the correct values. Alternatively, if our patients of different severity had substantially different pathways, we may wish to define different attend_clinic methods and use conditional logic here to determine which pathway they will be sent down; however, in this case, our pathways are the same, so we do not need to do this.
+5. Remember - our attribute `self.patient_inter_arrival_dist` is now a dictionary. By passing in the patient severity as our 'key', it will look up the correct distribution from our `self.patient_inter_arrival_dist` automatically. We then use the 'sample()' method to get out an appropriate inter-arrival time for that severity of patient.
+6. As before, we pass this inter-arrival time to the self.env.timeout() method. This will pause the patient-generating process in place for this severity of patient until the sampled time has elapsed - but during this time patients of other severities will continue to be generated, and patients will progress through their pathways appropriately.
