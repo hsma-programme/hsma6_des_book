@@ -1186,5 +1186,77 @@ We could turn these into functions as well to make it clearer what each does and
 
 ### Bar Chart Summary
 
+```{python}
+#| eval: true
+
+results_df = (
+    all_results[['Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .mean()
+    .round(2)
+    .reset_index()
+    )
+
+results_df.columns = ['Metric', 'Value']
+
+results_df
+```
+
+```{python}
+#| eval: true
+
+px.bar(
+    results_df,
+    y="Metric",
+    x="Value",
+    orientation='h'
+    )
+```
+
+We can see that while the queue times for the receptionist and the doctor are relatively short, the queue time for the nurse resource is very long, suggesting that the nurse is the bottleneck in our current simulated environment.
 
 ### Bar Chart Summary - by Severity
+
+```{python}
+#| eval: true
+
+results_df = (
+    all_results[['Patient Severity', 'Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .groupby('Patient Severity')
+    .mean()
+    .round(2)
+)
+
+results_df
+
+```
+
+```{python}
+#| eval: true
+results_df = results_df.reset_index()
+
+results_df
+```
+
+```{python}
+#| eval: true
+results_df_long = results_df.melt(id_vars="Patient Severity")
+
+results_df_long
+```
+
+```{python}
+#| eval: true
+
+px.bar(
+    results_df_long,
+    y="variable",
+    x="value",
+    color="Patient Severity",
+    orientation='h',
+    barmode="group"
+)
+```
+
+We can see that the queue times for each group across the trial are similar - which makes sense because we haven't introduced any sort of priority for the patients of different severity.
+
+If we were to introduce priority, this graph would make it easy to determine if that was working as expected.
