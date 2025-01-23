@@ -1,0 +1,9 @@
+# (Coming Soon!) The STARS Framework
+
+> "The STARS framework is a set of open practices, tools and learning materials to produce enhanced versions of research artefacts that intend to increase accessibility for others to (re)use, adapt and build on work."
+
+:::{.callout-warning}
+This section has not yet been developed.
+
+However, in the meantime, you may want to take a look at the STARS framework github repository at <https://github.com/pythonhealthdatascience>
+:::

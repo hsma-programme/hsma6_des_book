@@ -1,0 +1,9 @@
+# An Introduction to Modelling Complex Real-World Systems
+
+As you begin to model your first real-world systems, you may find yourself uncertain of the best approach to take to a problem, and seeking out the 'right' way to do something.
+
+While there are often rules of thumb and efficient or less efficient ways of doing things, there often isn't a single answer to how you structure a solution.
+
+The chapters that follow will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.
+
+Part 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can

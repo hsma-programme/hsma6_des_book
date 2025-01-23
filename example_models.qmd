@@ -1,0 +1,37 @@
+# Example Models from Other Modellers
+
+Looking at the model code written by other people - even if it does not exactly match the kind of system you are trying to create - can be hugely beneficial for seeing new approaches.
+
+In this section are links to a range of additional simpy models that you might wish to read through and adapt.
+
+:::{.callout-note}
+The majority of these models do not use the HSMA structure of `g`, `Patient`, `Model` and `Trial`.
+
+You may find it a helpful exercise to try and convert some of the models linked to the structure we have used in this book so far. This will help you really understand what is going on in the model, and help you to start develop your own preferred structure.
+
+When working through these models, consider
+
+- What do you prefer about the HSMA structure?
+- What do you prefer about the structure the other modeller uses?
+- Have they chosen to use a single entity class or multiple entity classes? Can you understand their reasoning for their decision?
+- Have they chosen to use a single generator or multiple generators for their patients? Can you see benefits or problems with their chosen approach?
+
+:::
+
+
+
+## An Orthopaedic Ward - The Hospital Efficiency Project
+
+<https://github.com/AliHarp/HEP>
+
+
+Harper, A., & Monks, T. Hospital Efficiency Project Orthopaedic Planning Model Discrete-Event Simulation
+
+<https://doi.org/10.5281/zenodo.7900852>
+
+
+## A trauma center model
+
+<https://github.com/TomMonks/treatment-centre-sim>
+
+<https://doi.org/10.5281/zenodo.6497476>
