@@ -1,1 +1,1 @@
-QUARTO_PYTHON=/.venv/Scripts/python.exe
+QUARTO_PYTHON=.venv/Scripts/python.exe
