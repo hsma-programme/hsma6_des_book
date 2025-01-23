@@ -30,13 +30,16 @@ book:
     - multiple_entity_types.qmd
     - reneging_balking_jockeying.qmd
     - modelling_variable_arrival_rates.qmd
+    - distributions_from_real_world_data.qmd
     - exercise_des_advanced.qmd
-  - part: "Part 4 - Advanced Performance Tracking and Visualisation"
+  - part: "Part 4 - Debugging, Model Validation and Visualising Results"
     chapters:
+    - basic_debugging_tactics.qmd
+    - event_logging.qmd
+    - visualising_des_models.qmd
     - tracking_resource_utilisation.qmd
     - other_model_metrics.qmd
     - visualising_model_metrics.qmd
-    - visualising_des_models.qmd
   - part: "Part 5 - Advanced Concepts"
     chapters:
     - requesting_multiple_resources.qmd
@@ -93,10 +96,10 @@ format:
       body-width: 900px
       margin-width: 300px
       gutter-width: 1.5rem
-  pdf:
-    output-file: hsma_des_book
-    toc: true
-    highlight-style: github
-    number-sections: true
-    colorlinks: true
-    toc-depth: 2
+  # pdf:
+  #   output-file: hsma_des_book
+  #   toc: true
+  #   highlight-style: github
+  #   number-sections: true
+  #   colorlinks: true
+  #   toc-depth: 2

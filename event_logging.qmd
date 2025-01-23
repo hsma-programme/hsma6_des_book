@@ -1,0 +1,9 @@
+---
+title: (Coming Soon!) Event Logging
+format:
+    html:
+        code-fold: false
+jupyter: python3
+---
+
+Coming soon!

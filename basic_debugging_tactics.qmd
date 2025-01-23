@@ -1,0 +1,34 @@
+---
+title: (Coming Soon!) Basic Debugging Tactics
+format:
+    html:
+        code-fold: false
+jupyter: python3
+---
+
+:::{.callout-warning}
+This section is under development.
+:::
+
+
+When working with your model, it can be hard to know whether it is working correctly.
+
+There are a range of different approaches we can take
+
+## Using print() statements
+
+Adding `print()` statements to your models at
+
+
+## Using the logging module
+
+The logging module is a step up from the use of print() statements.
+
+
+## Event Logging
+
+Building up our own event logs give us a very clear picture of what is happening to every entity throughout our model.
+
+They are a valuable debugging technique, and by structuring them correctly, we can start to build up a bank of code that can be used to debug very different models with no or minimal changes to our code that processes the event logs. They can also then be used for building animated visuals of the flow of entities through our model.
+
+As this is a more involved approach, it has been placed in its own chapter [here](event_logging.qmd).

@@ -11,9 +11,15 @@ format:
           href: https://des.hsma.co.uk/reproducibility
 ---
 
-Let's now make our model more complex by adding in some additional patient classes.
+:::{.callout-warning}
+This section is under development.
+:::
 
-What we do here will scale to any number of entity types.
+Let's imagine we want to model some more variety within the patients (entities) arriving in our model.
+
+Maybe patients with different illnesses have different arrival rates, are more likely to need to see the doctor in our model, or spend more time with the doctor than the nurse, or vice-versa.
+
+The flexibility of simpy and Python - and of the structure we have used - does mean there are a range of ways we could approach coding this in - this chapter will show you one way that you may go about it, and what we do here will scale to any number of entity types. However - this isn't the only way you could do this, and as you build more models, you may start to find your own structure that you prefer.
 
 ## The Approach
 
@@ -21,45 +27,59 @@ What we do here will scale to any number of entity types.
 The basic rule of thumb is have different generators if the entities (and / or what happens to them) is different if they come in via a different route
 :::
 
-However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**. Full details can be found in the [reproducibility chapter](/reproducibility.qmd), but we will cover the key changes in this section as well.
+Therefore, we will be wanting to set up a generator for each of the new types of patients we opt to add to this model.
+
+In this case, we are going to have patients of high, medium and low severity.
+
+- Low severity patients will arrive frequently, only spend a short time with each resource, and have a low probability of needing to see the doctor.
+- Medium severity pateints will arrive less frequently, spend more time with a nurse than the doctor, and have a medium probability of needing to see the doctor.
+- High severity patients will arrive even less frequently, spend a short amount of time with the nurse, then always visit the doctor and spend a long time with them.
+
+However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**.
+Full details can be found in the [reproducibility chapter](/reproducibility.qmd), but we will cover the key changes in this section as well.
 
 In short, what we will do in our model is
 
-- move the setup of our sampling distributions into our model class
 - add additional attributes to our g class for our different types of patients
-- create multiple generators that will cause our different patient types to arrive at the appropriate rate
+- add an additional attribute to our patient class to track the type of patient they are
+- move the setup of our sampling distributions into our model class
+- adjust our patient generator function to pull in the appropriate inter-arrival time for the patient type
+- adjust our patient journey function to pull in the appropriate sampling distribution for each patient type
+- adjust our model run function to multiple generators that will cause our different patient types to arrive at the appropriate rate
+- update our outputs and visualisations to check our different patient classes are working as expected
 
+### Some different ways we could approach this
 
 :::{.callout-note}
-There are different approaches you can take to having multiple types of entities - this is one of the situations in which the flexiblity of Python and SimPy start to become apparent, and there isn't necessarily one 'right' way.
+As mentioned before, there are different approaches you can take to having multiple types of entities - this is one of the situations in which the flexiblity of Python and SimPy start to become apparent, and there isn't necessarily one 'right' way.
 
 For example, let's imagine a scenario where we have two types of patient arriving at different rates - let's split them into 'seriously injured' and 'mildly injured'.
 
-### Approaches to Managing Arrivals
+#### Approaches to Managing Arrivals
 
 We could filter our historical data by patient type, work out the inter-arrival time between the 'seriously injured' patients and set up a generator for these patients, and then repeat this for the 'mildly injured' patients.
 
-However - you could instead have stuck with a single generator, like in our previous approach, but instead sampled whether the incoming patient is a
+However - you could instead have stuck with a single generator, like in our previous approach, but instead sampled whether the incoming patient is a 'seriously injured' or 'mildly injured' patient at the start of their journey based on known proportions of these patients.
 
-### Approaches to Patient Classes
+#### Approaches to Patient Classes
 
 Similarly, when it comes to our patient classes, there are multiple ways we could handle it.
 
-We could use the concept of inheritance to have a main patient class, then have multiple 'child' classes who inherit the properties of the parent class while also recording their own special , with the different processes generating the relevant patient type.
+We could use the concept of inheritance to have a main patient class, then have multiple 'child' classes who inherit the properties of the parent class while also recording their own special attributes, with the different processes generating the relevant patient type.
 
-However, if our patients are following the same or a sufficiently similar route that means that the attributes of the patient classes don't substantially change, it may be simpler to add an additional attribute that we set when initialising a patient to track their 'type', allowing us to then filter and subset patient groups in our results.
+However, if our patients are following the same or a sufficiently similar route that means that the attributes of the patient classes don't substantially change, it is often simpler to add an additional attribute that we set when initialising a patient to track their 'type', allowing us to then filter and subset patient groups in our results. This is similar to what is done in the [priority resources](priority_based_queueing.qmd) chapter.
 
 :::
 
 In this example, we will be working with three 'tiers' of patients and
-- keeping a single patient class
-- using multiple generators
+- keeping a single patient class and using an attribute to differentiate between them
+- using multiple generators with each patient class having their own inter-arrival time
 
 ## Coding the model
 
 ### Imports
 
-As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential function from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.
+As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.
 
 :::{.callout-tip}
 If you don't already have sim-tools in your environment, install it with `pip install sim-tools`.
@@ -92,7 +112,7 @@ class g:
     number_of_runs = 5
 
     # Shared Parameters between patient classes
-    mean_reception_time = 2
+    mean_reception_time = 2 # <1>
 
     # Resource Numbers
     number_of_receptionists = 1
@@ -102,16 +122,16 @@ class g:
     # -- Entity and Inter-arrival Time Parameters -- #
 
     # Tier 1 Patients - Very Ill
-    entity_1 = {
-        'label': 'high',
-        'mean_inter_arrival_time': 25,
+    entity_1 = { # <2>
+        'label': 'high', # <3>
+        'mean_inter_arrival_time': 25, # <4>
         'mean_n_consult_time': 5,
         'mean_d_consult_time': 45,
         'prob_seeing_doctor': 1.0
     }
 
     # Tier 2 Patients - Somewhat Ill
-    entity_2 = {
+    entity_2 = { # <5>
         'label': 'medium',
         'mean_inter_arrival_time': 15,
         'mean_n_consult_time': 10,
@@ -130,12 +150,19 @@ class g:
 
 ```
 
+1. In this case, we will have all of our patients having the same average time spent with the receptionist. Therefore, we can set this parameter up in the usual way.
+2. We are going to structure our parameters per entity type (here, with each entity being a type of patient). We will use a dictionary with the parameter name as a key and the parameter value as the associated value. We could have instead structured this as a dictionary per parameter, with the keys being the entity types and the values being the associated parameter value. We have used the variable name of the form 'entity_x' rather than 'high_severity', for example. This means our patient type labels are easy to change later as we will simply change the 'label' entry for the entity, and not have to make changes to the name of the variable itself in our code.
+3. Here, we set our patient type label. This will be used to identify and pull back the correct values for the patient throughout, so they must be different for each entity type.
+4. While each entity dictionary does not have to have all keys, where they are used across multiple entity types, you should keep the naming consistent.
+5. We repeat the same structure for as many different entity types as we wish to define.
 
 ### The Patient class
 
 In our patient class, we're going to add a new label that will relate to the severity of our patients. We will pass this in when initialising the patients later on.
 
 ```{python}
+#| eval: True
+
 # Class representing patients coming in to the clinic.
 class Patient:
     def __init__(self, p_id, severity):
@@ -154,11 +181,8 @@ class Patient:
 
 #### The \_\_init\_\_ method
 
-First, we will be
-
-
 :::{.callout-note}
-One of the big changes here is that we will be setting up our sampling distributions here too.
+One of the big changes here is that, unlike our simple models, we will be setting up our sampling distributions here too. The approach we are using here has strong benefits for reproducibility of your models and ensuring your conclusions on the impact of parameter changes are valid.
 
 To see how this is done with a single patient class, head over to the [reproducibility](reproducibility.qmd) chapter.
 
@@ -167,22 +191,32 @@ The setup of a sampling distribution follows a repeatable pattern.
 ```{python}
 self.patient_inter_arrival_dist = Exponential(
     mean = g.patient_inter,
-    random_seed = self.run_number*2
+    random_seed = self.run_number * 2
     )
 ```
 
 ```{python}
 self.patient_reception_time_dist = Exponential(
     mean = g.mean_reception_time,
-    random_seed = self.run_number*3
+    random_seed = self.run_number * 3
     )
 ```
 
-By using the run number as part of the random seed, we can ensure reproducibility across the same run in different trials.
+Then, when we wish to pull back a value from this distribution, we use
 
-To avoid getting identical numbers in the instance that we had two distributions with the same mean, we multiply the random seed by a number. It doesn't matter what the number is (as long as you're not randomly generating it in the code!)
+```{python}
+self.patient_reception_time_dist.sample()
+
+self.patient_reception_time_dist.sample()
+```
+
+By using the run number as part of the random seed, we can ensure reproducibility across the same run in different **trials**.
+
+To avoid getting identical numbers in the instance that we had two distributions with the same mean, we multiply the random seed by a number. It doesn't matter what the number is (as long as you're not randomly generating it in the code!).
 
 :::
+
+Let's now start setting up our model class.
 
 ```{python}
 class Model:
@@ -311,7 +345,7 @@ class Model:
 6. Finally, we repeat for our tier 3 patients. We could repeat this for as many patient classes as we wished.
 
 
-Let's print the output of one of these dictionaries so you can see the effect.
+Let's print the output of one of these dictionaries so you can see the effect of passing in our entity label as the parameter.
 
 ```{python}
 #| eval: true
@@ -337,10 +371,33 @@ patient_inter_arrival_dist = {
 patient_inter_arrival_dist
 ```
 
+I can now pull back and sample from these distributions.
+
+```{python}
+#| eval: true
+patient_inter_arrival_dist['high']
+```
+
+
+```{python}
+#| eval: true
+patient_inter_arrival_dist['high'].sample()
+```
+
+Let's imagine I've initiated a patient.
+Now, I can pass in the severity attribute of that patient to pull back the correct distribution.
+
+```{python}
+#| eval: true
+
+my_example_patient = Patient(p_id=123, severity="low")
+
+patient_inter_arrival_dist[my_example_patient.severity].sample()
+```
 
 #### The generator_patient_arrivals method
 
-Here, the key thing we need to do is make it possible to vary the inter-arrival time depending on the class of patient we are working with.
+Here, the key thing we need to do is make it possible to vary the inter-arrival time depending on the class of patient we are working with - as we have just demonstrated above.
 
 We will call this method three times later in our code - one per severity of patient. You could call it as many times as needed for different patients, or even do this in a loop if you had an unusually large number of entities.
 
