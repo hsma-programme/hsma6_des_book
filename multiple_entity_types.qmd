@@ -983,7 +983,19 @@ We can now check the average time spent at each stage.
 
 These numbers look pretty good - we aren't seeing much variation across the time patients spend with the receptionist, but we are seeing expected variation across the time they spent with the nurse and the doctor, as well as the probability of them seeing the doctor.
 
-However, uf queues build up in the system, or if our simulation is not long enough for a high proportion of the patients who start their journeys to actually make their whole journey through, we may find that some patients in our list haven't finished their journey before they exit and this may make figures for later parts of the patient journey look a bit strange. Let's rerun this after filtering to only include patients who finished their full journey and exited the system.
+:::{.callout-note}
+In our results dataframe, we stored whether patients saw the doctor or not as a **boolean** value (`True` or `False`).
+
+`True` is interpreted as 1, whereas `False` is interpreted as 0.
+
+When we take a mean of a boolean column, we can get an idea of the number of patients who have or have not done something, with values closer to 1 meaning more patients had a value of 'True'.
+
+So here, a value of '1.0' would mean all patients of that severity saw a doctor.
+
+A value of '0.24' would mean 24% of patients (24 in 100) of that severity saw a doctor.
+:::
+
+However, if queues build up in the system, or if our simulation is not long enough for a high proportion of the patients who start their journeys to actually make their whole journey through, we may find that some patients in our list haven't finished their journey before they exit and this may make figures for later parts of the patient journey look a bit strange. Let's rerun this after filtering to only include patients who finished their full journey and exited the system.
 
 ```{python}
 #| eval: true
@@ -1023,22 +1035,33 @@ times_df_long = times_df.melt( # <4>
 
 times_df_long.head(10)
 ```
+1. We'll import the plotly.express module. Plotly express gives us simplified functions for building interactive graphs.
+2. We use the `[[]]` syntax and pass it a list of column names to pull back just a subset of columns.
+3. Resetting the index - where the index was our Patient ID, turns this from a special type of Pandas column called an index into a regular dataframe column that we can access.
+4. Melting a dataframe turns it from a 'wide' format - with one row per patient - to a 'long' format. We want one row per variable, so we will have multiple rows per patient - a row for each different time. You will see shortly why this is necessary for passing the dataframe into plotly.
 
 Now we can display this as a box plot.
 
 ```{python}
 #| eval: true
 
-px.box(
-    times_df_long,
-    y="variable",
-    x="value",
-    color="Patient Severity"
+px.box( # <1>
+    times_df_long, # <2>
+    y="variable", # <3>
+    x="value", # <4>
+    color="Patient Severity" # <5>
 )
 ```
+1. We ask plotly for a box plot (also known as a box-and-whisker plot or a tukey plot). This kind of plot is valuable for showing the spread of values, along with the average.
+2. We pass in our reshaped dataframe.
+3. We put our variables - the metric names - on the vertical axis. Placing them on the vertical axis generally makes them easier to read.
+4. We put our numeric values on the horizontal axis.
+5. We then ask for the values to be coloured by patient severity.
 
 
-Let's look at this a different way.
+The plot above makes it easy for us to see how the average time - and the spread of times - varies for different patient groups.
+
+Let's look at this a different way to instead focus on the difference between times within a type of patient.
 
 ```{python}
 #| eval: true
@@ -1127,11 +1150,11 @@ This is working fine if we just want to get an overall sense of the queues at ea
 
 However, it doesn't give us much insight into our different patient groups over the course of multiple runs.
 
-To change this, we could go back through our model class and ensure we start recording
+To change this, we could go back through our model class and ensure we start recording the metrics separately for each class of patient.
 
-However, this is time-consuming and can be inefficient if we later want to add additional steps or metrics to our model.
+However, this is time-consuming and can be inefficient if we later want to add additional steps, metrics or patient types to our model.
 
-Instead, for each run, we will output the
+Instead, for each run, we will output the patient-level results we were working with earlier, and then use pandas dataframe functions to pull out different metrics.
 
 ```{python}
 #| eval: true
@@ -1167,6 +1190,7 @@ class Trial:
         return pd.concat(self.patient_dataframes)
 ```
 
+Let's run this code and view the first 10 rows of the trial-level output.
 
 ```{python}
 #| eval: true
@@ -1178,6 +1202,8 @@ all_results = my_trial.run_trial()
 
 all_results.head(10).round(2)
 ```
+
+Note the presence of the 'run' column. Now we'll look at the last 10 rows of the dataframe - note that this instead shows the
 
 ```{python}
 #| eval: true
