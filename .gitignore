@@ -1,3 +1,4 @@
 /.quarto/
 /env/
 *.pdf
+.venv
