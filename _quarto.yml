@@ -27,6 +27,7 @@ book:
     - modelling_resource_unavailability.qmd
     - choosing_distributions.qmd
     - reproducibility.qmd
+    - multiple_entity_types.qmd
     - reneging_balking_jockeying.qmd
     - modelling_variable_arrival_rates.qmd
     - exercise_des_advanced.qmd
