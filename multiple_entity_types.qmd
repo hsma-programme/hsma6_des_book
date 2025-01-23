@@ -1,9 +1,14 @@
 ---
-title: A Model with Multiple Entity Types
+title: Multiple Entity Types Following The Same (or Very Similar) Pathways
+jupyter: python3
+execute:
+  eval: false
 format:
     html:
-        code-fold: false
-jupyter: python3
+        toc-expand: 2
+        other-links:
+        - text: Reproducibility Chapter
+          href: https://des.hsma.co.uk/reproducibility
 ---
 
 Let's now make our model more complex by adding in some additional patient classes.
@@ -54,7 +59,7 @@ In this example, we will be working with three 'tiers' of patients and
 
 ### Imports
 
-As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential function from the sim_tools library.
+As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential function from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.
 
 :::{.callout-tip}
 If you don't already have sim-tools in your environment, install it with `pip install sim-tools`.
@@ -63,10 +68,11 @@ Note that we use a hyphen in the package name when installing it, but an undersc
 :::
 
 ```{python}
+#| eval: true
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential ##NEW
+from sim_tools.distributions import Exponential, Uniform ## NEW
 ```
 
 ### the g class
@@ -82,7 +88,7 @@ As the number of parameters in our g class continues to increase, it can be wort
 # inside.
 class g:
     # Simulation Parameters
-    sim_duration = 120
+    sim_duration = 60 * 8
     number_of_runs = 5
 
     # Shared Parameters between patient classes
@@ -93,31 +99,30 @@ class g:
     number_of_nurses = 1
     number_of_doctors = 2
 
-    # Inter-arrival times
+    # -- Entity and Inter-arrival Time Parameters -- #
 
-    patient_inter_arrival_time_mean = {
-        't1': 25,
-        't2': 15,
-        't3': 5
-    }
-
-    # -- Entity Parameters -- #
     # Tier 1 Patients - Very Ill
-    t1_patient = {
+    entity_1 = {
+        'label': 'high',
+        'mean_inter_arrival_time': 25,
         'mean_n_consult_time': 5,
         'mean_d_consult_time': 45,
         'prob_seeing_doctor': 1.0
     }
 
     # Tier 2 Patients - Somewhat Ill
-    t2_patient = {
+    entity_2 = {
+        'label': 'medium',
+        'mean_inter_arrival_time': 15,
         'mean_n_consult_time': 10,
         'mean_d_consult_time': 20,
         'prob_seeing_doctor': 0.6
     }
 
     # Tier 3 Patients - Mildly Ill
-    t3_patient = {
+    entity_3 = {
+        'label': 'low',
+        'mean_inter_arrival_time': 5,
         'mean_n_consult_time': 8,
         'mean_d_consult_time': 10,
         'prob_seeing_doctor': 0.2
@@ -147,7 +152,7 @@ class Patient:
 
 ### The Model Class
 
-#### The __init__ method
+#### The \_\_init\_\_ method
 
 First, we will be
 
@@ -210,8 +215,10 @@ class Model:
         self.results_df["Time with Recep"] = [0.0]
         self.results_df["Q Time Nurse"] = [0.0]
         self.results_df["Time with Nurse"] = [0.0]
+        self.results_df["Sees Doctor"] = [False]
         self.results_df["Q Time Doctor"] = [0.0]
         self.results_df["Time with Doctor"] = [0.0]
+        self.results_df["Completed Journey"] = [False]
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create an attribute to store the mean queuing times across this run of
@@ -220,38 +227,115 @@ class Model:
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
 
-        # Now we will set
+        # ============================================== #
+        # NEW CODE                                       #
+        # ============================================== #
 
         self.patient_inter_arrival_dist = { # <2>
-            't1': Exponential(
-                mean = g.patient_inter_arrival_time_mean['t1'],
-                random_seed = self.run_number*2
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_inter_arrival_time'], # <3>
+                random_seed = self.run_number * 2 # <4>
                 ),
-            't2': Exponential(
-                mean = g.patient_inter_arrival_time_mean['t2'],
-                random_seed = self.run_number*2
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_inter_arrival_time'], # <5>
+                random_seed = self.run_number * 3
                 ),
-            't3': Exponential(
-                mean = g.patient_inter_arrival_time_mean['t3'],
-                random_seed = self.run_number*2
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_inter_arrival_time'], # <6>
+                random_seed = self.run_number * 4
                 )
 
         }
 
-        self.t1_patient_dists = {
+        # In this model, all patients have the same distribution for the time they spend with
+        # a receptionist, so we can set up a single distribution instead of a dictionary
+        # of distributions
+        self.patient_reception_time_dist = Exponential( # <7>
+                mean = g.mean_reception_time,
+                random_seed = self.run_number * 5
+                )
+
+        # The time spent with the nurses, with the doctors, and the probability of seeing a
+        # doctor all differ between our tiers of patients, so we need to set up dictionaries of
+        # distributions like with the
+        self.nurse_consult_time_dist = {
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_n_consult_time'],
+                random_seed = self.run_number * 6
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_n_consult_time'],
+                random_seed = self.run_number * 7
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_n_consult_time'],
+                random_seed = self.run_number * 8
+                )
 
         }
 
+        self.doctor_consult_time_dist = {
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_d_consult_time'],
+                random_seed = self.run_number * 9
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_d_consult_time'],
+                random_seed = self.run_number * 10
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_d_consult_time'],
+                random_seed = self.run_number * 11
+                )
 
+        }
 
-        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
-        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
-        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+        self.doctor_prob_seeing_dist = Uniform(
+            low=0.0,
+            high=1.0,
+            random_seed = self.run_number * 12
+            )
+
+        self.doctor_probs_seeing = {
+            g.entity_1['label']: g.entity_1['prob_seeing_doctor'],
+            g.entity_2['label']: g.entity_2['prob_seeing_doctor'],
+            g.entity_3['label']: g.entity_3['prob_seeing_doctor']
+        }
+
 ```
 1. We add in an additional column in our dataframe where we will store the patient severity. This wll help us to summarise results for different patient groups later.
-2. Next, we need to set up our inter-arrival time distributions. By having a single attribute but setting these up as a dictionary, we will be able to access the relevant distribution with `self.patient_inter_arrival_dist['t1']`, replacing 't1' with the tier of patient (or, in a different model, whichever identifier we have opted to use for our different patients)
-3. For the
+2. Next, we need to set up our inter-arrival time distributions.
+3. For the mean, by having a single attribute but setting these up as a dictionary, we will be able to access the relevant distribution with `self.patient_inter_arrival_dist['high']`, replacing 'high' with the tier of patient (or, in a different model, whichever identifier we have opted to use for our different patients)
+4. For the random seed, we will use the run number to ensure reproducibility across runs, but we will multiply it by some other value (which is random in the sense that it doesn't matter what it is, but non-random in that we have chosen it and do not vary it across runs). By making it different for different distributions, we avoid the possibility of having different distributions that have the same mean and same set of randomly generated numbers in the same order.
+5. We then repeat this, making sure we pull back the value from our tier 2 patients this time.
+6. Finally, we repeat for our tier 3 patients. We could repeat this for as many patient classes as we wished.
 
+
+Let's print the output of one of these dictionaries so you can see the effect.
+
+```{python}
+#| eval: true
+
+run_number = 1
+
+patient_inter_arrival_dist = {
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_inter_arrival_time'],
+                random_seed = run_number * 2
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_inter_arrival_time'],
+                random_seed = run_number * 3
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_inter_arrival_time'],
+                random_seed = run_number * 4
+                )
+
+        }
+
+patient_inter_arrival_dist
+```
 
 
 #### The generator_patient_arrivals method
@@ -293,9 +377,814 @@ We will call this method three times later in our code - one per severity of pat
             # you like (just make sure you're consistent within the model)
             yield self.env.timeout(sampled_inter) # <6>
 ```
-1. We begin by adding an extra parameter that will get passed into our patient generator method. By passing in 't1', 't2' or 't3', we will be able to look up the appropriate inter-arrival time and ensure we set up our patient objects with the correct severity indicator.
+1. We begin by adding an extra parameter that will get passed into our patient generator method. By passing in 'high', 'medium' or 'low', we will be able to look up the appropriate inter-arrival time and ensure we set up our patient objects with the correct severity indicator.
 2. As we have defined the patient counter at the model level, we will not end up with overlapping IDs across our different patient severities - they will remain unique.
 3. Here, we will pass in the patient severity to the patient constructor so that it can be added as a patient attribute.
 4. Our attend_clinic method will be updated to cope with patients of different severity and pull back the correct values. Alternatively, if our patients of different severity had substantially different pathways, we may wish to define different attend_clinic methods and use conditional logic here to determine which pathway they will be sent down; however, in this case, our pathways are the same, so we do not need to do this.
 5. Remember - our attribute `self.patient_inter_arrival_dist` is now a dictionary. By passing in the patient severity as our 'key', it will look up the correct distribution from our `self.patient_inter_arrival_dist` automatically. We then use the 'sample()' method to get out an appropriate inter-arrival time for that severity of patient.
 6. As before, we pass this inter-arrival time to the self.env.timeout() method. This will pause the patient-generating process in place for this severity of patient until the sampled time has elapsed - but during this time patients of other severities will continue to be generated, and patients will progress through their pathways appropriately.
+
+#### The attend_clinic method
+
+Let's start working through the changes to the method where the patients move through the system.
+
+To start with, they see a receptionist. All patients have the same distribution for this regardless of their severity; however, we do need to ensure we are sampling from this distribution in the correct way.
+
+```{python}
+    # A generator function that represents the pathway for a patient going
+    # through the clinic.
+    # The patient object is passed in to the generator function so we can
+    # extract information from / record information to it
+    def attend_clinic(self, patient):
+
+        self.results_df.at[patient.id, "Patient Severity"] = ( # <1>
+                 patient.severity
+            )
+
+        start_q_recep = self.env.now
+
+        with self.receptionist.request() as req:
+            yield req
+
+            end_q_recep = self.env.now
+
+            patient.q_time_recep = end_q_recep - start_q_recep
+
+            sampled_recep_act_time = self.patient_reception_time_dist.sample() # <2>
+
+            self.results_df.at[patient.id, "Q Time Recep"] = (
+                 patient.q_time_recep
+            )
+            self.results_df.at[patient.id, "Time with Recep"] = (
+                 sampled_recep_act_time
+            )
+
+            yield self.env.timeout(sampled_recep_act_time)
+
+    # Here's where the patient finishes with the receptionist, and starts queuing for the nurse
+
+```
+1. First, let's ensure we record the severity of our patients against their entry in the dataframe when they enter the system.
+2. We are going to use the `.sample()` method of our `patient_reception_time_dist` to pull back a number from our distribution. Everything else in this section of the code is unchanged.
+
+Let's continue - for the nurse and doctor steps, it will be similar, but we will need to select the correct distribution depending on the patient severity.
+
+Remember - the patient object we have passed in has a 'severity' attribute that will match the **key** of one of the entries in the relevant dictionary of distributions.
+
+We'll look at the nurse step next.
+
+```{python}
+
+        # Record the time the patient started queuing for a nurse
+        start_q_nurse = self.env.now
+
+        # This code says request a nurse resource, and do all of the following
+        # block of code with that nurse resource held in place (and therefore
+        # not usable by another patient)
+        with self.nurse.request() as req:
+            # Freeze the function until the request for a nurse can be met.
+            # The patient is currently queuing.
+            yield req
+
+            # When we get to this bit of code, control has been passed back to
+            # the generator function, and therefore the request for a nurse has
+            # been met.  We now have the nurse, and have stopped queuing, so we
+            # can record the current time as the time we finished queuing.
+            end_q_nurse = self.env.now
+
+            # Calculate the time this patient was queuing for the nurse, and
+            # record it in the patient's attribute for this.
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            # Now we'll randomly sample the time this patient with the nurse.
+            sampled_nurse_act_time = self.nurse_consult_time_dist[patient.severity].sample() # <1>
+
+            # Here we'll store the queuing time for the nurse and the sampled time to spend with
+            # the nurse in the results DataFrame against the ID for this patient.
+            self.results_df.at[patient.id, "Q Time Nurse"] = (
+                patient.q_time_nurse)
+            self.results_df.at[patient.id, "Time with Nurse"] = (
+                sampled_nurse_act_time)
+
+            # Freeze this function in place for the activity time we sampled above.
+            # This is the patient spending time with the nurse.
+            yield self.env.timeout(sampled_nurse_act_time)
+```
+1. Here, we pass in the severity attribute of the patient who is currently going through the model to filter our dictionary of nurse consult time distributions. If the label was, for example, 'high', we'd get the distribution for our most severe, tier 1 patients. We then sample from this, getting an appropriate length of time for this severity of patient to spend with the nurse.
+
+And finally, let's look at the doctor step. Here, we will need to sample twice - once to see whether the patient actually needs to the see the doctor, and if they do, we sample from a different distribution to get the length of time spent with the doctor.
+
+```{python}
+        # Conditional logic to see if patient goes on to see doctor
+        # We sample from the uniform distribution between 0 and 1.  If the value
+        # is less than the probability of seeing a doctor then we say the patient sees a doctor.
+        # If not, this block of code won't be run and the patient will just
+        # leave the system
+        if self.doctor_prob_seeing_dist.sample() < self.doctor_probs_seeing[patient.severity]: # <1>
+            start_q_doctor = self.env.now
+
+            self.results_df.at[patient.id, "Sees Doctor"] = True
+
+            with self.doctor.request() as req:
+                yield req
+
+                end_q_doctor = self.env.now
+
+                patient.q_time_doctor = end_q_doctor - start_q_doctor
+
+                sampled_doctor_act_time = self.doctor_consult_time_dist[patient.severity].sample() # <2>
+
+                self.results_df.at[patient.id, "Q Time Doctor"] = (
+                    patient.q_time_doctor
+                )
+                self.results_df.at[patient.id, "Time with Doctor"] = (
+                    sampled_doctor_act_time
+                )
+
+                yield self.env.timeout(sampled_doctor_act_time)
+        else:
+            self.results_df.at[patient.id, "Sees Doctor"] = False
+
+        self.results_df.at[patient.id, "Completed Journey"] = True
+```
+1. Here, we sample from our uniform distribution, and compare it with the relevant value for our patient depending on their severity.
+2. This time, we sample from our exponential distribution, again selecting the correct distribution using the patient severity.
+
+
+#### The calculate_run_results method
+
+For now, we will leave this unchanged. This means our averages will be for the whole cohort, not
+for the different severities of patients - however, we can calculate the latter using the
+patient-level
+
+#### The run method
+
+The key change to the run method is that we will start up three different patient generators. Previously, we have just passed in one.
+
+```{python}
+    # The run method starts up the DES entity generators, runs the simulation,
+    # and in turns calls anything we need to generate results for the run
+    def run(self):
+        # Start up our DES entity generators that create new patients
+        self.env.process(self.generator_patient_arrivals(g.entity_1['label'])) # <1>
+        self.env.process(self.generator_patient_arrivals(g.entity_2['label']))
+        self.env.process(self.generator_patient_arrivals(g.entity_3['label']))
+
+        # Run the model for the duration specified in g class
+        self.env.run(until=g.sim_duration)
+
+        # Now the simulation run has finished, call the method that calculates
+        # run results
+        self.calculate_run_results()
+
+        # Return the patient-level results from this run of the model
+        return self.results_df
+```
+1. For each entity type, we now set up a separate process to generate them. By passing in the entity label to use here, the label - which in this case we are using to indicate severity, but could be any characteristic that separates your patients -
+
+## The Full Code
+
+:::{.callout-note collapse="true"}
+### Click here to view the full code
+
+```{python}
+#| eval: true
+#| echo: true
+
+import simpy
+import random
+import pandas as pd
+from sim_tools.distributions import Exponential, Uniform ## NEW
+
+# Class to store global parameter values.  We don't create an instance of this
+# class - we just refer to the class blueprint itself to access the numbers
+# inside.
+class g:
+    # Simulation Parameters
+    sim_duration = 60 * 8
+    number_of_runs = 5
+
+    # Shared Parameters between patient classes
+    mean_reception_time = 2
+
+    # Resource Numbers
+    number_of_receptionists = 1
+    number_of_nurses = 1
+    number_of_doctors = 2
+
+    # -- Entity and Inter-arrival Time Parameters -- #
+
+    # Tier 1 Patients - Very Ill
+    entity_1 = {
+        'label': 'high',
+        'mean_inter_arrival_time': 25,
+        'mean_n_consult_time': 5,
+        'mean_d_consult_time': 45,
+        'prob_seeing_doctor': 1.0
+    }
+
+    # Tier 2 Patients - Somewhat Ill
+    entity_2 = {
+        'label': 'medium',
+        'mean_inter_arrival_time': 15,
+        'mean_n_consult_time': 10,
+        'mean_d_consult_time': 20,
+        'prob_seeing_doctor': 0.6
+    }
+
+    # Tier 3 Patients - Mildly Ill
+    entity_3 = {
+        'label': 'low',
+        'mean_inter_arrival_time': 5,
+        'mean_n_consult_time': 8,
+        'mean_d_consult_time': 10,
+        'prob_seeing_doctor': 0.2
+    }
+
+# Class representing patients coming in to the clinic.
+class Patient:
+    def __init__(self, p_id, severity):
+        self.id = p_id
+
+        self.severity = severity
+
+        self.q_time_recep = 0
+        self.q_time_nurse = 0
+        self.seen_doctor = False ## NEW
+        self.q_time_doctor = 0
+
+class Model:
+    # Constructor to set up the model for a run.  We pass in a run number when
+    # we create a new model.
+    def __init__(self, run_number):
+        # Create a SimPy environment in which everything will live
+        self.env = simpy.Environment()
+
+        # Create a patient counter (which we'll use as a patient ID)
+        self.patient_counter = 0
+
+        # Create our resources
+        self.receptionist = simpy.Resource(
+            self.env, capacity=g.number_of_receptionists
+        )
+        self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
+        self.doctor = simpy.Resource(
+            self.env, capacity=g.number_of_doctors)
+
+        # Store the passed in run number
+        self.run_number = run_number
+
+        # Create a new Pandas DataFrame that will store some results against
+        # the patient ID (which we'll use as the index).
+        self.results_df = pd.DataFrame()
+        self.results_df["Patient ID"] = [1]
+        self.results_df["Patient Severity"] = [""] ## NEW # <1>
+        self.results_df["Q Time Recep"] = [0.0]
+        self.results_df["Time with Recep"] = [0.0]
+        self.results_df["Q Time Nurse"] = [0.0]
+        self.results_df["Time with Nurse"] = [0.0]
+        self.results_df["Sees Doctor"] = [False]
+        self.results_df["Q Time Doctor"] = [0.0]
+        self.results_df["Time with Doctor"] = [0.0]
+        self.results_df["Completed Journey"] = [False]
+        self.results_df.set_index("Patient ID", inplace=True)
+
+        # Create an attribute to store the mean queuing times across this run of
+        # the model
+        self.mean_q_time_recep = 0
+        self.mean_q_time_nurse = 0
+        self.mean_q_time_doctor = 0
+
+        # ============================================== #
+        # NEW CODE                                       #
+        # ============================================== #
+
+        self.patient_inter_arrival_dist = { # <2>
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_inter_arrival_time'], # <3>
+                random_seed = self.run_number * 2 # <4>
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_inter_arrival_time'], # <5>
+                random_seed = self.run_number * 3
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_inter_arrival_time'], # <6>
+                random_seed = self.run_number * 4
+                )
+
+        }
+
+        # In this model, all patients have the same distribution for the time they spend with
+        # a receptionist, so we can set up a single distribution instead of a dictionary
+        # of distributions
+        self.patient_reception_time_dist = Exponential( # <7>
+                mean = g.mean_reception_time,
+                random_seed = self.run_number * 5
+                )
+
+        # The time spent with the nurses, with the doctors, and the probability of seeing a
+        # doctor all differ between our tiers of patients, so we need to set up dictionaries of
+        # distributions like with the
+        self.nurse_consult_time_dist = {
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_n_consult_time'],
+                random_seed = self.run_number * 6
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_n_consult_time'],
+                random_seed = self.run_number * 7
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_n_consult_time'],
+                random_seed = self.run_number * 8
+                )
+
+        }
+
+        self.doctor_consult_time_dist = {
+            g.entity_1['label']: Exponential(
+                mean = g.entity_1['mean_d_consult_time'],
+                random_seed = self.run_number * 9
+                ),
+            g.entity_2['label']: Exponential(
+                mean = g.entity_2['mean_d_consult_time'],
+                random_seed = self.run_number * 10
+                ),
+            g.entity_3['label']: Exponential(
+                mean = g.entity_3['mean_d_consult_time'],
+                random_seed = self.run_number * 11
+                )
+
+        }
+
+        self.doctor_prob_seeing_dist = Uniform(
+            low=0.0,
+            high=1.0,
+            random_seed = self.run_number * 12
+            )
+
+        self.doctor_probs_seeing = {
+            g.entity_1['label']: g.entity_1['prob_seeing_doctor'],
+            g.entity_2['label']: g.entity_2['prob_seeing_doctor'],
+            g.entity_3['label']: g.entity_3['prob_seeing_doctor']
+        }
+
+    # A generator function that represents the DES generator for patient
+    # arrivals
+    def generator_patient_arrivals(self, patient_severity): # <1>
+        # We use an infinite loop here to keep doing this indefinitely whilst
+        # the simulation runs
+        while True:
+            # Increment the patient counter by 1 (this means our first patient
+            # will have an ID of 1)
+            self.patient_counter += 1 # <2>
+
+            # Create a new patient - an instance of the Patient Class we
+            # defined above.  Remember, we pass in the ID when creating a
+            # patient - so here we pass the patient counter to use as the ID.
+            p = Patient(self.patient_counter, patient_severity) # <3>
+
+            # Tell SimPy to start up the attend_clinic generator function with
+            # this patient (the generator function that will model the
+            # patient's journey through the system)
+            self.env.process(self.attend_clinic(p)) # <4>
+
+            # Randomly sample the time to the next patient arriving.  Here, we
+            # sample from an exponential distribution (common for inter-arrival
+            # times), and pass in a lambda value of 1 / mean.  The mean
+            # inter-arrival time is stored in the g class.
+            sampled_inter = self.patient_inter_arrival_dist[patient_severity].sample() # <5>
+
+            # Freeze this instance of this function in place until the
+            # inter-arrival time we sampled above has elapsed.  Note - time in
+            # SimPy progresses in "Time Units", which can represent anything
+            # you like (just make sure you're consistent within the model)
+            yield self.env.timeout(sampled_inter) # <6>
+
+    # A generator function that represents the pathway for a patient going
+    # through the clinic.
+    # The patient object is passed in to the generator function so we can
+    # extract information from / record information to it
+    def attend_clinic(self, patient):
+
+        self.results_df.at[patient.id, "Patient Severity"] = (
+                 patient.severity
+            )
+
+        start_q_recep = self.env.now
+
+        with self.receptionist.request() as req:
+            yield req
+
+            end_q_recep = self.env.now
+
+            patient.q_time_recep = end_q_recep - start_q_recep
+
+            sampled_recep_act_time = self.patient_reception_time_dist.sample()
+
+            self.results_df.at[patient.id, "Q Time Recep"] = (
+                 patient.q_time_recep
+            )
+            self.results_df.at[patient.id, "Time with Recep"] = (
+                 sampled_recep_act_time
+            )
+
+            yield self.env.timeout(sampled_recep_act_time)
+
+    # Here's where the patient finishes with the receptionist, and starts queuing for the nurse
+
+
+        # Record the time the patient started queuing for a nurse
+        start_q_nurse = self.env.now
+
+        # This code says request a nurse resource, and do all of the following
+        # block of code with that nurse resource held in place (and therefore
+        # not usable by another patient)
+        with self.nurse.request() as req:
+            # Freeze the function until the request for a nurse can be met.
+            # The patient is currently queuing.
+            yield req
+
+            # When we get to this bit of code, control has been passed back to
+            # the generator function, and therefore the request for a nurse has
+            # been met.  We now have the nurse, and have stopped queuing, so we
+            # can record the current time as the time we finished queuing.
+            end_q_nurse = self.env.now
+
+            # Calculate the time this patient was queuing for the nurse, and
+            # record it in the patient's attribute for this.
+            patient.q_time_nurse = end_q_nurse - start_q_nurse
+
+            # Now we'll randomly sample the time this patient with the nurse.
+            sampled_nurse_act_time = self.nurse_consult_time_dist[patient.severity].sample() # <1>
+
+            # Here we'll store the queuing time for the nurse and the sampled time to spend with
+            # the nurse in the results DataFrame against the ID for this patient.
+            self.results_df.at[patient.id, "Q Time Nurse"] = (
+                patient.q_time_nurse)
+            self.results_df.at[patient.id, "Time with Nurse"] = (
+                sampled_nurse_act_time)
+
+            # Freeze this function in place for the activity time we sampled above.
+            # This is the patient spending time with the nurse.
+            yield self.env.timeout(sampled_nurse_act_time)
+
+        # Conditional logic to see if patient goes on to see doctor
+        # We sample from the uniform distribution between 0 and 1.  If the value
+        # is less than the probability of seeing a doctor then we say the patient sees a doctor.
+        # If not, this block of code won't be run and the patient will just
+        # leave the system
+        if self.doctor_prob_seeing_dist.sample() < self.doctor_probs_seeing[patient.severity]: # <1>
+            self.results_df.at[patient.id, "Sees Doctor"] = True
+
+            start_q_doctor = self.env.now
+
+            with self.doctor.request() as req:
+                yield req
+
+                end_q_doctor = self.env.now
+
+                patient.q_time_doctor = end_q_doctor - start_q_doctor
+
+                sampled_doctor_act_time = self.doctor_consult_time_dist[patient.severity].sample() # <2>
+
+                self.results_df.at[patient.id, "Q Time Doctor"] = (
+                    patient.q_time_doctor
+                )
+                self.results_df.at[patient.id, "Time with Doctor"] = (
+                    sampled_doctor_act_time
+                )
+
+                yield self.env.timeout(sampled_doctor_act_time)
+        else:
+            self.results_df.at[patient.id, "Sees Doctor"] = False
+
+        self.results_df.at[patient.id, "Completed Journey"] = True
+
+    # This method calculates results over a single run.  Here we just calculate
+    # a mean, but in real world models you'd probably want to calculate more.
+    def calculate_run_results(self):
+        # Take the mean of the queuing times across patients in this run of the
+        # model.
+        self.mean_q_time_recep = self.results_df["Q Time Recep"].mean()
+        self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
+        self.mean_q_time_doctor = self.results_df["Q Time Doctor"].mean()
+
+    # The run method starts up the DES entity generators, runs the simulation,
+    # and in turns calls anything we need to generate results for the run
+    def run(self):
+        # Start up our DES entity generators that create new patients
+        self.env.process(self.generator_patient_arrivals(g.entity_1['label']))
+        self.env.process(self.generator_patient_arrivals(g.entity_2['label']))
+        self.env.process(self.generator_patient_arrivals(g.entity_3['label']))
+
+        # Run the model for the duration specified in g class
+        self.env.run(until=g.sim_duration)
+
+        # Now the simulation run has finished, call the method that calculates
+        # run results
+        self.calculate_run_results()
+
+        # Return the patient-level results from this run of the model
+        return self.results_df
+```
+
+:::
+
+
+## Checking Our Implementation
+
+Usually we would go on to run a trial - for now, we'll just look at the output of a single run of our new model.
+
+```{python}
+#| eval: true
+my_model = Model(run_number=1)
+
+patient_level_results = my_model.run()
+
+patient_level_results.head(20).round(2)
+```
+
+We can now check the average time spent at each stage.
+
+```{python}
+#| eval: true
+(
+    patient_level_results.reset_index()
+    .groupby('Patient Severity')
+    .agg({
+        'Patient ID': 'count',
+        'Time with Recep': 'mean',
+        'Time with Nurse': 'mean',
+        'Sees Doctor': 'mean',
+        'Time with Doctor': 'mean'
+    })
+    .round(2)
+)
+```
+
+These numbers look pretty good - we aren't seeing much variation across the time patients spend with the receptionist, but we are seeing expected variation across the time they spent with the nurse and the doctor, as well as the probability of them seeing the doctor.
+
+However, uf queues build up in the system, or if our simulation is not long enough for a high proportion of the patients who start their journeys to actually make their whole journey through, we may find that some patients in our list haven't finished their journey before they exit and this may make figures for later parts of the patient journey look a bit strange. Let's rerun this after filtering to only include patients who finished their full journey and exited the system.
+
+```{python}
+#| eval: true
+(
+    patient_level_results[patient_level_results["Completed Journey"] == True].reset_index()
+    .groupby('Patient Severity')
+    .agg({
+        'Patient ID': 'count',
+        'Time with Recep': 'mean',
+        'Time with Nurse': 'mean',
+        'Sees Doctor': 'mean',
+        'Time with Doctor': 'mean'
+    })
+    .round(2)
+)
+```
+
+### Exploring this with graphs
+
+We can also take a look at all of these figures in a more visual way.
+
+To start with, we need to alter the structure of our dataframe slightly.
+
+```{python}
+#| eval: true
+
+import plotly.express as px # <1>
+
+times_df = (
+    patient_level_results[['Patient Severity','Time with Recep', 'Time with Nurse', 'Time with Doctor']] # <2>
+    .reset_index() # <3>
+    )
+
+times_df_long = times_df.melt( # <4>
+    id_vars=["Patient ID", "Patient Severity"] # <5>
+    )
+
+times_df_long.head(10)
+```
+
+Now we can display this as a box plot.
+
+```{python}
+#| eval: true
+
+px.box(
+    times_df_long,
+    y="variable",
+    x="value",
+    color="Patient Severity"
+)
+```
+
+
+Let's look at this a different way.
+
+```{python}
+#| eval: true
+
+(
+    px.box(
+    times_df_long,
+    y="variable",
+    x="value",
+    facet_row="Patient Severity")
+    .update_yaxes(title_text="")
+    .for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1], y=1.05))
+)
+```
+
+
+
+## Adding in the trial
+
+Finally, now we're happy thaat this is working at the level of a single run, let's see what changes we need to make to our trial class.
+
+Below is the trial class in its existing form.
+
+```{python}
+#| eval: true
+
+# Class representing a Trial for our simulation - a batch of simulation runs.
+class Trial:
+    # The constructor sets up a pandas dataframe that will store the key
+    # results from each run against run number, with run number as the index.
+    def  __init__(self):
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Arrivals"] = [0]
+        self.df_trial_results["Mean Q Time Recep"] = [0.0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results["Mean Q Time Doctor"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    # Method to print out the results from the trial.  In real world models,
+    # you'd likely save them as well as (or instead of) printing them
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results.round(2))
+        print(self.df_trial_results.mean().round(2))
+
+    # Method to run a trial
+    def run_trial(self):
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
+        print("") ## NEW: Print a blank line
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+        for run in range(g.number_of_runs):
+            random.seed(run)
+
+            my_model = Model(run)
+            patient_level_results = my_model.run()
+
+            self.df_trial_results.loc[run] = [
+                len(patient_level_results),
+                my_model.mean_q_time_recep,
+                my_model.mean_q_time_nurse,
+                my_model.mean_q_time_doctor
+                ]
+
+        # Once the trial (ie all runs) has completed, print the final results
+        self.print_trial_results()
+```
+
+Let's see what happens when we run this now.
+
+```{python}
+#| eval: true
+# Create an i#| nstance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+my_trial.run_trial()
+```
+
+This is working fine if we just want to get an overall sense of the queues at each step in our model, regardless of our severity.
+
+However, it doesn't give us much insight into our different patient groups over the course of multiple runs.
+
+To change this, we could go back through our model class and ensure we start recording
+
+However, this is time-consuming and can be inefficient if we later want to add additional steps or metrics to our model.
+
+Instead, for each run, we will output the
+
+```{python}
+#| eval: true
+
+# Class representing a Trial for our simulation - a batch of simulation runs.
+class Trial:
+    def  __init__(self):
+        self.patient_dataframes = []
+
+    # Method to run a trial
+    def run_trial(self):
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
+        print("") ## NEW: Print a blank line
+        # Run the simulation for the number of runs specified in g class.
+        # For each run, we create a new instance of the Model class and call its
+        # run method, which sets everything else in motion.  Once the run has
+        # completed, we grab out the stored run results (just mean queuing time
+        # here) and store it against the run number in the trial results
+        # dataframe.
+        for run in range(g.number_of_runs):
+            my_model = Model(run_number=run)
+            patient_level_results = my_model.run()
+            patient_level_results.insert(
+                loc=0,
+                column="Run",
+                value=run+1
+                )
+
+            self.patient_dataframes.append(patient_level_results)
+
+        # Once the trial (ie all runs) has completed, turn this into a single dataframe
+        # and return it
+        return pd.concat(self.patient_dataframes)
+```
+
+
+```{python}
+#| eval: true
+# Create an instance of the Trial class
+my_trial = Trial()
+
+# Call the run_trial method of our Trial object
+all_results = my_trial.run_trial()
+
+all_results.head(10).round(2)
+```
+
+```{python}
+#| eval: true
+all_results.tail(10).round(2)
+```
+
+
+Now we can write simple code to recreate the output we were getting from our trial class previously, as well as allowing us to return more detailed outputs.
+
+:::{.callout-tip}
+We could turn these into functions as well to make it clearer what each does and make them easier to reuse and adapt.
+:::
+
+### Return Trial-level results
+
+```{python}
+#| eval: true
+(
+    all_results[['Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .mean()
+    .round(2)
+)
+```
+
+#### Segment This by Severity
+
+```{python}
+#| eval: true
+(
+    all_results[['Patient Severity', 'Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .groupby('Patient Severity')
+    .mean()
+    .round(2)
+)
+```
+
+### Return Run-level results
+
+```{python}
+#| eval: true
+(
+    all_results[['Run', 'Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .groupby('Run')
+    .mean()
+    .round(2)
+)
+```
+
+#### Segment This by Severity
+
+```{python}
+#| eval: true
+(
+    all_results[['Run', 'Patient Severity', 'Q Time Recep', 'Q Time Nurse', 'Q Time Doctor']]
+    .groupby(['Run','Patient Severity'])
+    .mean()
+    .round(2)
+)
+```
+
+
+## Display Trial Results Visually
+
+### Bar Chart Summary
+
+
+### Bar Chart Summary - by Severity
