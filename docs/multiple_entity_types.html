@@ -561,7 +561,15 @@ Tip
 <p>The basic rule of thumb is have different generators if the entities - and/or what happens to them - is different if they come in via a different route.</p>
 </div>
 </div>
-<p>You may opt for different generators if - a) the inter-arrival rate of that way of entering the system is fundamentally different <em>(the most common reason)</em>, and/or - b) if you’re modelling a different pathway in the same modelled system (e.g.&nbsp;telephone calls coming in to the same system as patients turning up in person etc).</p>
+<p>You may opt for different generators if</p>
+<ul>
+<li><ol type="a">
+<li>the inter-arrival rate of that way of entering the system is fundamentally different <em>(the most common reason)</em>, and/or</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>if you’re modelling a different pathway in the same modelled system (e.g.&nbsp;telephone calls coming in to the same system as patients turning up in person etc).</li>
+</ol></li>
+</ul>
 <p>The authors of this book would generally steer away from having a different generator just for a different patient type or severity, and would instead use attributes to differentiate between the patients. These attributes can then be read when making decisions in the pathway, like where to go in a branch, or which distribution to sample from for an activity time instead.</p>
 </section>
 <section id="multiple-patient-classes-versus-a-single-patient-class" class="level2" data-number="21.2">

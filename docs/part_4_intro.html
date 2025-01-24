@@ -483,7 +483,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-challenge-now" id="toc-the-challenge-now" class="nav-link active" data-scroll-target="#the-challenge-now"><span class="header-section-number">20.1</span> The Challenge Now…</a></li>
+  <li><a href="#what-do-i-do-if-what-i-need-isnt-covered-in-the-book" id="toc-what-do-i-do-if-what-i-need-isnt-covered-in-the-book" class="nav-link" data-scroll-target="#what-do-i-do-if-what-i-need-isnt-covered-in-the-book"><span class="header-section-number">20.2</span> What do I do if what I need isn’t covered in the book?</a>
+  <ul class="collapse">
+  <li><a href="#check-the-simpy-documentation" id="toc-check-the-simpy-documentation" class="nav-link" data-scroll-target="#check-the-simpy-documentation"><span class="header-section-number">20.2.1</span> Check the SimPy Documentation</a></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment"><span class="header-section-number">20.2.2</span> Experiment!</a></li>
+  <li><a href="#check-out-stackoverflow" id="toc-check-out-stackoverflow" class="nav-link" data-scroll-target="#check-out-stackoverflow"><span class="header-section-number">20.2.3</span> Check out StackOverflow</a></li>
+  <li><a href="#try-using-general-ai" id="toc-try-using-general-ai" class="nav-link" data-scroll-target="#try-using-general-ai"><span class="header-section-number">20.2.4</span> Try Using General AI</a></li>
+  <li><a href="#try-using-a-custom-ai" id="toc-try-using-a-custom-ai" class="nav-link" data-scroll-target="#try-using-a-custom-ai"><span class="header-section-number">20.2.5</span> Try Using a Custom AI</a></li>
+  <li><a href="#check-out-the-simpy-issues-on-gitlab" id="toc-check-out-the-simpy-issues-on-gitlab" class="nav-link" data-scroll-target="#check-out-the-simpy-issues-on-gitlab"><span class="header-section-number">20.2.6</span> Check out the SimPy Issues on GitLab</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -507,12 +522,125 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="the-challenge-now" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="the-challenge-now"><span class="header-section-number">20.1</span> The Challenge Now…</h2>
 <p>As you begin to model your first real-world systems, you may find yourself uncertain of the best approach to take to a problem, and seeking out the ‘right’ way to do something.</p>
 <p>While there are often rules of thumb and efficient or less efficient ways of doing things, there often isn’t a single answer to how you structure a solution.</p>
-<p>The chapters that follow will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.</p>
+<p>The chapters that follow in this section will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Part 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can build logging, testing and visualisation into various parts of your model to confirm that it is working in the way it should be.</p>
+</div>
+</div>
+</section>
+<section id="what-do-i-do-if-what-i-need-isnt-covered-in-the-book" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="what-do-i-do-if-what-i-need-isnt-covered-in-the-book"><span class="header-section-number">20.2</span> What do I do if what I need isn’t covered in the book?</h2>
+<section id="check-the-simpy-documentation" class="level3" data-number="20.2.1">
+<h3 data-number="20.2.1" class="anchored" data-anchor-id="check-the-simpy-documentation"><span class="header-section-number">20.2.1</span> Check the SimPy Documentation</h3>
+<p>The SimPy documentation is a rich resource for information on how to do things.</p>
+<p><a href="https://simpy.readthedocs.io/en/latest/" class="uri">https://simpy.readthedocs.io/en/latest/</a></p>
+<p>It covers a range of things that we don’t yet touch on in the book, such as</p>
+<ul>
+<li>interrupting processes</li>
+<li>building custom events</li>
+<li>waiting for any of or all events before triggering a process</li>
+<li>additional resource types, such as containers and stores</li>
+</ul>
+</section>
+<section id="experiment" class="level3" data-number="20.2.2">
+<h3 data-number="20.2.2" class="anchored" data-anchor-id="experiment"><span class="header-section-number">20.2.2</span> Experiment!</h3>
+<p>There’s no harm in trying things out!</p>
+<p>It may take a while and a few false starts to get things working as expected, but that’s entirely normal - if your code works first time, that would be quite unusual!</p>
+<p>Make use of some of the <a href="./basic_debugging_tactics.html">debugging and logging tips</a> to determine whether your approach is leading to events happening in the order expected and at the frequency expected.</p>
+<p>If you’re having issues, <strong>check your indentation</strong> - this is a common thing to get wrong as your model gets more complex.</p>
+<p>Make sure you have a clean working copy of your original code saved to go back to (ideally tracked via version control on a platform like GitHub!) and make notes of the different approaches you have tried - it’s very easy to accidentally circle back to a non-working solution.</p>
+<p>Finally, don’t be afraid to step away from the code for a bit - you will often find that you will ruminate over the problem without even realising, and inspiration will strike when you least expect it.</p>
+</section>
+<section id="check-out-stackoverflow" class="level3" data-number="20.2.3">
+<h3 data-number="20.2.3" class="anchored" data-anchor-id="check-out-stackoverflow"><span class="header-section-number">20.2.3</span> Check out StackOverflow</h3>
+<p>StackOverflow is a long-running site where users post questions about coding problems.</p>
+<p>Often, relevant StackOverflow questions will come up near the top of a Google search on coding topics.</p>
+<p>You can also ask questions yourself, though try to include a very clear description of your aim, your difficulty, what you have already tried to solve the problem yourself, and a ‘reproducible example’ (reprex) that someone trying to answer your question can run themselves to get them started.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take the time to understand any code that is presented on StackOverflow and thoroughly test it to ensure it’s doing what it says it’s doing.</p>
+</div>
+</div>
+</section>
+<section id="try-using-general-ai" class="level3" data-number="20.2.4">
+<h3 data-number="20.2.4" class="anchored" data-anchor-id="try-using-general-ai"><span class="header-section-number">20.2.4</span> Try Using General AI</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All AI tools should be used with caution. They may give you wrong information, may suggest functions or functionality that doesn’t exist, and more. Take the time to understand any code that is generated by an AI tool and thoroughly test it to ensure it’s doing what it says it’s doing.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Never upload any sensitive data to one of these tools. Data is processed on external servers, potentially in other countries, and you may be in serious breach of the information governance rules of your organisation.</p>
+</div>
+</div>
+<p>AI chat assistants can be helpful coding buddies.</p>
+<p><a href="https://chatgpt.com/">ChatGPT</a> is often quite good at generating code and ideas, and can be used for free. <a href="https://claude.ai/">Claude</a> also gets good feedback for this purpose.</p>
+<p><a href="https://www.perplexity.ai/">Perplexity</a> is good as it links back to the key sources in its answer, allowing you to interrogate them further.</p>
+<p>Tools built in to your coding environment, like Github Copilot and Intellicode in VSCode, can also be of use.</p>
+</section>
+<section id="try-using-a-custom-ai" class="level3" data-number="20.2.5">
+<h3 data-number="20.2.5" class="anchored" data-anchor-id="try-using-a-custom-ai"><span class="header-section-number">20.2.5</span> Try Using a Custom AI</h3>
+<p>For example, <a href="https://notebooklm.google.com">NotebookLM</a> allows you to upload a series of custom resources, such as videos, websites and slides. Through this you could create an AI trained specifially on the HSMA lectures, this book, and the SimPy documentation, among other SimPy-specific sources.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that if you are adding an ebook like this resource, or the documentation site of a library, you will need to add <strong>each page as a source individually</strong>, meaning you can quickly exceed the total number of sources allowed.</p>
+</div>
+</div>
+</section>
+<section id="check-out-the-simpy-issues-on-gitlab" class="level3" data-number="20.2.6">
+<h3 data-number="20.2.6" class="anchored" data-anchor-id="check-out-the-simpy-issues-on-gitlab"><span class="header-section-number">20.2.6</span> Check out the SimPy Issues on GitLab</h3>
+<p>The code for SimPy is hosted on GitLab.</p>
+<p>You can take a look at <a href="https://gitlab.com/team-simpy/simpy/-/issues">previously raised issues</a> to see if there is a known difficulty with what you are trying to do - it may be that what you are attempting to achieve is an actual limitation of the library.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script>
