@@ -1,3 +1,9 @@
+---
+jupyter: python3
+execute:
+  eval: false
+---
+
 # An Introduction to Approaching Multiple Entity Types
 
 Let's imagine we want to model some more variety within the patients (entities) arriving in our model.
@@ -15,7 +21,7 @@ In this chapter, we will give a bit of an introduction to how you might make dec
 
 - whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class
 - whether to have a single generator or multiple generators
-
+u
 :::{.callout-note}
 At this stage in your modelling, you will need to start drawing on your creativity!
 
@@ -125,4 +131,4 @@ class Patient:
 
 This means that when the patient is set up, it requires two attributes - the ID, as we have done throughout the book so far, and the severity.
 
-This approach is itself quite flexible - you could sample the severity when generating the patient, or choose to make the severity a parameter that is passed through in your generator method, allowing you to create patients of a given severity or type in that way. This is demonstrated in the [next chapter](multiple_entity_types_different_pathways.qmd).
+This approach is itself quite flexible - you could sample the severity when generating the patient, or choose to make the severity a parameter that is passed through in your generator method, allowing you to create patients of a given severity or type in that way. This is demonstrated in the [next chapter](example_multiple_entity_types_similar_pathways.qmd).
