@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./one_or_the_other.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Waiting for One or The Other</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">(Coming Soon!) Waiting for One or The Other</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -557,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-statements" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="import-statements"><span class="header-section-number">5.1</span> Import statements</h2>
 <p>First we need our import statements. The libraries you import will vary depending on your model and what you need, but these three are likely going to always be in there (the first must be!)</p>
-<div id="3eb431bd" class="cell" data-execution_count="1">
+<div id="aba715c6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -579,7 +579,7 @@ Tip
 <section id="g-class" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="g-class"><span class="header-section-number">5.2</span> g Class</h2>
 <p>Remember - the g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.</p>
-<div id="32cc0227" class="cell" data-execution_count="2">
+<div id="e358f06b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store global parameter values.  We don't create an instance of this</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># class - we just refer to the class blueprint itself to access the numbers</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># inside.</span></span>
@@ -593,7 +593,7 @@ Tip
 </section>
 <section id="patient-entity-class" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) Class</h2>
-<div id="d3b99d13" class="cell" data-execution_count="3">
+<div id="2e9edfbf" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.  Here, patients have</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># two attributes that they carry with them - their ID, and the amount of time</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># they spent queuing for the nurse.  The ID is passed in when a new patient is</span></span>
@@ -606,7 +606,7 @@ Tip
 </section>
 <section id="model-class" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">5.4</span> Model Class</h2>
-<div id="78ad89e2" class="cell" data-execution_count="4">
+<div id="3bba971d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
@@ -762,7 +762,7 @@ Tip
 </section>
 <section id="trial-class" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">5.5</span> Trial Class</h2>
-<div id="01537dfb" class="cell" data-execution_count="5">
+<div id="dac279a6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation - a batch of simulation runs.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
@@ -798,7 +798,7 @@ Tip
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.print_trial_results()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we just need to run the trial and print out the results!</p>
-<div id="e445a151" class="cell" data-execution_count="6">
+<div id="72504832" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -808,132 +808,112 @@ Tip
 <pre><code>Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         3.653734
-2               2.535599         0.270322
-3               0.686140         2.058646
-4               0.000000         1.270654
-5               0.000000         6.216839
-6               4.570560         2.463719
-7               0.000000        11.022979
-8               7.194042         0.745148
-9               0.000000         8.594883
-10              4.610676         7.629645
-11             11.989701         7.485010
-12             12.415684         3.366061
-13             12.765393         1.755961
-14              7.782561         5.901894
-15              7.230137         2.710061
-16              4.185211         2.828098
-17              3.681131         4.814703
-18              0.000000         7.056378
-19              0.000000        14.765789
-20              5.181061         2.566875
+1               0.000000        13.260998
+2               5.368378         3.319291
+3               7.681641         8.097482
+4               1.362556         2.925238
+5               0.000000         3.321335
+6               0.000000         3.395458
+7               1.808749         1.175378
+8               0.000000        14.862888
+9              10.117909         4.014449
+10             13.780852         6.073506
+11              8.967261         8.368355
+12             16.869520         1.636848
+13             18.100035         0.080790
+14             16.895508         1.552897
+15             13.901293         1.321124
+16              8.946704         3.089216
+17              0.000000        15.028423
+18             13.844528         5.214962
+19             17.751031         2.143484
+20             18.520880         1.603582
 Run Number 1
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         8.542115
-2               5.887185         1.572995
-3               6.591670         0.705774
-4               4.284030         1.445591
-5               2.963032         7.204179
-6               6.976964         4.644865
-7              10.462425         5.391499
-8              11.053597        10.920184
-9              19.905497         0.299054
-10             18.573938         6.879005
-11             16.285645         0.991146
-12             13.845121        12.505422
-13             18.949299         4.710134
-14             18.211317         2.076447
-15             13.481536         1.214608
-16             11.079788         3.058510
-17              5.484310        11.450957
-18              6.263610         1.970047
-19              0.373552         4.647731
-20              2.204060         4.886538
-21              4.964058         2.088587
-22              3.751291        13.282507
-23              7.992084        22.391754
+1               0.000000         4.031044
+2               0.000000         5.243435
+3               5.021117         7.726986
+4              11.681070        25.455402
+5              36.600832         3.615448
+6              36.538314         1.805399
+7              31.378075        10.392646
+8              41.433144         0.066231
+9              39.132501        13.987414
+10             48.514915        27.356319
+11             65.733826         9.682546
+12             71.710440         8.509573
+13             79.767344        12.566352
 Run Number 2
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         2.123502
-2               0.000000         1.284481
-3               0.000000         0.029553
-4               0.000000         9.493403
-5               9.214328        12.808091
-6              13.733376         8.153421
-7              20.765955         3.136797
-8              20.418166         2.536081
-9               9.140967         8.239283
-10             17.296509        17.335795
-11             30.303802         7.568814
-12             32.170333         5.120728
-13             35.042337         2.138139
-14             33.845825         2.658114
-15             17.875112         3.651148
-16             19.569371         4.118323
-17             20.889433         1.229321
-18             13.513526         3.575757
-19             13.866019         1.637119
-20             10.763393         0.508611
-21             10.705359         4.731135
+1               0.000000         4.776097
+2               4.316895        11.093009
+3               9.565477         7.376048
+4              15.665989         0.148615
+5               6.788229         2.932252
+6               6.511564         6.833258
+7              10.293789        10.772476
+8              20.461434         0.985895
+9              15.411159         6.369979
+10             20.769898         6.307437
+11             21.308648        15.427817
+12             35.909066        11.273441
+13             43.968390        13.322996
+14             55.899353         1.162253
+15             54.355999         6.374701
+16             55.881377         1.891744
+17             51.311905         0.654161
+18             51.514142         2.264419
+19             50.759046         2.783498
+20             48.258111         3.213785
+21             51.268766         0.764467
+22             47.207543         7.516084
 Run Number 3
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         6.465582
-2               2.903611         0.357374
-3               2.838152         3.581376
-4               1.919152         0.123767
-5               0.000000         8.338512
-6               2.343210         0.547479
-7               0.000000         3.469769
-8               0.000000         9.854404
-9               8.970210         2.092235
-10             10.527693        13.697288
-11             23.856928         7.074479
-12             23.524191         0.351996
-13             16.948791        20.377536
-14             30.780070         0.082300
-15             24.759846         5.000795
-16             21.373674         0.237894
-17             15.874638         0.662830
-18             10.443580         1.039033
-19              0.000000         3.265077
-20              0.000000         6.377651
-21              4.777831         1.476323
-22              4.647277         4.879069
-23              0.000000         4.864848
+1               0.000000        16.586199
+2               9.700073         0.570604
+3               4.263538         8.028041
+4               0.000000         2.227264
+5               0.000000         0.438703
+6               0.000000         0.632470
+7               0.000000         1.423070
+8               0.000000         4.055806
+9               3.289679         9.700261
+10             11.572700         0.323766
+11             10.011572         8.250120
+12             12.822045         2.544938
+13              9.856610         3.443303
+14             12.940280         2.046680
+15             12.522425        29.210710
+16             38.812258         8.717186
+17             46.211555         9.813017
 Run Number 4
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         3.057398
-2               1.939963         0.764773
-3               1.454754         0.470310
-4               0.000000         0.003027
-5               0.000000         5.565920
-6               0.000000        22.506249
-7              20.571490         5.667940
-8              11.123481         8.739420
-9              18.530923         0.825711
-10             14.334681         1.198233
-11             15.520075         4.360385
-12             14.414746         3.676572
-13             11.749638         2.332146
-14              8.117348         0.254104
-15              5.600850         2.975732
-16              0.000000        10.580699
-17              0.434316         3.763365
-18              1.224841         9.268737
-19              0.000000         1.029571
+1               0.000000         0.941031
+2               0.000000         1.839892
+3               0.506591         0.857569
+4               0.000000        22.759543
+5              22.074339         4.014956
+6              17.606221         1.312599
+7               9.932337         7.278020
+8              14.134557         2.068857
+9              15.967024         7.837587
+10              4.556363        21.493036
+11             22.142045        10.093897
+12             31.301881         4.081427
+13             33.905863         9.080814
+14             41.296516        16.072057
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                    4.241395
-1                    9.112348
-2                   15.672086
-3                    8.977776
-4                    6.579848</code></pre>
+0                    8.695842
+1                   35.962429
+2                   30.792126
+3                   10.117808
+4                   15.244553</code></pre>
 </div>
 </div>
 

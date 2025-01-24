@@ -21,7 +21,7 @@ In this chapter, we will give a bit of an introduction to how you might make dec
 
 - whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class
 - whether to have a single generator or multiple generators
-u
+
 :::{.callout-note}
 At this stage in your modelling, you will need to start drawing on your creativity!
 
