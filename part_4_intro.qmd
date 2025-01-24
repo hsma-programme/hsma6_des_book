@@ -6,4 +6,4 @@ While there are often rules of thumb and efficient or less efficient ways of doi
 
 The chapters that follow will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.
 
-Part 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can
+Part 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can build logging, testing and visualisation into various parts of your model to confirm that it is working in the way it should be.

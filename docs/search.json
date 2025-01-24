@@ -549,12 +549,12 @@
   {
     "objectID": "one_or_the_other.html",
     "href": "one_or_the_other.html",
-    "title": "15  Waiting for One or The Other",
+    "title": "15  (Coming Soon!) Waiting for One or The Other",
     "section": "",
     "text": "Warning\n\n\n\nThis section is a work in progress\n\n\nSometimes in a system you may find yourself in a situation where you need to\nFor example, you may have\n\nan operating theatre where the operation will be cancelled if a recovery bed resource is not available within a certain time of the patient beginning to be prepped\nan air ambulance where the call will be regarded as ‘missed’ and exit the system if an air ambulance resource is not immediately available\n\nThis is really just a similar situation to reneging - but instead of using a patience attribute, we instead provide some other value - often a fixed period of time - to check against.\n\n\n\n\n\n\nNote\n\n\n\nCode for this example is coming soon.\nIn the meantime, take a look at the reneging section - in particular the use of the OR statement in the form of the | (pipe).",
     "crumbs": [
       "Part 3 - Extending Your Basic Model",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Waiting for One or The Other</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(Coming Soon!) Waiting for One or The Other</span>"
     ]
   },
   {
@@ -683,7 +683,7 @@
     "href": "part_4_intro.html",
     "title": "20  An Introduction to Modelling Complex Real-World Systems",
     "section": "",
-    "text": "As you begin to model your first real-world systems, you may find yourself uncertain of the best approach to take to a problem, and seeking out the ‘right’ way to do something.\nWhile there are often rules of thumb and efficient or less efficient ways of doing things, there often isn’t a single answer to how you structure a solution.\nThe chapters that follow will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.\nPart 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can",
+    "text": "As you begin to model your first real-world systems, you may find yourself uncertain of the best approach to take to a problem, and seeking out the ‘right’ way to do something.\nWhile there are often rules of thumb and efficient or less efficient ways of doing things, there often isn’t a single answer to how you structure a solution.\nThe chapters that follow will tend to give you an idea of how you might approach a situation, and some general rules of thumb to follow, but you should not be afraid of trying a different approach.\nPart 5 will also be crucial for building your confidence in real-world systems, as it will help you to understand how you can build logging, testing and visualisation into various parts of your model to confirm that it is working in the way it should be.",
     "crumbs": [
       "Part 4 - Growing your Confidence as a Modeller",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>An Introduction to Modelling Complex Real-World Systems</span>"

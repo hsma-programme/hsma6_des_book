@@ -4,9 +4,10 @@ Let's imagine we want to model some more variety within the patients (entities) 
 
 Maybe patients are differentiated by something - their method of arrival, or the illness they have, or the severity of their symptoms, and consequently have
 
-- have different arrival rates
-- have different
-- have different pathways
+- different arrival rates
+- different distributions for the amount of time spend with resources
+- different probabilities at branching points
+- different pathways entirely (but still within your system of interest)
 
 The flexibility of simpy and Python does mean there are a range of ways we could approach coding this in.
 
@@ -16,7 +17,9 @@ In this chapter, we will give a bit of an introduction to how you might make dec
 - whether to have a single generator or multiple generators
 
 :::{.callout-note}
-At this stage in your modelling, you will need to start drawing on your creativity and
+At this stage in your modelling, you will need to start drawing on your creativity!
+
+Consider the approaches described throughout this chapter and the example given in the next chapter, but work this into your own solution.
 :::
 
 ## Approaches to Managing Arrivals
