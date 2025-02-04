@@ -22,11 +22,11 @@ In many community-based services, it is important to model the process of booked
 
 These are quite distinct from the processes we have modelled so far, where arrivals flow through the system immediately - or as quickly as possible, depending on the queues.
 
-This works well for modelling a range of services, or smaller parts of more complex processes, such as
+This works well for modelling a range of services, or smaller parts of more complex processes, such as:
 
-- emergency departments
-- services without booking (e.g. a walk-in clinic)
-- telephone helplines
+- Emergency departments.
+- Services without booking (e.g. a walk-in clinic).
+- Telephone helplines.
 
 However, in many services there is a process by which clients are booked into an appointment at some point in the future. There is often a delay of several days or weeks - which allows patients to receive communication about their appointment and make plans to attend it.
 
@@ -36,34 +36,34 @@ This video from NHS England explains why a certain level of waiting list can be 
 {{< video https://youtu.be/hga8HQFXaDw?si=KzNqZly5xf-bJ7S9>}}
 :::
 
-Appointment booking can take on additional layers of complexity, such as
+Appointment booking can take on additional layers of complexity, such as:
 
-- certain slots being set aside for more urgent referrals - and how to balance available capacity for these appointments with the importance of these clients being seen quickly
-- an ongoing caseload of patients being held 'on the books' and returning for follow-up appointments at certain intervals
-- a triage step prior to appointment booking where the referral may be deemed as inappropriate, giving another point at which referrals may leave the system (a **sink**)
-- a certain proportion of patients not attending their appointment, with some exiting the system entirely while some may need to be rebooked
+- Certain slots being set aside for more urgent referrals - and how to balance available capacity for these appointments with the importance of these clients being seen quickly.
+- An ongoing caseload of patients being held 'on the books' and returning for follow-up appointments at certain intervals.
+- A triage step prior to appointment booking where the referral may be deemed as inappropriate, giving another point at which referrals may leave the system (a **sink**).
+- A certain proportion of patients not attending their appointment, with some exiting the system entirely while some may need to be rebooked.
 
 In this chapter, we will look at an implementation of a simple model of a mental health assessment service.
 
-In this model, patients
+In this model, patients:
 
-- are referred to the service
-- are booked in to the next available appointment
-- wait until the appointment is carried out
-- exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system
+- Are referred to the service.
+- Are booked in to the next available appointment.
+- Wait until the appointment is carried out.
+- Exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system.
 
 ## The appointment book
 
 The key difference in this model is that we will feed in an additional object that represents the capacity of the clinic to see new clients.
 
-To begin with, let's assume that
+To begin with, let's assume that:
 
-- there is a single clinic
-- any client can be seen by any clinician
-- they are open six days a week
-- all appointments are the same length
-- clients do not express any preference about being seen at a particular time of day
-- everyone attends their appointment
+- There is a single clinic.
+- Any client can be seen by any clinician.
+- They are open six days a week.
+- All appointments are the same length.
+- Clients do not express any preference about being seen at a particular time of day.
+- Everyone attends their appointment.
 
 ```{python}
 #| eval: true
@@ -91,9 +91,7 @@ We will also pass in the dataframe of shifts.
 
 Another new parameter is the minimum wait. To give patients time to receive their appointment letter and make a plan to attend, we don't want to just book the next available appointment, as this could be the very next day, with no time for clients to find out they are meant to be attending!
 
-In the final new parameter, we will
-
-Next, we return to parameters we have used before - the sim duration, which we have this time set as two years (365 days times 2). Note that compared to our previous model, where we interpreted each simpy time unit as 1 minute, we are now interpreting a single time unit as one *day*. We do not change anything in simpy itself to do this - but we just need to be careful that we remain consistent in our application of this throughout the rest of the model.
+Finally, we return to parameters we have used before - the sim duration, which we have this time set as two years (365 days times 2). Note that compared to our previous model, where we interpreted each SimPy time unit as 1 minute, we are now interpreting a single time unit as one *day*. We do not change anything in SimPy itself to do this - but we just need to be careful that we remain consistent in our application of this throughout the rest of the model.
 
 ```{python}
 #| eval: true
@@ -142,10 +140,10 @@ class Patient:
 
 We now need to make some important changes to the __init__method of the model, as well as create a few extra methods we can call on.
 
-One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to
+One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to:
 
-- extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running)
-- create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when
+- Extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running).
+- Create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when.
 
 :::{.callout-tip}
 Note that we are using numpy throughout for the operations relating to the bookings. This is just due to the speed advantage of numpy in this context.
@@ -396,10 +394,10 @@ This method changes quite significantly from our existing models.
 
 Instead of generating a patient, calculating the length of time that elapses until the next patient arrives and then waiting for that time to elapse, we mode through the simulation one day at a time, performing the following steps:
 
-- calculating (sampling) the number of arrivals per day
-- looping through each referral and creating a new patient object
-- creating an instance of the booker class for each patient
-- starting a referral process for that patient
+- Calculating (sampling) the number of arrivals per day.
+- Looping through each referral and creating a new patient object.
+- Creating an instance of the booker class for each patient.
+- Starting a referral process for that patient.
 
 When this is complete for every patient who is generated for that day, we can step forward to the next day by waiting for one time unit to elapse.
 
