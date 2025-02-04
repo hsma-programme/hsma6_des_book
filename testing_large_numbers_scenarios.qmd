@@ -5,7 +5,7 @@ jupyter: python3
 ---
 # Testing Large Numbers of Scenarios {#sec-test-scenarios}
 
-:::{.callout-info}
+:::{.callout-note}
 Credit for this solution goes to [Anna Laws](https://orcid.org/0000-0002-2145-0487) and [Mike Allen](https://orcid.org/0000-0002-8746-9957) of the PenCHORD team.
 :::
 

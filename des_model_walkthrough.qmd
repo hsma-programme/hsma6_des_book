@@ -46,7 +46,7 @@ Then you can click ‘run simulation’ to start a new simulation.
 
 Take a look at the graphs that are created!
 
-::: {.callout-info}
+::: {.callout-note}
 - Try changing the slider with the title 'How many patients should arrive per day on average?'.
 Look at the graph below it.
     - How do the numbers on the horizontal axis change?

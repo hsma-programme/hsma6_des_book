@@ -4,7 +4,7 @@ SimPy is a Python package that allows us to create powerful Discrete Event Simul
 
 You can read SimPy's own tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/ - but we'd recommend working through at least the first few chapters in this book first.
 
-:::{.callout-info}
+:::{.callout-note}
 To install SimPy, we need to `pip install simpy`.  However, it is recommended that you use a separate environment.  Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!
 :::
 

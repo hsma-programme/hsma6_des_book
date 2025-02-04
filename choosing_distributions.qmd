@@ -54,7 +54,7 @@ Well, a Lognormal distribution is one in which the **logarithm** of the random v
 
 This means that the the two parameters μ (Mu) and σ (Sigma) used to specify a Lognormal distribution do not represent the mean and standard deviation, unlike the normal distribution; rather, they represent what are known as the location and scale of the distribution respectively.
 
-:::{.callout-info}
+:::{.callout-note}
 μ (Mu) and σ (Sigma) represent the mean and standard deviation once the data in the log normal distribution has been transformed using logarithms.
 :::
 
