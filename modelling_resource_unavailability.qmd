@@ -36,7 +36,11 @@ Basically, we will :
 - Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!)
 - Start this new generator running in our run method of the Model class.
 
-## Coding the approach
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### g class
 

@@ -125,6 +125,10 @@ Now let's update our model code.
 
 ## Coding the model
 
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
 ### g class
 
 We'll just add in a space to for the scenario name.

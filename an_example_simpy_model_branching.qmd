@@ -57,13 +57,13 @@ For the time of day, you'd want to check the current simulation time in the run.
 For the type of patient, you may have stored this in an **attribute** of the patient.
 :::
 
+## Coding the model
+
 :::{.callout-tip}
 Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
 :::
 
-## Coding the model
-
-### The g class
+### g class
 
 We need to add a few additional parameters to our g class.
 
@@ -85,7 +85,7 @@ class g:
     number_of_runs = 5
 ```
 
-### The patient class
+### Patient class
 
 We want to add an additional attribute to record the time patients spend with the doctor if they see one.
 
@@ -99,7 +99,7 @@ class Patient:
         self.q_time_doctor = 0 ##NEW
 ```
 
-### The model class
+### Model class
 
 #### the __init__ method
 
@@ -347,7 +347,7 @@ def calculate_run_results(self):
 
 The run method is unchanged
 
-### The trial class
+### Trial class
 
 #### The __init__ method
 

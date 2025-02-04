@@ -167,7 +167,11 @@ The wider distributions - where more of the blue 'unthinned' distribution is sti
 
 :::
 
-## Coding the variable arrival rates
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### Imports
 

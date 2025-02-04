@@ -51,6 +51,10 @@ So let's set a **random seed** so that we *fix* the patterns and arrivals.
 
 ## Exploring ways of coding in reproducibility
 
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
 :::{.callout-warning}
 The method shown in this section has limitations - but reading through this section will help you understand more about seeds and why the method in @sec-robust ("A robust way to ensure controlled randomness") is better.
 :::

@@ -20,7 +20,11 @@ Imagine this department is having problems seeing patients fast enough. They hav
 
 By setting up a model where we look at how both kinds of resources are used, we can begin to explore these questions.
 
-## Code example
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 Let's return to our branching model from before.
 

@@ -49,7 +49,11 @@ Let’s look at an example.  This is a slightly amended version of the model of 
 
 We’re going to assume this is a system that’s open 24 hours - let's imagine this is a triage function at an emergency department.
 
-I’ve marked the bits I’ve added to include warm up with ##NEW
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### The g class
 

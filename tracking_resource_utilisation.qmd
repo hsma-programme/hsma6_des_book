@@ -51,7 +51,11 @@ We can track this by adding an additional attribute to our patient class.
 
 Let's return to the very simplest version of the model for this.
 
-### A code example
+### Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 #### g class
 

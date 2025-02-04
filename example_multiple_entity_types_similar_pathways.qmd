@@ -75,6 +75,10 @@ Remember - this is just one way of tackling this!
 
 ## Coding the model
 
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
 ### Imports
 
 As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.

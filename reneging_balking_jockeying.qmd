@@ -34,6 +34,10 @@ To model this, we :
 
 ### Coding a reneging example
 
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
 #### g class
 The g class is unchanged.
 
@@ -535,7 +539,7 @@ This class is unchanged.
 
 Here we add in an additional attribute to count the number of people who balk.
 
-We also we add a list that will store patient objects queuing for the nurse consultation.  This will allow us to see who is in the queue at any time, as well as the length of the queue etc.
+We also we add a list that will store patient objects queuing for the nurse consultation.  This will allow us to see who is in the queue at any time, as well as the length of the queue etc.a reneging example
 
 ```{python}
 class Model:

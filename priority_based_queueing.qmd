@@ -16,6 +16,8 @@ So far, we’ve assumed that the queues in our models follow a FIFO (First in Fi
 
 But in healthcare systems, very often there is an element of prioritisation in a real world queue.  Typically this represents the severity of the patient’s condition.
 
+## Implementing priority-based queueing
+
 We can build in priority-based queuing in our SimPy models in a few different ways - but one of the easiest is using something known as a **PriorityResource**.
 
 A PriorityResource is a class in SimPy that’s like the standard Resource class we’ve used so far, but also has functionality that allows it to select which entity to pull out of a queue next based on a priority value we specify.
@@ -28,7 +30,11 @@ The way this works in SimPy is :
 
 3. When we request a PriorityResource, we tell it the attribute to use to determine priority in that queue (this also means we could have multiple attributes for priority and use different ones for different queues).
 
-## Implementing priority-based queueing
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### g class
 
