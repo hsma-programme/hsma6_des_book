@@ -264,6 +264,7 @@ class Model:
                     patient.q_time_nurse
                 )
 
+                ##NEW
                 self.results_df.at[patient.id, "Priority"] = (
                     patient.priority
                 )
