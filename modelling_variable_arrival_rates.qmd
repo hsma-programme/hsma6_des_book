@@ -203,7 +203,7 @@ arrivals_df = pd.read_csv("resources/nspp_example_1.csv")
 arrivals_df["arrival_rate"] = arrivals_df['mean_iat'].apply(lambda x: 1/x)
 
 class g:
-    arrivals_time_dependent_df = arrivals_df  ## NEW
+    arrivals_time_dependent_df = arrivals_df  ##NEW
     mean_n_consult_time = 6
     number_of_nurses = 1
     sim_duration = 120
@@ -251,7 +251,7 @@ We are also going to create an empty list to store our patient objects - this is
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         # Here we set up our arrivals distribution
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
@@ -268,7 +268,7 @@ We are also going to create an empty list to store our patient objects - this is
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create somewhere to store our patient objects
-        self.patient_list = [] ## NEW
+        self.patient_list = [] ##NEW
 
         # Create an attribute to store the mean queuing time for the nurse
         # across this run of the model
@@ -305,7 +305,7 @@ In this method, we just need to swap our use of `random.expovariate(1.0 / g.pati
             # sample from an exponential distribution (common for inter-arrival
             # times), and pass in a lambda value of 1 / mean.  The mean
             # inter-arrival time is stored in the g class.
-            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ## NEW
+            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ##NEW
 
             # Freeze this instance of this function in place until the
             # inter-arrival time we sampled above has elapsed.  Note - time in
@@ -337,6 +337,7 @@ For the purposes of checking the model is working as intended, we are going to r
         # run results
         self.calculate_run_results()
 
+        ##NEW - return list of arrival times
         return [p.arrival_time for p in self.patient_list]
 ```
 
@@ -370,11 +371,11 @@ def run_trial(self):
     # dataframe.
     for run in range(g.number_of_runs):
         my_model = Model(run)
-        model_outputs = my_model.run() ##MODIFIED
+        model_outputs = my_model.run() ##NEW
         ## Saves output from my_model.run to a variable
 
         self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
-        ## NEW
+        ##NEW
         self.arrival_time_lists.append(
               pf.DataFrame({"run": [run for i in range(len(model_outputs))], "arrival_times": model_outputs})
               )
@@ -382,7 +383,7 @@ def run_trial(self):
     # Once the trial (ie all runs) has completed, print the final results
     self.print_trial_results()
 
-    ## NEW - return the arrival times as well
+    ##NEW - return the arrival times as well
     return self.arrival_time_lists
 ```
 
@@ -420,7 +421,7 @@ class g:
 class Patient:
     def __init__(self, p_id):
         self.id = p_id
-        self.arrival_time = 0 ## NEW
+        self.arrival_time = 0 ##NEW
         self.q_time_nurse = 0
 
 # Class representing our model of the clinic.
@@ -442,7 +443,7 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        # NEW
+        ##NEW
         # Here we set up our arrivals distribution
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
@@ -460,7 +461,7 @@ class Model:
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create somewhere to store our patient objects
-        self.patient_list = [] ## NEW
+        self.patient_list = [] ##NEW
 
         # Create an attribute to store the mean queuing time for the nurse
         # across this run of the model
@@ -493,7 +494,7 @@ class Model:
             # sample from an exponential distribution (common for inter-arrival
             # times), and pass in a lambda value of 1 / mean.  The mean
             # inter-arrival time is stored in the g class.
-            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ## NEW
+            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ##NEW
 
             # Freeze this instance of this function in place until the
             # inter-arrival time we sampled above has elapsed.  Note - time in
@@ -585,6 +586,7 @@ class Model:
         # run results
         self.calculate_run_results()
 
+        ##NEW - return list of arrival times
         return [p.arrival_time for p in self.patient_list]
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
@@ -616,12 +618,12 @@ class Trial:
         # dataframe.
         for run in range(g.number_of_runs):
             my_model = Model(run)
-            model_outputs = my_model.run() ##MODIFIED
+            model_outputs = my_model.run() ##NEW
             ## Saves output from my_model.run to a variable
 
             self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
 
-            ## NEW
+            ##NEW
             self.arrival_time_lists.append(
               pd.DataFrame({"run": [run for i in range(len(model_outputs))], "arrival_times": model_outputs})
               )
@@ -629,7 +631,7 @@ class Trial:
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
 
-        ## NEW - return the arrival times as well
+        ##NEW - return the arrival times as well
         return self.arrival_time_lists
 ```
 :::

@@ -70,7 +70,7 @@ class Patient:
     def __init__(self, p_id):
         self.id = p_id
         self.q_time_nurse = 0
-        self.time_with_nurse = 0 ## NEW
+        self.time_with_nurse = 0 ##NEW
 
 ```
 
@@ -313,7 +313,7 @@ def run_trial(self):
         my_model = Model(run)
         my_model.run()
 
-        self.df_trial_results.loc[run, "Mean Q Time Nurse"] = [my_model.mean_q_time_nurse] ##EDITED
+        self.df_trial_results.loc[run, "Mean Q Time Nurse"] = [my_model.mean_q_time_nurse] ##NEW
         self.df_trial_results.loc[run, "Average Nurse Utilisation"] = [my_model.nurse_utilisation] ##NEW
 
     # Once the trial (ie all runs) has completed, print the final results
@@ -365,7 +365,7 @@ class Patient:
     def __init__(self, p_id):
         self.id = p_id
         self.q_time_nurse = 0
-        self.time_with_nurse = 0 ## NEW
+        self.time_with_nurse = 0 ##NEW
 
 # Class representing our model of the clinic.
 class Model:
@@ -377,7 +377,7 @@ class Model:
 
         # Create a patient counter (which we'll use as a patient ID)
         self.patient_counter = 0
-        self.patient_objects = [] ## NEW
+        self.patient_objects = [] ##NEW
 
         # Create a SimPy resource to represent a nurse, that will live in the
         # environment created above.  The number of this resource we have is
@@ -559,7 +559,7 @@ class Trial:
             my_model = Model(run)
             my_model.run()
 
-            self.df_trial_results.loc[run, "Mean Q Time Nurse"] = [my_model.mean_q_time_nurse] ##EDITED
+            self.df_trial_results.loc[run, "Mean Q Time Nurse"] = [my_model.mean_q_time_nurse] ##NEW
             self.df_trial_results.loc[run, "Average Nurse Utilisation"] = [my_model.nurse_utilisation] ##NEW
 
         # Once the trial (ie all runs) has completed, print the final results
@@ -655,6 +655,9 @@ Then we add the `interval_audit_utilisation` function to our `Model` class.
 We set it up so either a list of resources can be passed as a dictionary, or just a single simpy resource object.
 
 ```{python}
+#########
+##NEW
+#########
 def interval_audit_utilisation(self, resources, interval=1):
     '''
     Record utilisation at defined intervals.
@@ -705,6 +708,9 @@ def interval_audit_utilisation(self, resources, interval=1):
 
         # Trigger next audit after desired interval has passed.
         yield self.env.timeout(interval)
+#########
+##END NEW
+#########
 ```
 
 :::{.callout-tip}
@@ -806,6 +812,8 @@ class Trial:
 
 ##### The run_trial method
 
+Save the interval audit results in a dataframe.
+
 ```{python}
 # Method to run a trial
 def run_trial(self):
@@ -817,17 +825,17 @@ def run_trial(self):
         # dataframe.
         for run in range(g.number_of_runs):
             my_model = Model(run)
-            my_model.run() ##EDITED
+            my_model.run() ##NEW
 
             self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
 
-            interval_audit_df = pd.DataFrame(my_model.utilisation_audit)
-            interval_audit_df["run"] = run
+            interval_audit_df = pd.DataFrame(my_model.utilisation_audit) ##NEW
+            interval_audit_df["run"] = run ##NEW
             interval_audit_df["perc_utilisation"] = (
               interval_audit_df["number_utilised"]/interval_audit_df["number_available"]
-            )
+            ) ##NEW
 
-            self.interval_audit_list.append(interval_audit_df)
+            self.interval_audit_list.append(interval_audit_df) ##NEW
 
         # For now, we're going to skip printing the trial results, so the line
         # below has been commented out
@@ -839,6 +847,7 @@ def run_trial(self):
 Finally we are going to create a new method that just joins all of the interval audit dataframes together and returns them as a single dataframe.
 
 ```{python}
+##NEW
 def get_interval_audits(self):
   return pd.concat(self.interval_audit_list)
 ```
@@ -1006,6 +1015,9 @@ class Model:
         # this run of the model.
         self.mean_q_time_nurse = self.results_df["Q Time Nurse"].mean()
 
+    #########
+    ##NEW
+    #########
     def interval_audit_utilisation(self, resources, interval=1):
         '''
         Record utilisation at defined intervals.
@@ -1056,6 +1068,9 @@ class Model:
 
             # Trigger next audit after desired interval has passed.
             yield self.env.timeout(interval)
+    #########
+    ##END NEW
+    #########
 
     # The run method starts up the DES entity generators, runs the simulation,
     # and in turns calls anything we need to generate results for the run
@@ -1114,22 +1129,23 @@ class Trial:
         # dataframe.
         for run in range(g.number_of_runs):
             my_model = Model(run)
-            my_model.run() ##EDITED
+            my_model.run() ##NEW
 
             self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
 
-            interval_audit_df = pd.DataFrame(my_model.utilisation_audit)
-            interval_audit_df["run"] = run
+            interval_audit_df = pd.DataFrame(my_model.utilisation_audit) ##NEW
+            interval_audit_df["run"] = run ##NEW
             interval_audit_df["perc_utilisation"] = (
               interval_audit_df["number_utilised"]/interval_audit_df["number_available"]
-            )
+            ) ##NEW
 
-            self.interval_audit_list.append(interval_audit_df)
+            self.interval_audit_list.append(interval_audit_df) ##NEW
 
         # For now, we're going to skip printing the trial results, so the line
         # below has been commented out
         # self.print_trial_results()
 
+    ##NEW
     def get_interval_audits(self):
       return pd.concat(self.interval_audit_list)
 ```

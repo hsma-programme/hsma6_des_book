@@ -822,9 +822,9 @@ class Trial:
     # The constructor sets up an empty list, which we will place dictionaries
     # into. Each dictionary will be the results from a single run.
     def  __init__(self):
-        self.df_trial_results = [] ## NEW
+        self.df_trial_results = [] ##NEW
 
-    ## NEW
+    ##NEW
     def process_trial_results(self):
       self.df_trial_results = pd.DataFrame(self.df_trial_results)
       self.df_trial_results.set_index("Run Number", inplace=True)
@@ -904,9 +904,9 @@ class Trial:
     # The constructor sets up an empty list, which we will place dictionaries
     # into. Each dictionary will be the results from a single run.
     def  __init__(self):
-        self.df_trial_results = [] ## NEW
+        self.df_trial_results = [] ##NEW
 
-    ## NEW
+    ##NEW
     def process_trial_results(self):
       self.df_trial_results = pd.DataFrame(self.df_trial_results)
       self.df_trial_results.set_index("Run Number", inplace=True)

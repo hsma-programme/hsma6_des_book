@@ -101,7 +101,7 @@ def __init__(self, run_number):
         self.receptionist = simpy.Resource(self.env, capacity=g.number_of_receptionists)
         self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
         self.doctor = simpy.Resource(self.env, capacity=g.number_of_doctors)
-        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
+        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ##NEW
 
         # Store the passed in run number
         self.run_number = run_number
@@ -297,7 +297,7 @@ if random.uniform(0,1) < g.prob_seeing_doctor:
         self.cubicle.release(cubicle_request) ##NEW
 
 
-else: ## NEW
+else: ##NEW
 
       self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
             self.env.now - end_q_cubicle
@@ -414,7 +414,7 @@ class Model:
         self.receptionist = simpy.Resource(self.env, capacity=g.number_of_receptionists)
         self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
         self.doctor = simpy.Resource(self.env, capacity=g.number_of_doctors)
-        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
+        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ##NEW
 
         # Store the passed in run number
         self.run_number = run_number
@@ -501,16 +501,17 @@ class Model:
 
         # Here's where the patient finishes with the receptionist, and starts
         # queuing for the nurse
-        # NEW: They will also be queueing for a cubicle at this point.
+        ##NEW: They will also be queueing for a cubicle at this point.
         #
 
         # Record the time the patient started queuing for a nurse
         start_q_nurse = self.env.now
         start_q_cubicle = self.env.now ##NEW
 
-        ########
+        #########
         ##NEW
-        ########
+        #########
+
         # As we are going to require the cubicle for the entire time period from
         # here on, and won't release it until they exit the system, we will request
         # the cubicle here and indent all of the existing code by one level.
@@ -558,9 +559,9 @@ class Model:
         self.results_df.at[patient.id, "Q Time Nurse"] = (
           patient.q_time_nurse
         )
-        ########
+        #########
         ##END NEW
-        ########
+        #########
 
         # Now we'll randomly sample the time this patient with the nurse.
         # Here, we use an Exponential distribution for simplicity, but you
@@ -633,7 +634,7 @@ class Model:
 
                 self.cubicle.release(cubicle_request) ##NEW
 
-        else: ## NEW
+        else: ##NEW
 
             self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
                   self.env.now - end_q_cubicle
@@ -689,7 +690,7 @@ class Trial:
     # you'd likely save them as well as (or instead of) printing them
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
+        print (self.df_trial_results.round(1)) ##NEW: Added rounding
 
     # Method to run a trial
     def run_trial(self):
@@ -819,7 +820,7 @@ class Trial:
     # you'd likely save them as well as (or instead of) printing them
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
+        print (self.df_trial_results.round(1)) ##NEW: Added rounding
 
     # Method to run a trial
     def run_trial(self):

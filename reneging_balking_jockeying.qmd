@@ -637,7 +637,7 @@ def run(self):
     # Print patient level results for this run
     print (f"Run Number {self.run_number}")
     print (self.results_df)
-    print (f"{self.num_balked_nurse} patients balked at the nurse queue") ## NEW
+    print (f"{self.num_balked_nurse} patients balked at the nurse queue") ##NEW
 ```
 
 #### Trial class

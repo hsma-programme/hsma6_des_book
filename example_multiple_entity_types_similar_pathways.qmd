@@ -90,7 +90,7 @@ Note that we use a hyphen in the package name when installing it, but an undersc
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential, Uniform ## NEW
+from sim_tools.distributions import Exponential, Uniform ##NEW
 ```
 
 ### g class
@@ -167,11 +167,11 @@ class Patient:
     def __init__(self, p_id, type):
         self.id = p_id
 
-        self.type = type ## NEW
+        self.type = type ##NEW
 
         self.q_time_recep = 0
         self.q_time_nurse = 0
-        self.seen_doctor = False ## NEW
+        self.seen_doctor = False ##NEW
         self.q_time_doctor = 0
 ```
 
@@ -209,7 +209,7 @@ class Model:
         # the patient ID (which we'll use as the index).
         self.results_df = pd.DataFrame()
         self.results_df["Patient ID"] = [1]
-        self.results_df["Patient type"] = [""] ## NEW # <1>
+        self.results_df["Patient type"] = [""] ##NEW # <1>
         self.results_df["Q Time Recep"] = [0.0]
         self.results_df["Time with Recep"] = [0.0]
         self.results_df["Q Time Nurse"] = [0.0]
@@ -630,7 +630,7 @@ The full updated code for the model is given below.
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential, Uniform ## NEW
+from sim_tools.distributions import Exponential, Uniform ##NEW
 
 # Class to store global parameter values.  We don't create an instance of this
 # class - we just refer to the class blueprint itself to access the numbers
@@ -686,7 +686,7 @@ class Patient:
 
         self.q_time_recep = 0
         self.q_time_nurse = 0
-        self.seen_doctor = False ## NEW
+        self.seen_doctor = False ##NEW
         self.q_time_doctor = 0
 
 class Model:
@@ -714,7 +714,7 @@ class Model:
         # the patient ID (which we'll use as the index).
         self.results_df = pd.DataFrame()
         self.results_df["Patient ID"] = [1]
-        self.results_df["Patient type"] = [""] ## NEW # <1>
+        self.results_df["Patient type"] = [""] ##NEW # <1>
         self.results_df["Q Time Recep"] = [0.0]
         self.results_df["Time with Recep"] = [0.0]
         self.results_df["Q Time Nurse"] = [0.0]
@@ -1131,8 +1131,8 @@ class Trial:
 
     # Method to run a trial
     def run_trial(self):
-        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
-        print("") ## NEW: Print a blank line
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ##NEW
+        print("") ##NEW: Print a blank line
         # Run the simulation for the number of runs specified in g class.
         # For each run, we create a new instance of the Model class and call its
         # run method, which sets everything else in motion.  Once the run has
@@ -1187,8 +1187,8 @@ class Trial:
 
     # Method to run a trial
     def run_trial(self):
-        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
-        print("") ## NEW: Print a blank line
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ##NEW
+        print("") ##NEW: Print a blank line
         # Run the simulation for the number of runs specified in g class.
         # For each run, we create a new instance of the Model class and call its
         # run method, which sets everything else in motion.  Once the run has

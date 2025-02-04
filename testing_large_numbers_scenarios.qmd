@@ -136,7 +136,7 @@ class g:
     prob_seeing_doctor = 0.6
     sim_duration = 600
     number_of_runs = 2
-    scenario_name = 0 ## New
+    scenario_name = 0 ##NEW
 ```
 
 Let's now create all of the scenario objects.

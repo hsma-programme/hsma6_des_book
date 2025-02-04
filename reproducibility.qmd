@@ -858,8 +858,8 @@ class Trial:
 
     # Method to run a trial
     def run_trial(self):
-        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
-        print("") ## NEW: Print a blank line
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ##NEW
+        print("") ##NEW: Print a blank line
         # Run the simulation for the number of runs specified in g class.
         # For each run, we create a new instance of the Model class and call its
         # run method, which sets everything else in motion.  Once the run has

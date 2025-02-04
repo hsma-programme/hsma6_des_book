@@ -129,10 +129,10 @@ We will also create a space to record the time patients arrive into the model, a
 class Patient:
     def __init__(self, p_id, booker):
         self.id = p_id
-        self.booker = booker
+        self.booker = booker  ##NEW
 
-        self.arrival_time = 0
-        self.waiting_time = 0
+        self.arrival_time = 0  ##NEW
+        self.waiting_time = 0  ##NEW
 ```
 
 
@@ -178,15 +178,15 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         self.available_slots = None
         self.bookings = None
 
-        ## NEW - run the new methods we have created below
+        ##NEW - run the new methods we have created below
         self.create_slots() ##NEW
         self.create_bookings() ##NEW
 
-        ## NEW
+        ##NEW
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
                                     random_seed=run_number*42) # <2>
 
@@ -199,12 +199,12 @@ class Model:
 
         # Create an attribute to store the mean waiting time for an appointment
         # across this run of the model
-        self.mean_wait_time_appointment = 0 ## NEW
-        self.mean_yearly_arrivals = 0 ## NEW
+        self.mean_wait_time_appointment = 0 ##NEW
+        self.mean_yearly_arrivals = 0 ##NEW
 
-    ########################################
-    ## ---------- NEW ------------------- ##
-    ########################################
+    #########
+    ##NEW
+    #########
 
     def create_slots(self):
 
@@ -235,9 +235,9 @@ class Model:
         bookings.index.rename('day', inplace=True)
         self.bookings = bookings
 
-    ########################################
-    ## ---------- END NEW --------------- ##
-    ########################################
+    #########
+    ##END NEW
+    #########
 ```
 1. The parameter we pass to the poisson distribution is the average number of daily arrivals; this will be the average number of yearly arrivals divided by the number of weeks in a year and the number of days in a week.
 2. This will ensure we have a different random pattern of arrivals per run, but that the number of arrivals is reproducible across trials.
@@ -271,6 +271,10 @@ In this case, this is also the motivation for adding in a 'clinic ID' parameter 
 
 ```{python}
 #| eval: true
+
+#########
+##NEW
+#########
 class Booker():
     '''
     Booking class.
@@ -337,7 +341,9 @@ class Booker():
 
         # Increase the number of bookings we have on that day
         self.model.bookings.iat[booking_t, clinic_id] += 1
-
+#########
+##END NEW
+#########
 ```
 
 
@@ -398,6 +404,9 @@ Instead of generating a patient, calculating the length of time that elapses unt
 When this is complete for every patient who is generated for that day, we can step forward to the next day by waiting for one time unit to elapse.
 
 ```{python}
+#########
+##NEW
+#########
 def generator_patient_arrivals(self):
     for t in itertools.count():
 
@@ -418,6 +427,9 @@ def generator_patient_arrivals(self):
 
         #timestep by one day
         yield self.env.timeout(1)
+#########
+##END NEW
+#########
 ```
 
 #### The attend_clinic method
@@ -425,6 +437,9 @@ def generator_patient_arrivals(self):
 This method also needs to change quite significantly.
 
 ```{python}
+#########
+##NEW
+#########
 def attend_clinic(self, patient):
     patient.arrival_time = self.env.now
 
@@ -447,6 +462,9 @@ def attend_clinic(self, patient):
     self.results_df.at[patient.id, "Q Time Appointment"] = (
                patient.waiting_time
                )
+#########
+##END NEW
+#########
 ```
 1. The arrival time of the patient is passed in so that only appointments in the future are considered as eligible slots.
 2. In this example we are only looking at a single clinic. In later versions of this model, patients who arrive will also have a preferred 'home' clinic, which will mean that different clinic IDs can be passed in at this stage.
@@ -456,12 +474,18 @@ def attend_clinic(self, patient):
 Here, we are just altering the column name we refer to when calculating our metric of interest.
 
 ```{python}
-    def calculate_run_results(self):
-        # Take the mean of the queuing times for an appointment across this run of the model
-        self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
-        # use our patient counter to track how many patients turn up on average during each
-        # year of the simulation.
-        self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
+#########
+##NEW
+#########
+def calculate_run_results(self):
+    # Take the mean of the queuing times for an appointment across this run of the model
+    self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+    # use our patient counter to track how many patients turn up on average during each
+    # year of the simulation.
+    self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
+#########
+##END NEW
+#########
 ```
 
 #### The run method
@@ -545,11 +569,14 @@ class g:
 class Patient:
     def __init__(self, p_id, booker):
         self.id = p_id
-        self.booker = booker
+        self.booker = booker  ##NEW
 
-        self.arrival_time = 0
-        self.waiting_time = 0
+        self.arrival_time = 0  ##NEW
+        self.waiting_time = 0  ##NEW
 
+#########
+##NEW
+#########
 class Booker():
     '''
     Booking class.
@@ -616,6 +643,9 @@ class Booker():
 
         # Increase the number of bookings we have on that day
         self.model.bookings.iat[booking_t, clinic_id] += 1
+#########
+##END NEW
+#########
 
 class Model:
     # Constructor to set up the model for a run.  We pass in a run number when
@@ -630,7 +660,7 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         self.available_slots = None
         self.bookings = None
 
@@ -639,7 +669,7 @@ class Model:
         self.create_bookings() ##NEW
 
 
-        ## NEW
+        ##NEW
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
                                     random_seed=run_number*42) # <2>
 
@@ -652,12 +682,12 @@ class Model:
 
         # Create an attribute to store the mean waiting time for an appointment
         # across this run of the model
-        self.mean_wait_time_appointment = 0 ## NEW
-        self.mean_yearly_arrivals = 0 ## NEW
+        self.mean_wait_time_appointment = 0 ##NEW
+        self.mean_yearly_arrivals = 0 ##NEW
 
-    ########################################
-    ## ---------- NEW ------------------- ##
-    ########################################
+    #########
+    ##NEW
+    #########
 
     def create_slots(self):
 
@@ -759,9 +789,9 @@ class Model:
         #print (f"Run Number {self.run_number}")
         #print (self.results_df)
 
-    ########################################
-    ## ---------- END NEW --------------- ##
-    ########################################
+    #########
+    ##END NEW
+    #########
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
 class Trial:
@@ -948,7 +978,7 @@ class Model:
         self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
         self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
         #########
-        ## NEW ##
+        ##NEW
         #########
 
         slots_unused = self.available_slots.clinic_1.values[ : g.sim_duration]
