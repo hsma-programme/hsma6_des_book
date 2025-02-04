@@ -142,7 +142,7 @@ self.results_df.at[patient.id, "Q Time Nurse"] = (
 
 However, if the simulation time is 1680, for example, it will.
 
-### the calculate_run_results method
+#### The calculate_run_results method
 
 As we now won't count the first patient, we need to remove the dummy first patient result entry we created when we set up the dataframe.
 
@@ -179,7 +179,7 @@ def run(self):
     print (self.results_df)
 ```
 
-### The Trial class
+### The trial class
 
 Our trial class is unchanged.
 

@@ -32,12 +32,12 @@ To model this, we :
 - We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged
 - We’ll add the number of patients that reneged to our outputs from each run, and take the average number of patients who reneged per run over the trial.
 
-### Coding a reneging examaple
+### Coding a reneging example
 
-#### The g class
+#### g class
 The g class is unchanged.
 
-#### The patient class
+#### Patient class
 
 In the patient class, we add a patience attribute.
 
@@ -62,7 +62,7 @@ class Patient:
         self.patience_nurse = random.randint(5, 50) ##NEW
 ```
 
-#### The model class
+#### Model class
 
 ##### The __init__ method
 
@@ -100,7 +100,7 @@ def __init__(self, run_number):
     random.seed(42)
 ```
 
-#### The attend_clinic method
+##### The attend_clinic method
 
 In the attend clinic, we now add in an OR statement (the vertical line | , also known as a pipe) to our request for the nurse.
 
@@ -157,7 +157,7 @@ def attend_clinic(self, patient):
 
 ```
 
-#### The run method
+##### The run method
 
 The only change to the run method is adding a print statement to the end of it to print the patients who reneged.
 
@@ -165,7 +165,7 @@ The only change to the run method is adding a print statement to the end of it t
 print (f"{self.num_reneged_nurse} patients reneged from nurse queue")
 ```
 
-#### The Trial class
+#### Trial class
 
 ##### The __init__ method
 
@@ -231,7 +231,7 @@ def run_trial(self):
     self.print_trial_results()
 ```
 
-### The Full Code
+### The full code
 
 ::: {.callout-note collapse="true"}
 #### Click here to view the full code
@@ -487,7 +487,7 @@ We’ll add results of number of patients who balked to our results
 
 ### Coding a balking example
 
-#### The g Class
+#### g class
 
 We'll add a parameter value that will store the maximum length of the queue we allow for the nurse.
 
@@ -523,11 +523,11 @@ class g:
     warm_up_period = 1440
 ```
 
-#### The Patient Class
+#### Patient class
 
 This class is unchanged.
 
-#### The Model Class
+#### Model class
 
 ##### The __init__ method
 
@@ -638,7 +638,7 @@ def run(self):
     print (f"{self.num_balked_nurse} patients balked at the nurse queue") ## NEW
 ```
 
-#### The Trial Class
+#### Trial class
 
 ##### The __init__ method
 

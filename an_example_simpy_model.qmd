@@ -33,7 +33,7 @@ import pandas as pd
 **random** gives us access to stochastic sampling from probability distributions
 :::
 
-## g Class
+## g class
 
 Remember - the g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.
 
@@ -49,7 +49,7 @@ class g:
     number_of_runs = 5
 ```
 
-## Patient (entity) Class
+## Patient (entity) class
 
 ```{python}
 # Class representing patients coming in to the clinic.  Here, patients have
@@ -62,7 +62,7 @@ class Patient:
         self.q_time_nurse = 0
 ```
 
-## Model Class
+## Model class
 
 ```{python}
 # Class representing our model of the clinic.
@@ -219,7 +219,7 @@ class Model:
 
 ```
 
-## Trial Class
+## Trial class
 
 ```{python}
 # Class representing a Trial for our simulation - a batch of simulation runs.

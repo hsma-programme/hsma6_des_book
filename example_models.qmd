@@ -29,7 +29,7 @@ When working through these models, consider
 
 
 
-## An Orthopaedic Ward - The Hospital Efficiency Project
+## An orthopaedic ward - the Hospital Efficiency Project (HEP)
 
 <https://github.com/AliHarp/HEP>
 

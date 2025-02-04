@@ -46,7 +46,7 @@ Let’s look at an example.
 
 Let’s say we want to write code that defines how an ambulance works.
 
-There will be properties the ambulance has.  Things like:
+There will be properties the ambulance has. Things like:
 
 - The organisation it belongs to.
 - The registration number.
@@ -119,7 +119,7 @@ Let's look at the purpose and recommended structure of each class in a bit more 
 
 Here, the example code given relates to a customer support helpline. Customers call a helpline, wait on hold until a customer support agent is ready to speak to them, speak to the agent for a period of time, and then the call ends and the agent connects to the next person who is waiting on hold. If there is no-one on hold at the time, the agent will get a break until someone else arrives!
 
-### g Class
+### g class
 
 The g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.  This includes:
 

@@ -94,7 +94,7 @@ You will need to run `!pip install joblib` if you have not previously made use o
 from joblib import Parallel, delayed
 ```
 
-### The g, Patient and Model classes
+### The g, patient and model classes
 
 Our g, patient and model classes are unchanged.
 

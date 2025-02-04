@@ -14,7 +14,7 @@ jupyter: python3
 
 While the focus of this book is on simpy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
 
-## Python Libraries
+## Python libraries
 
 ### ciw
 
@@ -39,7 +39,7 @@ There is also a more detailed description of the steps required to convert a mod
 
 Salabim is thoroughly documented and sets itself apart by providing methods for 2D and 3D animation.
 
-## R Libraries
+## R libraries
 
 ### simmeR
 
@@ -60,7 +60,7 @@ One key benefit is being able to plot a flow diagram of the steps in a simmer mo
 ![Simmer Plot: credit to Stacey Croft, Anastasiia Zharinova and Tom Jemmett ^[https://the-strategy-unit.github.io/des_simmer_workshop/]](images/simmer_plot.png)
 
 
-## GUI Software
+## GUI software
 
 ### JaamSim
 

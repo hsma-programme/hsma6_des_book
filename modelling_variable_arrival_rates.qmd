@@ -229,7 +229,8 @@ class Patient:
 
 ### Model class
 
-#### _init
+#### The __init__ method
+
 In our __init__ method we will set up our random number generator.
 
 We are also going to create an empty list to store our patient objects - this is so we can track the arrival times.
@@ -318,7 +319,7 @@ In this method, we just need to swap our use of `random.expovariate(1.0 / g.pati
 
 These methods are unchanged.
 
-### The run class
+#### The run method
 
 For the purposes of checking the model is working as intended, we are going to return the list of patient arrival times after every run.
 

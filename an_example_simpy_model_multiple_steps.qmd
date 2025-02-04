@@ -51,7 +51,7 @@ class g:
     number_of_runs = 5
 ```
 
-### The Patient class
+### The patient class
 
 Next we'll add an additional attribute - think of it as an extra box on their clipboard that they need to fill in - to record how long they are queuing for the receptionist.
 
@@ -65,7 +65,7 @@ class Patient:
         self.q_time_nurse = 0
 ```
 
-### The Model class
+### The model class
 
 Now we move to our **model** class. Let's start by looking at the init method - the list of things that are set up when we create an instance of our model class.
 

@@ -36,7 +36,7 @@ The book can be accessed (here)[https://health-data-science-or.github.io/simpy-s
 
 ## Example apps
 
-### The DES Playground
+### The DES playground
 
 The following app contains a range of pages that allow users to explore a DES model of growing complexity.
 
@@ -58,7 +58,7 @@ Other features that may be useful to adapt for your own use include
 - the ability to save and compare the results from multiple scenarios
 - a range of interactive visualisations of simulation metrics
 
-### The HSMA SimPy Example Library
+### The HSMA SimPy example library
 
 As part of the SimPy visualisation library project, a range of different SimPy models have been created with a Streamlit frontend.
 

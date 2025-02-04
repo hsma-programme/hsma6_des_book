@@ -42,7 +42,7 @@ But let's imagine the setup is slightly different
 The cubicle is released for the next patient after seeing the nurse IF the patient leaves at this point. Otherwise, it will be released after seeing the doctor.
 
 
-### The g class
+### g class
 
 We add in an additional parameter for the number of
 
@@ -65,7 +65,7 @@ class g:
     number_of_runs = 10
 ```
 
-### The Patient class
+### Patient class
 
 We add in an new attribute where we will record the time spent queueing for a cubicle.
 
@@ -79,7 +79,7 @@ class Patient:
         self.q_time_cubicle = 0 ##NEW
 ```
 
-### The model class
+### Model class
 
 #### The __init__ method
 
@@ -128,11 +128,11 @@ def __init__(self, run_number):
         self.mean_q_time_cubicle = 0 ##NEW
 ```
 
-### The generator_patient_arrivals method
+#### The generator_patient_arrivals method
 
 This method is unchanged.
 
-### The attend_clinic method
+#### The attend_clinic method
 
 This is where the majority of our changes take place.
 
@@ -315,7 +315,7 @@ self.mean_q_time_doctor = self.results_df["Q Time Doctor"].mean()
 self.mean_q_time_cubicle = self.results_df["Q Time Cubicle"].mean() ##NEW
 ```
 
-### The trial class
+### Trial class
 
 #### The __init__ method
 
@@ -357,7 +357,7 @@ self.print_trial_results()
 print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_results['nurse_queue_longer'].values)} trials of {g.number_of_runs}")
 ```
 
-## The Full Code
+## The full code
 
 :::{.callout-note collapse="true"}
 

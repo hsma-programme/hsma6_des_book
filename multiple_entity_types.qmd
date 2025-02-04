@@ -34,7 +34,7 @@ At this stage in your modelling, you will need to start drawing on your creativi
 Consider the approaches described throughout this chapter and the example given in the next chapter, but work this into your own solution.
 :::
 
-## Approaches to Managing Arrivals
+## Approaches to managing arrivals
 
 When we start having multiple types of patients, we will need to think about how we set them up in our system.
 
@@ -60,7 +60,7 @@ However, it's perhaps not always clear cut! For example, our 'seriously injured'
 - we could check the simulation time, then look up the probability of them being seriously injured vs mildly injured at that point in time (relating it back to real-world time), and sample accordingly
 - we could use two generators, using the method described in the [variable arrival rates](modelling_variable_arrival_rates.qmd) chapter.
 
-## Multiple Patient Classes versus a Single Patient Class
+## Multiple patient classes versus a single patient class
 
 Similarly, when it comes to our patient classes, there are multiple ways we could handle it.
 

@@ -34,7 +34,7 @@ This chapter is intended to give just one example of a situation with
 :::
 
 
-## The Approach
+## The approach
 
 In this case, we will be wanting to set up a generator for each of the new types of patients we opt to add to this model.
 
@@ -93,7 +93,7 @@ import pandas as pd
 from sim_tools.distributions import Exponential, Uniform ## NEW
 ```
 
-### the g class
+### g class
 
 We need to add a few additional parameters to our g class.
 
@@ -153,7 +153,7 @@ class g:
 4. While each entity dictionary does not have to have all keys, where they are used across multiple entity types, you should keep the naming consistent.
 5. We repeat the same structure for as many different entity types as we wish to define.
 
-### The Patient class
+### Patient class
 
 In our patient class, we're going to add a new label that will relate to the type of our patients. We will pass this in when initialising the patients later on.
 
@@ -177,9 +177,9 @@ class Patient:
 
 
 
-### The Model Class
+### Model class
 
-#### The \_\_init\_\_ method
+#### The __init__ method
 
 Let's now start setting up our model class.
 
@@ -616,7 +616,7 @@ The key change to the run method is that we will start up three different patien
 ```
 1. For each entity type, we now set up a separate process to generate them. By passing in the entity label to use here, the label - which in this case we are using to indicate type, but could be any characteristic that separates your patients -
 
-## The Full Code
+## The full code
 
 :::{.callout-note collapse="true"}
 ### Click here to view and copy the full code
@@ -967,7 +967,7 @@ class Model:
 :::
 
 
-## Checking Our Implementation
+## Checking our implementation
 
 Usually we would go on to run a trial (several runs with the same set of parameters but variation in the samples picked from our different distributions to simulate different realities within our simulation) - but for now, we'll just look at the output of a single run of our new model so that we can verify that everything is working as expected.
 
@@ -1236,7 +1236,7 @@ Now we can write simple code to recreate the output we were getting from our tri
 We could turn these into functions as well to make it clearer what each does and make them easier to reuse and adapt.
 :::
 
-### Return Trial-level results
+### Return trial-level results
 
 ```{python}
 #| eval: true
@@ -1247,7 +1247,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-#### Segment This by type
+#### Segment this by type
 
 ```{python}
 #| eval: true
@@ -1259,7 +1259,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-### Return Run-level results
+### Return run-level results
 
 ```{python}
 #| eval: true
@@ -1271,7 +1271,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-#### Segment This by type
+#### Segment this by type
 
 ```{python}
 #| eval: true
@@ -1284,9 +1284,9 @@ We could turn these into functions as well to make it clearer what each does and
 ```
 
 
-## Display Trial Results Visually
+## Display trial results visually
 
-### Bar Chart Summary
+### Bar chart summary
 
 ```{python}
 #| eval: true
@@ -1316,7 +1316,7 @@ px.bar(
 
 We can see that while the queue times for the receptionist and the doctor are relatively short, the queue time for the nurse resource is very long, suggesting that the nurse is the bottleneck in our current simulated environment.
 
-### Bar Chart Summary - by type
+### Bar chart summary - by type
 
 ```{python}
 #| eval: true

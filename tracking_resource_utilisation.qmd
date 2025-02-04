@@ -53,11 +53,11 @@ Let's return to the very simplest version of the model for this.
 
 ### A code example
 
-#### The g class
+#### g class
 
 The g class is unchanged.
 
-#### The patient class
+#### Patient class
 
 First, we add an attribute to the patient class.
 
@@ -74,7 +74,7 @@ class Patient:
 
 ```
 
-#### The model class
+#### Model class
 
 ##### The __init__ method
 
@@ -279,7 +279,7 @@ def calculate_run_results(self):
 
 Finally, we can put this all together when we run the model.
 
-#### The trial class
+#### Trial class
 
 ##### The __init__ method
 
@@ -591,7 +591,7 @@ We create a new interval_audit_utilisation() function that we pass
 
 ### A code example
 
-#### The g class
+#### g class
 
 We add a parameter to the g class which will tell us how often to record the current utilisation.
 
@@ -609,7 +609,7 @@ class g:
 
 ```
 
-#### The Model Class
+#### Model Class
 
 ##### The __init__ method
 
@@ -712,7 +712,7 @@ If you are using a simpy store instead of a simpy resource, it's possibly to ada
 `len(resources.items)` to get the number of resources currently being utilised, and `resources.capacity` will still return the total number of resources that are in the system.
 :::
 
-##### the run method
+##### The run method
 
 We now add the interval audit process to our run.
 
@@ -782,7 +782,7 @@ This assumes our additional resources were set up in the __init__ method of the 
 ```
 :::
 
-#### The trial class
+#### Trial class
 
 ##### The __init__ method
 

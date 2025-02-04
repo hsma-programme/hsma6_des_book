@@ -83,7 +83,7 @@ Here, we have one row per day of the week. We will interpret an index of 0 as Mo
 
 ## Coding the example
 
-### The g class
+### g class
 
 Rather than setting an interarrival time, we will instead set a value that represents the average annual demand for our clinic.
 
@@ -114,7 +114,7 @@ class g:
 
 ```
 
-### The Patient (entity) class
+### Patient (entity) class
 
 In our patient class, we will record an id as before.
 
@@ -136,7 +136,7 @@ class Patient:
 ```
 
 
-### The model class
+### Model class
 
 #### The __init__method
 
@@ -258,7 +258,7 @@ model.create_bookings()
 model.bookings
 ```
 
-### The booker class
+### Booker class
 
 Before we continue making changes to our model class, we want to introduce a new class that will deal with patient bookings.
 
@@ -380,7 +380,7 @@ model.bookings
 ```
 
 
-### Further changes to the Model class
+### Further changes to the model class
 
 Now we have our booker method, we can make the remaining changes required to the model class.
 
@@ -468,7 +468,7 @@ Here, we are just altering the column name we refer to when calculating our metr
 
 The run method is unchanged.
 
-### The trial class
+### Trial class
 
 Our trial class is fundamentally unchanged - the main differences relate to the changes to the metrics we are interested in tracking.
 

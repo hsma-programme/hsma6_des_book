@@ -63,7 +63,7 @@ Throughout the code, anything new that's been added will be followed by the comm
 
 ## Coding the model
 
-### the g class
+### The g class
 
 We need to add a few additional parameters to our g class.
 
@@ -85,7 +85,7 @@ class g:
     number_of_runs = 5
 ```
 
-### The Patient class
+### The patient class
 
 We want to add an additional attribute to record the time patients spend with the doctor if they see one.
 

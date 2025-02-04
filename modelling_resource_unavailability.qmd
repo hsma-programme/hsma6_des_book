@@ -38,7 +38,7 @@ Basically, we will :
 
 ## Coding the approach
 
-### The g class
+### g class
 
 In the g class, we have added values to specify how long nurse is unavailable and at what frequency.
 Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.
@@ -64,11 +64,11 @@ class g:
 
 ```
 
-### The Patient class
+### Patient class
 
 The patient class is unchanged.
 
-### The Model class
+### Model class
 
 #### The obstruct_nurse method
 We create a new method within the model class called `obstruct_nurse`.
@@ -131,7 +131,7 @@ def run(self):
     return self.results_df
 ```
 
-### The Trial class
+### sTrial class
 
 The trial class is unchanged.
 

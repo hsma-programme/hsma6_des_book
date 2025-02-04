@@ -27,7 +27,7 @@ Adding `print()` statements to your models at
 The logging module is a step up from the use of print() statements.
 
 
-## Event Logging
+## Event logging
 
 Building up our own event logs give us a very clear picture of what is happening to every entity throughout our model.
 
