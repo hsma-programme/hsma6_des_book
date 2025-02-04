@@ -22,6 +22,8 @@ When working out the best possible configuration for a service, you may wish to 
 
 Let's return to our branching model (with the reproducibility set via sim-tools as described in chapter @sec-reproducibility).
 
+## Scenarios
+
 We have a number of parameters available to us in this model:
 
 ```{python}
@@ -30,7 +32,7 @@ We have a number of parameters available to us in this model:
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential ##NEW
+from sim_tools.distributions import Exponential
 ```
 
 ```{python}
@@ -119,9 +121,13 @@ How many scenarios have we created?
 len(all_scenarios_dicts)
 ```
 
+Now let's update our model code.
 
-Now let's update our g class.
-We'll just modify it to add in a space to add a scenario name.
+## Coding the model
+
+### g class
+
+We'll just add in a space to for the scenario name.
 
 ```{python}
 #| eval: true
@@ -139,15 +145,103 @@ class g:
     scenario_name = 0 ##NEW
 ```
 
-Let's now create all of the scenario objects.
+### Patient and model classes
+
+These remained unchanged.
+
+### Trial class
+
+#### The __init__ method
+
+The scenario is add to the results dataframe, along with some other results metrics.
 
 ```{python}
-#| echo: false
+#| eval: false
+def  __init__(self):
+    self.df_trial_results = pd.DataFrame()
+    self.df_trial_results["Run Number"] = [0]
+    self.df_trial_results["scenario"] = [0]  ##NEW
+    self.df_trial_results["average_inter_arrival"] = [0.0]  ##NEW
+    self.df_trial_results["num_recep"] = [0]  ##NEW
+    self.df_trial_results["num_nurses"] = [0]  ##NEW
+    self.df_trial_results["num_doctors"] = [0]  ##NEW
+    self.df_trial_results["average_reception_time"] = [0.0]  ##NEW
+    self.df_trial_results["average_nurse_time"] = [0.0]  ##NEW
+    self.df_trial_results["average_doctor_time"] = [0.0]  ##NEW
+    self.df_trial_results["prob_need_doctor"] = [0.0]  ##NEW
+    self.df_trial_results["Arrivals"] = [0]
+    self.df_trial_results["Mean Q Time Recep"] = [0.0]
+    self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+    self.df_trial_results["Mean Q Time Doctor"] = [0.0]
+    self.df_trial_results.set_index("Run Number", inplace=True)
+```
+
+### The print_trial_results method
+
+This remains unchanged.
+
+### The run_trial method
+
+This is updated to include the scenario name and other new metrics.
+
+```{python}
+#| eval: false
+def run_trial(self):
+    for run in range(g.number_of_runs):
+        random.seed(run)
+
+        my_model = Model(run)
+        patient_level_results = my_model.run()
+
+        ##NEW
+        self.df_trial_results.loc[run] = [
+            g.scenario_name,
+            g.patient_inter,
+            g.number_of_receptionists,
+            g.number_of_nurses,
+            g.number_of_doctors,
+            g.mean_reception_time,
+            g.mean_n_consult_time,
+            g.mean_d_consult_time,
+            g.prob_seeing_doctor,
+            len(patient_level_results),
+            my_model.mean_q_time_recep,
+            my_model.mean_q_time_nurse,
+            my_model.mean_q_time_doctor
+            ]
+
+    return self.df_trial_results
+```
+
+## The full code
+
+The full updated code for the model is given below.
+
+:::{.callout-note collapse="true"}
+### Click here to view the code
+
+```{python}
 #| eval: true
+import simpy
+import random
+import pandas as pd
+from sim_tools.distributions import Exponential
 
 # Class to store global parameter values.  We don't create an instance of this
 # class - we just refer to the class blueprint itself to access the numbers
 # inside.
+class g:
+    patient_inter = 5
+    mean_reception_time = 2
+    mean_n_consult_time = 6
+    mean_d_consult_time = 20
+    number_of_receptionists = 1
+    number_of_nurses = 1
+    number_of_doctors = 2
+    prob_seeing_doctor = 0.6
+    sim_duration = 600
+    number_of_runs = 2
+    scenario_name = 0  ##NEW
 
 # Class representing patients coming in to the clinic.
 class Patient:
@@ -334,7 +428,7 @@ class Model:
 
                 patient.q_time_doctor = end_q_doctor - start_q_doctor
 
-                sampled_doctor_act_time = self.nurse_consult_time_dist.sample() ##NEW
+                sampled_doctor_act_time = self.nurse_consult_time_dist.sample()
 
                 self.results_df.at[patient.id, "Q Time Doctor"] = (
                     patient.q_time_doctor
@@ -380,15 +474,15 @@ class Trial:
     def  __init__(self):
         self.df_trial_results = pd.DataFrame()
         self.df_trial_results["Run Number"] = [0]
-        self.df_trial_results["scenario"] = [0]
-        self.df_trial_results["average_inter_arrival"] = [0.0]
-        self.df_trial_results["num_recep"] = [0]
-        self.df_trial_results["num_nurses"] = [0]
-        self.df_trial_results["num_doctors"] = [0]
-        self.df_trial_results["average_reception_time"] = [0.0]
-        self.df_trial_results["average_nurse_time"] = [0.0]
-        self.df_trial_results["average_doctor_time"] = [0.0]
-        self.df_trial_results["prob_need_doctor"] = [0.0]
+        self.df_trial_results["scenario"] = [0]  ##NEW
+        self.df_trial_results["average_inter_arrival"] = [0.0]  ##NEW
+        self.df_trial_results["num_recep"] = [0]  ##NEW
+        self.df_trial_results["num_nurses"] = [0]  ##NEW
+        self.df_trial_results["num_doctors"] = [0]  ##NEW
+        self.df_trial_results["average_reception_time"] = [0.0]  ##NEW
+        self.df_trial_results["average_nurse_time"] = [0.0]  ##NEW
+        self.df_trial_results["average_doctor_time"] = [0.0]  ##NEW
+        self.df_trial_results["prob_need_doctor"] = [0.0]  ##NEW
         self.df_trial_results["Arrivals"] = [0]
         self.df_trial_results["Mean Q Time Recep"] = [0.0]
         self.df_trial_results["Mean Q Time Nurse"] = [0.0]
@@ -416,6 +510,7 @@ class Trial:
             my_model = Model(run)
             patient_level_results = my_model.run()
 
+            ##NEW
             self.df_trial_results.loc[run] = [
                 g.scenario_name,
                 g.patient_inter,
@@ -437,7 +532,11 @@ class Trial:
 
 ```
 
+:::
 
+## Running the scenarios
+
+Let's now create all of the scenario objects.
 
 ```{python}
 #| eval: true
@@ -460,12 +559,14 @@ for index, scenario_to_run in enumerate(all_scenarios_dicts):
 pd.concat(results).groupby("scenario").mean().head(20)
 ```
 
-
-
-
 Finally the following will give you a nice dictionary of all of your scenarios.
 
 ```{python}
 #| eval: true
-pd.DataFrame.from_dict(all_scenarios_dicts)
+pd.DataFrame.from_dict(all_scenarios_dicts).head()
+```
+
+```{python}
+#| eval: true
+pd.DataFrame.from_dict(all_scenarios_dicts).tail()
 ```
