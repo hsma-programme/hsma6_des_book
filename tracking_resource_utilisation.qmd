@@ -335,6 +335,8 @@ You could adapt the code above to account for that - for example, you could chec
 
 ### The full code
 
+The full updated code for the model is given below.
+
 :::{.callout-note collapse="true"}
 #### Click here to view the full code
 
@@ -842,6 +844,8 @@ def get_interval_audits(self):
 ```
 
 ### The full code
+
+The full updated code for the model is given below.
 
 :::{.callout-note collapse="true"}
 #### Click here to view the full code

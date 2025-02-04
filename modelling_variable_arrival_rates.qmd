@@ -388,9 +388,10 @@ def run_trial(self):
 
 ## The full code
 
-The full code is given below.
+The full updated code for the model is given below.
 
-:::{.callout-note collapse="true}
+:::{.callout-note collapse="true"}
+### Click here to view the full code
 
 ```{python}
 #| eval: true

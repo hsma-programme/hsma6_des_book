@@ -584,7 +584,7 @@ sampled_doctor_act_time = self.doctor_consult_time_dist.sample()
 
 ### The full code
 
-Let's update all the code and run our previous experiment again.
+The full updated code for the model is given below.
 
 :::{.callout-note collapse="true"}
 #### Click here to view the full code

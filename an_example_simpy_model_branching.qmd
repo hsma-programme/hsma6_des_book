@@ -388,9 +388,9 @@ Here, we just add in the mean queue time for the doctor to the trial results dat
       self.print_trial_results()
 ```
 
-## Evaluating the outputs
+## The full code
 
-Below is the full updated code for this model.
+The full updated code for the model is given below.
 
 :::{.callout-note collapse="true"}
 ### Click here to view the code
@@ -681,6 +681,8 @@ class Trial:
 
 ```
 :::
+
+## Evaluating the outputs
 
 Let's look at the outputs for a single run.
 

@@ -359,6 +359,8 @@ print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_
 
 ## The full code
 
+The full updated code for the model is given below.
+
 :::{.callout-note collapse="true"}
 
 ### Click here to view the full code

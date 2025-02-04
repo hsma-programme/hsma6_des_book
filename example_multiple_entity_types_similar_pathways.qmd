@@ -618,8 +618,10 @@ The key change to the run method is that we will start up three different patien
 
 ## The full code
 
+The full updated code for the model is given below.
+
 :::{.callout-note collapse="true"}
-### Click here to view and copy the full code
+### Click here to view the full code
 
 ```{python}
 #| eval: true

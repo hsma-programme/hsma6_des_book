@@ -233,6 +233,8 @@ def run_trial(self):
 
 ### The full code
 
+The full updated code for the model is given below.
+
 ::: {.callout-note collapse="true"}
 #### Click here to view the full code
 
@@ -703,7 +705,7 @@ def run_trial(self):
 
 ### The full code
 
-The full code can be seen below:
+The full updated code for the model is given below.
 
 ::: {.callout-note collapse="true"}
 #### Click here to view the full code
@@ -952,7 +954,7 @@ Due to the new logic, there should never be any patients balking (as they’d jo
 
 ### Coding the 'choosing queues' example
 
-The full code can be seen below.
+The full updated code for the model is given below.
 
 This example brings together code for
 - nurse breaks
