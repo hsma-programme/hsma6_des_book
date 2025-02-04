@@ -1,4 +1,13 @@
-# Introduction to DES Concepts
+---
+title: "Introduction to DES Concepts"
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
 Discrete Event Simulation (DES) is a simulation modelling approach that allows us to model queuing problems.  Queuing problems are those in which “things” (usually people, but not always) are waiting for a service or services.
 
@@ -6,11 +15,12 @@ In a Discrete Event Simulation, entities flow through (and queue for) discrete s
 
 ![](images/example.png)
 
-In healthcare, DES models can be used to model :
+In healthcare, DES models can be used to model:
 
-- Patient pathways
-- Phone systems
-- The transit of test results
+- Patient pathways.
+- Phone systems.
+- The transit of test results.
+
 And more!
 
 DES models are extremely useful for asking what if? questions about process / pathway changes.
@@ -18,38 +28,38 @@ DES models are extremely useful for asking what if? questions about process / pa
 
 ## Why use DES?
 
-Discrete event simulation allows you to
+Discrete event simulation allows you to:
 
-- Test changes in a risk-free, low-cost way
-- Explore the impact of changes in demand
-- See whether a system can cope on bad days as well as good days
-- Predict how long it will take to clear an existing backlog
+- Test changes in a risk-free, low-cost way.
+- Explore the impact of changes in demand.
+- See whether a system can cope on bad days as well as good days.
+- Predict how long it will take to clear an existing backlog.
 
-This can allow you to optimize a system, leading to  better balance and better flow, which can in turn lead to
+This can allow you to optimize a system, leading to  better balance and better flow, which can in turn lead to:
 
-- A safer environment
-- Less stress for staff
-- Improved patient experience
-- Meeting targets
+- A safer environment.
+- Less stress for staff.
+- Improved patient experience.
+- Meeting targets.
 
 ## An example
 
 Imagine being able to create a model of an emergency department.
 
-In this model, you can change all sorts of things
+In this model, you can change all sorts of things:
 
-- how many doctors, nurses and receptionists there are at each step
-- how long it takes for people to be seen
-- how many people go into the trauma pathway versus the non-trauma pathway
+- How many doctors, nurses and receptionists there are at each step.
+- How long it takes for people to be seen.
+- How many people go into the trauma pathway versus the non-trauma pathway.
 
 Then sprinkle in a dose of randomness - because in real life, you're not going to have each appointment taking the exact same amount of time, or people arriving exactly every five minutes - and then you can start to explore just how well a system will perform, what changes might have the most impact, and what configuration is likely to perform best. Then you can run it 1000 times with slightly different random days to see how well it performs on both good days and bad.
 
-You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what's going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of theser changes themselves.
+You can polish it all off by visualising the individual entities moving through the system so people with little understanding of discrete event simulation can get a sense of what's going on, and you can give them access to all of the controls - the number of nurses and doctors, the average consultation length, and more - so that they can explore the impact of these changes themselves.
 
 {{< video https://github.com/hsma-programme/Teaching_DES_Concepts_Streamlit/assets/29951987/1adc36a0-7bc0-4808-8d71-2d253a855b31 >}}
 
 
-## Runs and Trials
+## Runs and trials
 
 In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.
 
@@ -59,41 +69,41 @@ We need to run a stochastic simulation many times and take summary statistics ov
 
 A single run of a model for a simulated period of time is known as a **run**.  A batch of multiple runs with the same parameter values is known as a **trial**.
 
-## Key DES Terminology
+## Key DES terminology
 
 ![](images/example_des_simple.png)
 
 **Entities** are the things that are flowing through the sequential processes in the model (eg patients, test results, callers on a phone)
 
-**Generators** are the way in which entities enter the model and come into being (eg arriving at ED by ambulance, self-presenting, referral from GP)
+**Generators** are the way in which entities enter the model and come into being (eg arriving at ED by ambulance, self-presenting, referral from GP).
 
-**Inter-Arrival Times** specify the time between entities being generated in the generators (ie the time between arrivals into the modelled system)
+**Inter-Arrival Times** specify the time between entities being generated in the generators (ie the time between arrivals into the modelled system).
 
-**Activities** (sometimes referred to as Servers) are the bits of process that the entities are queuing up for (eg triaged, seen at reception, speak to doctor etc)
+**Activities** (sometimes referred to as Servers) are the bits of process that the entities are queuing up for (eg triaged, seen at reception, speak to doctor etc).
 
-**Activity Time** represents the amount of time it takes for an activity to happen to an entity - this is normally stochastic (random) and drawn from a distribution for each entity (eg time spent with nurse, time to be treated etc)
+**Activity Time** represents the amount of time it takes for an activity to happen to an entity - this is normally stochastic (random) and drawn from a distribution for each entity (eg time spent with nurse, time to be treated etc).
 
-**Resources** are the “stuff” and / or “staff” required for an activity to happen to an entity (eg nurse to triage, bed for patient, consultation room for GP to see patient etc, X-Ray machine and Radiographer to be free for X-Ray etc).  Important - resources may be shared between activities (eg the same nurse may be required to run multiple activities in our model, or even things we haven’t explicitly modelled)
+**Resources** are the “stuff” and / or “staff” required for an activity to happen to an entity (eg nurse to triage, bed for patient, consultation room for GP to see patient etc, X-Ray machine and Radiographer to be free for X-Ray etc).  Important - resources may be shared between activities (eg the same nurse may be required to run multiple activities in our model, or even things we haven’t explicitly modelled).
 
 **Queues** hold entities that are waiting for an activity.  Entities wait in a queue until the activity has both the capacity and all required resources.
 
-**Sinks** are how entities leave the model (the bit of system we’re modelling)
+**Sinks** are how entities leave the model (the bit of system we’re modelling).
 
 ![](images/des_steps.png)
 
 ### Entities
 
-Each entity may have certain “attributes” that it “carries with them” to help determine its journey through the modelled system. For example :
+Each entity may have certain “attributes” that it “carries with them” to help determine its journey through the modelled system. For example:
 
-- whether it goes down path A or B
-- how long it spends in an activity
-- its priority in a queue for an activity
+- Whether it goes down path A or B.
+- How long it spends in an activity.
+- Its priority in a queue for an activity.
 
 There may also be more than one type of entity in a model at the same time. For example, patients in a clinic, their test results, and phone calls into the clinic are all entities that we may want to capture when modelling the clinic.
 
 ![](images/des_entities.png)
 
-### Generators and Inter-Arrival
+### Generators and inter-arrival
 
 A generator creates new entities to bring into the system. The rate at which new entities are generated is determined by an inter-arrival time.
 
@@ -112,16 +122,16 @@ Each activity in a Discrete Event Simulation has an associated queue. The queue 
 Each queue has a queuing policy. This determines the order in which entities are released from the queue into the activity. The two most common queuing policies are:
 
 - First In First Out (FIFO) : entities are seen in the order they arrive. This is the default.
-- Priority-based : entities are seen according to some priority attribute. Ties often resolved using FIFO
+- Priority-based : entities are seen according to some priority attribute. Ties often resolved using FIFO.
 
 ![](images/queue_types.png)
 
-### Activities and Activity Times
+### Activities and activity times
 
-Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs :
+Each activity in a DES describes a process – this may be a simple atomic task, or a set of tasks bundled together. For an activity to take place, it needs:
 
-- An entity (drawn from the queue)
-- The required type and number of resource to be available
+- An entity (drawn from the queue).
+- The required type and number of resource to be available.
 
 Once the above conditions have been met, the activity begins. The entity, and the resource(s) are then locked in place for an amount of time – the Activity Time. The resource(s) cannot be used elsewhere until the activity time has passed.
 
@@ -140,9 +150,9 @@ Resources are needed to undertake activities. An activity may require just a sin
 ::: {.callout-tip}
 An activity may not require a resource at all, but think carefully to ensure that it really is either “resourceless” or there is no constraint on the resource (and so doesn’t need to be modelled).
 
-Resources can include
-- “staff” (e.g. doctors, nurses, officers etc)
-- “stuff” (beds, test equipment, detention cell etc)
+Resources can include:
+- “Staff” (e.g. doctors, nurses, officers etc).
+- “Stuff” (beds, test equipment, detention cell etc).
 :::
 
 Resources can (and often are) shared across a system, so may be required for more than one activity.  Therefore, a resource drain in one part of the system can affect another.
@@ -155,11 +165,11 @@ In some activities, having optional additional resource may speed up the activit
 
 ### Sinks
 
-Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include :
+Sinks are how entities leave the system, or part of the system, being modelled. Sinks might include:
 
-- an entity physically leaving a system (e.g. discharge from hospital)
-- an entity no longer existing (e.g. death, use of sample, end of telephone call)
-- an entity no longer needing to access activities that we’re interested in (e.g. they leave the bit of the system that we’re modelling)
+- An entity physically leaving a system (e.g. discharge from hospital).
+- An entity no longer existing (e.g. death, use of sample, end of telephone call).
+- An entity no longer needing to access activities that we’re interested in (e.g. they leave the bit of the system that we’re modelling).
 
 The most important thing to remember about a sink is that it doesn’t necessarily represent an entity leaving the system entirely.
 
@@ -167,25 +177,25 @@ For example, the scope of your model may only cover the triage aspect of an Emer
 
 ![](images/sinks_simple.png)
 
-### Branching Paths
+### Branching paths
 
 Real world systems (and the models of those systems) are rarely linear. Often, different things will happen to different entities. In a Discrete Event Simulation, this means different entities flowing to different activities, or different sinks.
 
-We might differentiate based on :
+We might differentiate based on:
 
-- an attribute of the patient (e.g. patients with a higher priority value flow through a different set of activities)
-- probability (e.g. we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time)
-- time (e.g. after a certain time of day, entities flow through a different set of activities)
+- An attribute of the patient (e.g. patients with a higher priority value flow through a different set of activities).
+- Probability (e.g. we know that approx 60% of these patients end up being admitted, so we’ll randomly select for them to be admitted 60% of the time).
+- Time (e.g. after a certain time of day, entities flow through a different set of activities).
 
 ![](images/branching_paths_simple.png)
 
 ### Outputs
 
-As with any type of model, it’s important to think about what outputs you need your DES model to generate to answer your modelling questions.  As a DES model is used to model queuing and resourcing problems, typical DES model outputs include average, min, max, xth percentile of :
+As with any type of model, it’s important to think about what outputs you need your DES model to generate to answer your modelling questions.  As a DES model is used to model queuing and resourcing problems, typical DES model outputs include average, min, max, xth percentile of:
 
-- time entities are in system
-- queue length and duration for queues of interest
-- rate of resource utilisation (ie % of time a resource is in use for activities in the model)
-- probability of exceeding a defined queue length / queue time / resource utilisation threshold (e.g. 4 hour wait in ED, overcrowding thresholds)
+- Time entities are in system.
+- Queue length and duration for queues of interest.
+- Rate of resource utilisation (ie % of time a resource is in use for activities in the model).
+- Probability of exceeding a defined queue length / queue time / resource utilisation threshold (e.g. 4 hour wait in ED, overcrowding thresholds).
 
 ![](images/output_example_simple.png)

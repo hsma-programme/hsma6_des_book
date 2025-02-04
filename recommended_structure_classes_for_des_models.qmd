@@ -1,5 +1,12 @@
 ---
 title: "The Recommended Structure for DES Models"
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -21,37 +28,37 @@ You then use these functions in some sort of sequence to achieve what you're try
 
 This can make a lot of sense for a lot of data analysis and data science workflows.
 
-In comparison, in object oriented programming (OOP) everything is centred around objects that have their own
+In comparison, in object oriented programming (OOP) everything is centred around objects that have their own:
 
-- attributes (variables that belong to them) and
-- methods (which are what functions are called when they belong to objects).
+- Attributes (variables that belong to them), and-
+- Methods (which are what functions are called when they belong to objects).
 
 **Objects** are created as **instances** of **classes**.
 
 Classes are essentially generalised blueprints for how certain types of objects should work!
 
-This can be really useful in situations where you have either
+This can be really useful in situations where you have either:
 
-- a lot of logic that makes sense to attach and organise with the thing that uses that logic (like a process)
-- a need to make copies of a very similar thing (like lots of patients to populate a model)
+- A lot of logic that makes sense to attach and organise with the thing that uses that logic (like a process)
+- A need to make copies of a very similar thing (like lots of patients to populate a model)
 
 Let’s look at an example.
 
 Let’s say we want to write code that defines how an ambulance works.
 
-There will be properties the ambulance has.  Things like :
+There will be properties the ambulance has.  Things like:
 
-- The organisation it belongs to
-- The registration number
-- Whether a patient is currently on board
-- Whether the siren is currently going off
+- The organisation it belongs to.
+- The registration number.
+- Whether a patient is currently on board.
+- Whether the siren is currently going off.
 
-There will also be things the ambulance does :
+There will also be things the ambulance does:
 
-- Driving
-- Parking
-- Having patients loaded into it / out of it
-- Switching the siren on and off
+- Driving.
+- Parking.
+- Having patients loaded into it / out of it.
+- Switching the siren on and off.
 
 In Object Oriented Programming, the things it **has** are known as **attributes** and the things it *does* are *methods*.
 
@@ -114,13 +121,13 @@ Here, the example code given relates to a customer support helpline. Customers c
 
 ### g Class
 
-The g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.  This includes :
+The g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.  This includes:
 
-- Values to define inter-arrival time distributions (eg mean, standard deviation etc)
-- Values to define activity time distributions (eg mean, standard deviation etc)
-- Number of each resource
-- Duration of simulation runs
-- Number of runs in a trial
+- Values to define inter-arrival time distributions (eg mean, standard deviation etc).
+- Values to define activity time distributions (eg mean, standard deviation etc).
+- Number of each resource.
+- Duration of simulation runs.
+- Number of runs in a trial.
 
 We do not create an instance of g class.  Instead, we refer to it directly when we need to access something in it.
 
@@ -154,18 +161,19 @@ class Customer:
 ```
 :::
 
-### Model Class
+### Model class
 
 The Model Class represents the system we are modelling - this might be a clinic, for example.  As such, there’s a lot more to unpack here, so let’s take this bit by bit.
 
 First, we’ll look at the constructor for our model.
 
-The constructor will set up
-- a SimPy Environment (basically where everything lives)
-- an entity counter (which we’ll use to give entities - such as patients - a simple ID)
-- the resources we need (for example, our nurses)
-- a DataFrame to store per-entity results in a single run of the model
-- attributes to store things like how long the entities queued for each activity
+The constructor will set up:
+
+- A SimPy Environment (basically where everything lives).
+- An entity counter (which we’ll use to give entities - such as patients - a simple ID).
+- The resources we need (for example, our nurses).
+- A DataFrame to store per-entity results in a single run of the model.
+- Attributes to store things like how long the entities queued for each activity.
 
 What the constructor sets up doesn't have to be limited to these things - anything relating to the system as a whole that makes sense to store here could be included.
 
@@ -175,37 +183,37 @@ Within the Model Class we have a **generator function** that will represent our 
 
 Here’s basically how it works:
 
-*KEEP REPEATING THE FOLLOWING FOREVER (until the simulation stops running) :*
+*KEEP REPEATING THE FOLLOWING FOREVER (until the simulation stops running):*
 
-1. Increment the counter to get ID for next entity
-2. Create a new entity and give them that ID
-3. Start up an instance of the generator function for their journey through the process and chuck them in it
-4. Sample the time until the next entity arrives
-5. FREEZE this function until that time elapses
-6. Return to 1
+1. Increment the counter to get ID for next entity.
+2. Create a new entity and give them that ID.
+3. Start up an instance of the generator function for their journey through the process and chuck them in it.
+4. Sample the time until the next entity arrives.
+5. FREEZE this function until that time elapses.
+6. Return to 1.
 
 #### DES Generator - the entity journey
 
 Now, let’s look at the big one.  The other generator function - the one that represents an entity’s journey through the system (this is the one we lobbed the new entities generated by the previous generator).
 
-Here’s how this works :
+Here’s how this works:
 
-1. Record time started queuing for first activity
-2. Request resource for first activity
-3. Wait until resource is free
+1. Record time started queuing for first activity.
+2. Request resource for first activity.
+3. Wait until resource is free.
 4. Once resource is free, grab the resource and keep hold of the resource until finished with them.  Record time finished queuing and calculate queue time.
 5. Sample how long will spend in this activity.
-6. FREEZE this instance of the function until that time elapses (freezing the resource with it, so it’s not available to anyone else)
+6. FREEZE this instance of the function until that time elapses (freezing the resource with it, so it’s not available to anyone else).
 7. If there’s another activity, do the same again for that one.  If not, end (and therefore entity leaves the model).
 
 #### Running the model
 
-Finally, we need a run method in our Model class.  Basically, the run method will
+Finally, we need a run method in our Model class.  Basically, the run method will:
 
-- start up our DES generators (our arrival points) - we only have one here.
-- tell the simulation to run for the duration specified in g Class.
-- call the calculate run results method in the previous slide.
-- print out the run number with the patient-level results from this run.
+- Start up our DES generators (our arrival points) - we only have one here.
+- Tell the simulation to run for the duration specified in g Class.
+- Call the calculate run results method in the previous slide.
+- Print out the run number with the patient-level results from this run.
 
 
 :::{.callout-note}
