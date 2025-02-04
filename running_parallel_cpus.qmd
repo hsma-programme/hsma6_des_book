@@ -1,9 +1,21 @@
 ---
 title: Parallelisation
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
+
+:::{.callout-note title="Acknowledgements"}
+
+This solution is based on the work of [Mike Allen](https://github.com/MichaelAllen1966) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-8746-9957) from the PenCHORD team at the University of Exeter. His repository can be found [here](https://github.com/MichaelAllen1966/2004_simple_simpy_parallel).
+:::
 
 > "Parallel computing is a type of computation in which many calculations or processes are carried out simultaneously. Large problems can often be divided into smaller ones, which can then be solved at the same time."
 [Wikipedia](https://en.wikipedia.org/wiki/Parallel_computing)
@@ -67,10 +79,6 @@ Parallel(n_jobs=2)(delayed(multiply_by_self)(i) for i in range(1, 11, 1))
 ```
 
 ## A code example
-
-::: {.callout-note}
-Thanks go to [Michael Allen](https://orcid.org/0000-0002-8746-9957) for providing an example of how this can be achieved in SimPy. His repository can be found [here](https://github.com/MichaelAllen1966/2004_simple_simpy_parallel).
-:::
 
 We will make use of the [Joblib](https://joblib.readthedocs.io/en/latest/parallel.html) package to easily split our SimPy code to run across multiple processor cores.
 

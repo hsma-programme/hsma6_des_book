@@ -1,12 +1,21 @@
 ---
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
+
 # Testing Large Numbers of Scenarios {#sec-test-scenarios}
 
-:::{.callout-note}
-Credit for this solution goes to [Anna Laws](https://orcid.org/0000-0002-2145-0487) and [Mike Allen](https://orcid.org/0000-0002-8746-9957) of the PenCHORD team.
+:::{.callout-note title="Acknowledgements"}
+
+This solution is based on the work of [Anna Laws](https://github.com/aselaws) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-2145-0487) and [Mike Allen](https://github.com/MichaelAllen1966) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-8746-9957) from the PenCHORD team at the University of Exeter.
 :::
 
 When working out the best possible configuration for a service, you may wish to try out a large number of scenarios.

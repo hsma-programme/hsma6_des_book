@@ -1,4 +1,8 @@
-# (Coming Soon!) The STARS Framework
+---
+title: (Coming Soon!) The STARS Framework
+author:
+  - name: TBC
+---
 
 > "The STARS framework is a set of open practices, tools and learning materials to produce enhanced versions of research artefacts that intend to increase accessibility for others to (re)use, adapt and build on work."
 

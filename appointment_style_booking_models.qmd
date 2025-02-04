@@ -1,10 +1,22 @@
 ---
 title: Dealing With Appointment Bookings
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 code-annotations: hover
 execute:
   eval: false
 jupyter: python3
 ---
+
+:::{.callout-note title="Acknowledgements"}
+
+This section is based on the method used by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. His code can be found [here](https://github.com/health-data-science-OR/stochastic_systems/tree/master/labs/simulation/lab5).
+:::
 
 In many community-based services, it is important to model the process of booked appointments.
 
@@ -39,10 +51,6 @@ In this model, patients
 - are booked in to the next available appointment
 - wait until the appointment is carried out
 - exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system
-
-:::{.callout-note}
-The contents of this section is based off the method employed by [Monks](https://orcid.org/0000-0003-2631-4481) in this [code](https://github.com/health-data-science-OR/stochastic_systems/tree/master/labs/simulation/lab5).
-:::
 
 ## The appointment book
 

@@ -1,10 +1,22 @@
 ---
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
 
 # Choosing Distributions {#sec-distributions}
+
+:::{.callout-note title="Acknowledgements"}
+
+The `LogNormal` class in this section is taken from the package [sim-tools](https://github.com/TomMonks/sim-tools), which was written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter.
+:::
 
 In the previous session, we mentioned that whilst it’s a useful tip to start by having all of the distributions in our model be Exponential (because it’s easy to tweak an Exponential Distribution), for real world models we probably want to then adapt them to use a Lognormal Distribution for activity times.
 

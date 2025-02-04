@@ -1,10 +1,16 @@
 ---
+title: An Introduction to Approaching Multiple Entity Types
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 jupyter: python3
 execute:
   eval: false
 ---
-
-# An Introduction to Approaching Multiple Entity Types
 
 Let's imagine we want to model some more variety within the patients (entities) arriving in our model.
 

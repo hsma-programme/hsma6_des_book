@@ -1,5 +1,12 @@
 ---
 title: Creating Web Apps
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -15,7 +22,7 @@ In the meantime, there are several resources available to you.
 
 ## Video guide: creating a streamlit web app interface for a DES model
 
-This video is the masterclass on Streamlit interfaces from the fifth round of the HSMA programme. This is delivered by [Tom Monks](https://orcid.org/0000-0003-2631-4481), another member of the PenCHORD team.
+This video is the masterclass on Streamlit interfaces from the fifth round of the HSMA programme. This is delivered by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481), another member of the PenCHORD team.
 
 {{< video https://youtu.be/6e0OPsjRYQ8?si=YxA80wwKm5J-UjAb >}}
 

@@ -1,4 +1,8 @@
-# (Coming Soon!) Waiting for One or The Other
+---
+title: (Coming Soon!) Waiting for One or The Other
+author:
+  - name: TBC
+---
 
 :::{.callout-warning}
 This section is a work in progress

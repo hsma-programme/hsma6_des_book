@@ -1,5 +1,12 @@
 ---
 title: Other Model Metrics
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3

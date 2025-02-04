@@ -1,5 +1,7 @@
 ---
 title: (Coming Soon!) Visualising Entity Flow
+author:
+  - name: TBC
 execute:
   eval: false
 jupyter: python3

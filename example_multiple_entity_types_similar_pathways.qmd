@@ -1,5 +1,12 @@
 ---
 title: Example - Multiple Entity Types
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 jupyter: python3
 execute:
   eval: false
@@ -40,7 +47,7 @@ In this case, we are going to have patients arriving via different routes: telep
 :::{.callout-warning}
 In this version of our system, we will not be implementing any sort of prioritisation - instead, patients will be seen in the order they arrive (FIFO).
 
-It would be more realistic to implement priority-based queueing, with our ambulance patients jumping to the front of the queue, but this is outside the scope of this chapter. Take a look at the [priority-based queueing](priority_based_queuing.qmd) chapter if you would like to find out more about implementing this.
+It would be more realistic to implement priority-based queueing, with our ambulance patients jumping to the front of the queue, but this is outside the scope of this chapter. Take a look at the [priority-based queueing](priority_based_queueing.qmd) chapter if you would like to find out more about implementing this.
 :::
 
 However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**.
