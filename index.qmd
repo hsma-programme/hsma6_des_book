@@ -30,9 +30,9 @@ The accompanying text in this book is licenced under a
 
 The content in this book is a combined effort, bringing together the knowledge of the Peninsula Collaborative for Operational Research and Design (PenCHORD) on the topic.
 
-The content in part 1 and a large amount of part 2 is from a series of sessions given on discrete event simulation as part of the HSMA programme. These lectures and accompanying code examples were written by Dr Daniel Chalk and made available under the **CC BY-NC-SA 4.0** licence. The chapters often replicate the wording of these lectures nearly exactly, with minor tweaks and additions for readability and to better suit the format of a book made by Sammi Rosser.
+The content in part 1 and a large amount of part 2 is from a series of sessions given on discrete event simulation as part of the HSMA programme. These lectures and accompanying code examples were written by [Dr Daniel Chalk](https://github.com/hsma-chief-elf) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-4165-4364) and made available under the **CC BY-NC-SA 4.0** licence. The chapters often replicate the wording of these lectures nearly exactly, with minor tweaks and additions for readability and to better suit the format of a book made by [Sammi Rosser](https://github.com/Bergam0t) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-9552-8988).
 
-The content in parts 3 and 4 is more of a mixture of content from the HSMA lectures along with brand new content written for this book, drawing on a range of work done by the wider PenCHORD team.
+The content in parts 3 and 4 is more of a mixture of content from the HSMA lectures along with brand new content written for this book mostly by [Sammi Rosser](https://github.com/Bergam0t) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-9552-8988), with a few pages also by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479). The book also draws on a range of work done by other members of the PenCHORD team, including: [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481), [Mike Allen](https://github.com/MichaelAllen1966) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-8746-9957), and [Anna Laws](https://github.com/aselaws) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-2145-0487).
 
 All work that has been adapted is licenced under the MIT Licence. To comply with the terms of this licence, the MIT licence is provided below.
 
@@ -45,7 +45,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 :::
 
-Adaptation into book format has been done throughout by Sammi Rosser.
+Adaptation into book format has been done throughout by [Sammi Rosser](https://github.com/Bergam0t) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-9552-8988).
 
 **HSMA 6: Lecture 1** - [Slides](https://docs.google.com/presentation/d/1HO0wXTocHRZgeuLadkGvqf5yC8BEmQzTcgo8QHOd0yY/edit?usp=sharing) - [Github](https://github.com/hsma-programme/h6_2a_intro_to_des)
 

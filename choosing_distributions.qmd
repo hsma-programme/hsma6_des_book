@@ -92,7 +92,7 @@ We need to convert our mean and standard deviation values (that we get from our 
 
 ## Code for the lognormal distribution
 
-This code was written by [Tom Monks](https://orcid.org/0000-0003-2631-4481).
+This code was written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
 
 ```{python}
 import numpy as np
