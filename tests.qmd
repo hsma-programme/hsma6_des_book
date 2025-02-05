@@ -1,0 +1,116 @@
+---
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+---
+
+# Tests {#sec-tests}
+
+:::{.callout-note title="Acknowledgements"}
+
+This section is based on the tests in the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.
+:::
+
+Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions. By **systematically checking for errors, inconsistencies, or unexpected behaviors**, testing helps improve the quality of a model, catch errors and prevent future issues.
+
+## Pytest
+
+When you create a model, you will naturally carry out tests, with simple manual checks where you observe outputs and ensure they look right. These checks can be formalised and **automated** so that you can run them after any changes, and catch any issues that arise.
+
+A popular framework for testing in python is **pytest**.
+
+![Pytest. Holger Krekel, CC BY 2.5 <https://creativecommons.org/licenses/by/2.5>, via Wikimedia Commons.](images/pytest_logo.png){width=50%}
+
+### Simple pytest example
+
+Each test in pytest is a function that contains an assertion statement to check a condition (e.g. `number > 0`). If the condition fails, pytest will return an error message (e.g. "The number should be positive").
+
+Tests are typically stored in a folder called `tests`, with filenames starting with the prefix `test_`. This naming convention allows pytest to automatically discover and run all the tests in the folder.
+
+Here’s an example of a simple test using pytest:
+
+```{python}
+import pytest
+
+
+def test_positive():
+    """
+    Confirm that the number is positive.
+    """
+    number = 5
+    assert number > 0, "The number should be positive"
+```
+
+### Running the tests
+
+Tests are typically run from the terminal. Commands include:
+
+* `pytest` - runs all tests.
+* `pytest tests/test_example_simple.py` - runs tests from a specific file.
+
+When you run a test, you’ll see an output like this in the terminal:
+
+:::{.callout-note icon=false}
+
+## Output:
+
+```{python}
+#| echo: false
+pytest.main(["tests/test_example_simple.py"])
+```
+
+:::
+
+
+### Parametrise
+
+We can execute the same test on different parameters using `pytest.mark.parametrize`.
+
+Here's an example:
+
+```{python}
+@pytest.mark.parametrize("number", [1, 2, 3, -1])
+def test_positive_param(number):
+    """
+    Confirm that the number is positive.
+
+    Arguments:
+        number (float):
+            Number to check.
+    """
+    assert number > 0, f"The number {number} is not positive."
+```
+
+In this example, we’re testing the same logic with four different values: `1`, `2`, `3`, and `-1`. The last value, `-1`, will cause the test to fail. The error message includes the failed value for easy debugging.
+
+:::{.callout-note icon=false}
+
+## Output:
+
+```{python}
+#| echo: false
+pytest.main(["tests/test_example_param.py"])
+```
+
+:::
+
+## Types of testing
+
+There are many different ways of categorising tests. We will focus on three types:
+
+* **Back testing**
+* **Functional testing**
+* **Unit testing**
+
+### Back tests
+
+Back tests check that the model code produces results consistent with those generated historically/from prior code.
+
+### Functional tests
+
+Functional tests verify that the system or components perform their intended functionality.
+
+### Unit tests
+
+Unit tests are a type of functional testing that focuses on individual components (e.g. methods, classes) and tests them in isolation to ensure they work as intended.

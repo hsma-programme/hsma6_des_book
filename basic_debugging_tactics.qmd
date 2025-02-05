@@ -21,11 +21,17 @@ There are a range of different approaches we can take
 
 Adding `print()` statements to your models at
 
-
 ## Using the logging module
 
 The logging module is a step up from the use of print() statements.
 
+## Testing
+
+Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions.
+
+By checking for errors and unexpected results, it helps improve the quality of the model, catch errors and prevent future issues.
+
+Testing is explored in more detail in its own chapter: @sec-tests.
 
 ## Event logging
 
