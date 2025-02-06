@@ -12,7 +12,7 @@ execute:
 jupyter: python3
 ---
 
-While the focus of this book is on simpy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
+While the focus of this book is on SimPy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
 
 ## Python libraries
 

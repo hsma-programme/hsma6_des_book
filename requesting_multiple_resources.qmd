@@ -28,20 +28,22 @@ Throughout the code, anything new that's been added will be followed by the comm
 
 Let's return to our branching model from before.
 
-Remember, in this, patients
-- see a receptionist
-- see a nurse
-- have a chance of going on to see a doctor
+Remember, in this, patients:
+
+- See a receptionist.
+- See a nurse.
+- Have a chance of going on to see a doctor.
 
 ![](images/example_simple_model_branching.png)
 
 In the original version of the model, we assumed that there was always a room available for patients to be seen in. Maybe each nurse and doctor in this example clinic has their own designated room they are always in.
 
-But let's imagine the setup is slightly different
-- patients see a receptionist and go to a waiting area
-- once both a cubicle and a nurse are available, the patient is seen by a nurse
-- if the patient then needs to see a doctor (which, as before, only a certain % of patients will) then they will remain in the same cubicle while waiting for a doctor
-- the doctor will see them in the cubicle
+But let's imagine the setup is slightly different:
+
+- Patients see a receptionist and go to a waiting area.
+- Once both a cubicle and a nurse are available, the patient is seen by a nurse.
+- If the patient then needs to see a doctor (which, as before, only a certain % of patients will) then they will remain in the same cubicle while waiting for a doctor.
+- The doctor will see them in the cubicle.
 
 The cubicle is released for the next patient after seeing the nurse IF the patient leaves at this point. Otherwise, it will be released after seeing the doctor.
 
@@ -198,9 +200,10 @@ clinic_resource = yield self.env.any_of([nurse_request,cubicle_request]) ##NEW
 ```
 
 Next, we have to check three possible scenarios and act accordingly:
-- both were available at the same time
-- we got the nurse but are still waiting for a cubicle
-- we got the cubicle but are still waiting for a nurse
+
+- Both were available at the same time.
+- We got the nurse but are still waiting for a cubicle.
+- We got the cubicle but are still waiting for a nurse.
 
 ```{python}
 clinic_resource_list = list(clinic_resource.keys()) ##NEW

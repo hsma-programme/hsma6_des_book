@@ -30,10 +30,11 @@ Let’s look at how we’d model that.
 
 ## The approach
 
-Basically, we will :
-- Set up the frequency and duration of unavailability as parameter values in g class
-- Make sure that the nurse is set up as a PriorityResource
-- Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!)
+Basically, we will:
+
+- Set up the frequency and duration of unavailability as parameter values in g class.
+- Make sure that the nurse is set up as a PriorityResource.
+- Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!).
 - Start this new generator running in our run method of the Model class.
 
 ## Coding the model
@@ -45,7 +46,8 @@ Throughout the code, anything new that's been added will be followed by the comm
 ### g class
 
 In the g class, we have added values to specify how long nurse is unavailable and at what frequency.
-Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.
+
+In this example, every 2 hours, the nurse will be unavailable for 15 minutes.
 
 ```{python}
 class g:

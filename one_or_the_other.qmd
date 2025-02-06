@@ -8,12 +8,12 @@ author:
 This section is a work in progress
 :::
 
-Sometimes in a system you may find yourself in a situation where you need to
+Sometimes in a system you may find yourself in a situation where you need to <!--TODO: incomplete sentence -->
 
-For example, you may have
+For example, you may have:
 
-- an operating theatre where the operation will be cancelled if a recovery bed resource is not available within a certain time of the patient beginning to be prepped
-- an air ambulance where the call will be regarded as 'missed' and exit the system if an air ambulance resource is not immediately available
+- An operating theatre where the operation will be cancelled if a recovery bed resource is not available within a certain time of the patient beginning to be prepped.
+- An air ambulance where the call will be regarded as 'missed' and exit the system if an air ambulance resource is not immediately available.
 
 This is really just a similar situation to reneging - but instead of using a patience attribute, we instead provide some other value - often a fixed period of time - to check against.
 

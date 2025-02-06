@@ -22,12 +22,10 @@ We can build in priority-based queuing in our SimPy models in a few different wa
 
 A PriorityResource is a class in SimPy that’s like the standard Resource class we’ve used so far, but also has functionality that allows it to select which entity to pull out of a queue next based on a priority value we specify.
 
-The way this works in SimPy is :
+The way this works in SimPy is:
 
-1. We set up resources that will be dealing with priority-based queues as PriorityResources rather than Resources
-
-2. We have an attribute stored against the entity that specifies that entity’s priority (with lower values indicating higher priority)
-
+1. We set up resources that will be dealing with priority-based queues as PriorityResources rather than Resources.
+2. We have an attribute stored against the entity that specifies that entity’s priority (with lower values indicating higher priority).
 3. When we request a PriorityResource, we tell it the attribute to use to determine priority in that queue (this also means we could have multiple attributes for priority and use different ones for different queues).
 
 ## Coding the model

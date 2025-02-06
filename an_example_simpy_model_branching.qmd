@@ -44,11 +44,12 @@ Therefore, if there’s an equal chance of any value being picked (as is the cas
 :::{.callout-note}
 Not all branching paths will be probability-based.
 
-It may be that some paths are followed depending on
-  - the time of day
-  - the type of patient
-  - how long a patient spends in an activity
-  - etc.
+It may be that some paths are followed depending on:
+
+- The time of day.
+- The type of patient.
+- How long a patient spends in an activity.
+- etc.
 
 In these cases, you’d still use conditional logic, but just alter the condition you’re checking.
 

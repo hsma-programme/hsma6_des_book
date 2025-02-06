@@ -157,7 +157,7 @@ When setting up our model class, we also want to create a distribution object th
 
 For more information on these functions, refer to @sec-distributions and @sec-reproducibility.
 
-We will be using the `Poisson` class from the `sim-tools` package, so first need to run the following line.
+We will be using the `Poisson` class from the `sim-tools` package written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481), so first need to run the following line.
 
 ```{python}
 #| eval: true

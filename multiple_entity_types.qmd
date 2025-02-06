@@ -14,19 +14,19 @@ execute:
 
 Let's imagine we want to model some more variety within the patients (entities) arriving in our model.
 
-Maybe patients are differentiated by something - their method of arrival, or the illness they have, or the severity of their symptoms, and consequently have
+Maybe patients are differentiated by something - their method of arrival, or the illness they have, or the severity of their symptoms, and consequently have:
 
-- different arrival rates
-- different distributions for the amount of time spend with resources
-- different probabilities at branching points
-- different pathways entirely (but still within your system of interest)
+- Different arrival rates
+- Different distributions for the amount of time spend with resources
+- Different probabilities at branching points
+- Different pathways entirely (but still within your system of interest)
 
 The flexibility of simpy and Python does mean there are a range of ways we could approach coding this in.
 
-In this chapter, we will give a bit of an introduction to how you might make decisions about
+In this chapter, we will give a bit of an introduction to how you might make decisions about:
 
-- whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class
-- whether to have a single generator or multiple generators
+- Whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class.
+- Whether to have a single generator or multiple generators.
 
 :::{.callout-note}
 At this stage in your modelling, you will need to start drawing on your creativity!
@@ -50,8 +50,8 @@ The basic rule of thumb is have different generators if the entities - and/or wh
 
 You may opt for different generators if
 
-- a) the inter-arrival rate of that way of entering the system is fundamentally different *(the most common reason)*, and/or
-- b) if you're modelling a different pathway in the same modelled system (e.g. telephone calls coming in to the same system as patients turning up in person etc).
+- (A) The inter-arrival rate of that way of entering the system is fundamentally different *(the most common reason)*, and/or
+- (B) If you're modelling a different pathway in the same modelled system (e.g. telephone calls coming in to the same system as patients turning up in person etc).
 
 The authors of this book would generally steer away from having a different generator just for a different patient type or severity, and would instead use attributes to differentiate between the patients. These attributes can then be read when making decisions in the pathway, like where to go in a branch, or which distribution to sample from for an activity time instead.
 

@@ -18,7 +18,7 @@ The majority of these models do not use the HSMA structure of `g`, `Patient`, `M
 
 You may find it a helpful exercise to try and convert some of the models linked to the structure we have used in this book so far. This will help you really understand what is going on in the model, and help you to start develop your own preferred structure.
 
-When working through these models, consider
+When working through these models, consider:
 
 - What do you prefer about the HSMA structure?
 - What do you prefer about the structure the other modeller uses?
@@ -28,11 +28,9 @@ When working through these models, consider
 :::
 
 
-
 ## An orthopaedic ward - the Hospital Efficiency Project (HEP)
 
 <https://github.com/AliHarp/HEP>
-
 
 Harper, A., & Monks, T. Hospital Efficiency Project Orthopaedic Planning Model Discrete-Event Simulation
 

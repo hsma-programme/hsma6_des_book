@@ -26,10 +26,11 @@ Not all queues run “as planned”. We may wish to model behaviours where entit
 
 Let’s imagine that each of our patients has a patience level - an amount of time they’re prepared to wait for the nurse.
 
-To model this, we :
-- Add patience level as an attribute to each patient, with some way of determining what a patient’s patience is
-- When we request a resource, we’ll tell SimPy to either wait until the request can be met OR until the patient’s patience has expired (whichever comes first)
-- We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged
+To model this, we:
+
+- Add patience level as an attribute to each patient, with some way of determining what a patient’s patience is.
+- When we request a resource, we’ll tell SimPy to either wait until the request can be met OR until the patient’s patience has expired (whichever comes first).
+- We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged.
 - We’ll add the number of patients that reneged to our outputs from each run, and take the average number of patients who reneged per run over the trial.
 
 ### Coding a reneging example
@@ -475,21 +476,23 @@ We can also see that some patients who arrived in the system later balk earlier 
 
 ## Balking
 
-For balking, there are two different ways in which balking can occur (and both could occur in the same model) :
+For balking, there are two different ways in which balking can occur (and both could occur in the same model):
 
-- An entity may choose not to join a queue because it is too long for their preferences / needs
-- An entity may not be able to join a queue because there is no capacity for them
+- An entity may choose not to join a queue because it is too long for their preferences / needs.
+- An entity may not be able to join a queue because there is no capacity for them.
 
 We will look at the latter, but the way we approach it is the same for both - the only difference is that, in the former, the maximum queue length is likely to be an attribute of the patient (and may be individual per patient) just like in the reneging example, rather than an attribute of the model.
 
 Here, we’ll imagine that in our clinic, there is only space for 3 people to wait to see the nurse, and if there is no space, they cannot wait.
 
-To model our balking requirements, we will :
-- Add a parameter to g class to store the maximum queue length allowed (if this were patient-decided balking, we’d put this in the patient class instead)
-- Add a list to our model attributes that will store all the patient objects currently in the queue for the nurse.  This is really useful as it allows us to see who is in the queue at any time, as well as how many etc
-- Whenever a patient joins or leaves the queue, we’ll update the list of patients in the queue
+To model our balking requirements, we will:
+
+- Add a parameter to g class to store the maximum queue length allowed (if this were patient-decided balking, we’d put this in the patient class instead).
+- Add a list to our model attributes that will store all the patient objects currently in the queue for the nurse.  This is really useful as it allows us to see who is in the queue at any time, as well as how many etc.
+- Whenever a patient joins or leaves the queue, we’ll update the list of patients in the queue.
 - Before we ask for the nurse resource, we’ll first check if the queue is at maximum size.  If it is, the patient will never join the queue and we’ll record that.  If not, we’ll proceed as before.
-We’ll add results of number of patients who balked to our results
+
+We’ll add results of number of patients who balked to our results.
 
 ### Coding a balking example
 
@@ -960,11 +963,12 @@ Due to the new logic, there should never be any patients balking (as they’d jo
 
 The full updated code for the model is given below.
 
-This example brings together code for
-- nurse breaks
-- reneging
-- balking
-- queue choosing
+This example brings together code for:
+
+- Nurse breaks.
+- Reneging.
+- Balking.
+- Queue choosing.
 
 ::: {.callout-note collapse="true"}
 

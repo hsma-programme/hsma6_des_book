@@ -20,7 +20,8 @@ One way to implement this is to return to the `sim-tools` package by [Tom Monks]
 
 ## The principle used
 
-The documentation of the in sim tools says the following about the approach we will be using.
+The `sim-tools` documentation states the following about the approach we will be using:
+
 > Thinning is an acceptance-rejection approach to sampling inter-arrival times (IAT) from a time dependent distribution where each time period follows its own exponential distribution.
 
 ```{python}
@@ -32,8 +33,9 @@ import plotly.express as px
 ```
 
 The NSPP thinning class takes in a dataframe with two columns:
-- the first, called 't', is a list of time points at which the arrival rate changes
-- the second, called 'arrival_rate', is the arrival rate in the form of the average inter-arrival time in time units
+
+- The first, called 't', is a list of time points at which the arrival rate changes.
+- The second, called 'arrival_rate', is the arrival rate in the form of the average inter-arrival time in time units.
 
 Let's look at an example of the sort of dataframe we would create and pass in.
 
@@ -85,10 +87,10 @@ The key things to note here are
 :::{.callout-note collapse="true"}
 ### Click here for a more in-depth breakdown about how the NSPPThinning class works under the hood
 
-The NSPP thinning class uses this table to do a few things
+The NSPP thinning class uses this table to do a few things:
 
-- set up an exponential distribution using the **highest** observed arrival rate.
-- works out the time interval between our dataframe rows
+- Set up an exponential distribution using the **highest** observed arrival rate.
+- Work out the time interval between our dataframe rows.
 
 Let's first look at 20,000 samples taken from the exponential distribution that is set up using the maximum arrival rate (1 divided by the lowest inter-arrival time).
 
@@ -190,14 +192,14 @@ This will be used by the NSPPThinning class to determine the arrival rate depend
 Note that the dataframe we have loaded in only contains a column for the mean interarrival time. We need to convert this to a rate by dividing 1 by the mean interarrival time.
 
 :::{.callout-tip}
-The two essential columns to have in our new `arrivals_time_dependent_df` are
+The two essential columns to have in our new `arrivals_time_dependent_df` are:
 
-- t
-- arrival_rate
+- `t`
+- `arrival_rate`
 
-t is an integer representing the simulation time at which the rate applies from
+`t` is an integer representing the simulation time at which the rate applies from.
 
-arrival_rate is an indication of the arrivals per time unit (1 over the average interarrival time)
+`arrival_rate` is an indication of the arrivals per time unit (1 over the average interarrival time).
 :::
 
 We will also remove our `patient_inter` attribute as that's no longer going to be in use.

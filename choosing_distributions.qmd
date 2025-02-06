@@ -48,7 +48,10 @@ Effectively, lognormals relate to how many copies of one number multiply togethe
 
 How many 4s multiply together to make 64?
 
+```
 4 x 4 x 4 = 64
+```
+
 We had to multiply 3 copies of the number 4 to get 64.
 
 This means that the logarithm is 3.

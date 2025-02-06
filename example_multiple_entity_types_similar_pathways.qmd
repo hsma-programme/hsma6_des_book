@@ -27,10 +27,10 @@ This section is under development.
 :::{.callout-tip}
 Before reading this chapter, we'd strongly recommend you take a look at [the chapter on approaches to different entity types](https://des.hsma.co.uk/multiple_entity_types).
 
-This chapter is intended to give just one example of a situation with
+This chapter is intended to give just one example of a situation with:
 
-- multiple patient generators
-- multiple types of patient defined by attributes instead of separate patient classes
+- Multiple patient generators.
+- Multiple types of patient defined by attributes instead of separate patient classes.
 :::
 
 
@@ -38,11 +38,11 @@ This chapter is intended to give just one example of a situation with
 
 In this case, we will be wanting to set up a generator for each of the new types of patients we opt to add to this model.
 
-In this case, we are going to have patients arriving via different routes: telephone, walk-ins, and ambulance
+In this case, we are going to have patients arriving via different routes: telephone, walk-ins, and ambulance.
 
-- Telephone patients will 'arrive' frequently, only spend a short time with a nurse, and have a low probability of needing to see the doctor.
-- Walk-in patients will arrive less frequently, spend more time with a nurse than the doctor, and have a medium probability of needing to see the doctor.
-- Ambulance patients will arrive even less frequently, spend a short amount of time with the nurse, then always visit the doctor and spend a long time with them.
+- **Telephone** patients will 'arrive' frequently, only spend a short time with a nurse, and have a low probability of needing to see the doctor.
+- **Walk-in** patients will arrive less frequently, spend more time with a nurse than the doctor, and have a medium probability of needing to see the doctor.
+- **Ambulance** patients will arrive even less frequently, spend a short amount of time with the nurse, then always visit the doctor and spend a long time with them.
 
 :::{.callout-warning}
 In this version of our system, we will not be implementing any sort of prioritisation - instead, patients will be seen in the order they arrive (FIFO).
@@ -53,20 +53,20 @@ It would be more realistic to implement priority-based queueing, with our ambula
 However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**.
 Full details can be found in the [reproducibility chapter](reproducibility.qmd), but we will cover the key changes in this section as well.
 
-In this example, we will be
+In this example, we will be:
 
-- keeping a single patient class and using an attribute to differentiate between them (as their pathways are very similar)
-- using multiple generators (as each different type of patient has their own inter-arrival time)
+- Keeping a single patient class and using an attribute to differentiate between them (as their pathways are very similar).
+- Using multiple generators (as each different type of patient has their own inter-arrival time).
 
-In short, what we will need do in our model is
+In short, what we will need do in our model is:
 
-- add additional attributes to our g class for our different types of patients
-- add an additional attribute to our patient class to track the type of patient they are
-- move the setup of our sampling distributions into our model class
-- adjust our patient generator function to pull in the appropriate inter-arrival time for the patient type
-- adjust our patient journey function to pull in the appropriate sampling distribution for each patient type
-- adjust our model run function to multiple generators that will cause our different patient types to arrive at the appropriate rate
-- update our outputs and visualisations to check our different patient classes are working as expected
+- Add additional attributes to our g class for our different types of patients.
+- Add an additional attribute to our patient class to track the type of patient they are.
+- Move the setup of our sampling distributions into our model class.
+- Adjust our patient generator function to pull in the appropriate inter-arrival time for the patient type.
+- Adjust our patient journey function to pull in the appropriate sampling distribution for each patient type.
+- Adjust our model run function to multiple generators that will cause our different patient types to arrive at the appropriate rate.
+- Update our outputs and visualisations to check our different patient classes are working as expected.
 
 :::{.callout-warning}
 Remember - this is just one way of tackling this!
@@ -81,7 +81,7 @@ Throughout the code, anything new that's been added will be followed by the comm
 
 ### Imports
 
-As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.
+As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
 
 :::{.callout-tip}
 If you don't already have sim-tools in your environment, install it with `pip install sim-tools`.

@@ -29,12 +29,12 @@ The SimPy documentation is a rich resource for information on how to do things.
 
 <https://simpy.readthedocs.io/en/latest/>
 
-It covers a range of things that we don't yet touch on in the book, such as
+It covers a range of things that we don't yet touch on in the book, such as:
 
-- interrupting processes
-- building custom events
-- waiting for any of or all events before triggering a process
-- additional resource types, such as containers and stores
+- Interrupting processes.
+- Building custom events.
+- Waiting for any of or all events before triggering a process.
+- Additional resource types, such as containers and stores.
 
 ### Experiment!
 

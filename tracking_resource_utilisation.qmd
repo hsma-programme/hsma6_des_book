@@ -14,8 +14,8 @@ jupyter: python3
 
 When running a model, it's useful to be able to track a few things about your resources.
 
-- How much are resources being utilised overall
-- How much are resources being utilised at specific points in time
+- How much are resources being utilised overall.
+- How much are resources being utilised at specific points in time.
 
 For example, it would be useful to know that your nurse resources are being utilised 89% of the time.
 
@@ -43,9 +43,10 @@ Note that this is slightly different from the resource utilisation, but the idea
 
 To calculate the percentage of time a resource was being utilised overall, we need to start tracking how long each entity in our model spent using a resource.
 
-What we can then do is
-- add this up across every entity who passes through our model
-- divide it by the total amount of time that has elapsed in the model, multiplied by the number of resources in the model
+What we can then do is:
+
+- Add this up across every entity who passes through our model.
+- Divide it by the total amount of time that has elapsed in the model, multiplied by the number of resources in the model.
 
 We can track this by adding an additional attribute to our patient class.
 
@@ -591,9 +592,10 @@ A nice enhancement to this output would be to format the average nurse utilisati
 
 Another option for monitoring resource usage is to set up a new interval audit process.
 
-We create a new interval_audit_utilisation() function that we pass
-- a list of resources we want to monitor
-- a time interval at which to snapshot the utilisation in the process
+We create a new `interval_audit_utilisation()` function that we pass:
+
+- A list of resources we want to monitor.
+- A time interval at which to snapshot the utilisation in the process.
 
 ### A code example
 
@@ -720,8 +722,7 @@ def interval_audit_utilisation(self, resources, interval=1):
 :::{.callout-tip}
 If you are using a simpy PriorityResource instead of a standard resource, the code should work the same.
 
-If you are using a simpy store instead of a simpy resource, it's possibly to adapt by using
-`len(resources.items)` to get the number of resources currently being utilised, and `resources.capacity` will still return the total number of resources that are in the system.
+If you are using a simpy store instead of a simpy resource, it's possibly to adapt by using `len(resources.items)` to get the number of resources currently being utilised, and `resources.capacity` will still return the total number of resources that are in the system.
 :::
 
 ##### The run method

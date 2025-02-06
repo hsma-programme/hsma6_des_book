@@ -34,9 +34,10 @@ If our seed is 101, maybe the arrival times will be
 
 Why is this good?
 
-We can either
-- Change the random number and see how the same system can cope with different patterns of arrivals
-- Keep the random number the same and see how changing the system affects performance
+We can either:
+
+- Change the random number and see how the same system can cope with different patterns of arrivals.
+- Keep the random number the same and see how changing the system affects performance.
 
 
 Let's go back to our branching model.

@@ -20,7 +20,7 @@ This solution is based on the work of [Anna Laws](https://github.com/aselaws) [!
 
 When working out the best possible configuration for a service, you may wish to try out a large number of scenarios.
 
-Let's return to our branching model (with the reproducibility set via sim-tools as described in chapter @sec-reproducibility).
+Let's return to our branching model (with the reproducibility set via `sim-tools` as described in chapter @sec-reproducibility).
 
 ## Scenarios
 
