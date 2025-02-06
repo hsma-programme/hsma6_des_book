@@ -40,11 +40,10 @@ The g class is unchanged
 
 ### Patient class
 
-Here we add an attribute of the patient that determines their priority
-:::{.callout-tip}
-When using a priority resource
+Here we add an attribute of the patient that determines their priority.
 
-Lower value = higher priority
+:::{.callout-tip}
+When using a priority resource, **lower value = higher priority**.
 :::
 
 In this example, we just randomly pick a value between 1 and 5, but you can use whatever logic you like.
@@ -387,17 +386,15 @@ Let's calculate the mean queue time by priority.
     )
 ```
 
-We can see that the queueing time is shorter for the clients with a lower priority value (and therefore a higher actual priority in terms of the model - i.e. they will be seen first)
+We can see that the queueing time is shorter for the clients with a lower priority value (and therefore a higher actual priority in terms of the model - i.e. they will be seen first).
 
-
-:::{.tip-warning}
+:::{.callout-warning}
 Remember that we are only recording the queue time at the point at which someone exits the queue to be seen by a nurse.
 
 This means that there may be lots of people - particularly those with a higher priority number (and therefore the least important to see as far as the model is concerned) who are still sitting waiting to be seen when our model stops running.
 
 Think about ways you might try to account for that.
 :::
-
 
 ```{python}
 #| eval: true
