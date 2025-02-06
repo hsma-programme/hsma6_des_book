@@ -102,9 +102,13 @@ pytest.main(["tests/test_example_param.py"])
 
 :::
 
-## The model
+## Coding the model
 
-We design tests for the model from @sec-reproducibility. However, we will modify this model so that, instead of modifying a global class of parameter values, we **create instances of this class** and use it in our model.
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
+We will design tests for the model from @sec-reproducibility. However, we will modify the model so that, instead of modifying a global class of parameter values, we **create instances of this class** and use it in our model.
 
 By using class instances, each test has **isolated parameters**, preventing interference and ensuring consistency. This improves flexibility for independent test scenarios, simplifies debugging, and supports parallel execution by avoiding shared state, making the model more robust.
 
@@ -288,13 +292,13 @@ pytest.main(["tests/test_functionaltest.py"])
 
 Unit tests are a type of functional testing that focuses on individual components (e.g. methods, classes) and tests them in isolation to ensure they work as intended.
 
-For example, we expect that our model should fail if the simulation duration or the patient inter-arrival time were set to 0. This is tested using `test_zero_inputs`.
+For example, we expect that our model should fail if the number of doctors or the patient inter-arrival time were set to 0. This is tested using `test_zero_inputs`.
 
 ```{python}
 {{< include tests/test_unittest.py >}}
 ```
 
-When we run the test, we see there is one pass and one fail.
+When we run the test, we see that both fail.
 
 :::{.callout-note icon=false collapse="true"}
 
@@ -308,11 +312,12 @@ pytest.main(["tests/test_unittest.py"])
 
 :::
 
-**Simulation duration** passes the test as SimPy has built in functionality requiring that `env.run()` is set to run for a time greater than the current simulation time (which is 0) - and so, it raises a ValueError and stops execution.
+These tests fail as we do not have an error handling for these values. If we had proceeded to `run_trial()`...
 
-However, the **patient inter-arrival time** test fails. There is no ValueError raised by the model - in fact, we would find that the model will run infinitely, as it is just constantly generating new patients. Hence, this test was given a time limit using the `pytest-timeout` package, using which we can add the decorator `@pytest.mark.timeout(3)` which will end the test after 3 seconds.
+* **Number of doctors = 0:** The model would've stopped, as SimPy has built in functionality requiring that the capacity of resources must be greater than 0, and so it raises a ValueError and stops execution.
+* **Patient inter-arrival time = 0**: The model would have run infinitely, as it would just constantly generating new patients.
 
-From running these tests, we've therefore identified a **glitch** in the model. To address this, we could add error handling which raises an error for users if they try to input an inter-arrival time of 0. For example, we could add the following code to our `Model __init__` method:
+To address this, we could add error handling which raises an error for users if they try to input a value of 0. For example, we could add the following code to our `Model __init__` method:
 
 ```{python}
 # Loop through the specified parameters

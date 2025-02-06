@@ -3,10 +3,9 @@ from full_model import Param, Trial
 
 
 @pytest.mark.parametrize("param_name, value", [
-    ("sim_duration", 0),
+    ("number_of_doctors", 0),
     ("patient_inter", 0)
 ])
-@pytest.mark.timeout(3)
 def test_zero_inputs(param_name, value):
     """
     Check that the model fails when inputs that are zero are used.
@@ -23,4 +22,4 @@ def test_zero_inputs(param_name, value):
 
     # Verify that initialising the model raises an error
     with pytest.raises(ValueError):
-        Trial(param).run_trial()
+        Trial(param)
