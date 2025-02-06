@@ -32,7 +32,7 @@ The classes and structure used for the model are very slightly different to the 
 
 A book has also been written to accompany the above tutorial.
 
-The book can be accessed (here)[https://health-data-science-or.github.io/simpy-streamlit-tutorial/content/03_streamlit/01_intro.html].
+The book can be accessed [here](https://health-data-science-or.github.io/simpy-streamlit-tutorial/content/03_streamlit/01_intro.html).
 
 ## Example apps
 

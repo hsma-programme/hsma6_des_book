@@ -155,7 +155,7 @@ Note that we are using numpy throughout for the operations relating to the booki
 
 When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class.
 
-For more information on these functions, refer to #sec-reproducibility and #sec-distributions.
+For more information on these functions, refer to @sec-distributions and @sec-reproducibility.
 
 We will be using the `Poisson` class from the `sim-tools` package, so first need to run the following line.
 
@@ -1070,7 +1070,7 @@ Note that in this example we have not made use of a warm-up period.
 
 In the early phases of the model, we would expect the utilisation of available slots to be lower, as there will be no booked appointments at the beginning of the model, and the first people to be booked in will be booked in a week ahead due to the mandatory delay period. Therefore the utilisation is likely to be an underestimate.
 
-To learn more about setting warm-up periods, refer to #sec-warmup
+To learn more about setting warm-up periods, refer to @sec-warmup.
 :::
 
 ## Evaluating the impact of changing the number of yearly attendances
