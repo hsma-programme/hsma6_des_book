@@ -63,7 +63,7 @@ Other features that may be useful to adapt for your own use include
 As part of the SimPy visualisation library project, a range of different SimPy models have been created with a Streamlit frontend.
 
 ```{=html}
-<iframe width="780" height="720" src="https://simpy-visualisation.streamlit.app/" title="DES Streamlit example 2"></iframe>
+<iframe width="780" height="720" src="https://simpy-visualisation.streamlit.app/?embedded=true" title="DES Streamlit example 2"></iframe>
 ```
 
 The code for all of these examples can be explored in this [Github Repository](https://github.com/Bergam0t/simpy_visualisation).
