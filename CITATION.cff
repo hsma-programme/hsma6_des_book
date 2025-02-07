@@ -1,0 +1,36 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: HSMA - little book of DES
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Sammi
+    family-names: Rosser
+    orcid: 'https://orcid.org/0000-0002-9552-8988'
+    affiliation: University of Exeter
+    email: s.j.rosser@exeter.ac.uk
+  - given-names: Dan
+    family-names: Chalk
+    email: d.chalk@exeter.ac.uk
+    affiliation: University of Exeter
+    orcid: 'https://orcid.org/0000-0002-4165-4364'
+  - given-names: Amy
+    family-names: Heather
+    email: a.heather2@exeter.ac.uk
+    affiliation: University of Exeter
+    orcid: 'https://orcid.org/0000-0002-6596-3479'
+repository-code: 'https://github.com/hsma-programme/hsma6_des_book/'
+url: 'https://des.hsma.co.uk/'
+abstract: >-
+  An introduction to writing discrete event simulation
+  models for healthcare (and beyond) using the SimPy package
+  in Python.
+keywords:
+  - simulation
+  - simpy
+  - python
+license: MIT
