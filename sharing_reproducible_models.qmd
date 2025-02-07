@@ -6,7 +6,9 @@ author:
     url: https://github.com/amyheather
 ---
 
-**Reproducibility** refers to the ability to get the same results (e.g. those described in a report) using the same code and data. Making your work reproducible is important because it:
+**Reproducibility** refers to the ability to get the same results (e.g. those described in a report) using the same code and data. You may have come across the related concept of a **reproducible analytical pipeline (RAP)**, which is when an analytical process (in this case, running and analysing our DES model) is automated and reproducible - from getting the parameters through to generating tables and figures.
+
+Making your work reproducible is important because it:
 
 * **Ensures results can be regenerated** - that future you - or others - can reproduce the results.
 * **Builds trust** - through transparency, and confidence in the model's consistency.
@@ -20,18 +22,17 @@ In @sec-reproducibility, we explored how to add **seeds** to our model, allowing
 
 There are various recommendations of best practice, that will help make your work reproducible. We will turn to two relevant examples:
 
-1. Heather, A. Monks, T. Harper, A. (2025). Mustafee, N. Mayne, A. **On the reproducibility of discrete-event simulation studies in health research: an empirical study using open models**. arXiv pre-print. <https://doi.org/10.48550/arXiv.2501.13137>.
-2. The NHS RAP Community of Practice. **Levels of RAP Framework**. <https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/>.
+Heather, A. Monks, T. Harper, A. (2025). Mustafee, N. Mayne, A. **On the reproducibility of discrete-event simulation studies in health research: an empirical study using open models**. arXiv pre-print. <https://doi.org/10.48550/arXiv.2501.13137>.
 
-### Recommendations from Heather et al. (2025)
+:::{.callout-note collapse="true"}
 
-:::{.callout-note}
+## View recommendations
+
 These recommendations were developed following attempts to reproduce results from healthcare discrete-event simulation models in eight published articles, using the provided code.
 
 The recommendations marked with a star (⭐) were identified as having the greatest impact in Heather et al. 2025.
 
 For further explanation of each recommendation, check out the paper: <https://doi.org/10.48550/arXiv.2501.13137>.
-:::
 
 Recommendations to support reproduction.
 
@@ -74,15 +75,19 @@ Recommendations to support troubleshooting and reuse.
 * [ ] Avoid excessive output files.
 * [ ] Address large file sizes.
 
-### Recommendations from the NHS Levels of RAP Framework
+:::
 
-:::{.callout-note}
+The NHS RAP Community of Practice. **Levels of RAP Framework**. <https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/>.
+
+:::{.callout-note collapse="true"}
+
+## View recommendations
+
 The following framework has been directly copied from the RAP Community of Practice repository/website: [NHS RAP Levels of RAP Framework](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/).
 
 This framework is maintained by the NHS RAP Community of Practice and is © 2024 Crown Copyright (NHS England), shared by them under the terms of the [Open Government 3.0 licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
 The specific version of the framework copied below is that from commit [2549256](https://github.com/NHSDigital/rap-community-of-practice/commit/2549256498886d6d7ea4cdb736e2a2864c8bb461) (9th September 2024).
-:::
 
 🥉 Baseline: RAP fundamentals offering resilience against future change.
 
@@ -111,6 +116,23 @@ The specific version of the framework copied below is that from commit [2549256]
 * [ ] Process runs based on event-based triggers (e.g., new data in database) or on a schedule.
 * [ ] Changes to the RAP are clearly signposted. E.g. a changelog in the package, releases etc. (See gov.uk info on [Semantic Versioning](https://github.com/alphagov/govuk-frontend/blob/main/docs/contributing/versioning.md)).
 
+:::
+
 ## Implementing these recommendations
 
-<!--TODO: DES RAP Template-->
+A model and repository has been developed to help **support, demonstrate and serve as a possible template** for how you could meet these recommendations:
+
+> Heather, A. Monks, T. (2025). **Python DES RAP Template**. <https://github.com/pythonhealthdatascience/rap_template_python_des/>.
+
+It **adheres to all the recommendations** from:
+
+* ✅ Heather et al. (2025).
+* ✅ NHS Levels of RAP Framework.
+
+The DES model is a simple queueing system where patients arrive, wait to see a nurse, undergo a consultation, and then leave. This model can be extended with advanced features such as multiple activities, branching paths, and priority-based queueing, as discussed in the book.
+
+The model was inspired by this book, alongside other sources and with some other changes, and so the model is similar but with some structural differences. For details on how the model differs from this book and the rationale behind those changes, refer to [docs/hsma_changes.md](https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md) in the model repository.
+
+<br>
+
+[![Python DES RAP Template GitHub](images/python_des_rap_template_github.png)](https://github.com/pythonhealthdatascience/rap_template_python_des/)
