@@ -61,7 +61,7 @@ You can polish it all off by visualising the individual entities moving through 
 
 ## Runs and trials
 
-In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity times etc.
+A **stochastic model** is one that incorporates randomness and variability in its processes, meaning that different runs of the model can yield different outcomes. In a stochastic model, it is important that we do not just run a model once if we’re looking to draw insights from our results.  This is because every run of the simulation will have different random samples for inter-arrival times, activity durations, and other key variables, leading to variation in the results. Running the model multiple times allows us to capture a range of possible scenarios and make more reliable conclusions.
 
 What if you had a run with unusually long activity times sampled (a run of “bad luck”)?  Or unusually long inter-arrival times (a run of “good luck”)?
 

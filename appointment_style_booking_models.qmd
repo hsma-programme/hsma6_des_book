@@ -122,7 +122,7 @@ In our patient class, we will record an id as before.
 
 We have a new attribute named 'booker' that we will create shortly.
 
-We will also create a space to record the time patients arrive into the model, and the time they have their appointment.
+We will also create a space to record the time patients arrive into the model, and the time they have to wait until their appointment.
 
 ```{python}
 #| eval: true
@@ -142,18 +142,18 @@ class Patient:
 
 #### The __init__method
 
-We now need to make some important changes to the __init__method of the model, as well as create a few extra methods we can call on.
+We now need to make some important changes to the `__init__` method of the model, as well as create a few extra methods we can call on.
 
 One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to:
 
-- Extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running).
-- Create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when.
+- Extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running) (`create_slots()`).
+- Create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when (`create_bookings()`).
 
 :::{.callout-tip}
 Note that we are using numpy throughout for the operations relating to the bookings. This is just due to the speed advantage of numpy in this context.
 :::
 
-When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class.
+When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class (`self.arrival_dist`).
 
 For more information on these functions, refer to @sec-distributions and @sec-reproducibility.
 
@@ -436,7 +436,7 @@ def generator_patient_arrivals(self):
 
 #### The attend_clinic method
 
-This method also needs to change quite significantly.
+This method also needs to change quite significantly. Instead of waiting in queues for the receptionist/nurse, this method introduces slot booking. Patients book an appointment slot, and the time until their appointment is recorded as their waiting time.
 
 ```{python}
 #########

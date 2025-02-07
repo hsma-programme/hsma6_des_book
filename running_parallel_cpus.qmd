@@ -64,7 +64,7 @@ We can simplify the code above into a list comprehension.
 
 Why is this important? Well, to use joblib, it's easiest to write our loop as a list comprehension.
 
-Instead of doing i * i to square our number, we have made a new **function** that does the same thing.
+Instead of doing `i * i` to square our number, we have made a new **function** that does the same thing.
 
 ```{python}
 #| eval: true
@@ -77,6 +77,24 @@ def multiply_by_self(input_number):
 Parallel(n_jobs=2)(delayed(multiply_by_self)(i) for i in range(1, 11, 1))
 
 ```
+
+:::{.callout-note}
+
+## Why `Parallel` and `delayed`?
+
+`Parallel` is a function that allows you to run tasks concurrently across multiple CPU cores. By setting `n_jobs=2`, we tell Joblib to use 2 CPU cores to run process the tasks in parallel.
+
+The function `delayed` is used to delay the execution of our function. If we had just run...
+
+```{python}
+Parallel(n_jobs=2)(multiply_by_self)(i) for i in range(1, 11, 1)
+```
+
+... then, by the time it gets passed to `Parallel`, the `multiply_by_self(i)` calls would have already returned, so there would be nothing left to execute in parallel. This is because squaring numbers from 1 to 10 is a very quick task.
+
+The real benefit of `joblib` and parallelism will come when we have more computationally expensive tasks that take a longer time to complete.
+
+:::
 
 ## Coding the model
 

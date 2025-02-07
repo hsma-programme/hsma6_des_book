@@ -54,6 +54,6 @@ In SimPy, we use Generator Functions in two different places:
 
 Let’s imagine we are modelling patients in a patient pathway.
 
-For 1, the generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient.  Then it does it all over again.
+For **1. Modelling the DES generators (arrival points):** The generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient.  Then it does it all over again.
 
-For 2, the generator function requests a resource and freezes until that resource is available (the queue).  When the resource is available it freezes in place for an amount of time with it (the activity).  It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.
+For **2. Modelling the individual journey of each entity:** The generator function requests a resource and freezes until that resource is available (the queue).  When the resource is available it freezes in place for an amount of time with it (the activity).  It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.

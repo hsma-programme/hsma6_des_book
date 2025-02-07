@@ -288,7 +288,7 @@ Finally, we can put this all together when we run the model.
 
 ##### The __init__ method
 
-First we add a
+First we add a column to record the average nurse utilisation.
 
 ```{python}
 def  __init__(self):
@@ -299,7 +299,7 @@ def  __init__(self):
     self.df_trial_results.set_index("Run Number", inplace=True)
 ```
 
-##### The run_trial class
+##### The run_trial method
 
 Finally, we add this to the output dataframe.
 
