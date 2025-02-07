@@ -4,3 +4,8 @@
 
 // Code blocks
 $code-block-bg-alpha: -.8;
+
+// Prevent cut-off of final chapters in sidebar
+.sidebar-menu-container {
+    padding-bottom: 10em;
+}
