@@ -59,6 +59,7 @@ book:
     chapters:
     - stress_des.qmd
     - stars.qmd
+    - sharing_reproducible_models.qmd
   - part: "Part 8 - Advanced Concepts"
     chapters:
     - testing_large_numbers_scenarios.qmd
