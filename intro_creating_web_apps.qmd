@@ -1,5 +1,4 @@
 ---
-title: Creating Web Apps
 author:
   - name: Sammi Rosser
     orcid: 0000-0002-9552-8988
@@ -12,11 +11,13 @@ execute:
 jupyter: python3
 ---
 
+# Creating Web Apps {#sec-apps}
+
 As part of the HSMA programme, we teach how to use the Streamlit web application framework to produce a front-end for a discrete event simulation model.
 
 This can be a hugely powerful way of distributing your model. By creating a web application, stakeholders can interact with the model and adjust parameters themselves, seeing the impact this has. A carefully designed web app can guide them through the process of understanding the impact of different changes to the system.
 
-It is beyond the scope of this book to give a full treatment of this topic at this time, though it may be expanded on in the future (by the end of 2024).
+It is beyond the scope of this book to give a full treatment of this topic at this time, though it may be expanded on in the future.
 
 In the meantime, there are several resources available to you.
 

@@ -20,7 +20,7 @@ STRESS-DES is 20-item checklist. It was designed to improve the reporting of DES
 
 ## How to use the guidelines?
 
-You can refer to the guidelines **when writing your report**, making sure to cover all the required points from the checklist. This will help ensure your report is clear, complete and replicable.
+You can refer to the guidelines **when writing your report**, making sure to cover all the required points from the checklist. This will help ensure your model is clear, complete and replicable.
 
 It can be helpful to create a **column in the checklist** where you mark whether you have addressed each item. You can also note the relevant section in your report and even copy or paraphrase key sections into the checklist itself. This makes it easier to track your progress and ensure that nothing is overlooked.
 
@@ -33,6 +33,8 @@ It can be helpful to create a **column in the checklist** where you mark whether
 {{< downloadthis assets/stress_des.docx dname=stress_des label="Download STRESS-DES word document" >}}
 
 View on the [equator network](https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/).
+
+**STRESS-DES guidelines:**
 
 {{< include assets/stress_des.md >}}
 
