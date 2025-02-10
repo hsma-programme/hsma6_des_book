@@ -10,6 +10,7 @@ format:
 jupyter: python3
 execute:
   eval: false
+code-annotations: hover
 ---
 
 :::{.callout-note title="Acknowledgements"}
@@ -42,8 +43,9 @@ class g:
     mean_n_consult_time = 6
     number_of_nurses = 1
     sim_duration = 120
-    number_of_runs = 1  ##NEW - single run
+    number_of_runs = 1  ##NEW - single run # <1>
 ```
+1. Just run the model once.
 
 ## Using simple `print()` statements
 
@@ -74,7 +76,7 @@ def generator_patient_arrivals(self):
         self.patient_counter += 1
         p = Patient(self.patient_counter)
 
-        ##NEW - Print message stating patient ID and arrival time
+        ##NEW - Print message stating patient ID and arrival time # <1>
         print(f"Patient {p.id} arrives at: {self.env.now:.3f}.")
 
         self.env.process(self.attend_clinic(p))
@@ -90,7 +92,7 @@ def attend_clinic(self, patient):
         sampled_nurse_act_time = random.expovariate(1.0 /
                                                     g.mean_n_consult_time)
 
-        ##NEW - Print message with patient wait and consultation length
+        ##NEW - Print message with patient wait and consultation length # <1>
         print(
           f"Patient {patient.id} waits for {patient.q_time_nurse:.3f} " +
           f"and is seen at {end_q_nurse}. Consultation length: " +
@@ -102,6 +104,7 @@ def attend_clinic(self, patient):
             sampled_nurse_act_time)
         yield self.env.timeout(sampled_nurse_act_time)
 ```
+1. Add print messages with the patient arrival time, wait time, and time with the nurse.
 
 ### The full code
 
@@ -364,14 +367,16 @@ class g:
     mean_n_consult_time = 6
     number_of_nurses = 1
     sim_duration = 120
-    number_of_runs = 1  ##NEW - single run
-    trace = True  ##NEW - controls whether the print statements are executed
+    number_of_runs = 1  ##NEW - single run # <1>
+    trace = True  ##NEW - controls whether the print statements are executed # <2>
 ```
+1. Just run the model once.
+2. Add `trace` parameter which will determine whether the print statements are executed.
 
 We then define a new function `trace()` which will only run if `g.trace` is true.
 
 ```{python}
-##NEW
+##NEW # <1>
 def trace(msg):
     """ 
     If TRUE will return all patient-level message outputs.
@@ -383,6 +388,7 @@ def trace(msg):
     if g.trace:
         print(msg)
 ```
+1. Define a new function `trace()` which will print messages if `g.trace` is true.
 
 Then, in our model, we alter our `print()` statements so that the message is input to the `trace()` function.
 
@@ -392,7 +398,7 @@ def generator_patient_arrivals(self):
         self.patient_counter += 1
         p = Patient(self.patient_counter)
 
-        ##NEW - Print message stating patient ID and arrival time
+        ##NEW - Print message stating patient ID and arrival time # <1>
         trace(f"Patient {p.id} arrives at: {self.env.now:.3f}.")
 
         self.env.process(self.attend_clinic(p))
@@ -408,7 +414,7 @@ def attend_clinic(self, patient):
         sampled_nurse_act_time = random.expovariate(1.0 /
                                                     g.mean_n_consult_time)
 
-        ##NEW - Print message with patient wait and consultation length
+        ##NEW - Print message with patient wait and consultation length # <1>
         trace(
           f"Patient {patient.id} waits for {patient.q_time_nurse:.3f} " +
           f"and is seen at {end_q_nurse}. Consultation length: " +
@@ -420,6 +426,7 @@ def attend_clinic(self, patient):
             sampled_nurse_act_time)
         yield self.env.timeout(sampled_nurse_act_time)
 ```
+1. Change our `print()` statements to `trace()`.
 
 ### The full code
 
@@ -702,16 +709,20 @@ It can also be extended with different types of log message (e.g. `INFO`, `WARNI
 
 #### Imports
 
-First, we need to import the `logging` and `time` modules.
+First, we need to update our imports.
 
 ```{python}
-import logging  ##NEW
-import time  ##NEW
+import logging  ##NEW # <1>
+import sys  ##NEW # <2>
+import time  ##NEW # <3>
 
 import simpy
 import random
 import pandas as pd
 ```
+1. Add `logging` which we will use to create logs.
+2. Add `sys` which is required when setting up the handler for logging to the console.
+3. Add `time` which we will use is it is desired to save logs to a file with the current date and time.
 
 #### SimLogger class
 
@@ -732,7 +743,7 @@ class SimLogger:
     def __init__(self, log_to_console=False, log_to_file=False,
                 file_path=("../outputs/logs/" +
                             f"{time.strftime('%Y-%m-%d_%H-%M-%S')}.log")
-      ):
+      ): # <1>
         """
         Initialise the Logger class.
 
@@ -757,7 +768,7 @@ class SimLogger:
             self.logger = logging.getLogger(__name__)
             self._configure_logging()
 
-    def _configure_logging(self):
+    def _configure_logging(self): # <2>
         """
         Configure the logger.
         """
@@ -785,7 +796,7 @@ class SimLogger:
         for handler in handlers:
             handler.setFormatter(formatter)
 
-    def log(self, msg):
+    def log(self, msg): # <3>
         """
         Log a message if logging is enabled.
 
@@ -796,6 +807,9 @@ class SimLogger:
         if self.log_to_console or self.log_to_file:
             self.logger.info(msg)
 ```
+1. Set up for the `SimLogger` class which accepts three inputs, and will call the `_configure_logging()` method
+2. This method configures the loggers, setting up appropriate handlers depending on whether we are printing logs to the console, saving them to the file, or both.
+3. This is the equivalent to `print()` or `trace()` above.
 
 #### g class
 
@@ -807,12 +821,14 @@ class g:
     mean_n_consult_time = 6
     number_of_nurses = 1
     sim_duration = 120
-    number_of_runs = 1  ##NEW - single run
-    ##NEW - instance of the SimLogger class
+    number_of_runs = 1  ##NEW - single run # <1>
+    ##NEW - instance of the SimLogger class # <2>
     logger = SimLogger(log_to_console = True,
                        log_to_file = True,
                        file_path = "./outputs/example_log.log")
 ```
+1. Just run the model once.
+2. Set up `SimLogger` instance.
 
 #### Model class
 
@@ -824,7 +840,7 @@ def generator_patient_arrivals(self):
         self.patient_counter += 1
         p = Patient(self.patient_counter)
 
-        ##NEW - Log message stating patient ID and arrival time
+        ##NEW - Log message stating patient ID and arrival time # <1>
         g.logger.log(f"Patient {p.id} arrives at: {self.env.now:.3f}.")
 
         self.env.process(self.attend_clinic(p))
@@ -840,7 +856,7 @@ def attend_clinic(self, patient):
         sampled_nurse_act_time = random.expovariate(1.0 /
                                                     g.mean_n_consult_time)
 
-        ##NEW - Log message with patient wait and consultation length
+        ##NEW - Log message with patient wait and consultation length # <1>
         g.logger.log(
           f"Patient {patient.id} waits for {patient.q_time_nurse:.3f} " +
           f"and is seen at {end_q_nurse}. Consultation length: " +
@@ -852,6 +868,7 @@ def attend_clinic(self, patient):
             sampled_nurse_act_time)
         yield self.env.timeout(sampled_nurse_act_time)
 ```
+1. Change `print()`/`trace()` to `log()`.
 
 ### The full code
 
@@ -864,6 +881,7 @@ The full updated code for the model is given below.
 ```{python}
 #| eval: true
 import logging  ##NEW
+import sys  ##NEW
 import time  ##NEW
 
 import simpy
