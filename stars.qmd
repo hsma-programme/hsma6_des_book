@@ -91,6 +91,8 @@ At a minimum, you should include some documentation alongside your model that de
 
 This can be done easily using a `README.md` file. This is a markdown file stored in the root of your repository.
 
+![](images/stars_readme.png){width=50% fig-align="center"}
+
 ### Open Researcher and Contributor Identifier (ORCID)
 
 An **ORCID** is a free, unique, persistent ID that identifies and links authors to their research. It ensures that any outputs and publications are correctly attributed to you.
@@ -107,9 +109,13 @@ Or as a markdown badge...
 
 [![](https://img.shields.io/badge/Jane_Doe_ORCID-0000--0000--0000--0000-brightgreen)](https://orcid.org/0000-0000-0000-0000)
 
+![](images/stars_orcid.png){width=50% fig-align="center"}
+
 ### Citation information
 
 Including citation instructions makes it easier for others to reference and give credit to your model. Platforms like GitHub support `CITATION.cff`, which are files that contain details like author names, version, and links to the original work. These can be created using [cff-init](https://citation-file-format.github.io/cff-initializer-javascript/#/).
+
+![](images/stars_cite.png){width=70% fig-align="center"}
 
 ### Remote code repository
 
@@ -119,9 +125,13 @@ Remote code repositories like **GitHub, GitLab, and Bitbucket** help manage and 
 * Users can **clone** a repository to use a model and pull updates as improvements are made.
 * Features like **issues** (for discussion and bug tracking) and **releases** (for tagging stable versions) make collaboration easier.
 
+![](images/stars_repo.png){width=70% fig-align="center"}
+
 ### Open science archive
 
 To ensure simulation models remain accessible over time, they should be stored in open science archives like [Zenodo](https://zenodo.org/), [Figshare](https://figshare.com/), and the [Open Science Framework](https://osf.io/). These platforms provide **DOIs (Digital Object Identifiers)** for citation and follow principles that guarantee long-term storage and discoverability. Unlike GitHub, which can change or be deleted, archives preserve models permanently.
+
+![](images/stars_archive.png)
 
 ## Optional components									
 
@@ -155,6 +165,8 @@ Great tools for creating your documentation include:
 * **Quarto markdown** (`.qmd`) and **Jupyter notebook** (`.ipynb`) files, which allow you to combine code and text in an interactive format.
 * **Quarto** and **Jupyter Book**, which allow you to turn these files into structured websites.
 
+![](images/stars_docs.png){width=60% fig-align="center"}
+
 ### Documentation hosting
 
 Services like **GitHub Pages, GitLab Pages, BitBucket Cloud, and Quarto Pub** can host documentation websites for free.
@@ -165,9 +177,13 @@ Services like **GitHub Pages, GitLab Pages, BitBucket Cloud, and Quarto Pub** ca
 This book is created from quarto markdown files (`.qmd`) which have been structured into a book (via a `_quarto.yml` file), and hosted using GitHub pages.
 :::
 
+![](images/stars_docs_host.png){width=60% fig-align="center"}
+
 ### Online coding environment
 
 There are tools which enable users to run code online without any installation or downloads. A FOSS example for jupyter notebooks is **BinderHub** (<https://mybinder.org>) which creates an online Jupyter environment from a public GitHub or GitLab repository. It packages the code and any dependencies into a container, from which the notebooks can be run.
+
+![](images/stars_code.png){width=60% fig-align="center"}
 
 ### Model interface
 
@@ -179,9 +195,13 @@ Turning your model into an **application** will make it more accessible to non-t
 
 Check out @sec-apps for more information on how to create a streamlit web application for your DES model.
 
+![](images/stars_app.png)
+
 ### Web app hosting
 
 Services like **Streamlit Community Cloud** and **ShinyApps** offer free hosting tiers which can be used to deploy your **web app**, making it freely accessible via a website link.
+
+![](images/stars_app_host.png){width=60% fig-align="center"}
 
 ## Example DES models implementing the STARS framework
 
@@ -195,15 +215,15 @@ For inspiration, check out these three examples of healthcare DES models which i
 
 STARS components:
 
-* MIT licence.
-* Conda environment.
-* SimPy python model.
-* Shared on GitHub.
-* `CITATION.cff` and ORCID meta-data.
-* `README.md`.
-* Archived on Zenodo.
-* Online coding environment via Binder.
-* Enhanced documentation using electronic notebook.
+* ✅ MIT licence.
+* ✅ Conda environment.
+* ✅ SimPy python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using electronic notebook.
 
 ### Example 2: SimPy
 
@@ -217,18 +237,18 @@ STARS components:
 
 STARS components:
 
-* MIT licence.
-* Conda environment.
-* SimPy python model.
-* Shared on GitHub.
-* `CITATION.cff` and ORCID meta-data.
-* `README.md`.
-* Archived on Zenodo.
-* Online coding environment via Binder.
-* Enhanced documentation using Jupyter Book and STRESS-DES.
-* Documentation hosted on GitHub pages.
-* Web app using streamlit.
-* Web app hosted using streamlit community cloud.
+* ✅ MIT licence.
+* ✅ Conda environment.
+* ✅ SimPy python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using Jupyter Book and STRESS-DES.
+* ✅ Documentation hosted on GitHub pages.
+* ✅ Web app using streamlit.
+* ✅ Web app hosted using streamlit community cloud.
 
 ### Example 3: CIW
 
@@ -242,15 +262,15 @@ STARS components:
 
 STARS components:
 
-* GNU Public Licence 3.
-* Conda environment.
-* ciw python model.
-* Shared on GitHub.
-* `CITATION.cff` and ORCID meta-data.
-* `README.md`.
-* Archived on Zenodo.
-* Online coding environment via Binder.
-* Enhanced documentation using Quarto and STRESS-DES.
-* Documentation hosted on GitHub pages.
-* Web app using shiny for python.
-* Web app hosted on shinyapps.io.
+* ✅ GNU Public Licence 3.
+* ✅ Conda environment.
+* ✅ ciw python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using Quarto and STRESS-DES.
+* ✅ Documentation hosted on GitHub pages.
+* ✅ Web app using shiny for python.
+* ✅ Web app hosted on shinyapps.io.
