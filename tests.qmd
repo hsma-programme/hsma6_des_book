@@ -12,7 +12,7 @@ code-annotations: hover
 
 :::{.callout-note title="Acknowledgements"}
 
-This section is based on the tests in the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.
+This section is based on the tests in the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.
 :::
 
 Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions. By **systematically checking for errors, inconsistencies, or unexpected behaviors**, testing helps improve the quality of a model, catch errors and prevent future issues.
