@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sammi Rosser">
+<meta name="author" content="Dan Chalk">
 
-<title>HSMA - the little book of DES - 5&nbsp; An example simpy model</title>
+<title>HSMA - the little book of DES - 5&nbsp; An Example SimPy Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,8 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 5&nbsp; An example simpy model">
+<meta property="og:title" content="HSMA - the little book of DES - 5&nbsp; An Example SimPy Model">
 <meta property="og:description" content="">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -146,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -289,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -395,37 +398,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basic_debugging_tactics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">(Coming Soon!) Basic Debugging Tactics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_logging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
   </div>
 </li>
       </ul>
@@ -442,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -459,13 +468,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stress_des.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">(Coming Soon!) STRESS-DES Reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stars.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sharing_reproducible_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,13 +497,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -496,13 +511,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -522,25 +537,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#import-statements" id="toc-import-statements" class="nav-link active" data-scroll-target="#import-statements"><span class="header-section-number">5.1</span> Import statements</a></li>
-  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">5.2</span> g Class</a></li>
-  <li><a href="#patient-entity-class" id="toc-patient-entity-class" class="nav-link" data-scroll-target="#patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) Class</a></li>
-  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">5.4</span> Model Class</a></li>
-  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">5.5</span> Trial Class</a></li>
+  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">5.2</span> g class</a></li>
+  <li><a href="#patient-entity-class" id="toc-patient-entity-class" class="nav-link" data-scroll-target="#patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) class</a></li>
+  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">5.4</span> Model class</a></li>
+  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">5.5</span> Trial class</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./an_example_simpy_model.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p><a href="https://github.com/hsma-chief-elf">Dan Chalk</a> <a href="https://orcid.org/0000-0002-4165-4364" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
   
     
@@ -557,7 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-statements" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="import-statements"><span class="header-section-number">5.1</span> Import statements</h2>
 <p>First we need our import statements. The libraries you import will vary depending on your model and what you need, but these three are likely going to always be in there (the first must be!)</p>
-<div id="aba715c6" class="cell" data-execution_count="1">
+<div id="341f6927" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -577,9 +599,9 @@ Tip
 </div>
 </section>
 <section id="g-class" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="g-class"><span class="header-section-number">5.2</span> g Class</h2>
+<h2 data-number="5.2" class="anchored" data-anchor-id="g-class"><span class="header-section-number">5.2</span> g class</h2>
 <p>Remember - the g Class stores our global parameter values for the model so we can easily change aspects of the model to test scenarios.</p>
-<div id="e358f06b" class="cell" data-execution_count="2">
+<div id="338618ca" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store global parameter values.  We don't create an instance of this</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># class - we just refer to the class blueprint itself to access the numbers</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># inside.</span></span>
@@ -592,8 +614,8 @@ Tip
 </div>
 </section>
 <section id="patient-entity-class" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) Class</h2>
-<div id="2e9edfbf" class="cell" data-execution_count="3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="patient-entity-class"><span class="header-section-number">5.3</span> Patient (entity) class</h2>
+<div id="b701aa88" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.  Here, patients have</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># two attributes that they carry with them - their ID, and the amount of time</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># they spent queuing for the nurse.  The ID is passed in when a new patient is</span></span>
@@ -605,8 +627,8 @@ Tip
 </div>
 </section>
 <section id="model-class" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">5.4</span> Model Class</h2>
-<div id="3bba971d" class="cell" data-execution_count="4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">5.4</span> Model class</h2>
+<div id="93a4a7bc" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number when</span></span>
@@ -761,8 +783,8 @@ Tip
 </div>
 </section>
 <section id="trial-class" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">5.5</span> Trial Class</h2>
-<div id="dac279a6" class="cell" data-execution_count="5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">5.5</span> Trial class</h2>
+<div id="5cf83220" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation - a batch of simulation runs.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
@@ -798,7 +820,7 @@ Tip
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.print_trial_results()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we just need to run the trial and print out the results!</p>
-<div id="72504832" class="cell" data-execution_count="6">
+<div id="f6af0b4c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of the Trial class</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>my_trial <span class="op">=</span> Trial()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -808,112 +830,114 @@ Tip
 <pre><code>Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000        13.260998
-2               5.368378         3.319291
-3               7.681641         8.097482
-4               1.362556         2.925238
-5               0.000000         3.321335
-6               0.000000         3.395458
-7               1.808749         1.175378
-8               0.000000        14.862888
-9              10.117909         4.014449
-10             13.780852         6.073506
-11              8.967261         8.368355
-12             16.869520         1.636848
-13             18.100035         0.080790
-14             16.895508         1.552897
-15             13.901293         1.321124
-16              8.946704         3.089216
-17              0.000000        15.028423
-18             13.844528         5.214962
-19             17.751031         2.143484
-20             18.520880         1.603582
+1               0.000000         4.998785
+2               0.000000         5.952685
+3               0.000000         3.227013
+4               0.000000         8.739832
+5               7.386002        10.557354
+6              16.910072        10.808492
+7              26.313864        24.366227
+8              50.562584         2.246095
+9              51.504852         6.840544
+10             54.597887         3.295280
+11             53.724128        13.783114
+12             65.443850        18.290989
 Run Number 1
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         4.031044
-2               0.000000         5.243435
-3               5.021117         7.726986
-4              11.681070        25.455402
-5              36.600832         3.615448
-6              36.538314         1.805399
-7              31.378075        10.392646
-8              41.433144         0.066231
-9              39.132501        13.987414
-10             48.514915        27.356319
-11             65.733826         9.682546
-12             71.710440         8.509573
-13             79.767344        12.566352
+1               0.000000         8.827731
+2               2.063709         8.028403
+3               6.214052        40.481188
+4              44.207873         4.435951
+5              45.346048         0.712733
+6              38.076857         3.711843
+7              21.421507         0.705434
+8              18.777333         1.405325
+9              13.112070         5.954196
+10             17.884180         0.734076
+11             13.708912         6.473742
+12             10.586481         2.991859
+13             12.980406        17.245918
+14             28.580285         6.921424
+15             35.133574        10.019511
+16             39.010231         2.099398
 Run Number 2
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         4.776097
-2               4.316895        11.093009
-3               9.565477         7.376048
-4              15.665989         0.148615
-5               6.788229         2.932252
-6               6.511564         6.833258
-7              10.293789        10.772476
-8              20.461434         0.985895
-9              15.411159         6.369979
-10             20.769898         6.307437
-11             21.308648        15.427817
-12             35.909066        11.273441
-13             43.968390        13.322996
-14             55.899353         1.162253
-15             54.355999         6.374701
-16             55.881377         1.891744
-17             51.311905         0.654161
-18             51.514142         2.264419
-19             50.759046         2.783498
-20             48.258111         3.213785
-21             51.268766         0.764467
-22             47.207543         7.516084
+1               0.000000         4.690964
+2               2.561700        14.153383
+3              14.799805         1.397301
+4              12.351404         0.584268
+5              12.179869         0.889111
+6              12.986884         7.662635
+7              20.225961         4.250164
+8              23.127752         8.828842
+9              24.833293         1.434653
+10             25.590814         2.531692
+11             24.812239         6.974535
+12             25.459179         0.424997
+13             19.552005         5.009452
+14             10.551427         0.910529
+15              4.648525         2.554510
+16              0.000000         1.033286
+17              0.000000        11.725417
+18             10.179934         1.049178
+19             10.534878         2.676866
+20             11.079664         8.816664
+21             18.166138         4.352574
+22             18.058601         0.370751
+23             16.188788         0.164978
+24             14.274001        10.135404
+25              0.000000         9.732655
 Run Number 3
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000        16.586199
-2               9.700073         0.570604
-3               4.263538         8.028041
-4               0.000000         2.227264
-5               0.000000         0.438703
-6               0.000000         0.632470
-7               0.000000         1.423070
-8               0.000000         4.055806
-9               3.289679         9.700261
-10             11.572700         0.323766
-11             10.011572         8.250120
-12             12.822045         2.544938
-13              9.856610         3.443303
-14             12.940280         2.046680
-15             12.522425        29.210710
-16             38.812258         8.717186
-17             46.211555         9.813017
+1               0.000000         2.070018
+2               0.632498         0.162895
+3               0.000000         1.731575
+4               0.000000         3.355080
+5               1.633302         1.657678
+6               0.000000         6.380708
+7               0.261121         0.138941
+8               0.000000        12.125468
+9              10.287368         8.924750
+10             19.068540         8.136303
+11             26.421863        16.299281
+12             39.875228         0.228139
+13             37.661256         0.001814
+14             36.251377         5.836072
+15             39.123136        10.142657
+16             47.947361         5.186130
+17             42.785401         0.268946
+18             29.234851         8.602776
 Run Number 4
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         0.941031
-2               0.000000         1.839892
-3               0.506591         0.857569
-4               0.000000        22.759543
-5              22.074339         4.014956
-6              17.606221         1.312599
-7               9.932337         7.278020
-8              14.134557         2.068857
-9              15.967024         7.837587
-10              4.556363        21.493036
-11             22.142045        10.093897
-12             31.301881         4.081427
-13             33.905863         9.080814
-14             41.296516        16.072057
+1               0.000000         0.688620
+2               0.530504         4.512865
+3               4.917153        26.164270
+4              30.681151        16.667504
+5              24.030709         1.105545
+6              18.738852         0.766710
+7              19.336858        13.913867
+8              32.416531        11.814664
+9              40.998377         1.018511
+10             32.068085         8.131299
+11             40.019335         9.847492
+12             48.170637         6.856371
+13             52.385561         6.163567
+14             56.955549         1.553750
+15             55.193797         0.375332
+16             45.602162         4.928774
+17             45.458076         8.801389
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                    8.695842
-1                   35.962429
-2                   30.792126
-3                   10.117808
-4                   15.244553</code></pre>
+0                   27.203603
+1                   21.693970
+2                   13.286514
+3                   18.399072
+4                   32.206079</code></pre>
 </div>
 </div>
 

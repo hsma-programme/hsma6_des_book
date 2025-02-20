@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sammi Rosser">
+<meta name="author" content="Dan Chalk">
 
 <title>HSMA - the little book of DES - 11&nbsp; Modelling Resource Unavailability</title>
 <style>
@@ -109,6 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="include/webex.css">
 <meta property="og:title" content="HSMA - the little book of DES - 11&nbsp; Modelling Resource Unavailability">
 <meta property="og:description" content="">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -224,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -289,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -395,37 +398,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basic_debugging_tactics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">(Coming Soon!) Basic Debugging Tactics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_logging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
   </div>
 </li>
       </ul>
@@ -442,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -459,13 +468,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stress_des.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">(Coming Soon!) STRESS-DES Reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stars.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sharing_reproducible_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,13 +497,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -496,13 +511,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -522,12 +537,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-approach" id="toc-the-approach" class="nav-link active" data-scroll-target="#the-approach"><span class="header-section-number">11.1</span> The approach</a></li>
-  <li><a href="#coding-the-approach" id="toc-coding-the-approach" class="nav-link" data-scroll-target="#coding-the-approach"><span class="header-section-number">11.2</span> Coding the approach</a>
+  <li><a href="#coding-the-model" id="toc-coding-the-model" class="nav-link" data-scroll-target="#coding-the-model"><span class="header-section-number">11.2</span> Coding the model</a>
   <ul class="collapse">
-  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">11.2.1</span> The g class</a></li>
-  <li><a href="#the-patient-class" id="toc-the-patient-class" class="nav-link" data-scroll-target="#the-patient-class"><span class="header-section-number">11.2.2</span> The Patient class</a></li>
-  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">11.2.3</span> The Model class</a></li>
-  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">11.2.4</span> The Trial class</a></li>
+  <li><a href="#g-class" id="toc-g-class" class="nav-link" data-scroll-target="#g-class"><span class="header-section-number">11.2.1</span> g class</a></li>
+  <li><a href="#patient-class" id="toc-patient-class" class="nav-link" data-scroll-target="#patient-class"><span class="header-section-number">11.2.2</span> Patient class</a></li>
+  <li><a href="#model-class" id="toc-model-class" class="nav-link" data-scroll-target="#model-class"><span class="header-section-number">11.2.3</span> Model class</a></li>
+  <li><a href="#trial-class" id="toc-trial-class" class="nav-link" data-scroll-target="#trial-class"><span class="header-section-number">11.2.4</span> Trial class</a></li>
   </ul></li>
   <li><a href="#the-full-code" id="toc-the-full-code" class="nav-link" data-scroll-target="#the-full-code"><span class="header-section-number">11.3</span> The full code</a></li>
   <li><a href="#evaluating-the-outputs" id="toc-evaluating-the-outputs" class="nav-link" data-scroll-target="#evaluating-the-outputs"><span class="header-section-number">11.4</span> Evaluating the outputs</a></li>
@@ -546,6 +561,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p><a href="https://github.com/hsma-chief-elf">Dan Chalk</a> <a href="https://orcid.org/0000-0002-4165-4364" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
   
     
@@ -566,14 +588,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/modelling_unavailability.png" class="img-fluid"></p>
 <section id="the-approach" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="the-approach"><span class="header-section-number">11.1</span> The approach</h2>
-<p>Basically, we will : - Set up the frequency and duration of unavailability as parameter values in g class - Make sure that the nurse is set up as a PriorityResource - Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!) - Start this new generator running in our run method of the Model class.</p>
+<p>Basically, we will:</p>
+<ul>
+<li>Set up the frequency and duration of unavailability as parameter values in g class.</li>
+<li>Make sure that the nurse is set up as a PriorityResource.</li>
+<li>Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!).</li>
+<li>Start this new generator running in our run method of the Model class.</li>
+</ul>
 </section>
-<section id="coding-the-approach" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="coding-the-approach"><span class="header-section-number">11.2</span> Coding the approach</h2>
-<section id="the-g-class" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">11.2.1</span> The g class</h3>
-<p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency. Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
-<div id="101303aa" class="cell" data-execution_count="1">
+<section id="coding-the-model" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="coding-the-model"><span class="header-section-number">11.2</span> Coding the model</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Throughout the code, anything new that’s been added will be followed by the comment <code>##NEW</code> - so look out for that in the following code chunks.</p>
+</div>
+</div>
+<section id="g-class" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">11.2.1</span> g class</h3>
+<p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency.</p>
+<p>In this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
+<div id="b565b88e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -593,12 +635,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    warm_up_period <span class="op">=</span> <span class="dv">1440</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-patient-class" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="the-patient-class"><span class="header-section-number">11.2.2</span> The Patient class</h3>
+<section id="patient-class" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="patient-class"><span class="header-section-number">11.2.2</span> Patient class</h3>
 <p>The patient class is unchanged.</p>
 </section>
-<section id="the-model-class" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">11.2.3</span> The Model class</h3>
+<section id="model-class" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">11.2.3</span> Model class</h3>
 <section id="the-obstruct_nurse-method" class="level4" data-number="11.2.3.1">
 <h4 data-number="11.2.3.1" class="anchored" data-anchor-id="the-obstruct_nurse-method"><span class="header-section-number">11.2.3.1</span> The obstruct_nurse method</h4>
 <p>We create a new method within the model class called <code>obstruct_nurse</code>.</p>
@@ -617,7 +659,7 @@ Tip
 <p>This is a very helpful feature to use to keep your breaktime functions from clashing with high-priority patients.</p>
 </div>
 </div>
-<div id="3a79b1ef" class="cell" data-execution_count="2">
+<div id="3a0f8f24" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function to obstruct a nurse resource at specified intervals</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for specified amounts of time</span></span>
@@ -650,7 +692,7 @@ Tip
 <section id="the-run-method" class="level4" data-number="11.2.3.2">
 <h4 data-number="11.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">11.2.3.2</span> The run method</h4>
 <p>In our run method, we now start up the <code>obstruct_nurse</code> process in addition to the <code>generator_patient_arrivals</code> process.</p>
-<div id="0fea2d5b" class="cell" data-execution_count="3">
+<div id="310746e5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -667,16 +709,16 @@ Tip
 </div>
 </section>
 </section>
-<section id="the-trial-class" class="level3" data-number="11.2.4">
-<h3 data-number="11.2.4" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">11.2.4</span> The Trial class</h3>
+<section id="trial-class" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">11.2.4</span> Trial class</h3>
 <p>The trial class is unchanged.</p>
 </section>
 </section>
 <section id="the-full-code" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="the-full-code"><span class="header-section-number">11.3</span> The full code</h2>
-<p>The full code is given below.</p>
+<p>The full updated code for the model is given below.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -685,9 +727,9 @@ Click here to view the full code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="db6624dc" class="cell" data-execution_count="4">
+<div id="ec297680" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -899,7 +941,7 @@ Click here to view the full code
 <h2 data-number="11.4" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">11.4</span> Evaluating the outputs</h2>
 <p>Let’s look at the printed output showing when our nurses were obstructed.</p>
 <p>The first number in each line of output shows the simulation time when the message was generated.</p>
-<div id="f0cd084d" class="cell" data-execution_count="5">
+<div id="5b714ab1" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>0.00: The nurse will go on a break at around time 120.00
 120.15: The nurse is now on a break and will be back at 135.15
@@ -966,12 +1008,12 @@ Click here to view the full code
 </div>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
-<div id="b271ce80" class="cell" data-execution_count="9">
+<div id="f3bb3ca4" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are no nurse breaks is 143.18 minutes</code></pre>
 </div>
 </div>
-<div id="94bcddea" class="cell" data-execution_count="10">
+<div id="c31b09b9" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are nurse breaks is 299.7 minutes</code></pre>
 </div>

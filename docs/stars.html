@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Amy Heather">
 
-<title>HSMA - the little book of DES - 36&nbsp; (Coming Soon!) The STARS Framework</title>
+<title>HSMA - the little book of DES - 37&nbsp; The STARS Framework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./testing_large_numbers_scenarios.html" rel="next">
+<link href="./sharing_reproducible_models.html" rel="next">
 <link href="./stress_des.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -44,6 +79,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,7 +111,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="HSMA - the little book of DES - 36&nbsp; (Coming Soon!) The STARS Framework">
+<meta property="og:title" content="HSMA - the little book of DES - 37&nbsp; The STARS Framework">
+<meta property="og:description" content="">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -111,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stress_des.html">Part 7 - Model Reporting and Sharing</a></li><li class="breadcrumb-item"><a href="./stars.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stress_des.html">Part 7 - Model Reporting and Sharing</a></li><li class="breadcrumb-item"><a href="./stars.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -189,7 +229,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An example simpy model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -254,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, balking and jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -360,37 +400,43 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basic_debugging_tactics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">(Coming Soon!) Basic Debugging Tactics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_logging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Event Logging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
   </div>
 </li>
       </ul>
@@ -407,7 +453,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,13 +470,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stress_des.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">(Coming Soon!) STRESS-DES Reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stars.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sharing_reproducible_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
   </div>
 </li>
       </ul>
@@ -447,13 +499,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -461,13 +513,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -482,20 +534,57 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#stars-sharing-tools-and-artefacts-for-reusable-simulation" id="toc-stars-sharing-tools-and-artefacts-for-reusable-simulation" class="nav-link active" data-scroll-target="#stars-sharing-tools-and-artefacts-for-reusable-simulation"><span class="header-section-number">37.1</span> STARS: Sharing Tools and Artefacts for Reusable Simulation</a></li>
+  <li><a href="#essential-components" id="toc-essential-components" class="nav-link" data-scroll-target="#essential-components"><span class="header-section-number">37.2</span> Essential components</a>
+  <ul class="collapse">
+  <li><a href="#open-licence" id="toc-open-licence" class="nav-link" data-scroll-target="#open-licence"><span class="header-section-number">37.2.1</span> Open licence</a></li>
+  <li><a href="#dependency-management" id="toc-dependency-management" class="nav-link" data-scroll-target="#dependency-management"><span class="header-section-number">37.2.2</span> Dependency management</a></li>
+  <li><a href="#use-free-and-open-source-software-foss-languages" id="toc-use-free-and-open-source-software-foss-languages" class="nav-link" data-scroll-target="#use-free-and-open-source-software-foss-languages"><span class="header-section-number">37.2.3</span> Use Free and Open-Source Software (FOSS) languages</a></li>
+  <li><a href="#minimum-documentation" id="toc-minimum-documentation" class="nav-link" data-scroll-target="#minimum-documentation"><span class="header-section-number">37.2.4</span> Minimum documentation</a></li>
+  <li><a href="#open-researcher-and-contributor-identifier-orcid" id="toc-open-researcher-and-contributor-identifier-orcid" class="nav-link" data-scroll-target="#open-researcher-and-contributor-identifier-orcid"><span class="header-section-number">37.2.5</span> Open Researcher and Contributor Identifier (ORCID)</a></li>
+  <li><a href="#citation-information" id="toc-citation-information" class="nav-link" data-scroll-target="#citation-information"><span class="header-section-number">37.2.6</span> Citation information</a></li>
+  <li><a href="#remote-code-repository" id="toc-remote-code-repository" class="nav-link" data-scroll-target="#remote-code-repository"><span class="header-section-number">37.2.7</span> Remote code repository</a></li>
+  <li><a href="#open-science-archive" id="toc-open-science-archive" class="nav-link" data-scroll-target="#open-science-archive"><span class="header-section-number">37.2.8</span> Open science archive</a></li>
+  </ul></li>
+  <li><a href="#optional-components" id="toc-optional-components" class="nav-link" data-scroll-target="#optional-components"><span class="header-section-number">37.3</span> Optional components</a>
+  <ul class="collapse">
+  <li><a href="#enhanced-documentation" id="toc-enhanced-documentation" class="nav-link" data-scroll-target="#enhanced-documentation"><span class="header-section-number">37.3.1</span> Enhanced documentation</a></li>
+  <li><a href="#documentation-hosting" id="toc-documentation-hosting" class="nav-link" data-scroll-target="#documentation-hosting"><span class="header-section-number">37.3.2</span> Documentation hosting</a></li>
+  <li><a href="#online-coding-environment" id="toc-online-coding-environment" class="nav-link" data-scroll-target="#online-coding-environment"><span class="header-section-number">37.3.3</span> Online coding environment</a></li>
+  <li><a href="#model-interface" id="toc-model-interface" class="nav-link" data-scroll-target="#model-interface"><span class="header-section-number">37.3.4</span> Model interface</a></li>
+  <li><a href="#web-app-hosting" id="toc-web-app-hosting" class="nav-link" data-scroll-target="#web-app-hosting"><span class="header-section-number">37.3.5</span> Web app hosting</a></li>
+  </ul></li>
+  <li><a href="#example-des-models-implementing-the-stars-framework" id="toc-example-des-models-implementing-the-stars-framework" class="nav-link" data-scroll-target="#example-des-models-implementing-the-stars-framework"><span class="header-section-number">37.4</span> Example DES models implementing the STARS framework</a>
+  <ul class="collapse">
+  <li><a href="#example-1-simpy" id="toc-example-1-simpy" class="nav-link" data-scroll-target="#example-1-simpy"><span class="header-section-number">37.4.1</span> Example 1: SimPy</a></li>
+  <li><a href="#example-2-simpy" id="toc-example-2-simpy" class="nav-link" data-scroll-target="#example-2-simpy"><span class="header-section-number">37.4.2</span> Example 2: SimPy</a></li>
+  <li><a href="#example-3-ciw" id="toc-example-3-ciw" class="nav-link" data-scroll-target="#example-3-ciw"><span class="header-section-number">37.4.3</span> Example 3: CIW</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stress_des.html">Part 7 - Model Reporting and Sharing</a></li><li class="breadcrumb-item"><a href="./stars.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stress_des.html">Part 7 - Model Reporting and Sharing</a></li><li class="breadcrumb-item"><a href="./stars.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) The STARS Framework</span></h1>
+<h1 class="title"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
   
     
@@ -506,25 +595,326 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<p>“The STARS framework is a set of open practices, tools and learning materials to produce enhanced versions of research artefacts that intend to increase accessibility for others to (re)use, adapt and build on work.”</p>
-</blockquote>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Acknowledgements">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Acknowledgements
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This section has not yet been developed.</p>
-<p>However, in the meantime, you may want to take a look at the STARS framework github repository at <a href="https://github.com/pythonhealthdatascience" class="uri">https://github.com/pythonhealthdatascience</a></p>
+<p>The content in this chapter is based on the paper “<em>Towards sharing tools and artefacts for reusable simulations in healthcare</em>” (<a href="https://doi.org/10.1080/17477778.2024.2347882">10.1080/17477778.2024.2347882</a>) by <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>, <a href="https://github.com/AliHarp">Alison Harper</a> <a href="https://orcid.org/0000-0001-5274-5037"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/NavonilNM">Nav Mustafee</a> <a href="https://orcid.org/0000-0002-2204-8924"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</p>
+<p>The drawings are created using <a href="https://sketch.io/sketchpad/">sketch.io</a>.</p>
 </div>
 </div>
+<section id="stars-sharing-tools-and-artefacts-for-reusable-simulation" class="level2" data-number="37.1">
+<h2 data-number="37.1" class="anchored" data-anchor-id="stars-sharing-tools-and-artefacts-for-reusable-simulation"><span class="header-section-number">37.1</span> STARS: Sharing Tools and Artefacts for Reusable Simulation</h2>
+<p>The STARS framework is a set of <strong>practical guidelines</strong> to help modellers share their simulation models in a way that makes them:</p>
+<ul>
+<li>✅ <strong>Accessible</strong> – so others can easily find and access your model.</li>
+<li>✅ <strong>Reusable</strong> - so people can use and adapt the model for their own work.</li>
+<li>✅ <strong>Understandable and well-documented</strong> - so others can engage with and understand your model better.</li>
+</ul>
+<p>You can use the framework to guide how you share your DES model.</p>
+<p>The framework is described in:</p>
+<blockquote class="blockquote">
+<p>Monks, T., Harper, A., &amp; Mustafee, N. (2024). Towards sharing tools and artefacts for reusable simulations in healthcare. Journal of Simulation, 1–20. <a href="https://doi.org/10.1080/17477778.2024.2347882" class="uri">https://doi.org/10.1080/17477778.2024.2347882</a>.</p>
+</blockquote>
+<p>It is divided into essential and optional components.</p>
+<ul>
+<li><strong>Essential components</strong> - the minimum steps needed to share models that are citable, functional, well-licensed and available long-term.</li>
+<li><strong>Optional components</strong> - a step further, enhancing accessibility, understanding and clarity of the model.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/stars_framework.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Overview of the STARS Framework from Monks et al.&nbsp;(2024) (CC BY 4.0)."><img src="images/stars_framework.jpg" class="img-fluid figure-img" alt="Overview of the STARS Framework from Monks et al.&nbsp;(2024) (CC BY 4.0)."></a></p>
+<figcaption>Overview of the STARS Framework from Monks et al.&nbsp;(2024) (CC BY 4.0).</figcaption>
+</figure>
+</div>
+</section>
+<section id="essential-components" class="level2" data-number="37.2">
+<h2 data-number="37.2" class="anchored" data-anchor-id="essential-components"><span class="header-section-number">37.2</span> Essential components</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+STARS essential components checklist
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Open licence</label></li>
+<li><label><input type="checkbox">Dependency management</label></li>
+<li><label><input type="checkbox">Use FOSS languages</label></li>
+<li><label><input type="checkbox">Minimum documentation</label></li>
+<li><label><input type="checkbox">ORCID</label></li>
+<li><label><input type="checkbox">Citation information</label></li>
+<li><label><input type="checkbox">Remote code repository</label></li>
+<li><label><input type="checkbox">Open science archive</label></li>
+</ul>
+</div>
+</div>
+<section id="open-licence" class="level3" data-number="37.2.1">
+<h3 data-number="37.2.1" class="anchored" data-anchor-id="open-licence"><span class="header-section-number">37.2.1</span> Open licence</h3>
+<p>Before sharing code, it’s important to choose an appropriate open-source licence. <strong>A licence tells others how they can use, modify or share your work</strong>. Without a licence, you retain exclusive copyright, and others would not be able to legally reuse the model.</p>
+<p>A common approach in data science is to use a <strong>permissive licence like an MIT licence</strong>. Other options are available, with more restrictive licences like GPL licences requiring anyone who modifies your work to share it under the same terms. The website <a href="https://choosealicense.com/" class="uri">https://choosealicense.com/</a> can be helpful in choosing a licence that suits you.</p>
+<p>A licence is simply a file (often just <code>LICENCE</code>) add to the root of your repository. It is easy to add - check out these <a href="https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository">handy instructions from GitHub</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_licence.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</section>
+<section id="dependency-management" class="level3" data-number="37.2.2">
+<h3 data-number="37.2.2" class="anchored" data-anchor-id="dependency-management"><span class="header-section-number">37.2.2</span> Dependency management</h3>
+<p>To make sure your code runs correctly for others (or for yourself in the future), you need to list the <strong>required software and versions</strong>. Without this, users may face errors due to missing dependencies.</p>
+<p>In Python, common tools for managing this are:</p>
+<ul>
+<li><strong>Pip virtual environments</strong> with a <code>requirements.txt</code> file.</li>
+<li><strong>Conda environments</strong> with a <code>environment.yaml/yml</code> file.</li>
+<li><strong>Poetry</strong> with a <code>pyproject.toml</code> file.</li>
+</ul>
+<p>The <a href="https://hsma-programme.github.io/hsma6_intro_to_python_book/">HSMA - Programming in Python</a> ebook has a chapter on “Creating Environments with Python” which guides you on how to set up an pip virtual environment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_dependency.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="use-free-and-open-source-software-foss-languages" class="level3" data-number="37.2.3">
+<h3 data-number="37.2.3" class="anchored" data-anchor-id="use-free-and-open-source-software-foss-languages"><span class="header-section-number">37.2.3</span> Use Free and Open-Source Software (FOSS) languages</h3>
+<p>We already meet this recommendation! 😊🎉 Python is an example of a FOSS language. FOSS provides <em>freedom</em>: it grants users the rights to adapt and share copies of their model however they choose.</p>
+<p><img src="images/stars_foss.png" class="img-fluid"></p>
+</section>
+<section id="minimum-documentation" class="level3" data-number="37.2.4">
+<h3 data-number="37.2.4" class="anchored" data-anchor-id="minimum-documentation"><span class="header-section-number">37.2.4</span> Minimum documentation</h3>
+<p>At a minimum, you should include some documentation alongside your model that describes:</p>
+<ol type="1">
+<li>What the model does.</li>
+<li>How to install and run the model to obtain results.</li>
+<li>How to vary parameters to run new experiments.</li>
+</ol>
+<p>This can be done easily using a <code>README.md</code> file. This is a markdown file stored in the root of your repository.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_readme.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</section>
+<section id="open-researcher-and-contributor-identifier-orcid" class="level3" data-number="37.2.5">
+<h3 data-number="37.2.5" class="anchored" data-anchor-id="open-researcher-and-contributor-identifier-orcid"><span class="header-section-number">37.2.5</span> Open Researcher and Contributor Identifier (ORCID)</h3>
+<p>An <strong>ORCID</strong> is a free, unique, persistent ID that identifies and links authors to their research. It ensures that any outputs and publications are correctly attributed to you.</p>
+<p>It is recommended to include your ORCID in the <code>README.md</code>. For example:</p>
+<p>Jane Doe ORCID: <a href="https://orcid.org/0000-0000-0000-0000" class="uri">https://orcid.org/0000-0000-0000-0000</a>.</p>
+<p>Or as a markdown badge…</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="al">![](https://img.shields.io/badge/Dane_Doe_ORCID-0000--0000--0000--0000-brightgreen)</span><span class="co">](https://orcid.org/0000-0000-0000-0000)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://orcid.org/0000-0000-0000-0000"><img src="https://img.shields.io/badge/Jane_Doe_ORCID-0000--0000--0000--0000-brightgreen.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_orcid.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</section>
+<section id="citation-information" class="level3" data-number="37.2.6">
+<h3 data-number="37.2.6" class="anchored" data-anchor-id="citation-information"><span class="header-section-number">37.2.6</span> Citation information</h3>
+<p>Including citation instructions makes it easier for others to reference and give credit to your model. Platforms like GitHub support <code>CITATION.cff</code>, which are files that contain details like author names, version, and links to the original work. These can be created using <a href="https://citation-file-format.github.io/cff-initializer-javascript/#/">cff-init</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_cite.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</section>
+<section id="remote-code-repository" class="level3" data-number="37.2.7">
+<h3 data-number="37.2.7" class="anchored" data-anchor-id="remote-code-repository"><span class="header-section-number">37.2.7</span> Remote code repository</h3>
+<p>Remote code repositories like <strong>GitHub, GitLab, and Bitbucket</strong> help manage and share code.</p>
+<ul>
+<li>They provide <strong>version control</strong>, allowing developers to track changes, revert to previous versions, and collaborate through branching.</li>
+<li>Users can <strong>clone</strong> a repository to use a model and pull updates as improvements are made.</li>
+<li>Features like <strong>issues</strong> (for discussion and bug tracking) and <strong>releases</strong> (for tagging stable versions) make collaboration easier.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_repo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</section>
+<section id="open-science-archive" class="level3" data-number="37.2.8">
+<h3 data-number="37.2.8" class="anchored" data-anchor-id="open-science-archive"><span class="header-section-number">37.2.8</span> Open science archive</h3>
+<p>To ensure simulation models remain accessible over time, they should be stored in open science archives like <a href="https://zenodo.org/">Zenodo</a>, <a href="https://figshare.com/">Figshare</a>, and the <a href="https://osf.io/">Open Science Framework</a>. These platforms provide <strong>DOIs (Digital Object Identifiers)</strong> for citation and follow principles that guarantee long-term storage and discoverability. Unlike GitHub, which can change or be deleted, archives preserve models permanently.</p>
+<p><img src="images/stars_archive.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="optional-components" class="level2" data-number="37.3">
+<h2 data-number="37.3" class="anchored" data-anchor-id="optional-components"><span class="header-section-number">37.3</span> Optional components</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+STARS optional components checklist
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Enhanced documentation.</label></li>
+<li><label><input type="checkbox">Documentation hosting.</label></li>
+<li><label><input type="checkbox">Online coding environment.</label></li>
+<li><label><input type="checkbox">Model interface.</label></li>
+<li><label><input type="checkbox">Web app hosting.</label></li>
+</ul>
+</div>
+</div>
+<section id="enhanced-documentation" class="level3" data-number="37.3.1">
+<h3 data-number="37.3.1" class="anchored" data-anchor-id="enhanced-documentation"><span class="header-section-number">37.3.1</span> Enhanced documentation</h3>
+<p>Going beyond the minimum documentation requirements, good documentation should include:</p>
+<ul>
+<li>A plain-language summary of the project context and model.</li>
+<li>Licence and citation details.</li>
+<li>Contribution instructions.</li>
+<li>Installation instructions.</li>
+<li>A structured code walk through of the model.</li>
+<li>Documentation of the modelling cycle using TRAnsparent and Comprehensive model Evaluation (TRACE) (<a href="https://doi.org/10.1016/j.envsoft.2020.104932">Ayllón et al.&nbsp;(2021)</a>).</li>
+<li>Annotated simulation reporting guidelines (e.g.&nbsp;<a href="./stress_des.html">STRESS-DES</a>).</li>
+<li>Clear description of model validation including its intended purpose.</li>
+</ul>
+<p>Great tools for creating your documentation include:</p>
+<ul>
+<li><strong>Quarto markdown</strong> (<code>.qmd</code>) and <strong>Jupyter notebook</strong> (<code>.ipynb</code>) files, which allow you to combine code and text in an interactive format.</li>
+<li><strong>Quarto</strong> and <strong>Jupyter Book</strong>, which allow you to turn these files into structured websites.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_docs.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="documentation-hosting" class="level3" data-number="37.3.2">
+<h3 data-number="37.3.2" class="anchored" data-anchor-id="documentation-hosting"><span class="header-section-number">37.3.2</span> Documentation hosting</h3>
+<p>Services like <strong>GitHub Pages, GitLab Pages, BitBucket Cloud, and Quarto Pub</strong> can host documentation websites for free.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Fun fact!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This book is created from quarto markdown files (<code>.qmd</code>) which have been structured into a book (via a <code>_quarto.yml</code> file), and hosted using GitHub pages.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_docs_host.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="online-coding-environment" class="level3" data-number="37.3.3">
+<h3 data-number="37.3.3" class="anchored" data-anchor-id="online-coding-environment"><span class="header-section-number">37.3.3</span> Online coding environment</h3>
+<p>There are tools which enable users to run code online without any installation or downloads. A FOSS example for jupyter notebooks is <strong>BinderHub</strong> (<a href="https://mybinder.org" class="uri">https://mybinder.org</a>) which creates an online Jupyter environment from a public GitHub or GitLab repository. It packages the code and any dependencies into a container, from which the notebooks can be run.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_code.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="model-interface" class="level3" data-number="37.3.4">
+<h3 data-number="37.3.4" class="anchored" data-anchor-id="model-interface"><span class="header-section-number">37.3.4</span> Model interface</h3>
+<p>Turning your model into an <strong>application</strong> will make it more accessible to non-technical users who may be unfamiliar with codings. Python options include:</p>
+<ul>
+<li><strong>Streamlit</strong> (<a href="https://streamlit.io/" class="uri">https://streamlit.io/</a>).</li>
+<li><strong>Shiny for Python</strong> (<a href="https://shiny.posit.co/py/" class="uri">https://shiny.posit.co/py/</a>).</li>
+<li><strong>Plotly Dash</strong> (<a href="https://dash.plotly.com/" class="uri">https://dash.plotly.com/</a>).</li>
+</ul>
+<p>Check out <a href="intro_creating_web_apps.html" class="quarto-xref"><span>Chapter 35</span></a> for more information on how to create a streamlit web application for your DES model.</p>
+<p><img src="images/stars_app.png" class="img-fluid"></p>
+</section>
+<section id="web-app-hosting" class="level3" data-number="37.3.5">
+<h3 data-number="37.3.5" class="anchored" data-anchor-id="web-app-hosting"><span class="header-section-number">37.3.5</span> Web app hosting</h3>
+<p>Services like <strong>Streamlit Community Cloud</strong> and <strong>ShinyApps</strong> offer free hosting tiers which can be used to deploy your <strong>web app</strong>, making it freely accessible via a website link.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/stars_app_host.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="example-des-models-implementing-the-stars-framework" class="level2" data-number="37.4">
+<h2 data-number="37.4" class="anchored" data-anchor-id="example-des-models-implementing-the-stars-framework"><span class="header-section-number">37.4</span> Example DES models implementing the STARS framework</h2>
+<p>For inspiration, check out these three examples of healthcare DES models which implement the framework, as linked in the paper describing the framework (Monks et al.&nbsp;(2024)).</p>
+<section id="example-1-simpy" class="level3" data-number="37.4.1">
+<h3 data-number="37.4.1" class="anchored" data-anchor-id="example-1-simpy"><span class="header-section-number">37.4.1</span> Example 1: SimPy</h3>
+<p><strong>Code:</strong> <a href="https://github.com/pythonhealthdatascience/stars-treat-sim" class="uri">https://github.com/pythonhealthdatascience/stars-treat-sim</a>.</p>
+<p><strong>Archived code:</strong> <a href="https://doi.org/10.5281/zenodo.10026327" class="uri">https://doi.org/10.5281/zenodo.10026327</a>.</p>
+<p>STARS components:</p>
+<ul>
+<li>✅ MIT licence.</li>
+<li>✅ Conda environment.</li>
+<li>✅ SimPy python model.</li>
+<li>✅ Shared on GitHub.</li>
+<li>✅ <code>CITATION.cff</code> and ORCID meta-data.</li>
+<li>✅ <code>README.md</code>.</li>
+<li>✅ Archived on Zenodo.</li>
+<li>✅ Online coding environment via Binder.</li>
+<li>✅ Enhanced documentation using electronic notebook.</li>
+</ul>
+</section>
+<section id="example-2-simpy" class="level3" data-number="37.4.2">
+<h3 data-number="37.4.2" class="anchored" data-anchor-id="example-2-simpy"><span class="header-section-number">37.4.2</span> Example 2: SimPy</h3>
+<p><strong>Code:</strong> <a href="https://github.com/pythonhealthdatascience/stars-streamlit-example" class="uri">https://github.com/pythonhealthdatascience/stars-streamlit-example</a> and <a href="https://github.com/pythonhealthdatascience/stars-simpy-example-docs" class="uri">https://github.com/pythonhealthdatascience/stars-simpy-example-docs</a>.</p>
+<p><strong>Web app:</strong> <a href="https://stars-simpy-example.streamlit.app/" class="uri">https://stars-simpy-example.streamlit.app/</a>.</p>
+<p><strong>Documentation:</strong> <a href="https://pythonhealthdatascience.github.io/stars-simpy-example-docs" class="uri">https://pythonhealthdatascience.github.io/stars-simpy-example-docs</a>.</p>
+<p><strong>Archived code:</strong> <a href="https://doi.org/10.5281/zenodo.10055169" class="uri">https://doi.org/10.5281/zenodo.10055169</a> and <a href="https://doi.org/10.5281/zenodo.10054063" class="uri">https://doi.org/10.5281/zenodo.10054063</a>.</p>
+<p>STARS components:</p>
+<ul>
+<li>✅ MIT licence.</li>
+<li>✅ Conda environment.</li>
+<li>✅ SimPy python model.</li>
+<li>✅ Shared on GitHub.</li>
+<li>✅ <code>CITATION.cff</code> and ORCID meta-data.</li>
+<li>✅ <code>README.md</code>.</li>
+<li>✅ Archived on Zenodo.</li>
+<li>✅ Online coding environment via Binder.</li>
+<li>✅ Enhanced documentation using Jupyter Book and STRESS-DES.</li>
+<li>✅ Documentation hosted on GitHub pages.</li>
+<li>✅ Web app using streamlit.</li>
+<li>✅ Web app hosted using streamlit community cloud.</li>
+</ul>
+</section>
+<section id="example-3-ciw" class="level3" data-number="37.4.3">
+<h3 data-number="37.4.3" class="anchored" data-anchor-id="example-3-ciw"><span class="header-section-number">37.4.3</span> Example 3: CIW</h3>
+<p><strong>Code:</strong> <a href="https://github.com/pythonhealthdatascience/stars-ciw-example" class="uri">https://github.com/pythonhealthdatascience/stars-ciw-example</a>.</p>
+<p><strong>Web app:</strong> <a href="https://pythonhealthdatascience.shinyapps.io/stars-ciw-examplar" class="uri">https://pythonhealthdatascience.shinyapps.io/stars-ciw-examplar</a>.</p>
+<p><strong>Documentation:</strong> <a href="https://pythonhealthdatascience.github.io/stars-ciw-example" class="uri">https://pythonhealthdatascience.github.io/stars-ciw-example</a>.</p>
+<p><strong>Archived code:</strong> <a href="https://doi.org/10.5281/zenodo.10051495" class="uri">https://doi.org/10.5281/zenodo.10051495</a>.</p>
+<p>STARS components:</p>
+<ul>
+<li>✅ GNU Public Licence 3.</li>
+<li>✅ Conda environment.</li>
+<li>✅ ciw python model.</li>
+<li>✅ Shared on GitHub.</li>
+<li>✅ <code>CITATION.cff</code> and ORCID meta-data.</li>
+<li>✅ <code>README.md</code>.</li>
+<li>✅ Archived on Zenodo.</li>
+<li>✅ Online coding environment via Binder.</li>
+<li>✅ Enhanced documentation using Quarto and STRESS-DES.</li>
+<li>✅ Documentation hosted on GitHub pages.</li>
+<li>✅ Web app using shiny for python.</li>
+<li>✅ Web app hosted on shinyapps.io.</li>
+</ul>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Overview of the STARS Framework from Monks et al.&nbsp;(2024) (CC BY 4.0).</span>
+</div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1419,17 +1809,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./stress_des.html" class="pagination-link" aria-label="(Coming Soon!) STRESS-DES Reporting">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">(Coming Soon!) STRESS-DES Reporting</span></span>
+      <a href="./stress_des.html" class="pagination-link" aria-label="STRESS-DES Reporting">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./testing_large_numbers_scenarios.html" class="pagination-link" aria-label="Testing Large Numbers of Scenarios">
-        <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Testing Large Numbers of Scenarios</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sharing_reproducible_models.html" class="pagination-link" aria-label="Sharing reproducible models">
+        <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
