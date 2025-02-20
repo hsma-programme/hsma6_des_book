@@ -1,20 +1,32 @@
 ---
 title: Dealing With Appointment Bookings
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 code-annotations: hover
 execute:
   eval: false
 jupyter: python3
 ---
 
+:::{.callout-note title="Acknowledgements"}
+
+This section is based on the method used by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. His code can be found [here](https://github.com/health-data-science-OR/stochastic_systems/tree/master/labs/simulation/lab5).
+:::
+
 In many community-based services, it is important to model the process of booked appointments.
 
 These are quite distinct from the processes we have modelled so far, where arrivals flow through the system immediately - or as quickly as possible, depending on the queues.
 
-This works well for modelling a range of services, or smaller parts of more complex processes, such as
+This works well for modelling a range of services, or smaller parts of more complex processes, such as:
 
-- emergency departments
-- services without booking (e.g. a walk-in clinic)
-- telephone helplines
+- Emergency departments.
+- Services without booking (e.g. a walk-in clinic).
+- Telephone helplines.
 
 However, in many services there is a process by which clients are booked into an appointment at some point in the future. There is often a delay of several days or weeks - which allows patients to receive communication about their appointment and make plans to attend it.
 
@@ -24,38 +36,34 @@ This video from NHS England explains why a certain level of waiting list can be 
 {{< video https://youtu.be/hga8HQFXaDw?si=KzNqZly5xf-bJ7S9>}}
 :::
 
-Appointment booking can take on additional layers of complexity, such as
+Appointment booking can take on additional layers of complexity, such as:
 
-- certain slots being set aside for more urgent referrals - and how to balance available capacity for these appointments with the importance of these clients being seen quickly
-- an ongoing caseload of patients being held 'on the books' and returning for follow-up appointments at certain intervals
-- a triage step prior to appointment booking where the referral may be deemed as inappropriate, giving another point at which referrals may leave the system (a **sink**)
-- a certain proportion of patients not attending their appointment, with some exiting the system entirely while some may need to be rebooked
+- Certain slots being set aside for more urgent referrals - and how to balance available capacity for these appointments with the importance of these clients being seen quickly.
+- An ongoing caseload of patients being held 'on the books' and returning for follow-up appointments at certain intervals.
+- A triage step prior to appointment booking where the referral may be deemed as inappropriate, giving another point at which referrals may leave the system (a **sink**).
+- A certain proportion of patients not attending their appointment, with some exiting the system entirely while some may need to be rebooked.
 
 In this chapter, we will look at an implementation of a simple model of a mental health assessment service.
 
-In this model, patients
+In this model, patients:
 
-- are referred to the service
-- are booked in to the next available appointment
-- wait until the appointment is carried out
-- exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system
-
-:::{.callout-note}
-The contents of this section is based off the method employed by [Monks](https://orcid.org/0000-0003-2631-4481) in this [code](https://github.com/health-data-science-OR/stochastic_systems/tree/master/labs/simulation/lab5).
-:::
+- Are referred to the service.
+- Are booked in to the next available appointment.
+- Wait until the appointment is carried out.
+- Exit the system - we will make the assumption at this point that they are either discharged, or are referred on to a separate service for an intervention, but we will not model this part of the system.
 
 ## The appointment book
 
 The key difference in this model is that we will feed in an additional object that represents the capacity of the clinic to see new clients.
 
-To begin with, let's assume that
+To begin with, let's assume that:
 
-- there is a single clinic
-- any client can be seen by any clinician
-- they are open six days a week
-- all appointments are the same length
-- clients do not express any preference about being seen at a particular time of day
-- everyone attends their appointment
+- There is a single clinic.
+- Any client can be seen by any clinician.
+- They are open six days a week.
+- All appointments are the same length.
+- Clients do not express any preference about being seen at a particular time of day.
+- Everyone attends their appointment.
 
 ```{python}
 #| eval: true
@@ -73,9 +81,13 @@ pd.read_csv("resources/shifts_simplest.csv")
 
 Here, we have one row per day of the week. We will interpret an index of 0 as Monday and 6 as Sunday.
 
-## Coding the example
+## Coding the model
 
-### The g class
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
+### g class
 
 Rather than setting an interarrival time, we will instead set a value that represents the average annual demand for our clinic.
 
@@ -83,9 +95,7 @@ We will also pass in the dataframe of shifts.
 
 Another new parameter is the minimum wait. To give patients time to receive their appointment letter and make a plan to attend, we don't want to just book the next available appointment, as this could be the very next day, with no time for clients to find out they are meant to be attending!
 
-In the final new parameter, we will
-
-Next, we return to parameters we have used before - the sim duration, which we have this time set as two years (365 days times 2). Note that compared to our previous model, where we interpreted each simpy time unit as 1 minute, we are now interpreting a single time unit as one *day*. We do not change anything in simpy itself to do this - but we just need to be careful that we remain consistent in our application of this throughout the rest of the model.
+Finally, we return to parameters we have used before - the sim duration, which we have this time set as two years (365 days times 2). Note that compared to our previous model, where we interpreted each SimPy time unit as 1 minute, we are now interpreting a single time unit as one *day*. We do not change anything in SimPy itself to do this - but we just need to be careful that we remain consistent in our application of this throughout the rest of the model.
 
 ```{python}
 #| eval: true
@@ -106,13 +116,13 @@ class g:
 
 ```
 
-### The Patient (entity) class
+### Patient (entity) class
 
 In our patient class, we will record an id as before.
 
 We have a new attribute named 'booker' that we will create shortly.
 
-We will also create a space to record the time patients arrive into the model, and the time they have their appointment.
+We will also create a space to record the time patients arrive into the model, and the time they have to wait until their appointment.
 
 ```{python}
 #| eval: true
@@ -121,33 +131,33 @@ We will also create a space to record the time patients arrive into the model, a
 class Patient:
     def __init__(self, p_id, booker):
         self.id = p_id
-        self.booker = booker
+        self.booker = booker  ##NEW
 
-        self.arrival_time = 0
-        self.waiting_time = 0
+        self.arrival_time = 0  ##NEW
+        self.waiting_time = 0  ##NEW
 ```
 
 
-### The model class
+### Model class
 
 #### The __init__method
 
-We now need to make some important changes to the __init__method of the model, as well as create a few extra methods we can call on.
+We now need to make some important changes to the `__init__` method of the model, as well as create a few extra methods we can call on.
 
-One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to
+One of the key things we need to do is create two new dataframes based on our shift data (the dataframe of available daily slots). We have only provided the required information for a single week - our model will need to:
 
-- extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running)
-- create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when
+- Extrapolate this out into an array that covers the whole model (with a bit extra for appointments that are booked while the model is running, but are booked in for after the model has finished running) (`create_slots()`).
+- Create a second array with the same dimensions that will be used to track the number of patients that have been booked in on a given day, allowing us to calculate if there are any slots still available when (`create_bookings()`).
 
 :::{.callout-tip}
 Note that we are using numpy throughout for the operations relating to the bookings. This is just due to the speed advantage of numpy in this context.
 :::
 
-When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class.
+When setting up our model class, we also want to create a distribution object that can be used to sample the number of daily arrivals to our system, based on the average number of yearly arrivals passed in our g class (`self.arrival_dist`).
 
-For more information on these functions, refer to #sec-reproducibility and #sec-distributions.
+For more information on these functions, refer to @sec-distributions and @sec-reproducibility.
 
-We will be using the `Poisson` class from the `sim-tools` package, so first need to run the following line.
+We will be using the `Poisson` class from the `sim-tools` package written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481), so first need to run the following line.
 
 ```{python}
 #| eval: true
@@ -170,15 +180,15 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         self.available_slots = None
         self.bookings = None
 
-        ## NEW - run the new methods we have created below
+        ##NEW - run the new methods we have created below
         self.create_slots() ##NEW
         self.create_bookings() ##NEW
 
-        ## NEW
+        ##NEW
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
                                     random_seed=run_number*42) # <2>
 
@@ -191,12 +201,12 @@ class Model:
 
         # Create an attribute to store the mean waiting time for an appointment
         # across this run of the model
-        self.mean_wait_time_appointment = 0 ## NEW
-        self.mean_yearly_arrivals = 0 ## NEW
+        self.mean_wait_time_appointment = 0 ##NEW
+        self.mean_yearly_arrivals = 0 ##NEW
 
-    ########################################
-    ## ---------- NEW ------------------- ##
-    ########################################
+    #########
+    ##NEW
+    #########
 
     def create_slots(self):
 
@@ -227,9 +237,9 @@ class Model:
         bookings.index.rename('day', inplace=True)
         self.bookings = bookings
 
-    ########################################
-    ## ---------- END NEW --------------- ##
-    ########################################
+    #########
+    ##END NEW
+    #########
 ```
 1. The parameter we pass to the poisson distribution is the average number of daily arrivals; this will be the average number of yearly arrivals divided by the number of weeks in a year and the number of days in a week.
 2. This will ensure we have a different random pattern of arrivals per run, but that the number of arrivals is reproducible across trials.
@@ -250,7 +260,7 @@ model.create_bookings()
 model.bookings
 ```
 
-### The booker class
+### Booker class
 
 Before we continue making changes to our model class, we want to introduce a new class that will deal with patient bookings.
 
@@ -263,6 +273,10 @@ In this case, this is also the motivation for adding in a 'clinic ID' parameter 
 
 ```{python}
 #| eval: true
+
+#########
+##NEW
+#########
 class Booker():
     '''
     Booking class.
@@ -329,7 +343,9 @@ class Booker():
 
         # Increase the number of bookings we have on that day
         self.model.bookings.iat[booking_t, clinic_id] += 1
-
+#########
+##END NEW
+#########
 ```
 
 
@@ -372,7 +388,7 @@ model.bookings
 ```
 
 
-### Further changes to the Model class
+### Further changes to the model class
 
 Now we have our booker method, we can make the remaining changes required to the model class.
 
@@ -382,14 +398,17 @@ This method changes quite significantly from our existing models.
 
 Instead of generating a patient, calculating the length of time that elapses until the next patient arrives and then waiting for that time to elapse, we mode through the simulation one day at a time, performing the following steps:
 
-- calculating (sampling) the number of arrivals per day
-- looping through each referral and creating a new patient object
-- creating an instance of the booker class for each patient
-- starting a referral process for that patient
+- Calculating (sampling) the number of arrivals per day.
+- Looping through each referral and creating a new patient object.
+- Creating an instance of the booker class for each patient.
+- Starting a referral process for that patient.
 
 When this is complete for every patient who is generated for that day, we can step forward to the next day by waiting for one time unit to elapse.
 
 ```{python}
+#########
+##NEW
+#########
 def generator_patient_arrivals(self):
     for t in itertools.count():
 
@@ -410,13 +429,19 @@ def generator_patient_arrivals(self):
 
         #timestep by one day
         yield self.env.timeout(1)
+#########
+##END NEW
+#########
 ```
 
 #### The attend_clinic method
 
-This method also needs to change quite significantly.
+This method also needs to change quite significantly. Instead of waiting in queues for the receptionist/nurse, this method introduces slot booking. Patients book an appointment slot, and the time until their appointment is recorded as their waiting time.
 
 ```{python}
+#########
+##NEW
+#########
 def attend_clinic(self, patient):
     patient.arrival_time = self.env.now
 
@@ -439,6 +464,9 @@ def attend_clinic(self, patient):
     self.results_df.at[patient.id, "Q Time Appointment"] = (
                patient.waiting_time
                )
+#########
+##END NEW
+#########
 ```
 1. The arrival time of the patient is passed in so that only appointments in the future are considered as eligible slots.
 2. In this example we are only looking at a single clinic. In later versions of this model, patients who arrive will also have a preferred 'home' clinic, which will mean that different clinic IDs can be passed in at this stage.
@@ -448,19 +476,25 @@ def attend_clinic(self, patient):
 Here, we are just altering the column name we refer to when calculating our metric of interest.
 
 ```{python}
-    def calculate_run_results(self):
-        # Take the mean of the queuing times for an appointment across this run of the model
-        self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
-        # use our patient counter to track how many patients turn up on average during each
-        # year of the simulation.
-        self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
+#########
+##NEW
+#########
+def calculate_run_results(self):
+    # Take the mean of the queuing times for an appointment across this run of the model
+    self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
+    # use our patient counter to track how many patients turn up on average during each
+    # year of the simulation.
+    self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
+#########
+##END NEW
+#########
 ```
 
 #### The run method
 
 The run method is unchanged.
 
-### The trial class
+### Trial class
 
 Our trial class is fundamentally unchanged - the main differences relate to the changes to the metrics we are interested in tracking.
 
@@ -505,9 +539,10 @@ class Trial:
 
 ### The full code
 
+The full updated code for the model is given below.
+
 :::{.callout-note collapse="true"}
 ### Click here to view the full code
-
 
 ```{python}
 #| eval: true
@@ -536,11 +571,14 @@ class g:
 class Patient:
     def __init__(self, p_id, booker):
         self.id = p_id
-        self.booker = booker
+        self.booker = booker  ##NEW
 
-        self.arrival_time = 0
-        self.waiting_time = 0
+        self.arrival_time = 0  ##NEW
+        self.waiting_time = 0  ##NEW
 
+#########
+##NEW
+#########
 class Booker():
     '''
     Booking class.
@@ -607,6 +645,9 @@ class Booker():
 
         # Increase the number of bookings we have on that day
         self.model.bookings.iat[booking_t, clinic_id] += 1
+#########
+##END NEW
+#########
 
 class Model:
     # Constructor to set up the model for a run.  We pass in a run number when
@@ -621,7 +662,7 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         self.available_slots = None
         self.bookings = None
 
@@ -630,7 +671,7 @@ class Model:
         self.create_bookings() ##NEW
 
 
-        ## NEW
+        ##NEW
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
                                     random_seed=run_number*42) # <2>
 
@@ -643,12 +684,12 @@ class Model:
 
         # Create an attribute to store the mean waiting time for an appointment
         # across this run of the model
-        self.mean_wait_time_appointment = 0 ## NEW
-        self.mean_yearly_arrivals = 0 ## NEW
+        self.mean_wait_time_appointment = 0 ##NEW
+        self.mean_yearly_arrivals = 0 ##NEW
 
-    ########################################
-    ## ---------- NEW ------------------- ##
-    ########################################
+    #########
+    ##NEW
+    #########
 
     def create_slots(self):
 
@@ -750,9 +791,9 @@ class Model:
         #print (f"Run Number {self.run_number}")
         #print (self.results_df)
 
-    ########################################
-    ## ---------- END NEW --------------- ##
-    ########################################
+    #########
+    ##END NEW
+    #########
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
 class Trial:
@@ -939,7 +980,7 @@ class Model:
         self.mean_wait_time_appointment= self.results_df["Q Time Appointment"].mean()
         self.mean_yearly_arrivals = self.patient_counter / (g.sim_duration / 365)
         #########
-        ## NEW ##
+        ##NEW
         #########
 
         slots_unused = self.available_slots.clinic_1.values[ : g.sim_duration]
@@ -1029,7 +1070,7 @@ Note that in this example we have not made use of a warm-up period.
 
 In the early phases of the model, we would expect the utilisation of available slots to be lower, as there will be no booked appointments at the beginning of the model, and the first people to be booked in will be booked in a week ahead due to the mandatory delay period. Therefore the utilisation is likely to be an underestimate.
 
-To learn more about setting warm-up periods, refer to #sec-warmup
+To learn more about setting warm-up periods, refer to @sec-warmup.
 :::
 
 ## Evaluating the impact of changing the number of yearly attendances

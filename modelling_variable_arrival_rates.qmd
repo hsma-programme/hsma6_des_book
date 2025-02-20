@@ -1,5 +1,12 @@
 ---
 title: Modelling Variable Arrival Rates
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -13,7 +20,8 @@ One way to implement this is to return to the `sim-tools` package by [Tom Monks]
 
 ## The principle used
 
-The documentation of the in sim tools says the following about the approach we will be using.
+The `sim-tools` documentation states the following about the approach we will be using:
+
 > Thinning is an acceptance-rejection approach to sampling inter-arrival times (IAT) from a time dependent distribution where each time period follows its own exponential distribution.
 
 ```{python}
@@ -25,8 +33,9 @@ import plotly.express as px
 ```
 
 The NSPP thinning class takes in a dataframe with two columns:
-- the first, called 't', is a list of time points at which the arrival rate changes
-- the second, called 'arrival_rate', is the arrival rate in the form of the average inter-arrival time in time units
+
+- The first, called 't', is a list of time points at which the arrival rate changes.
+- The second, called 'arrival_rate', is the arrival rate in the form of the average inter-arrival time in time units.
 
 Let's look at an example of the sort of dataframe we would create and pass in.
 
@@ -78,10 +87,10 @@ The key things to note here are
 :::{.callout-note collapse="true"}
 ### Click here for a more in-depth breakdown about how the NSPPThinning class works under the hood
 
-The NSPP thinning class uses this table to do a few things
+The NSPP thinning class uses this table to do a few things:
 
-- set up an exponential distribution using the **highest** observed arrival rate.
-- works out the time interval between our dataframe rows
+- Set up an exponential distribution using the **highest** observed arrival rate.
+- Work out the time interval between our dataframe rows.
 
 Let's first look at 20,000 samples taken from the exponential distribution that is set up using the maximum arrival rate (1 divided by the lowest inter-arrival time).
 
@@ -160,7 +169,11 @@ The wider distributions - where more of the blue 'unthinned' distribution is sti
 
 :::
 
-## Coding the variable arrival rates
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### Imports
 
@@ -179,14 +192,14 @@ This will be used by the NSPPThinning class to determine the arrival rate depend
 Note that the dataframe we have loaded in only contains a column for the mean interarrival time. We need to convert this to a rate by dividing 1 by the mean interarrival time.
 
 :::{.callout-tip}
-The two essential columns to have in our new `arrivals_time_dependent_df` are
+The two essential columns to have in our new `arrivals_time_dependent_df` are:
 
-- t
-- arrival_rate
+- `t`
+- `arrival_rate`
 
-t is an integer representing the simulation time at which the rate applies from
+`t` is an integer representing the simulation time at which the rate applies from.
 
-arrival_rate is an indication of the arrivals per time unit (1 over the average interarrival time)
+`arrival_rate` is an indication of the arrivals per time unit (1 over the average interarrival time).
 :::
 
 We will also remove our `patient_inter` attribute as that's no longer going to be in use.
@@ -196,7 +209,7 @@ arrivals_df = pd.read_csv("resources/nspp_example_1.csv")
 arrivals_df["arrival_rate"] = arrivals_df['mean_iat'].apply(lambda x: 1/x)
 
 class g:
-    arrivals_time_dependent_df = arrivals_df  ## NEW
+    arrivals_time_dependent_df = arrivals_df  ##NEW
     mean_n_consult_time = 6
     number_of_nurses = 1
     sim_duration = 120
@@ -222,7 +235,8 @@ class Patient:
 
 ### Model class
 
-#### _init
+#### The __init__ method
+
 In our __init__ method we will set up our random number generator.
 
 We are also going to create an empty list to store our patient objects - this is so we can track the arrival times.
@@ -243,7 +257,7 @@ We are also going to create an empty list to store our patient objects - this is
         # Store the passed in run number
         self.run_number = run_number
 
-        ## NEW
+        ##NEW
         # Here we set up our arrivals distribution
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
@@ -260,7 +274,7 @@ We are also going to create an empty list to store our patient objects - this is
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create somewhere to store our patient objects
-        self.patient_list = [] ## NEW
+        self.patient_list = [] ##NEW
 
         # Create an attribute to store the mean queuing time for the nurse
         # across this run of the model
@@ -297,7 +311,7 @@ In this method, we just need to swap our use of `random.expovariate(1.0 / g.pati
             # sample from an exponential distribution (common for inter-arrival
             # times), and pass in a lambda value of 1 / mean.  The mean
             # inter-arrival time is stored in the g class.
-            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ## NEW
+            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ##NEW
 
             # Freeze this instance of this function in place until the
             # inter-arrival time we sampled above has elapsed.  Note - time in
@@ -311,7 +325,7 @@ In this method, we just need to swap our use of `random.expovariate(1.0 / g.pati
 
 These methods are unchanged.
 
-### The run class
+#### The run method
 
 For the purposes of checking the model is working as intended, we are going to return the list of patient arrival times after every run.
 
@@ -329,6 +343,7 @@ For the purposes of checking the model is working as intended, we are going to r
         # run results
         self.calculate_run_results()
 
+        ##NEW - return list of arrival times
         return [p.arrival_time for p in self.patient_list]
 ```
 
@@ -362,11 +377,11 @@ def run_trial(self):
     # dataframe.
     for run in range(g.number_of_runs):
         my_model = Model(run)
-        model_outputs = my_model.run() ##MODIFIED
+        model_outputs = my_model.run() ##NEW
         ## Saves output from my_model.run to a variable
 
         self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
-        ## NEW
+        ##NEW
         self.arrival_time_lists.append(
               pf.DataFrame({"run": [run for i in range(len(model_outputs))], "arrival_times": model_outputs})
               )
@@ -374,15 +389,16 @@ def run_trial(self):
     # Once the trial (ie all runs) has completed, print the final results
     self.print_trial_results()
 
-    ## NEW - return the arrival times as well
+    ##NEW - return the arrival times as well
     return self.arrival_time_lists
 ```
 
 ## The full code
 
-The full code is given below.
+The full updated code for the model is given below.
 
-:::{.callout-note collapse="true}
+:::{.callout-note collapse="true"}
+### Click here to view the full code
 
 ```{python}
 #| eval: true
@@ -411,7 +427,7 @@ class g:
 class Patient:
     def __init__(self, p_id):
         self.id = p_id
-        self.arrival_time = 0 ## NEW
+        self.arrival_time = 0 ##NEW
         self.q_time_nurse = 0
 
 # Class representing our model of the clinic.
@@ -433,7 +449,7 @@ class Model:
         # Store the passed in run number
         self.run_number = run_number
 
-        # NEW
+        ##NEW
         # Here we set up our arrivals distribution
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
@@ -451,7 +467,7 @@ class Model:
         self.results_df.set_index("Patient ID", inplace=True)
 
         # Create somewhere to store our patient objects
-        self.patient_list = [] ## NEW
+        self.patient_list = [] ##NEW
 
         # Create an attribute to store the mean queuing time for the nurse
         # across this run of the model
@@ -484,7 +500,7 @@ class Model:
             # sample from an exponential distribution (common for inter-arrival
             # times), and pass in a lambda value of 1 / mean.  The mean
             # inter-arrival time is stored in the g class.
-            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ## NEW
+            sampled_inter = self.arrivals_dist.sample(simulation_time=self.env.now) ##NEW
 
             # Freeze this instance of this function in place until the
             # inter-arrival time we sampled above has elapsed.  Note - time in
@@ -576,6 +592,7 @@ class Model:
         # run results
         self.calculate_run_results()
 
+        ##NEW - return list of arrival times
         return [p.arrival_time for p in self.patient_list]
 
 # Class representing a Trial for our simulation - a batch of simulation runs.
@@ -607,12 +624,12 @@ class Trial:
         # dataframe.
         for run in range(g.number_of_runs):
             my_model = Model(run)
-            model_outputs = my_model.run() ##MODIFIED
+            model_outputs = my_model.run() ##NEW
             ## Saves output from my_model.run to a variable
 
             self.df_trial_results.loc[run] = [my_model.mean_q_time_nurse]
 
-            ## NEW
+            ##NEW
             self.arrival_time_lists.append(
               pd.DataFrame({"run": [run for i in range(len(model_outputs))], "arrival_times": model_outputs})
               )
@@ -620,7 +637,7 @@ class Trial:
         # Once the trial (ie all runs) has completed, print the final results
         self.print_trial_results()
 
-        ## NEW - return the arrival times as well
+        ##NEW - return the arrival times as well
         return self.arrival_time_lists
 ```
 :::

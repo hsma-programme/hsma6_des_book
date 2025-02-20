@@ -1,30 +1,39 @@
-# An Introduction to SimPy
+---
+title: "An Introduction to SimPy"
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
 SimPy is a Python package that allows us to create powerful Discrete Event Simulation (DES) models.
 
-You can read SimPy's own tutorials and reference guides on its website : https://simpy.readthedocs.io/en/latest/ - but we'd recommend working through at least the first few chapters in this book first.
+You can read SimPy's own tutorials and reference guides on its website (<https://simpy.readthedocs.io/en/latest/>) but we'd recommend working through at least the first few chapters in this book first.
 
-:::{.callout-info}
+:::{.callout-note}
 To install SimPy, we need to `pip install simpy`.  However, it is recommended that you use a separate environment.  Make sure you switch to this environment for any DES work you do - or, even better, set up a separate environment for every DES project you undertake!
 :::
 
-Before we look at how we put together a SimPy model, there’s a couple concepts we need to cover first that are important to understand.
+Before we look at how we put together a SimPy model, there’s a couple of concepts we need to cover first that are important to understand.
 
-## Simulation Time
+## Simulation time
 
 SimPy simulations run in time units.  These units of time can represent any real world amount of time we like as long as we are consistent within the same model.
 
 Our time units should represent the lowest level of real world time that we need to represent in the model.  In models of pathways where people arrive for a service, this will likely be minutes (seconds is too much, and hours is probably not enough, unless all the processes are slow).  But we may have pathways where we measure time in days or weeks (e.g. referral pathways).
 
-For example, in an ED model, our time units may represent minutes.  So we specify everything in minutes - inter-arrival times, activity times etc.
+For example, in an emergency department (ED) model, our time units may represent minutes.  So we specify everything in minutes - inter-arrival times, activity times etc.
 
-:::{.calllout-info}
-Strictly speaking, SimPy doesn’t run in time units ticking away one by one.  Instead, it schedules events jumps to the next event.  But don’t worry about that for your purposes.  Just know that, because of this, you will see current simulation time as floating point numbers (eg the current time unit could be 3.6 etc).
+:::{.callout-note}
+Strictly speaking, SimPy doesn’t progress in fixed time units. Instead, it schedules events and jumps to the next one. However, you don’t need to worry about that. Just note that, as a result, the simulation time is represented as floating-point numbers (e.g., the current time could be 3.6).
 :::
 
-## Generator Functions
+## Generator functions
 
-SimPy is built around a special type of function in Python known as a Generator Function.
+SimPy is built around a special type of function in Python known as a **Generator Function**.
 
 So let’s have a look at what we mean by a Generator Function.
 
@@ -38,13 +47,13 @@ Let’s look at a very simple example of a generator function to see how they wo
 
 ![](images/generator_func_example.png)
 
-In SimPy, we use Generator Functions in two different places :
+In SimPy, we use Generator Functions in two different places:
 
-To model the DES generators (arrival points)
-To model the individual journey of each entity
+1. To model the DES generators (arrival points).
+2. To model the individual journey of each entity.
 
 Let’s imagine we are modelling patients in a patient pathway.
 
-For 1, the generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient.  Then it does it all over again.
+For **1. Modelling the DES generators (arrival points):** The generator function basically creates a patient, sets them off on their pathway, then freezes in place for an amount of time representing the inter-arrival time to the next patient.  Then it does it all over again.
 
-For 2, the generator function requests a resource and freezes until that resource is available (the queue).  When the resource is available it freezes in place for an amount of time with it (the activity).  It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.
+For **2. Modelling the individual journey of each entity:** The generator function requests a resource and freezes until that resource is available (the queue).  When the resource is available it freezes in place for an amount of time with it (the activity).  It will then either move on to the next activity (and request the resource for it, as above) or end if there are no further activities.

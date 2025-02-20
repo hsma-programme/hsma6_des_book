@@ -4,3 +4,13 @@
 
 // Code blocks
 $code-block-bg-alpha: -.8;
+
+// Chapter numbers
+.sidebar-item .chapter-number {
+    color: #fff !important; 
+}
+
+// Prevent cut-off of final chapters in sidebar
+.sidebar-menu-container {
+    padding-bottom: 10em;
+}

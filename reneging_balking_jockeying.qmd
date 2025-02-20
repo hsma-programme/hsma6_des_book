@@ -1,5 +1,12 @@
 ---
-title: Reneging, balking and jockeying
+title: Reneging, Balking and Jockeying
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -19,18 +26,23 @@ Not all queues run “as planned”. We may wish to model behaviours where entit
 
 Let’s imagine that each of our patients has a patience level - an amount of time they’re prepared to wait for the nurse.
 
-To model this, we :
-- Add patience level as an attribute to each patient, with some way of determining what a patient’s patience is
-- When we request a resource, we’ll tell SimPy to either wait until the request can be met OR until the patient’s patience has expired (whichever comes first)
-- We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged
+To model this, we:
+
+- Add patience level as an attribute to each patient, with some way of determining what a patient’s patience is.
+- When we request a resource, we’ll tell SimPy to either wait until the request can be met OR until the patient’s patience has expired (whichever comes first).
+- We’ll then check what happened - did the patient wait or did they renege?  If they waited, we’ll proceed as before.  If they reneged, then they won’t see the nurse, and we’ll record that they reneged.
 - We’ll add the number of patients that reneged to our outputs from each run, and take the average number of patients who reneged per run over the trial.
 
-### Coding a reneging examaple
+### Coding a reneging example
 
-#### The g class
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
+#### g class
 The g class is unchanged.
 
-#### The patient class
+#### Patient class
 
 In the patient class, we add a patience attribute.
 
@@ -55,7 +67,7 @@ class Patient:
         self.patience_nurse = random.randint(5, 50) ##NEW
 ```
 
-#### The model class
+#### Model class
 
 ##### The __init__ method
 
@@ -93,7 +105,7 @@ def __init__(self, run_number):
     random.seed(42)
 ```
 
-#### The attend_clinic method
+##### The attend_clinic method
 
 In the attend clinic, we now add in an OR statement (the vertical line | , also known as a pipe) to our request for the nurse.
 
@@ -150,7 +162,7 @@ def attend_clinic(self, patient):
 
 ```
 
-#### The run method
+##### The run method
 
 The only change to the run method is adding a print statement to the end of it to print the patients who reneged.
 
@@ -158,7 +170,7 @@ The only change to the run method is adding a print statement to the end of it t
 print (f"{self.num_reneged_nurse} patients reneged from nurse queue")
 ```
 
-#### The Trial class
+#### Trial class
 
 ##### The __init__ method
 
@@ -224,7 +236,9 @@ def run_trial(self):
     self.print_trial_results()
 ```
 
-### The Full Code
+### The full code
+
+The full updated code for the model is given below.
 
 ::: {.callout-note collapse="true"}
 #### Click here to view the full code
@@ -462,25 +476,27 @@ We can also see that some patients who arrived in the system later balk earlier 
 
 ## Balking
 
-For balking, there are two different ways in which balking can occur (and both could occur in the same model) :
+For balking, there are two different ways in which balking can occur (and both could occur in the same model):
 
-- An entity may choose not to join a queue because it is too long for their preferences / needs
-- An entity may not be able to join a queue because there is no capacity for them
+- An entity may choose not to join a queue because it is too long for their preferences / needs.
+- An entity may not be able to join a queue because there is no capacity for them.
 
 We will look at the latter, but the way we approach it is the same for both - the only difference is that, in the former, the maximum queue length is likely to be an attribute of the patient (and may be individual per patient) just like in the reneging example, rather than an attribute of the model.
 
 Here, we’ll imagine that in our clinic, there is only space for 3 people to wait to see the nurse, and if there is no space, they cannot wait.
 
-To model our balking requirements, we will :
-- Add a parameter to g class to store the maximum queue length allowed (if this were patient-decided balking, we’d put this in the patient class instead)
-- Add a list to our model attributes that will store all the patient objects currently in the queue for the nurse.  This is really useful as it allows us to see who is in the queue at any time, as well as how many etc
-- Whenever a patient joins or leaves the queue, we’ll update the list of patients in the queue
+To model our balking requirements, we will:
+
+- Add a parameter to g class to store the maximum queue length allowed (if this were patient-decided balking, we’d put this in the patient class instead).
+- Add a list to our model attributes that will store all the patient objects currently in the queue for the nurse.  This is really useful as it allows us to see who is in the queue at any time, as well as how many etc.
+- Whenever a patient joins or leaves the queue, we’ll update the list of patients in the queue.
 - Before we ask for the nurse resource, we’ll first check if the queue is at maximum size.  If it is, the patient will never join the queue and we’ll record that.  If not, we’ll proceed as before.
-We’ll add results of number of patients who balked to our results
+
+We’ll add results of number of patients who balked to our results.
 
 ### Coding a balking example
 
-#### The g Class
+#### g class
 
 We'll add a parameter value that will store the maximum length of the queue we allow for the nurse.
 
@@ -516,17 +532,17 @@ class g:
     warm_up_period = 1440
 ```
 
-#### The Patient Class
+#### Patient class
 
 This class is unchanged.
 
-#### The Model Class
+#### Model class
 
 ##### The __init__ method
 
 Here we add in an additional attribute to count the number of people who balk.
 
-We also we add a list that will store patient objects queuing for the nurse consultation.  This will allow us to see who is in the queue at any time, as well as the length of the queue etc.
+We also we add a list that will store patient objects queuing for the nurse consultation.  This will allow us to see who is in the queue at any time, as well as the length of the queue etc.a reneging example
 
 ```{python}
 class Model:
@@ -628,10 +644,10 @@ def run(self):
     # Print patient level results for this run
     print (f"Run Number {self.run_number}")
     print (self.results_df)
-    print (f"{self.num_balked_nurse} patients balked at the nurse queue") ## NEW
+    print (f"{self.num_balked_nurse} patients balked at the nurse queue") ##NEW
 ```
 
-#### The Trial Class
+#### Trial class
 
 ##### The __init__ method
 
@@ -696,7 +712,7 @@ def run_trial(self):
 
 ### The full code
 
-The full code can be seen below:
+The full updated code for the model is given below.
 
 ::: {.callout-note collapse="true"}
 #### Click here to view the full code
@@ -945,13 +961,14 @@ Due to the new logic, there should never be any patients balking (as they’d jo
 
 ### Coding the 'choosing queues' example
 
-The full code can be seen below.
+The full updated code for the model is given below.
 
-This example brings together code for
-- nurse breaks
-- reneging
-- balking
-- queue choosing
+This example brings together code for:
+
+- Nurse breaks.
+- Reneging.
+- Balking.
+- Queue choosing.
 
 ::: {.callout-note collapse="true"}
 

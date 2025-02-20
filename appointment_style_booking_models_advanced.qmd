@@ -1,4 +1,8 @@
-# (Coming Soon!) Advanced Appointment Booking Model Features
+---
+title: (Coming Soon!) Advanced Appointment Booking Model Features
+author:
+  - name: TBC
+---
 
 ## Adding in priority and carve-out
 

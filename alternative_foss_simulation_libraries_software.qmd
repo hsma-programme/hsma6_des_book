@@ -1,13 +1,20 @@
 ---
 title: Alternative FOSS Simulation Libraries and Software
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
 
-While the focus of this book is on simpy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
+While the focus of this book is on SimPy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.
 
-## Python Libraries
+## Python libraries
 
 ### ciw
 
@@ -32,7 +39,7 @@ There is also a more detailed description of the steps required to convert a mod
 
 Salabim is thoroughly documented and sets itself apart by providing methods for 2D and 3D animation.
 
-## R Libraries
+## R libraries
 
 ### simmeR
 
@@ -53,7 +60,7 @@ One key benefit is being able to plot a flow diagram of the steps in a simmer mo
 ![Simmer Plot: credit to Stacey Croft, Anastasiia Zharinova and Tom Jemmett ^[https://the-strategy-unit.github.io/des_simmer_workshop/]](images/simmer_plot.png)
 
 
-## GUI Software
+## GUI software
 
 ### JaamSim
 

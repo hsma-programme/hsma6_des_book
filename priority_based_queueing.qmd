@@ -1,5 +1,12 @@
 ---
 title: Priority-Based Queueing
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -9,19 +16,23 @@ So far, we’ve assumed that the queues in our models follow a FIFO (First in Fi
 
 But in healthcare systems, very often there is an element of prioritisation in a real world queue.  Typically this represents the severity of the patient’s condition.
 
+## Implementing priority-based queueing
+
 We can build in priority-based queuing in our SimPy models in a few different ways - but one of the easiest is using something known as a **PriorityResource**.
 
 A PriorityResource is a class in SimPy that’s like the standard Resource class we’ve used so far, but also has functionality that allows it to select which entity to pull out of a queue next based on a priority value we specify.
 
-The way this works in SimPy is :
+The way this works in SimPy is:
 
-1. We set up resources that will be dealing with priority-based queues as PriorityResources rather than Resources
-
-2. We have an attribute stored against the entity that specifies that entity’s priority (with lower values indicating higher priority)
-
+1. We set up resources that will be dealing with priority-based queues as PriorityResources rather than Resources.
+2. We have an attribute stored against the entity that specifies that entity’s priority (with lower values indicating higher priority).
 3. When we request a PriorityResource, we tell it the attribute to use to determine priority in that queue (this also means we could have multiple attributes for priority and use different ones for different queues).
 
-## Implementing priority-based queueing
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ### g class
 
@@ -29,11 +40,10 @@ The g class is unchanged
 
 ### Patient class
 
-Here we add an attribute of the patient that determines their priority
-:::{.callout-tip}
-When using a priority resource
+Here we add an attribute of the patient that determines their priority.
 
-Lower value = higher priority
+:::{.callout-tip}
+When using a priority resource, **lower value = higher priority**.
 :::
 
 In this example, we just randomly pick a value between 1 and 5, but you can use whatever logic you like.
@@ -141,9 +151,9 @@ The trial class is unchanged.
 
 ## The full code
 
-The full code is given below.
+The full updated code for the model is given below.
 
-:::{.callout-note collapse="true}
+:::{.callout-note collapse="true"}
 ### Click here to view the full code
 
 ```{python}
@@ -257,6 +267,7 @@ class Model:
                     patient.q_time_nurse
                 )
 
+                ##NEW
                 self.results_df.at[patient.id, "Priority"] = (
                     patient.priority
                 )
@@ -375,17 +386,15 @@ Let's calculate the mean queue time by priority.
     )
 ```
 
-We can see that the queueing time is shorter for the clients with a lower priority value (and therefore a higher actual priority in terms of the model - i.e. they will be seen first)
+We can see that the queueing time is shorter for the clients with a lower priority value (and therefore a higher actual priority in terms of the model - i.e. they will be seen first).
 
-
-:::{.tip-warning}
+:::{.callout-warning}
 Remember that we are only recording the queue time at the point at which someone exits the queue to be seen by a nurse.
 
 This means that there may be lots of people - particularly those with a higher priority number (and therefore the least important to see as far as the model is concerned) who are still sitting waiting to be seen when our model stops running.
 
 Think about ways you might try to account for that.
 :::
-
 
 ```{python}
 #| eval: true

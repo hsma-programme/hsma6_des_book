@@ -1,9 +1,276 @@
-# (Coming Soon!) The STARS Framework
+---
+title: The STARS Framework
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+---
 
-> "The STARS framework is a set of open practices, tools and learning materials to produce enhanced versions of research artefacts that intend to increase accessibility for others to (re)use, adapt and build on work."
+:::{.callout-note title="Acknowledgements"}
 
-:::{.callout-warning}
-This section has not yet been developed.
+The content in this chapter is based on the paper "*Towards sharing tools and artefacts for reusable simulations in healthcare*" ([10.1080/17477778.2024.2347882](https://doi.org/10.1080/17477778.2024.2347882)) by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481), [Alison Harper](https://github.com/AliHarp) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0001-5274-5037) and [Nav Mustafee](https://github.com/NavonilNM) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-2204-8924).
 
-However, in the meantime, you may want to take a look at the STARS framework github repository at <https://github.com/pythonhealthdatascience>
+The drawings are created using [sketch.io](https://sketch.io/sketchpad/).
 :::
+
+## STARS: Sharing Tools and Artefacts for Reusable Simulation
+
+The STARS framework is a set of **practical guidelines** to help modellers share their simulation models in a way that makes them:
+
+* ✅ **Accessible** – so others can easily find and access your model.
+* ✅ **Reusable** - so people can use and adapt the model for their own work.
+* ✅ **Understandable and well-documented** - so others can engage with and understand your model better.
+
+You can use the framework to guide how you share your DES model.
+
+The framework is described in:
+
+> Monks, T., Harper, A., & Mustafee, N. (2024). Towards sharing tools and artefacts for reusable simulations in healthcare. Journal of Simulation, 1–20. <https://doi.org/10.1080/17477778.2024.2347882>.
+
+It is divided into essential and optional components.
+
+* **Essential components** - the minimum steps needed to share models that are citable, functional, well-licensed and available long-term.
+* **Optional components** - a step further, enhancing accessibility, understanding and clarity of the model.
+
+![Overview of the STARS Framework from Monks et al. (2024) (CC BY 4.0).](images/stars_framework.jpg){.lightbox}
+
+## Essential components
+
+::: {.callout-tip}
+
+## STARS essential components checklist
+
+* [ ] Open licence
+* [ ] Dependency management
+* [ ] Use FOSS languages
+* [ ] Minimum documentation
+* [ ] ORCID
+* [ ] Citation information
+* [ ] Remote code repository
+* [ ] Open science archive
+
+:::
+
+### Open licence
+
+Before sharing code, it's important to choose an appropriate open-source licence. **A licence tells others how they can use, modify or share your work**. Without a licence, you retain exclusive copyright, and others would not be able to legally reuse the model.
+
+A common approach in data science is to use a **permissive licence like an MIT licence**. Other options are available, with more restrictive licences like GPL licences requiring anyone who modifies your work to share it under the same terms. The website <https://choosealicense.com/> can be helpful in choosing a licence that suits you.
+
+A licence is simply a file (often just `LICENCE`) add to the root of your repository. It is easy to add - check out these [handy instructions from GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository).
+
+![](images/stars_licence.png){width=50% fig-align="center"}
+
+### Dependency management
+
+To make sure your code runs correctly for others (or for yourself in the future), you need to list the **required software and versions**. Without this, users may face errors due to missing dependencies.
+
+In Python, common tools for managing this are:
+
+* **Pip virtual environments** with a `requirements.txt` file.
+* **Conda environments** with a `environment.yaml/yml` file.
+* **Poetry** with a `pyproject.toml` file.
+
+The [HSMA - Programming in Python](https://hsma-programme.github.io/hsma6_intro_to_python_book/) ebook has a chapter on "Creating Environments with Python" which guides you on how to set up an pip virtual environment.
+
+![](images/stars_dependency.png){width=60% fig-align="center"}
+
+### Use Free and Open-Source Software (FOSS) languages
+
+We already meet this recommendation! 😊🎉 Python is an example of a FOSS language. FOSS provides *freedom*: it grants users the rights to adapt and share copies of their model however they choose.
+
+![](images/stars_foss.png)
+
+### Minimum documentation
+
+At a minimum, you should include some documentation alongside your model that describes:
+
+1. What the model does.
+2. How to install and run the model to obtain results.
+3. How to vary parameters to run new experiments.
+
+This can be done easily using a `README.md` file. This is a markdown file stored in the root of your repository.
+
+![](images/stars_readme.png){width=50% fig-align="center"}
+
+### Open Researcher and Contributor Identifier (ORCID)
+
+An **ORCID** is a free, unique, persistent ID that identifies and links authors to their research. It ensures that any outputs and publications are correctly attributed to you.
+
+It is recommended to include your ORCID in the `README.md`. For example:
+
+Jane Doe ORCID: <https://orcid.org/0000-0000-0000-0000>.
+
+Or as a markdown badge...
+
+```{.markdown .code-overflow-wrap}
+[![](https://img.shields.io/badge/Dane_Doe_ORCID-0000--0000--0000--0000-brightgreen)](https://orcid.org/0000-0000-0000-0000)
+```
+
+[![](https://img.shields.io/badge/Jane_Doe_ORCID-0000--0000--0000--0000-brightgreen)](https://orcid.org/0000-0000-0000-0000)
+
+![](images/stars_orcid.png){width=50% fig-align="center"}
+
+### Citation information
+
+Including citation instructions makes it easier for others to reference and give credit to your model. Platforms like GitHub support `CITATION.cff`, which are files that contain details like author names, version, and links to the original work. These can be created using [cff-init](https://citation-file-format.github.io/cff-initializer-javascript/#/).
+
+![](images/stars_cite.png){width=70% fig-align="center"}
+
+### Remote code repository
+
+Remote code repositories like **GitHub, GitLab, and Bitbucket** help manage and share code.
+
+* They provide **version control**, allowing developers to track changes, revert to previous versions, and collaborate through branching.
+* Users can **clone** a repository to use a model and pull updates as improvements are made.
+* Features like **issues** (for discussion and bug tracking) and **releases** (for tagging stable versions) make collaboration easier.
+
+![](images/stars_repo.png){width=70% fig-align="center"}
+
+### Open science archive
+
+To ensure simulation models remain accessible over time, they should be stored in open science archives like [Zenodo](https://zenodo.org/), [Figshare](https://figshare.com/), and the [Open Science Framework](https://osf.io/). These platforms provide **DOIs (Digital Object Identifiers)** for citation and follow principles that guarantee long-term storage and discoverability. Unlike GitHub, which can change or be deleted, archives preserve models permanently.
+
+![](images/stars_archive.png)
+
+## Optional components									
+
+::: {.callout-tip}
+
+## STARS optional components checklist
+
+* [ ] Enhanced documentation.
+* [ ] Documentation hosting.
+* [ ] Online coding environment.
+* [ ] Model interface.
+* [ ] Web app hosting.
+
+:::
+
+### Enhanced documentation
+
+Going beyond the minimum documentation requirements, good documentation should include:
+
+* A plain-language summary of the project context and model.
+* Licence and citation details.
+* Contribution instructions.
+* Installation instructions.
+* A structured code walk through of the model.
+* Documentation of the modelling cycle using TRAnsparent and Comprehensive model Evaluation (TRACE) ([Ayllón et al. (2021)](https://doi.org/10.1016/j.envsoft.2020.104932)).
+* Annotated simulation reporting guidelines (e.g. [STRESS-DES](stress_des.qmd)).
+* Clear description of model validation including its intended purpose.
+
+Great tools for creating your documentation include:
+
+* **Quarto markdown** (`.qmd`) and **Jupyter notebook** (`.ipynb`) files, which allow you to combine code and text in an interactive format.
+* **Quarto** and **Jupyter Book**, which allow you to turn these files into structured websites.
+
+![](images/stars_docs.png){width=60% fig-align="center"}
+
+### Documentation hosting
+
+Services like **GitHub Pages, GitLab Pages, BitBucket Cloud, and Quarto Pub** can host documentation websites for free.
+
+::: {.callout-tip}
+## Fun fact!
+
+This book is created from quarto markdown files (`.qmd`) which have been structured into a book (via a `_quarto.yml` file), and hosted using GitHub pages.
+:::
+
+![](images/stars_docs_host.png){width=60% fig-align="center"}
+
+### Online coding environment
+
+There are tools which enable users to run code online without any installation or downloads. A FOSS example for jupyter notebooks is **BinderHub** (<https://mybinder.org>) which creates an online Jupyter environment from a public GitHub or GitLab repository. It packages the code and any dependencies into a container, from which the notebooks can be run.
+
+![](images/stars_code.png){width=60% fig-align="center"}
+
+### Model interface
+
+Turning your model into an **application** will make it more accessible to non-technical users who may be unfamiliar with codings. Python options include:
+
+* **Streamlit** (<https://streamlit.io/>).
+* **Shiny for Python** (<https://shiny.posit.co/py/>).
+* **Plotly Dash** (<https://dash.plotly.com/>).
+
+Check out @sec-apps for more information on how to create a streamlit web application for your DES model.
+
+![](images/stars_app.png)
+
+### Web app hosting
+
+Services like **Streamlit Community Cloud** and **ShinyApps** offer free hosting tiers which can be used to deploy your **web app**, making it freely accessible via a website link.
+
+![](images/stars_app_host.png){width=60% fig-align="center"}
+
+## Example DES models implementing the STARS framework
+
+For inspiration, check out these three examples of healthcare DES models which implement the framework, as linked in the paper describing the framework (Monks et al. (2024)).
+
+### Example 1: SimPy
+
+**Code:** <https://github.com/pythonhealthdatascience/stars-treat-sim>.
+
+**Archived code:** <https://doi.org/10.5281/zenodo.10026327>.
+
+STARS components:
+
+* ✅ MIT licence.
+* ✅ Conda environment.
+* ✅ SimPy python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using electronic notebook.
+
+### Example 2: SimPy
+
+**Code:** <https://github.com/pythonhealthdatascience/stars-streamlit-example> and <https://github.com/pythonhealthdatascience/stars-simpy-example-docs>.
+
+**Web app:** <https://stars-simpy-example.streamlit.app/>.
+
+**Documentation:** <https://pythonhealthdatascience.github.io/stars-simpy-example-docs>.
+
+**Archived code:** <https://doi.org/10.5281/zenodo.10055169> and <https://doi.org/10.5281/zenodo.10054063>.
+
+STARS components:
+
+* ✅ MIT licence.
+* ✅ Conda environment.
+* ✅ SimPy python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using Jupyter Book and STRESS-DES.
+* ✅ Documentation hosted on GitHub pages.
+* ✅ Web app using streamlit.
+* ✅ Web app hosted using streamlit community cloud.
+
+### Example 3: CIW
+
+**Code:** <https://github.com/pythonhealthdatascience/stars-ciw-example>.
+
+**Web app:** <https://pythonhealthdatascience.shinyapps.io/stars-ciw-examplar>.
+
+**Documentation:** <https://pythonhealthdatascience.github.io/stars-ciw-example>.
+
+**Archived code:** <https://doi.org/10.5281/zenodo.10051495>.
+
+STARS components:
+
+* ✅ GNU Public Licence 3.
+* ✅ Conda environment.
+* ✅ ciw python model.
+* ✅ Shared on GitHub.
+* ✅ `CITATION.cff` and ORCID meta-data.
+* ✅ `README.md`.
+* ✅ Archived on Zenodo.
+* ✅ Online coding environment via Binder.
+* ✅ Enhanced documentation using Quarto and STRESS-DES.
+* ✅ Documentation hosted on GitHub pages.
+* ✅ Web app using shiny for python.
+* ✅ Web app hosted on shinyapps.io.

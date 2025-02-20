@@ -1,13 +1,22 @@
-# Exercise - Designing a DES
+---
+title: "Exercise - Designing a DES"
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
 Design a Discrete Event Simulation for a system of your choosing.
 
 Think about some different possibilities (and these don’t have to be health-related, they can be anything!  A restaurant?  Airport?  Customer service line?).
 
-You should then draw up a design for the model.  This should include :
+You should then draw up a design for the model.  This should include:
 
-- The “what if?” question(s) you would use the model to answer
-- A process map of the system you are looking to model
+- The “what if?” question(s) you would use the model to answer.
+- A process map of the system you are looking to model.
 - A conceptual model for the proposed Discrete Event Simulation (which may not include everything in the process map).
 
 Identify the types of entities, generators, activities, queues, resources and sinks.

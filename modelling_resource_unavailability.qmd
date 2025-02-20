@@ -1,5 +1,12 @@
 ---
 title: Modelling Resource Unavailability
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -23,18 +30,24 @@ Let’s look at how we’d model that.
 
 ## The approach
 
-Basically, we will :
-- Set up the frequency and duration of unavailability as parameter values in g class
-- Make sure that the nurse is set up as a PriorityResource
-- Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!)
+Basically, we will:
+
+- Set up the frequency and duration of unavailability as parameter values in g class.
+- Make sure that the nurse is set up as a PriorityResource.
+- Create a new entity generator whose sole purpose is to demand the nurse resource with a higher priority than any patient every 2 hours, and will freeze the nurse with them for 15 minutes (this means the nurse will complete the current patient, they won’t walk out midway through!).
 - Start this new generator running in our run method of the Model class.
 
-## Coding the approach
+## Coding the model
 
-### The g class
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
+### g class
 
 In the g class, we have added values to specify how long nurse is unavailable and at what frequency.
-Un this example, every 2 hours, the nurse will be unavailable for 15 minutes.
+
+In this example, every 2 hours, the nurse will be unavailable for 15 minutes.
 
 ```{python}
 class g:
@@ -57,11 +70,11 @@ class g:
 
 ```
 
-### The Patient class
+### Patient class
 
 The patient class is unchanged.
 
-### The Model class
+### Model class
 
 #### The obstruct_nurse method
 We create a new method within the model class called `obstruct_nurse`.
@@ -124,17 +137,15 @@ def run(self):
     return self.results_df
 ```
 
-### The Trial class
+### Trial class
 
 The trial class is unchanged.
 
-
-
 ## The full code
 
-The full code is given below.
+The full updated code for the model is given below.
 
-:::{.callout-note collapse="true}
+:::{.callout-note collapse="true"}
 ### Click here to view the full code
 
 ```{python}

@@ -1,5 +1,12 @@
 ---
 title: Requesting Multiple Resources Simultaneously
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
@@ -13,29 +20,35 @@ Imagine this department is having problems seeing patients fast enough. They hav
 
 By setting up a model where we look at how both kinds of resources are used, we can begin to explore these questions.
 
-## Code example
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 Let's return to our branching model from before.
 
-Remember, in this, patients
-- see a receptionist
-- see a nurse
-- have a chance of going on to see a doctor
+Remember, in this, patients:
+
+- See a receptionist.
+- See a nurse.
+- Have a chance of going on to see a doctor.
 
 ![](images/example_simple_model_branching.png)
 
 In the original version of the model, we assumed that there was always a room available for patients to be seen in. Maybe each nurse and doctor in this example clinic has their own designated room they are always in.
 
-But let's imagine the setup is slightly different
-- patients see a receptionist and go to a waiting area
-- once both a cubicle and a nurse are available, the patient is seen by a nurse
-- if the patient then needs to see a doctor (which, as before, only a certain % of patients will) then they will remain in the same cubicle while waiting for a doctor
-- the doctor will see them in the cubicle
+But let's imagine the setup is slightly different:
+
+- Patients see a receptionist and go to a waiting area.
+- Once both a cubicle and a nurse are available, the patient is seen by a nurse.
+- If the patient then needs to see a doctor (which, as before, only a certain % of patients will) then they will remain in the same cubicle while waiting for a doctor.
+- The doctor will see them in the cubicle.
 
 The cubicle is released for the next patient after seeing the nurse IF the patient leaves at this point. Otherwise, it will be released after seeing the doctor.
 
 
-### The g class
+### g class
 
 We add in an additional parameter for the number of
 
@@ -58,7 +71,7 @@ class g:
     number_of_runs = 10
 ```
 
-### The Patient class
+### Patient class
 
 We add in an new attribute where we will record the time spent queueing for a cubicle.
 
@@ -72,7 +85,7 @@ class Patient:
         self.q_time_cubicle = 0 ##NEW
 ```
 
-### The model class
+### Model class
 
 #### The __init__ method
 
@@ -94,7 +107,7 @@ def __init__(self, run_number):
         self.receptionist = simpy.Resource(self.env, capacity=g.number_of_receptionists)
         self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
         self.doctor = simpy.Resource(self.env, capacity=g.number_of_doctors)
-        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
+        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ##NEW
 
         # Store the passed in run number
         self.run_number = run_number
@@ -121,11 +134,11 @@ def __init__(self, run_number):
         self.mean_q_time_cubicle = 0 ##NEW
 ```
 
-### The generator_patient_arrivals method
+#### The generator_patient_arrivals method
 
 This method is unchanged.
 
-### The attend_clinic method
+#### The attend_clinic method
 
 This is where the majority of our changes take place.
 
@@ -187,9 +200,10 @@ clinic_resource = yield self.env.any_of([nurse_request,cubicle_request]) ##NEW
 ```
 
 Next, we have to check three possible scenarios and act accordingly:
-- both were available at the same time
-- we got the nurse but are still waiting for a cubicle
-- we got the cubicle but are still waiting for a nurse
+
+- Both were available at the same time.
+- We got the nurse but are still waiting for a cubicle.
+- We got the cubicle but are still waiting for a nurse.
 
 ```{python}
 clinic_resource_list = list(clinic_resource.keys()) ##NEW
@@ -290,7 +304,7 @@ if random.uniform(0,1) < g.prob_seeing_doctor:
         self.cubicle.release(cubicle_request) ##NEW
 
 
-else: ## NEW
+else: ##NEW
 
       self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
             self.env.now - end_q_cubicle
@@ -308,7 +322,7 @@ self.mean_q_time_doctor = self.results_df["Q Time Doctor"].mean()
 self.mean_q_time_cubicle = self.results_df["Q Time Cubicle"].mean() ##NEW
 ```
 
-### The trial class
+### Trial class
 
 #### The __init__ method
 
@@ -350,7 +364,9 @@ self.print_trial_results()
 print(f"Queue for nurse was longer than queue for cubicle in {sum(self.df_trial_results['nurse_queue_longer'].values)} trials of {g.number_of_runs}")
 ```
 
-## The Full Code
+## The full code
+
+The full updated code for the model is given below.
 
 :::{.callout-note collapse="true"}
 
@@ -405,7 +421,7 @@ class Model:
         self.receptionist = simpy.Resource(self.env, capacity=g.number_of_receptionists)
         self.nurse = simpy.Resource(self.env, capacity=g.number_of_nurses)
         self.doctor = simpy.Resource(self.env, capacity=g.number_of_doctors)
-        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ## NEW
+        self.cubicle = simpy.Resource(self.env, capacity=g.number_of_cubicles) ##NEW
 
         # Store the passed in run number
         self.run_number = run_number
@@ -492,16 +508,17 @@ class Model:
 
         # Here's where the patient finishes with the receptionist, and starts
         # queuing for the nurse
-        # NEW: They will also be queueing for a cubicle at this point.
+        ##NEW: They will also be queueing for a cubicle at this point.
         #
 
         # Record the time the patient started queuing for a nurse
         start_q_nurse = self.env.now
         start_q_cubicle = self.env.now ##NEW
 
-        ########
+        #########
         ##NEW
-        ########
+        #########
+
         # As we are going to require the cubicle for the entire time period from
         # here on, and won't release it until they exit the system, we will request
         # the cubicle here and indent all of the existing code by one level.
@@ -549,9 +566,9 @@ class Model:
         self.results_df.at[patient.id, "Q Time Nurse"] = (
           patient.q_time_nurse
         )
-        ########
+        #########
         ##END NEW
-        ########
+        #########
 
         # Now we'll randomly sample the time this patient with the nurse.
         # Here, we use an Exponential distribution for simplicity, but you
@@ -624,7 +641,7 @@ class Model:
 
                 self.cubicle.release(cubicle_request) ##NEW
 
-        else: ## NEW
+        else: ##NEW
 
             self.results_df.at[patient.id, "Time Using Cubicle"] = (  ##NEW
                   self.env.now - end_q_cubicle
@@ -680,7 +697,7 @@ class Trial:
     # you'd likely save them as well as (or instead of) printing them
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
+        print (self.df_trial_results.round(1)) ##NEW: Added rounding
 
     # Method to run a trial
     def run_trial(self):
@@ -810,7 +827,7 @@ class Trial:
     # you'd likely save them as well as (or instead of) printing them
     def print_trial_results(self):
         print ("Trial Results")
-        print (self.df_trial_results.round(1)) ##EDITED: Added rounding
+        print (self.df_trial_results.round(1)) ##NEW: Added rounding
 
     # Method to run a trial
     def run_trial(self):

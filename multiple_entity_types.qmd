@@ -1,26 +1,32 @@
 ---
+title: An Introduction to Approaching Multiple Entity Types
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 jupyter: python3
 execute:
   eval: false
 ---
 
-# An Introduction to Approaching Multiple Entity Types
-
 Let's imagine we want to model some more variety within the patients (entities) arriving in our model.
 
-Maybe patients are differentiated by something - their method of arrival, or the illness they have, or the severity of their symptoms, and consequently have
+Maybe patients are differentiated by something - their method of arrival, or the illness they have, or the severity of their symptoms, and consequently have:
 
-- different arrival rates
-- different distributions for the amount of time spend with resources
-- different probabilities at branching points
-- different pathways entirely (but still within your system of interest)
+- Different arrival rates
+- Different distributions for the amount of time spend with resources
+- Different probabilities at branching points
+- Different pathways entirely (but still within your system of interest)
 
 The flexibility of simpy and Python does mean there are a range of ways we could approach coding this in.
 
-In this chapter, we will give a bit of an introduction to how you might make decisions about
+In this chapter, we will give a bit of an introduction to how you might make decisions about:
 
-- whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class
-- whether to have a single generator or multiple generators
+- Whether to have a single Patient class or multiple Patient classes that inherit from the basic Patient class.
+- Whether to have a single generator or multiple generators.
 
 :::{.callout-note}
 At this stage in your modelling, you will need to start drawing on your creativity!
@@ -28,7 +34,7 @@ At this stage in your modelling, you will need to start drawing on your creativi
 Consider the approaches described throughout this chapter and the example given in the next chapter, but work this into your own solution.
 :::
 
-## Approaches to Managing Arrivals
+## Approaches to managing arrivals
 
 When we start having multiple types of patients, we will need to think about how we set them up in our system.
 
@@ -44,8 +50,8 @@ The basic rule of thumb is have different generators if the entities - and/or wh
 
 You may opt for different generators if
 
-- a) the inter-arrival rate of that way of entering the system is fundamentally different *(the most common reason)*, and/or
-- b) if you're modelling a different pathway in the same modelled system (e.g. telephone calls coming in to the same system as patients turning up in person etc).
+- (A) The inter-arrival rate of that way of entering the system is fundamentally different *(the most common reason)*, and/or
+- (B) If you're modelling a different pathway in the same modelled system (e.g. telephone calls coming in to the same system as patients turning up in person etc).
 
 The authors of this book would generally steer away from having a different generator just for a different patient type or severity, and would instead use attributes to differentiate between the patients. These attributes can then be read when making decisions in the pathway, like where to go in a branch, or which distribution to sample from for an activity time instead.
 
@@ -54,7 +60,7 @@ However, it's perhaps not always clear cut! For example, our 'seriously injured'
 - we could check the simulation time, then look up the probability of them being seriously injured vs mildly injured at that point in time (relating it back to real-world time), and sample accordingly
 - we could use two generators, using the method described in the [variable arrival rates](modelling_variable_arrival_rates.qmd) chapter.
 
-## Multiple Patient Classes versus a Single Patient Class
+## Multiple patient classes versus a single patient class
 
 Similarly, when it comes to our patient classes, there are multiple ways we could handle it.
 

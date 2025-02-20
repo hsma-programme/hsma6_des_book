@@ -1,18 +1,26 @@
 ---
 title: Exercise - Practicing Advanced Concepts
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
 
-In this section we’ve looked at how we can implement the following DES features in SimPy :
-- Simulation warm-up
-- Priority-based queuing
-- Resource unavailability
-- Use of the alternative distributions
-- Reneging
-- Balking
-- Entities choosing queues based on queue length
+In this section we’ve looked at how we can implement the following DES features in SimPy:
+
+- Simulation warm-up.
+- Priority-based queuing.
+- Resource unavailability.
+- Use of the alternative distributions.
+- Reneging.
+- Balking.
+- Entities choosing queues based on queue length.
 
 Design and build a DES model in SimPy that uses **at least four of the features above**.
 

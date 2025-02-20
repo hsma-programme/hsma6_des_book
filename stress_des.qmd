@@ -1,1 +1,52 @@
-# (Coming Soon!) STRESS-DES Reporting
+---
+title: STRESS-DES Reporting
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+---
+
+## Reporting guidelines
+
+Reporting guidelines are structured sets of recommendations designed to improve the clarity and completeness of published research. They provide list of information that authors should ensure they include in their report/manuscript.
+
+## STRESS-DES
+
+An example of relevant guidelines for DES models are the **The Strengthening The Reporting of Empirical Simulation Studies (STRESS) Discrete Event Simulation (DES) guidelines**.
+
+STRESS-DES is 20-item checklist. It was designed to improve the reporting of DES models, ensuring that your report includes enough information for others to understand, evaluate and replicate the findings of your work.. It was published in:
+
+> Monks, T., Currie, C. S. M., Onggo, B. S., Robinson, S., Kunc, M., & Taylor, S. J. E. (2018). Strengthening the reporting of empirical simulation studies: Introducing the STRESS guidelines. Journal of Simulation, 13(1), 55–67. <https://doi.org/10.1080/17477778.2018.1442155>.
+
+## How to use the guidelines?
+
+You can refer to the guidelines **when writing your report**, making sure to cover all the required points from the checklist. This will help ensure your model is clear, complete and replicable.
+
+It can be helpful to create a **column in the checklist** where you mark whether you have addressed each item. You can also note the relevant section in your report and even copy or paraphrase key sections into the checklist itself. This makes it easier to track your progress and ensure that nothing is overlooked.
+
+**Including the completed checklist** as supporting/supplementary material with your report allows readers and reviewers to more easily identify these relevant details about your model, and verify that they are present in the report.
+
+## View and download the guidelines
+
+{{< downloadthis assets/stress_des.md dname=stress_des label="Download STRESS-DES markdown file" >}}
+
+{{< downloadthis assets/stress_des.docx dname=stress_des label="Download STRESS-DES word document" >}}
+
+View on the [equator network](https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/).
+
+**STRESS-DES guidelines:**
+
+{{< include assets/stress_des.md >}}
+
+## Other relevant guidelines
+
+An example of another guideline specifically designed for DES models is the **generic reporting checklist** described in:
+
+> Zhang, Xiange, Stefan K. Lhachimi, and Wolf H. Rogowski. 2020. “Reporting Quality of Discrete Event Simulations in Healthcare—Results From a Generic Reporting Checklist.” Value in Health 23 (4): 506–14. <https://doi.org/10.1016/j.jval.2020.01.005>.
+
+This checklist is focused on **model quality**, and was derived from the *International Society for Pharmacoeconomics and Outcomes Research (ISPOR)–Society for Medical Decision Making (SMDM) Modelling Good Research Practices Task Force* reports.
+
+Several other guidelines have been developed for different modeling and research fields. Examples include:
+
+* **Overview, Design Concepts, and Details (ODD) protocol** - a widely used framework for reporting agent-based models, <https://www.comses.net/resources/standards/>.
+* **Consolidated Health Economic Evaluation Reporting Standards (CHEERS)** - designed for health economic modeling, <https://www.equator-network.org/reporting-guidelines/cheers/>.

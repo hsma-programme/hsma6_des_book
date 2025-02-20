@@ -1,10 +1,22 @@
 ---
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
 
 # Choosing Distributions {#sec-distributions}
+
+:::{.callout-note title="Acknowledgements"}
+
+The `LogNormal` class in this section is taken from the package [sim-tools](https://github.com/TomMonks/sim-tools), which was written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter.
+:::
 
 In the previous session, we mentioned that whilst it’s a useful tip to start by having all of the distributions in our model be Exponential (because it’s easy to tweak an Exponential Distribution), for real world models we probably want to then adapt them to use a Lognormal Distribution for activity times.
 
@@ -36,7 +48,10 @@ Effectively, lognormals relate to how many copies of one number multiply togethe
 
 How many 4s multiply together to make 64?
 
+```
 4 x 4 x 4 = 64
+```
+
 We had to multiply 3 copies of the number 4 to get 64.
 
 This means that the logarithm is 3.
@@ -54,7 +69,7 @@ Well, a Lognormal distribution is one in which the **logarithm** of the random v
 
 This means that the the two parameters μ (Mu) and σ (Sigma) used to specify a Lognormal distribution do not represent the mean and standard deviation, unlike the normal distribution; rather, they represent what are known as the location and scale of the distribution respectively.
 
-:::{.callout-info}
+:::{.callout-note}
 μ (Mu) and σ (Sigma) represent the mean and standard deviation once the data in the log normal distribution has been transformed using logarithms.
 :::
 
@@ -80,7 +95,7 @@ We need to convert our mean and standard deviation values (that we get from our 
 
 ## Code for the lognormal distribution
 
-This code was written by [Tom Monks](https://orcid.org/0000-0003-2631-4481).
+This code was written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
 
 ```{python}
 import numpy as np
@@ -137,6 +152,10 @@ Then we just need to make sure we have both a mean and standard deviation (SD) f
 When we need to sample an activity time, we create an instance of the Lognormal class with our mean and SD, and call the sample method.
 
 We are going to do this in the attend_clinic method of the Model class.
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
 
 ```{python}
 def attend_clinic(self, patient):

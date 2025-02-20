@@ -1,0 +1,46 @@
+Patient 1 arrives at: 0.000.
+Patient 1 waits for 0.000 and is seen at 0. Consultation length: 12.901.
+Patient 2 arrives at: 3.124.
+Patient 2 waits for 9.777 and is seen at 12.900921738959715. Consultation length: 0.594.
+Patient 3 arrives at: 14.690.
+Patient 3 waits for 0.000 and is seen at 14.689581461408737. Consultation length: 3.307.
+Patient 4 arrives at: 17.330.
+Patient 5 arrives at: 17.400.
+Patient 4 waits for 0.666 and is seen at 17.99627405202913. Consultation length: 6.811.
+Patient 6 arrives at: 24.091.
+Patient 5 waits for 7.407 and is seen at 24.806824263201396. Consultation length: 0.392.
+Patient 6 waits for 1.108 and is seen at 25.198993528247772. Consultation length: 2.675.
+Patient 7 arrives at: 34.124.
+Patient 7 waits for 0.000 and is seen at 34.12354438163661. Consultation length: 3.776.
+Patient 8 arrives at: 35.184.
+Patient 8 waits for 2.715 and is seen at 37.89934081124402. Consultation length: 7.176.
+Patient 9 arrives at: 42.290.
+Patient 9 waits for 2.785 and is seen at 45.07504838667681. Consultation length: 9.039.
+Patient 10 arrives at: 52.197.
+Patient 11 arrives at: 54.013.
+Patient 10 waits for 1.917 and is seen at 54.11356109164435. Consultation length: 8.069.
+Patient 12 arrives at: 56.474.
+Patient 13 arrives at: 57.280.
+Patient 14 arrives at: 61.439.
+Patient 11 waits for 8.169 and is seen at 62.18266970331166. Consultation length: 1.295.
+Patient 12 waits for 7.004 and is seen at 63.47782101270822. Consultation length: 0.110.
+Patient 13 waits for 6.307 and is seen at 63.5876867707027. Consultation length: 2.229.
+Patient 14 waits for 4.378 and is seen at 65.8167710767701. Consultation length: 4.511.
+Patient 15 arrives at: 66.156.
+Patient 15 waits for 4.172 and is seen at 70.3274977289777. Consultation length: 1.211.
+Patient 16 arrives at: 71.767.
+Patient 16 waits for 0.000 and is seen at 71.76681443500972. Consultation length: 11.425.
+Patient 17 arrives at: 75.283.
+Patient 18 arrives at: 76.001.
+Patient 17 waits for 7.909 and is seen at 83.19137368462162. Consultation length: 21.664.
+Patient 19 arrives at: 90.117.
+Patient 20 arrives at: 90.665.
+Patient 21 arrives at: 97.185.
+Patient 22 arrives at: 101.725.
+Patient 23 arrives at: 103.363.
+Patient 18 waits for 28.855 and is seen at 104.85522198769152. Consultation length: 1.267.
+Patient 19 waits for 16.005 and is seen at 106.12213461436009. Consultation length: 7.000.
+Patient 20 waits for 22.458 and is seen at 113.12237290332332. Consultation length: 0.509.
+Patient 21 waits for 16.446 and is seen at 113.63131641971023. Consultation length: 0.768.
+Patient 22 waits for 12.674 and is seen at 114.39963476335865. Consultation length: 0.607.
+Patient 23 waits for 11.643 and is seen at 115.00627309151648. Consultation length: 1.978.

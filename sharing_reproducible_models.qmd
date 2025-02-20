@@ -1,0 +1,138 @@
+---
+title: Sharing reproducible models
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+---
+
+**Reproducibility** refers to the ability to get the same results (e.g. those described in a report) using the same code and data. You may have come across the related concept of a **reproducible analytical pipeline (RAP)**, which is when an analytical process (in this case, running and analysing our DES model) is automated and reproducible - from getting the parameters through to generating tables and figures.
+
+Making your work reproducible is important because it:
+
+* **Ensures results can be regenerated** - that future you - or others - can reproduce the results.
+* **Builds trust** - through transparency, and confidence in the model's consistency.
+* **Saves time and effort** - troubleshooting non-reproducible code in the future can be time-consuming or impossible if key details are missing.
+* **Facilitates reuse** - it is necessary for someone reusing the model to ensure it is running correctly, before adapting and applying it to new contexts.
+* **Improves code quality** - striving for reproduciblity will in turn encourage clear structure, documentation and organisation, helping reduce errors and ambiguities.
+
+In @sec-reproducibility, we explored how to add **seeds** to our model, allowing us to control randomness and reproduce the same results between runs. However, the requirements for making your work reproducible actually extend beyond that...
+
+## Making your work reproducible
+
+There are various recommendations of best practice, that will help make your work reproducible. We will turn to two relevant examples:
+
+Heather, A. Monks, T. Harper, A. (2025). Mustafee, N. Mayne, A. **On the reproducibility of discrete-event simulation studies in health research: an empirical study using open models**. arXiv pre-print. <https://doi.org/10.48550/arXiv.2501.13137>.
+
+:::{.callout-note collapse="true"}
+
+## View recommendations
+
+These recommendations were developed following attempts to reproduce results from healthcare discrete-event simulation models in eight published articles, using the provided code.
+
+The recommendations marked with a star (⭐) were identified as having the greatest impact in Heather et al. 2025.
+
+For further explanation of each recommendation, check out the paper: <https://doi.org/10.48550/arXiv.2501.13137>.
+
+Recommendations to support reproduction.
+
+**Set-up**
+
+* [ ] Share code with an open licence (⭐).
+* [ ] Link publication to a specific version of the code.
+* [ ] List dependencies and versions.
+
+**Running the model**
+
+* [ ] Provide code for all scenarios and sensitivity analyses (⭐).
+* [ ] Ensure model parameters are correct (⭐).
+* [ ] Control randomness.
+
+**Outputs**
+
+* [ ] Include code to calculate all required model outputs (⭐).
+* [ ] Include code to generate the tables, figures, and other reported results (⭐).
+
+Recommendations to support troubleshooting and reuse.
+
+**Design**
+
+* [ ] Separate model code from applications.
+* [ ] Avoid hard-coded parameters.
+* [ ] Minimise code duplication.
+
+**Clarity**
+
+* [ ] Comment sufficiently.
+* [ ] Ensure clarity and consistency in the model results tables.
+* [ ] Include run instructions.
+* [ ] State run times and machine specifications.
+
+**Functionality**
+
+* [ ] Optimise model run time.
+* [ ] Save outputs to a file.
+* [ ] Avoid excessive output files.
+* [ ] Address large file sizes.
+
+:::
+
+The NHS RAP Community of Practice. **Levels of RAP Framework**. <https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/>.
+
+:::{.callout-note collapse="true"}
+
+## View recommendations
+
+The following framework has been directly copied from the RAP Community of Practice repository/website: [NHS RAP Levels of RAP Framework](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/).
+
+This framework is maintained by the NHS RAP Community of Practice and is © 2024 Crown Copyright (NHS England), shared by them under the terms of the [Open Government 3.0 licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+The specific version of the framework copied below is that from commit [2549256](https://github.com/NHSDigital/rap-community-of-practice/commit/2549256498886d6d7ea4cdb736e2a2864c8bb461) (9th September 2024).
+
+🥉 Baseline: RAP fundamentals offering resilience against future change.
+
+* [ ] Data produced by code in an open-source language (e.g., Python, R, SQL).
+* [ ] Code is version controlled (see [Git basics](https://nhsdigital.github.io/rap-community-of-practice/training_resources/git/introduction-to-git/) and [using Git collaboratively](https://nhsdigital.github.io/rap-community-of-practice/training_resources/git/using-git-collaboratively/) guides).
+* [ ] Repository includes a README.md file (or equivalent) that clearly details steps a user must follow to reproduce the code (use [NHS Open Source Policy section on Readmes](https://github.com/nhsx/open-source-policy/blob/main/open-source-policy.md#b-readmes) as a guide).
+* [ ] Code has been [peer reviewed](https://nhsdigital.github.io/rap-community-of-practice/implementing_RAP/workflow/code-review/).
+* [ ] Code is [published in the open](https://nhsdigital.github.io/rap-community-of-practice/implementing_RAP/publishing_code/how-to-publish-your-code-in-the-open/) and linked to & from accompanying publication (if relevant).
+
+🥈 Silver: Implementing best practice by following good analytical and software engineering standards. Meeting all of the above requirements, plus:
+
+* [ ] Outputs are produced by code with minimal manual intervention.
+* [ ] Code is well-documented including user guidance, explanation of code structure & methodology and [docstrings](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/python-functions/#documentation) for functions.
+* [ ] Code is well-organised following [standard directory format](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/project-structure-and-packaging/).
+* [ ] [Reusable functions](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/python-functions/) and/or classes are used where appropriate.
+* [ ] Code adheres to agreed coding standards (e.g PEP8, [style guide for Pyspark](https://nhsdigital.github.io/rap-community-of-practice/training_resources/pyspark/pyspark-style-guide/)).
+* [ ] Pipeline includes a testing framework ([unit tests](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/unit-testing/), [back tests](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/backtesting/)).
+* [ ] Repository includes dependency information (e.g. [requirements.txt](https://pip.pypa.io/en/stable/user_guide/#requirements-files), [PipFile](https://github.com/pypa/pipfile/blob/main/README.rst), [environment.yml](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/virtual-environments/conda/)).
+* [ ] [Logs](https://nhsdigital.github.io/rap-community-of-practice/training_resources/python/logging-and-error-handling/) are automatically recorded by the pipeline to ensure outputs are as expected.
+* [ ] Data is handled and output in a [Tidy data format](https://medium.com/@kimrodrikwa/untidy-data-a90b6e3ebe4c).
+
+🥇 Gold: Analysis as a product to further elevate your analytical work and enhance its reusability to the public. Meeting all of the above requirements, plus:
+
+* [ ] Code is fully [packaged](https://packaging.python.org/en/latest/).
+* [ ] Repository automatically runs tests etc. via CI/CD or a different integration/deployment tool e.g. [GitHub Actions](https://docs.github.com/en/actions).
+* [ ] Process runs based on event-based triggers (e.g., new data in database) or on a schedule.
+* [ ] Changes to the RAP are clearly signposted. E.g. a changelog in the package, releases etc. (See gov.uk info on [Semantic Versioning](https://github.com/alphagov/govuk-frontend/blob/main/docs/contributing/versioning.md)).
+
+:::
+
+## Implementing these recommendations
+
+A model and repository has been developed to help **support, demonstrate and serve as a possible template** for how you could meet these recommendations:
+
+> Heather, A. Monks, T. (2025). **Python DES RAP Template**. <https://github.com/pythonhealthdatascience/rap_template_python_des/>.
+
+It **adheres to all the recommendations** from:
+
+* ✅ Heather et al. (2025).
+* ✅ NHS Levels of RAP Framework.
+
+The DES model is a simple queueing system where patients arrive, wait to see a nurse, undergo a consultation, and then leave. This model can be extended with advanced features such as multiple activities, branching paths, and priority-based queueing, as discussed in the book.
+
+The model was inspired by this book, alongside other sources and with some other changes, and so the model is similar but with some structural differences. For details on how the model differs from this book and the rationale behind those changes, refer to [docs/hsma_changes.md](https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md) in the model repository.
+
+<br>
+
+[![Python DES RAP Template GitHub](images/python_des_rap_template_github.png)](https://github.com/pythonhealthdatascience/rap_template_python_des/)

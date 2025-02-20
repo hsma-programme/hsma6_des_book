@@ -1,9 +1,21 @@
 ---
 title: Parallelisation
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 execute:
   eval: false
 jupyter: python3
 ---
+
+:::{.callout-note title="Acknowledgements"}
+
+This solution is based on the work of [Mike Allen](https://github.com/MichaelAllen1966) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-8746-9957) from the PenCHORD team at the University of Exeter. His repository can be found [here](https://github.com/MichaelAllen1966/2004_simple_simpy_parallel).
+:::
 
 > "Parallel computing is a type of computation in which many calculations or processes are carried out simultaneously. Large problems can often be divided into smaller ones, which can then be solved at the same time."
 [Wikipedia](https://en.wikipedia.org/wiki/Parallel_computing)
@@ -52,7 +64,7 @@ We can simplify the code above into a list comprehension.
 
 Why is this important? Well, to use joblib, it's easiest to write our loop as a list comprehension.
 
-Instead of doing i * i to square our number, we have made a new **function** that does the same thing.
+Instead of doing `i * i` to square our number, we have made a new **function** that does the same thing.
 
 ```{python}
 #| eval: true
@@ -66,10 +78,28 @@ Parallel(n_jobs=2)(delayed(multiply_by_self)(i) for i in range(1, 11, 1))
 
 ```
 
-## A code example
+:::{.callout-note}
 
-::: {.callout-note}
-Thanks go to [Michael Allen](https://orcid.org/0000-0002-8746-9957) for providing an example of how this can be achieved in SimPy. His repository can be found [here](https://github.com/MichaelAllen1966/2004_simple_simpy_parallel).
+## Why `Parallel` and `delayed`?
+
+`Parallel` is a function that allows you to run tasks concurrently across multiple CPU cores. By setting `n_jobs=2`, we tell Joblib to use 2 CPU cores to run process the tasks in parallel.
+
+The function `delayed` is used to delay the execution of our function. If we had just run...
+
+```{python}
+Parallel(n_jobs=2)(multiply_by_self)(i) for i in range(1, 11, 1)
+```
+
+... then, by the time it gets passed to `Parallel`, the `multiply_by_self(i)` calls would have already returned, so there would be nothing left to execute in parallel. This is because squaring numbers from 1 to 10 is a very quick task.
+
+The real benefit of `joblib` and parallelism will come when we have more computationally expensive tasks that take a longer time to complete.
+
+:::
+
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
 :::
 
 We will make use of the [Joblib](https://joblib.readthedocs.io/en/latest/parallel.html) package to easily split our SimPy code to run across multiple processor cores.
@@ -86,7 +116,7 @@ You will need to run `!pip install joblib` if you have not previously made use o
 from joblib import Parallel, delayed
 ```
 
-### The g, Patient and Model classes
+### The g, patient and model classes
 
 Our g, patient and model classes are unchanged.
 
@@ -814,9 +844,9 @@ class Trial:
     # The constructor sets up an empty list, which we will place dictionaries
     # into. Each dictionary will be the results from a single run.
     def  __init__(self):
-        self.df_trial_results = [] ## NEW
+        self.df_trial_results = [] ##NEW
 
-    ## NEW
+    ##NEW
     def process_trial_results(self):
       self.df_trial_results = pd.DataFrame(self.df_trial_results)
       self.df_trial_results.set_index("Run Number", inplace=True)
@@ -896,9 +926,9 @@ class Trial:
     # The constructor sets up an empty list, which we will place dictionaries
     # into. Each dictionary will be the results from a single run.
     def  __init__(self):
-        self.df_trial_results = [] ## NEW
+        self.df_trial_results = [] ##NEW
 
-    ## NEW
+    ##NEW
     def process_trial_results(self):
       self.df_trial_results = pd.DataFrame(self.df_trial_results)
       self.df_trial_results.set_index("Run Number", inplace=True)

@@ -1,15 +1,25 @@
-# Example Models from Other Modellers
+---
+title: Example Models from Other Modellers
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
-Looking at the model code written by other people - even if it does not exactly match the kind of system you are trying to create - can be hugely beneficial for seeing new approaches.
-
-In this section are links to a range of additional simpy models that you might wish to read through and adapt.
+Looking at the model code written by other people - even if it does not exactly match the kind of system you are trying to create - can be hugely beneficial for seeing new approaches. In this section are links to a range of additional SimPy models that you might wish to read through and adapt.
 
 :::{.callout-note}
 The majority of these models do not use the HSMA structure of `g`, `Patient`, `Model` and `Trial`.
 
 You may find it a helpful exercise to try and convert some of the models linked to the structure we have used in this book so far. This will help you really understand what is going on in the model, and help you to start develop your own preferred structure.
 
-When working through these models, consider
+When working through these models, consider:
 
 - What do you prefer about the HSMA structure?
 - What do you prefer about the structure the other modeller uses?
@@ -18,20 +28,63 @@ When working through these models, consider
 
 :::
 
+## HSMA clinic model diagram
+
+To aid understanding of different code structures, diagrams have been provided for each example. For comparison, we have generated a diagram of the code structure for the model from @sec-reproducibility. In this model, patients see a patient, nurse and doctor.
+
+Code structure:
+
+![Structure as of 7th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_hsma.png){.lightbox}
+
+## A queueing model
+
+A SimPy model of a queueing model for a nurse consultation.
+
+> [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) (2025) **Python DES RAP Template**. https://github.com/pythonhealthdatascience/rap_template_python_des.
+
+* [Model code](https://github.com/pythonhealthdatascience/rap_template_python_des) ([archive](https://doi.org/10.5281/zenodo.14622466)).
+
+The repository includes a document [docs/hsma_changes.md](https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md) which explains how the model differs from those in this book, and why those changes were made.
+
+Code structure:
+
+![Structure as of 7th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_queueing.png){.lightbox}
 
 
-## An Orthopaedic Ward - The Hospital Efficiency Project
+## An urgent care call centre model
 
-<https://github.com/AliHarp/HEP>
+A SimPy model of an urgent care call centre where patients speak to an operator, are triaged, and some required callback from a nurse.
 
+> [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) [Alison Harper](https://github.com/AliHarp) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0001-5274-5037) [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) (2025) **An introduction to Discrete-Event Simulation using Free and Open Source Software**. <https://github.com/pythonhealthdatascience/intro-open-sim>.
 
-Harper, A., & Monks, T. Hospital Efficiency Project Orthopaedic Planning Model Discrete-Event Simulation
+* [Model code](https://github.com/pythonhealthdatascience/intro-open-sim) ([archive](https://doi.org/10.5281/zenodo.13971858)).
+* [Interactive coding environment via JupyterLite](https://pythonhealthdatascience.github.io/intro-open-sim/).
 
-<https://doi.org/10.5281/zenodo.7900852>
+![Structure as of 10th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_call.png){.lightbox}
 
+## A trauma centre model
 
-## A trauma center model
+A SimPy model of an urgent treatment centre with trauma and non-trauma arrivals.
 
-<https://github.com/TomMonks/treatment-centre-sim>
+> [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) [Alison Harper](https://github.com/AliHarp) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0001-5274-5037) [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) (2024) **Towards Sharing Tools, and Artifacts, for Reusable Simulation: a minimal model example** (v2.2.0). Zenodo. https://doi.org/10.5281//zenodo.10026326
 
-<https://doi.org/10.5281/zenodo.6497476>
+* [Model code](https://github.com/pythonhealthdatascience/stars-treat-sim) ([archive](https://doi.org/10.5281/zenodo.10026326)).
+* [Model documentation](https://pythonhealthdatascience.github.io/stars-simpy-example-docs/) ([GitHub](https://github.com/pythonhealthdatascience/stars-simpy-example-docs), [archive](https://doi.org/10.5281/zenodo.10054062)).
+* [Web app](https://stars-simpy-example.streamlit.app/) ([GitHub](https://github.com/pythonhealthdatascience/stars-streamlit-example), [archive](https://doi.org/10.5281/zenodo.10055168)).
+
+Code structure:
+
+![Structure as of 7th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_trauma.png){.lightbox}
+
+## An orthopaedic ward
+
+A SimPy model used for orthopaedic elective planning, from the Hospital Efficiency Project (HEP).
+
+> [Alison Harper](https://github.com/AliHarp) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0001-5274-5037) [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) (2023) **Efficiency Project Orthopaedic Planning Model Discrete-Event Simulation**. <https://github.com/AliHarp/HEP>.
+
+* [Model code](https://github.com/AliHarp/HEP) ([archive](https://doi.org/10.5281/zenodo.7900852)).
+* [Model documentation](https://aliharp.github.io/HEP/HEP_notebooks/01_intro.html).
+* [Web app](https://hospital-efficiency-project.streamlit.app/).
+* [Interactive coding environment via Binder](https://mybinder.org/v2/gh/AliHarp/HEP/HEAD).
+
+![Structure as of 10th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_hep.png){.lightbox}

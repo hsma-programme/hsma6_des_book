@@ -1,5 +1,12 @@
 ---
 title: Example - Multiple Entity Types
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
 jupyter: python3
 execute:
   eval: false
@@ -20,46 +27,46 @@ This section is under development.
 :::{.callout-tip}
 Before reading this chapter, we'd strongly recommend you take a look at [the chapter on approaches to different entity types](https://des.hsma.co.uk/multiple_entity_types).
 
-This chapter is intended to give just one example of a situation with
+This chapter is intended to give just one example of a situation with:
 
-- multiple patient generators
-- multiple types of patient defined by attributes instead of separate patient classes
+- Multiple patient generators.
+- Multiple types of patient defined by attributes instead of separate patient classes.
 :::
 
 
-## The Approach
+## The approach
 
 In this case, we will be wanting to set up a generator for each of the new types of patients we opt to add to this model.
 
-In this case, we are going to have patients arriving via different routes: telephone, walk-ins, and ambulance
+In this case, we are going to have patients arriving via different routes: telephone, walk-ins, and ambulance.
 
-- Telephone patients will 'arrive' frequently, only spend a short time with a nurse, and have a low probability of needing to see the doctor.
-- Walk-in patients will arrive less frequently, spend more time with a nurse than the doctor, and have a medium probability of needing to see the doctor.
-- Ambulance patients will arrive even less frequently, spend a short amount of time with the nurse, then always visit the doctor and spend a long time with them.
+- **Telephone** patients will 'arrive' frequently, only spend a short time with a nurse, and have a low probability of needing to see the doctor.
+- **Walk-in** patients will arrive less frequently, spend more time with a nurse than the doctor, and have a medium probability of needing to see the doctor.
+- **Ambulance** patients will arrive even less frequently, spend a short amount of time with the nurse, then always visit the doctor and spend a long time with them.
 
 :::{.callout-warning}
 In this version of our system, we will not be implementing any sort of prioritisation - instead, patients will be seen in the order they arrive (FIFO).
 
-It would be more realistic to implement priority-based queueing, with our ambulance patients jumping to the front of the queue, but this is outside the scope of this chapter. Take a look at the [priority-based queueing](priority_based_queuing.qmd) chapter if you would like to find out more about implementing this.
+It would be more realistic to implement priority-based queueing, with our ambulance patients jumping to the front of the queue, but this is outside the scope of this chapter. Take a look at the [priority-based queueing](priority_based_queueing.qmd) chapter if you would like to find out more about implementing this.
 :::
 
 However, before we kick off, it will save us time down the road if we first improve the way the model handles **randomness**.
 Full details can be found in the [reproducibility chapter](reproducibility.qmd), but we will cover the key changes in this section as well.
 
-In this example, we will be
+In this example, we will be:
 
-- keeping a single patient class and using an attribute to differentiate between them (as their pathways are very similar)
-- using multiple generators (as each different type of patient has their own inter-arrival time)
+- Keeping a single patient class and using an attribute to differentiate between them (as their pathways are very similar).
+- Using multiple generators (as each different type of patient has their own inter-arrival time).
 
-In short, what we will need do in our model is
+In short, what we will need do in our model is:
 
-- add additional attributes to our g class for our different types of patients
-- add an additional attribute to our patient class to track the type of patient they are
-- move the setup of our sampling distributions into our model class
-- adjust our patient generator function to pull in the appropriate inter-arrival time for the patient type
-- adjust our patient journey function to pull in the appropriate sampling distribution for each patient type
-- adjust our model run function to multiple generators that will cause our different patient types to arrive at the appropriate rate
-- update our outputs and visualisations to check our different patient classes are working as expected
+- Add additional attributes to our g class for our different types of patients.
+- Add an additional attribute to our patient class to track the type of patient they are.
+- Move the setup of our sampling distributions into our model class.
+- Adjust our patient generator function to pull in the appropriate inter-arrival time for the patient type.
+- Adjust our patient journey function to pull in the appropriate sampling distribution for each patient type.
+- Adjust our model run function to multiple generators that will cause our different patient types to arrive at the appropriate rate.
+- Update our outputs and visualisations to check our different patient classes are working as expected.
 
 :::{.callout-warning}
 Remember - this is just one way of tackling this!
@@ -68,9 +75,13 @@ Remember - this is just one way of tackling this!
 
 ## Coding the model
 
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
 ### Imports
 
-As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library.
+As mentioned before, we will be taking the opportunity to better control the randomness of our model runs while we are making this change - so we will import the Exponential and Uniform distribution functions from the [sim_tools](https://tommonks.github.io/sim-tools/00_front_page.html) library written by [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
 
 :::{.callout-tip}
 If you don't already have sim-tools in your environment, install it with `pip install sim-tools`.
@@ -83,10 +94,10 @@ Note that we use a hyphen in the package name when installing it, but an undersc
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential, Uniform ## NEW
+from sim_tools.distributions import Exponential, Uniform ##NEW
 ```
 
-### the g class
+### g class
 
 We need to add a few additional parameters to our g class.
 
@@ -146,7 +157,7 @@ class g:
 4. While each entity dictionary does not have to have all keys, where they are used across multiple entity types, you should keep the naming consistent.
 5. We repeat the same structure for as many different entity types as we wish to define.
 
-### The Patient class
+### Patient class
 
 In our patient class, we're going to add a new label that will relate to the type of our patients. We will pass this in when initialising the patients later on.
 
@@ -160,19 +171,19 @@ class Patient:
     def __init__(self, p_id, type):
         self.id = p_id
 
-        self.type = type ## NEW
+        self.type = type ##NEW
 
         self.q_time_recep = 0
         self.q_time_nurse = 0
-        self.seen_doctor = False ## NEW
+        self.seen_doctor = False ##NEW
         self.q_time_doctor = 0
 ```
 
 
 
-### The Model Class
+### Model class
 
-#### The \_\_init\_\_ method
+#### The __init__ method
 
 Let's now start setting up our model class.
 
@@ -202,7 +213,7 @@ class Model:
         # the patient ID (which we'll use as the index).
         self.results_df = pd.DataFrame()
         self.results_df["Patient ID"] = [1]
-        self.results_df["Patient type"] = [""] ## NEW # <1>
+        self.results_df["Patient type"] = [""] ##NEW # <1>
         self.results_df["Q Time Recep"] = [0.0]
         self.results_df["Time with Recep"] = [0.0]
         self.results_df["Q Time Nurse"] = [0.0]
@@ -609,10 +620,12 @@ The key change to the run method is that we will start up three different patien
 ```
 1. For each entity type, we now set up a separate process to generate them. By passing in the entity label to use here, the label - which in this case we are using to indicate type, but could be any characteristic that separates your patients -
 
-## The Full Code
+## The full code
+
+The full updated code for the model is given below.
 
 :::{.callout-note collapse="true"}
-### Click here to view and copy the full code
+### Click here to view the full code
 
 ```{python}
 #| eval: true
@@ -621,7 +634,7 @@ The key change to the run method is that we will start up three different patien
 import simpy
 import random
 import pandas as pd
-from sim_tools.distributions import Exponential, Uniform ## NEW
+from sim_tools.distributions import Exponential, Uniform ##NEW
 
 # Class to store global parameter values.  We don't create an instance of this
 # class - we just refer to the class blueprint itself to access the numbers
@@ -677,7 +690,7 @@ class Patient:
 
         self.q_time_recep = 0
         self.q_time_nurse = 0
-        self.seen_doctor = False ## NEW
+        self.seen_doctor = False ##NEW
         self.q_time_doctor = 0
 
 class Model:
@@ -705,7 +718,7 @@ class Model:
         # the patient ID (which we'll use as the index).
         self.results_df = pd.DataFrame()
         self.results_df["Patient ID"] = [1]
-        self.results_df["Patient type"] = [""] ## NEW # <1>
+        self.results_df["Patient type"] = [""] ##NEW # <1>
         self.results_df["Q Time Recep"] = [0.0]
         self.results_df["Time with Recep"] = [0.0]
         self.results_df["Q Time Nurse"] = [0.0]
@@ -960,7 +973,7 @@ class Model:
 :::
 
 
-## Checking Our Implementation
+## Checking our implementation
 
 Usually we would go on to run a trial (several runs with the same set of parameters but variation in the samples picked from our different distributions to simulate different realities within our simulation) - but for now, we'll just look at the output of a single run of our new model so that we can verify that everything is working as expected.
 
@@ -1122,8 +1135,8 @@ class Trial:
 
     # Method to run a trial
     def run_trial(self):
-        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
-        print("") ## NEW: Print a blank line
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ##NEW
+        print("") ##NEW: Print a blank line
         # Run the simulation for the number of runs specified in g class.
         # For each run, we create a new instance of the Model class and call its
         # run method, which sets everything else in motion.  Once the run has
@@ -1178,8 +1191,8 @@ class Trial:
 
     # Method to run a trial
     def run_trial(self):
-        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ## NEW
-        print("") ## NEW: Print a blank line
+        print(f"{g.number_of_receptionists} receptionists, {g.number_of_nurses} nurses, {g.number_of_doctors} doctors") ##NEW
+        print("") ##NEW: Print a blank line
         # Run the simulation for the number of runs specified in g class.
         # For each run, we create a new instance of the Model class and call its
         # run method, which sets everything else in motion.  Once the run has
@@ -1229,7 +1242,7 @@ Now we can write simple code to recreate the output we were getting from our tri
 We could turn these into functions as well to make it clearer what each does and make them easier to reuse and adapt.
 :::
 
-### Return Trial-level results
+### Return trial-level results
 
 ```{python}
 #| eval: true
@@ -1240,7 +1253,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-#### Segment This by type
+#### Segment this by type
 
 ```{python}
 #| eval: true
@@ -1252,7 +1265,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-### Return Run-level results
+### Return run-level results
 
 ```{python}
 #| eval: true
@@ -1264,7 +1277,7 @@ We could turn these into functions as well to make it clearer what each does and
 )
 ```
 
-#### Segment This by type
+#### Segment this by type
 
 ```{python}
 #| eval: true
@@ -1277,9 +1290,9 @@ We could turn these into functions as well to make it clearer what each does and
 ```
 
 
-## Display Trial Results Visually
+## Display trial results visually
 
-### Bar Chart Summary
+### Bar chart summary
 
 ```{python}
 #| eval: true
@@ -1309,7 +1322,7 @@ px.bar(
 
 We can see that while the queue times for the receptionist and the doctor are relatively short, the queue time for the nurse resource is very long, suggesting that the nurse is the bottleneck in our current simulated environment.
 
-### Bar Chart Summary - by type
+### Bar chart summary - by type
 
 ```{python}
 #| eval: true

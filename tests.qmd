@@ -1,0 +1,403 @@
+---
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+execute:
+  eval: false
+code-annotations: hover
+---
+
+# Tests {#sec-tests}
+
+:::{.callout-note title="Acknowledgements"}
+
+This section is based on the tests in the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.
+:::
+
+Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions. By **systematically checking for errors, inconsistencies, or unexpected behaviors**, testing helps improve the quality of a model, catch errors and prevent future issues.
+
+## Pytest
+
+When you create a model, you will naturally carry out tests, with simple manual checks where you observe outputs and ensure they look right. These checks can be formalised and **automated** so that you can run them after any changes, and catch any issues that arise.
+
+A popular framework for testing in python is **pytest**.
+
+```{python}
+#| eval: true
+import pytest
+```
+
+![Pytest. Holger Krekel, CC BY 2.5 <https://creativecommons.org/licenses/by/2.5>, via Wikimedia Commons.](images/pytest_logo.png){width=50%}
+
+### Simple pytest example
+
+Each test in pytest is a function that contains an assertion statement to check a condition (e.g. `number > 0`). If the condition fails, pytest will return an error message (e.g. "The number should be positive").
+
+Tests are typically stored in a folder called `tests`, with filenames starting with the prefix `test_`. This naming convention allows pytest to automatically discover and run all the tests in the folder.
+
+Here’s an example of a simple test using pytest:
+
+```{python}
+def test_positive():
+    """
+    Confirm that the number is positive.
+    """
+    number = 5
+    assert number > 0, "The number should be positive"
+```
+
+### Running the tests
+
+Tests are typically run from the terminal. Commands include:
+
+* `pytest` - runs all tests.
+* `pytest tests/test_example_simple.py` - runs tests from a specific file.
+
+When you run a test, you'll see an output like this in the terminal:
+
+:::{.callout-note icon=false}
+
+## Test output:
+
+```{python}
+#| eval: true
+#| echo: false
+pytest.main(["tests/test_example_simple.py"])
+```
+
+:::
+
+
+### Parametrise
+
+We can execute the same test on different parameters using `pytest.mark.parametrize`.
+
+Here's an example:
+
+```{python}
+@pytest.mark.parametrize("number", [1, 2, 3, -1])
+def test_positive_param(number):
+    """
+    Confirm that the number is positive.
+
+    Arguments:
+        number (float):
+            Number to check.
+    """
+    assert number > 0, f"The number {number} is not positive."
+```
+
+In this example, we're testing the same logic with four different values: `1`, `2`, `3`, and `-1`. The last value, `-1`, will cause the test to fail. The error message includes the failed value for easy debugging.
+
+:::{.callout-note icon=false}
+
+## Test output:
+
+```{python}
+#| eval: true
+#| echo: false
+pytest.main(["tests/test_example_param.py"])
+```
+
+:::
+
+## Coding the model
+
+:::{.callout-tip}
+Throughout the code, anything new that's been added will be followed by the comment `##NEW` - so look out for that in the following code chunks.
+:::
+
+We will design tests for the model from @sec-reproducibility. However, we will modify the model so that, instead of modifying a global class of parameter values, we **create instances of this class** and use it in our model.
+
+By using class instances, each test has **isolated parameters**, preventing interference and ensuring consistency. This improves flexibility for independent test scenarios, simplifies debugging, and supports parallel execution by avoiding shared state, making the model more robust.
+
+### Param class
+
+As these are no longer "global" parameters, we will rename `g` to `Param`.
+
+```{python}
+# Class to store parameter values.
+class Param:  ##NEW # <1>
+    patient_inter = 5
+    mean_reception_time = 2
+    mean_n_consult_time = 6
+    mean_d_consult_time = 20
+    number_of_receptionists = 1
+    number_of_nurses = 1
+    number_of_doctors = 2
+    prob_seeing_doctor = 0.6
+    sim_duration = 600
+    number_of_runs = 100
+```
+1. Renamed `g` to `Param`.
+
+### Patient class
+
+This remains unchanged.
+
+### Model class
+
+Set parameters as an input to the class. Each instance of `g` is changed to `param` (which refers to the parameter instance provided to the class).
+
+```{python}
+class Model:
+    def __init__(self, param, run_number):  ##NEW # <1>
+        self.param = param  ##NEW # <1>
+        self.env = simpy.Environment()
+        self.patient_counter = 0
+        self.receptionist = simpy.Resource(
+            self.env, capacity=self.param.number_of_receptionists)  ##NEW # <2>
+        self.nurse = simpy.Resource(
+            self.env, capacity=self.param.number_of_nurses)  ##NEW # <2>
+        self.doctor = simpy.Resource(
+            self.env, capacity=self.param.number_of_doctors)  ##NEW # <2>
+
+        ...
+
+        self.patient_inter_arrival_dist = Exponential(
+            mean = self.param.patient_inter,  ##NEW # <2>
+            random_seed = self.run_number*2)
+        self.patient_reception_time_dist = Exponential(
+            mean = self.param.mean_reception_time,  ##NEW # <2>
+            random_seed = self.run_number*3)
+        self.nurse_consult_time_dist = Exponential(
+            mean = self.param.mean_n_consult_time,  ##NEW # <2>
+            random_seed = self.run_number*4)
+        self.doctor_consult_time_dist = Exponential(
+            mean = self.param.mean_d_consult_time,  ##NEW # <2>
+            random_seed = self.run_number*5)
+
+   ...
+
+    def attend_clinic(self, patient):
+
+        ...
+
+        if random.uniform(0,1) < self.param.prob_seeing_doctor:  ##NEW # <2>
+
+    ...
+
+    def run(self):
+        self.env.process(self.generator_patient_arrivals())
+        self.env.run(until=self.param.sim_duration)  ##NEW # <2>
+
+        ...
+```
+1. Set `param` as an input to the `Model`, and made a model attribute.
+2. Replaced all `g` with `self.param`.
+
+### Trial class
+
+Set parameters as an input to the class, and renamed `g` to `param`. Also, disabled printing sections.
+
+```{python}
+class Trial:
+    def  __init__(self, param):  ##NEW # <1>
+        self.param = param  ##NEW # <1>
+
+        self.df_trial_results = pd.DataFrame()
+        self.df_trial_results["Run Number"] = [0]
+        self.df_trial_results["Arrivals"] = [0]
+        self.df_trial_results["Mean Q Time Recep"] = [0.0]
+        self.df_trial_results["Mean Q Time Nurse"] = [0.0]
+        self.df_trial_results["Mean Q Time Doctor"] = [0.0]
+        self.df_trial_results.set_index("Run Number", inplace=True)
+
+    def print_trial_results(self):
+        print ("Trial Results")
+        print (self.df_trial_results.round(2))
+        print(self.df_trial_results.mean().round(2))
+
+    def run_trial(self):
+        # print(f"{self.param.number_of_receptionists} receptionists, " +
+        #      f"{self.param.number_of_nurses} nurses, " +
+        #       f"{self.param.number_of_doctors} doctors")  ##NEW - no printing # <2>
+        # print("")
+
+        for run in range(self.param.number_of_runs):  ##NEW # <3>
+            random.seed(run)
+
+            my_model = Model(param=self.param, run_number=run)  ##NEW # <3>
+            patient_level_results = my_model.run()
+
+            self.df_trial_results.loc[run] = [
+                len(patient_level_results),
+                my_model.mean_q_time_recep,
+                my_model.mean_q_time_nurse,
+                my_model.mean_q_time_doctor
+                ]
+
+        ##NEW - no printing
+        # self.print_trial_results() # <4>
+```
+1. Set `param` as an input to the `Trial`, and made a trial attribute.
+2. Disabled printing.
+3. Replaced all `g` with `self.param`.
+4. Disabled printing.
+
+### The full code
+
+The full updated code for the model is given below.
+
+:::{.callout-note collapse="true"}
+## Click here to view the code
+
+```{python}
+#| eval: true
+{{< include tests/full_model.py >}}
+```
+
+:::
+
+## Testing our model
+
+There are many different ways of categorising tests. We will focus on three types:
+
+* **Functional testing**
+* **Unit testing**
+* **Back testing**
+
+### Functional tests
+
+Functional tests verify that the system or components perform their intended functionality.
+
+For example, we expect that the mean wait time for a nurse should decrease if:
+
+* The number of nurses increases.
+* The patient inter-arrival time increases (so there are fewer arrivals).
+* The length of the nurse consultation decreases.
+
+For simplicity, this test just focuses the nurse waiting times, but this idea can be expanded to other resources and metrics in the model as well.
+
+```{python}
+{{< include tests/test_functionaltest.py >}}
+```
+
+These tests pass.
+
+:::{.callout-note icon=false collapse="true"}
+
+## Test output:
+
+```{python}
+#| eval: true
+#| echo: false
+pytest.main(["tests/test_functionaltest.py"])
+```
+
+:::
+
+### Unit tests
+
+Unit tests are a type of functional testing that focuses on individual components (e.g. methods, classes) and tests them in isolation to ensure they work as intended.
+
+For example, we expect that our model should fail if the number of doctors or the patient inter-arrival time were set to 0. This is tested using `test_zero_inputs`.
+
+```{python}
+{{< include tests/test_unittest.py >}}
+```
+
+When we run the test, we see that both fail.
+
+:::{.callout-note icon=false collapse="true"}
+
+## Test output:
+
+```{python}
+#| eval: true
+#| echo: false
+pytest.main(["tests/test_unittest.py"])
+```
+
+:::
+
+These tests fail as we do not have an error handling for these values. If we had proceeded to `run_trial()`...
+
+* **Number of doctors = 0:** The model would've stopped, as SimPy has built in functionality requiring that the capacity of resources must be greater than 0, and so it raises a ValueError and stops execution.
+* **Patient inter-arrival time = 0**: The model would have run infinitely, as it would just constantly generating new patients.
+
+To address this, we could add error handling which raises an error for users if they try to input a value of 0. For example, we could add the following code to our `Model __init__` method:
+
+```{python}
+# Loop through the specified parameters
+for param_name in ["sim_duration", "patient_inter"]:
+
+    # Get the value of that parameter by its name
+    param_value = getattr(self.param, param_name)
+
+    # Raise an error if it is 0 or less
+    if param_value <= 0:
+        raise ValueError(
+            f"Parameter '{param_name}' must be greater than 0, but has been" +
+            f"set to {param_value:.3f}.)
+```
+
+### Back tests
+
+Back tests check that the model code produces results consistent with those generated historically/from prior code.
+
+First, we'll generate a set of expected results, with a specific set of parameters. Although this may seem unnecessary in this case, as they match our default parameters in our `Param` class, these are still specified to ensure that we are testing on the same parameters, even if defaults change in Param class.
+
+```{python}
+#| eval: true
+param = Param()
+param.patient_inter = 5
+param.mean_reception_time = 2
+param.mean_n_consult_time = 6
+param.mean_d_consult_time = 20
+param.number_of_receptionists = 1
+param.number_of_nurses = 1
+param.number_of_doctors = 2
+param.prob_seeing_doctor = 0.6
+param.sim_duration = 600
+param.number_of_runs = 100
+```
+
+We'll then run the model and save the results to `.csv` files.
+
+```{python}
+#| eval: true
+# Run trial
+trial = Trial(param)
+trial.run_trial()
+
+# Preview and save results to csv
+print(trial.df_trial_results.head())
+trial.df_trial_results.to_csv("tests/exp_results/trial.csv")
+```
+
+In the test, we'll run the same model parameters, then import and compare against the saved `.csv` file to check for any differences.
+
+```{python}
+{{< include tests/test_backtest.py >}}
+```
+
+This test passes.
+
+:::{.callout-note icon=false collapse="true"}
+
+## Test output:
+
+```{python}
+#| eval: true
+#| echo: false
+pytest.main(["tests/test_backtest.py"])
+```
+
+:::
+
+We generate the expected results for our backtest in a seperate Python file or Jupyter notebook, rather than within the test itself. We then would generally run tests using the same pre-generated `.csv` files, without regenerating them. However, the test will fail if the model logic is intentionally changed, leading to different results from the same parameters. In that case, if we are certain that these changes are the reason for differing results, we should re-run the Python file or notebook to regenerate the `.csv`. It is crucial to exercise caution when doing this, to avoid unintentionally overwriting correct expected results.
+
+### Further testing examples
+
+For more inspiration, check out the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des). Examples of other tests it includes are:
+
+* Functional tests for the impact of high demand on utilisation.
+* Functional tests checking for expected decreases in the number of arrivals.
+* Functional tests for an interval auditor.
+* Functional tests for parallel execution.
+* Functional tests for a warm-up period.
+* Unit tests for the exponential class.
+* Unit tests for a logging class.
+* Unit tests for a modified parameter class which has functionality designed to prevent the addition of new attributes.

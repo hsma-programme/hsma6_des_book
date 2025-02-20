@@ -1,4 +1,13 @@
-## Key Steps in a DES
+---
+title: Key Steps in a DES
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
 ### Arrivals
 
@@ -46,7 +55,7 @@ Then you can click ‘run simulation’ to start a new simulation.
 
 Take a look at the graphs that are created!
 
-::: {.callout-info}
+::: {.callout-note}
 - Try changing the slider with the title 'How many patients should arrive per day on average?'.
 Look at the graph below it.
     - How do the numbers on the horizontal axis change?

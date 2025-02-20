@@ -1,14 +1,23 @@
-
-# Exercise - Building Your First Model
+---
+title: "Exercise - Building Your First Model"
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Dan Chalk
+    orcid: 0000-0002-4165-4364
+    url: https://github.com/hsma-chief-elf
+---
 
 Your task is to build a Discrete Event Simulation model of the following GP surgery.
 
 ![](images/exercise_gp.png)
 
-Patients
-- arrive into the GP surgery around every 3 minutes
-- spend around 2 minutes being registered
-- then spend around 8 minutes with the GP.
+Patients:
+
+- Arrive into the GP surgery around every 3 minutes.
+- Spend around 2 minutes being registered.
+- Then spend around 8 minutes with the GP.
 
 Around a quarter of patients need to book a test at reception after they’ve seen the GP, and this takes around 4 minutes.
 
@@ -28,9 +37,10 @@ You also need to calculate and provide them with the mean queuing times across t
 
 ## Goal
 
-Once you’ve built the model, use it to
-- a) identify where you think the problem is
-- b) provide proposals for how you would fix it (this can include anything you like - they are open to suggestions - more resources, changes to processes to cut activity times, having the GP book the test, anything you can think of!
+Once you’ve built the model, use it to:
+
+1. Identify where you think the problem is
+2. Provide proposals for how you would fix it (this can include anything you like - they are open to suggestions - more resources, changes to processes to cut activity times, having the GP book the test, anything you can think of!
 
 Try different things, different solutions.
 
