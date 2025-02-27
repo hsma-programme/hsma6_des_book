@@ -69,6 +69,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./choosing_distributions.html" rel="next">
 <link href="./priority_based_queueing.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,6 +108,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3YZDF78XLF"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3YZDF78XLF', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"dark",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 
 
 <link rel="stylesheet" href="include/webex.css">
@@ -615,7 +644,7 @@ Tip
 <h3 data-number="11.2.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">11.2.1</span> g class</h3>
 <p>In the g class, we have added values to specify how long nurse is unavailable and at what frequency.</p>
 <p>In this example, every 2 hours, the nurse will be unavailable for 15 minutes.</p>
-<div id="b565b88e" class="cell" data-execution_count="1">
+<div id="a1fc0b7d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inter-arrival times</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -659,7 +688,7 @@ Tip
 <p>This is a very helpful feature to use to keep your breaktime functions from clashing with high-priority patients.</p>
 </div>
 </div>
-<div id="3a0f8f24" class="cell" data-execution_count="2">
+<div id="a483225b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generator function to obstruct a nurse resource at specified intervals</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for specified amounts of time</span></span>
@@ -692,7 +721,7 @@ Tip
 <section id="the-run-method" class="level4" data-number="11.2.3.2">
 <h4 data-number="11.2.3.2" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">11.2.3.2</span> The run method</h4>
 <p>In our run method, we now start up the <code>obstruct_nurse</code> process in addition to the <code>generator_patient_arrivals</code> process.</p>
-<div id="310746e5" class="cell" data-execution_count="3">
+<div id="37a28e5c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up DES generators</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
@@ -729,7 +758,7 @@ Click here to view the full code
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="ec297680" class="cell" data-execution_count="4">
+<div id="4df68235" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -941,7 +970,7 @@ Click here to view the full code
 <h2 data-number="11.4" class="anchored" data-anchor-id="evaluating-the-outputs"><span class="header-section-number">11.4</span> Evaluating the outputs</h2>
 <p>Let’s look at the printed output showing when our nurses were obstructed.</p>
 <p>The first number in each line of output shows the simulation time when the message was generated.</p>
-<div id="5b714ab1" class="cell" data-execution_count="5">
+<div id="c9c5663d" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>0.00: The nurse will go on a break at around time 120.00
 120.15: The nurse is now on a break and will be back at 135.15
@@ -1008,12 +1037,12 @@ Click here to view the full code
 </div>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
 <p>Now let’s look at some of the other outputs and compare them with a version without the nurse obstruction.</p>
-<div id="f3bb3ca4" class="cell" data-execution_count="9">
+<div id="10982e54" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are no nurse breaks is 143.18 minutes</code></pre>
 </div>
 </div>
-<div id="c31b09b9" class="cell" data-execution_count="10">
+<div id="99cfe40b" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>The average wait when there are nurse breaks is 299.7 minutes</code></pre>
 </div>
@@ -1926,6 +1955,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./event_logging.html" rel="next">
 <link href="./basic_debugging_tactics.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,6 +107,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3YZDF78XLF"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3YZDF78XLF', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"dark",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 
 
 <link rel="stylesheet" href="include/webex.css">
@@ -605,7 +634,7 @@ Acknowledgements
 <h2 data-number="29.1" class="anchored" data-anchor-id="pytest"><span class="header-section-number">29.1</span> Pytest</h2>
 <p>When you create a model, you will naturally carry out tests, with simple manual checks where you observe outputs and ensure they look right. These checks can be formalised and <strong>automated</strong> so that you can run them after any changes, and catch any issues that arise.</p>
 <p>A popular framework for testing in python is <strong>pytest</strong>.</p>
-<div id="a7ffe34c" class="cell" data-execution_count="1">
+<div id="4999bb89" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -619,7 +648,7 @@ Acknowledgements
 <p>Each test in pytest is a function that contains an assertion statement to check a condition (e.g.&nbsp;<code>number &gt; 0</code>). If the condition fails, pytest will return an error message (e.g.&nbsp;“The number should be positive”).</p>
 <p>Tests are typically stored in a folder called <code>tests</code>, with filenames starting with the prefix <code>test_</code>. This naming convention allows pytest to automatically discover and run all the tests in the folder.</p>
 <p>Here’s an example of a simple test using pytest:</p>
-<div id="45822aa0" class="cell" data-execution_count="2">
+<div id="2433720f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_positive():</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Confirm that the number is positive.</span></span>
@@ -646,7 +675,7 @@ Test output:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="e2fa2a6a" class="cell" data-execution_count="3">
+<div id="80780727" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
@@ -656,7 +685,7 @@ collected 1 item
 
 tests/test_example_simple.py .                                           [100%]
 
-============================== 1 passed in 0.69s ===============================</code></pre>
+============================== 1 passed in 0.52s ===============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -669,7 +698,7 @@ tests/test_example_simple.py .                                           [100%]
 <h3 data-number="29.1.3" class="anchored" data-anchor-id="parametrise"><span class="header-section-number">29.1.3</span> Parametrise</h3>
 <p>We can execute the same test on different parameters using <code>pytest.mark.parametrize</code>.</p>
 <p>Here’s an example:</p>
-<div id="107a9bdc" class="cell" data-execution_count="4">
+<div id="6bc65f14" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@pytest.mark.parametrize</span>(<span class="st">"number"</span>, [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_positive_param(number):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -692,7 +721,7 @@ Test output:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="5707748e" class="cell" data-execution_count="5">
+<div id="60569df8" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
@@ -723,7 +752,7 @@ E       assert -1 &gt; 0
 tests/test_example_param.py:13: AssertionError
 =========================== short test summary info ============================
 FAILED tests/test_example_param.py::test_positive_param[-1] - AssertionError: The number -1 is not positive.
-========================= 1 failed, 3 passed in 8.83s ==========================</code></pre>
+========================= 1 failed, 3 passed in 7.56s ==========================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>&lt;ExitCode.TESTS_FAILED: 1&gt;</code></pre>
@@ -753,7 +782,7 @@ Tip
 <section id="param-class" class="level3" data-number="29.2.1">
 <h3 data-number="29.2.1" class="anchored" data-anchor-id="param-class"><span class="header-section-number">29.2.1</span> Param class</h3>
 <p>As these are no longer “global” parameters, we will rename <code>g</code> to <code>Param</code>.</p>
-<div id="cf2093a9" class="cell" data-execution_count="6">
+<div id="e0324fa8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store parameter values.</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Param:  <span class="co">##NEW</span></span>
 <span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -783,7 +812,7 @@ Tip
 <section id="model-class" class="level3" data-number="29.2.3">
 <h3 data-number="29.2.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">29.2.3</span> Model class</h3>
 <p>Set parameters as an input to the class. Each instance of <code>g</code> is changed to <code>param</code> (which refers to the parameter instance provided to the class).</p>
-<div id="59b5f5b7" class="cell" data-execution_count="7">
+<div id="97af7d1b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param, run_number):  <span class="co">##NEW</span></span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
@@ -843,7 +872,7 @@ Tip
 <section id="trial-class" class="level3" data-number="29.2.4">
 <h3 data-number="29.2.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">29.2.4</span> Trial class</h3>
 <p>Set parameters as an input to the class, and renamed <code>g</code> to <code>param</code>. Also, disabled printing sections.</p>
-<div id="09f5082c" class="cell" data-execution_count="8">
+<div id="d0617e21" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>, param):  <span class="co">##NEW</span></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
@@ -919,7 +948,7 @@ Click here to view the code
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="ab07decd" class="cell" data-execution_count="9">
+<div id="e57b0127" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1248,7 +1277,7 @@ Click here to view the code
 <li>The length of the nurse consultation decreases.</li>
 </ul>
 <p>For simplicity, this test just focuses the nurse waiting times, but this idea can be expanded to other resources and metrics in the model as well.</p>
-<div id="892f5f2e" class="cell" data-execution_count="10">
+<div id="5543760d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1324,7 +1353,7 @@ Test output:
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="48a32c27" class="cell" data-execution_count="11">
+<div id="86f779cc" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
@@ -1334,7 +1363,7 @@ collected 3 items
 
 tests/test_functionaltest.py ...                                         [100%]
 
-============================== 3 passed in 0.99s ===============================</code></pre>
+============================== 3 passed in 0.94s ===============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -1348,7 +1377,7 @@ tests/test_functionaltest.py ...                                         [100%]
 <h3 data-number="29.3.2" class="anchored" data-anchor-id="unit-tests"><span class="header-section-number">29.3.2</span> Unit tests</h3>
 <p>Unit tests are a type of functional testing that focuses on individual components (e.g.&nbsp;methods, classes) and tests them in isolation to ensure they work as intended.</p>
 <p>For example, we expect that our model should fail if the number of doctors or the patient inter-arrival time were set to 0. This is tested using <code>test_zero_inputs</code>.</p>
-<div id="fd662f7f" class="cell" data-execution_count="12">
+<div id="508ecab9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1388,7 +1417,7 @@ Test output:
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="d6601d59" class="cell" data-execution_count="13">
+<div id="7c2c0570" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
 <pre><code>============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
@@ -1456,7 +1485,7 @@ tests/test_unittest.py:24: Failed
 =========================== short test summary info ============================
 FAILED tests/test_unittest.py::test_zero_inputs[number_of_doctors-0] - Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
 FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
-============================== 2 failed in 8.40s ===============================</code></pre>
+============================== 2 failed in 7.41s ===============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>&lt;ExitCode.TESTS_FAILED: 1&gt;</code></pre>
@@ -1471,7 +1500,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <li><strong>Patient inter-arrival time = 0</strong>: The model would have run infinitely, as it would just constantly generating new patients.</li>
 </ul>
 <p>To address this, we could add error handling which raises an error for users if they try to input a value of 0. For example, we could add the following code to our <code>Model __init__</code> method:</p>
-<div id="ca9f92f6" class="cell" data-execution_count="14">
+<div id="c1089633" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the specified parameters</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> param_name <span class="kw">in</span> [<span class="st">"sim_duration"</span>, <span class="st">"patient_inter"</span>]:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1489,7 +1518,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <h3 data-number="29.3.3" class="anchored" data-anchor-id="back-tests"><span class="header-section-number">29.3.3</span> Back tests</h3>
 <p>Back tests check that the model code produces results consistent with those generated historically/from prior code.</p>
 <p>First, we’ll generate a set of expected results, with a specific set of parameters. Although this may seem unnecessary in this case, as they match our default parameters in our <code>Param</code> class, these are still specified to ensure that we are testing on the same parameters, even if defaults change in Param class.</p>
-<div id="679f7a9b" class="cell" data-execution_count="15">
+<div id="06400d38" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>param <span class="op">=</span> Param()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>param.patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>param.mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -1503,7 +1532,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>param.number_of_runs <span class="op">=</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll then run the model and save the results to <code>.csv</code> files.</p>
-<div id="ddb4f94c" class="cell" data-execution_count="16">
+<div id="26a838da" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run trial</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial(param)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span>
@@ -1522,7 +1551,7 @@ Run Number
 </div>
 </div>
 <p>In the test, we’ll run the same model parameters, then import and compare against the saved <code>.csv</code> file to check for any differences.</p>
-<div id="90be8809" class="cell" data-execution_count="17">
+<div id="0e0c64b1" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
@@ -1568,7 +1597,7 @@ Test output:
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="d6735d2e" class="cell" data-execution_count="18">
+<div id="97f57149" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-stdout">
 <pre><code>============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
@@ -1578,7 +1607,7 @@ collected 1 item
 
 tests/test_backtest.py .                                                 [100%]
 
-============================== 1 passed in 4.47s ===============================</code></pre>
+============================== 1 passed in 4.60s ===============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -2550,6 +2579,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

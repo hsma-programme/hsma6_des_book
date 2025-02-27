@@ -69,6 +69,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./running_parallel_cpus.html" rel="next">
 <link href="./sharing_reproducible_models.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,6 +108,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3YZDF78XLF"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3YZDF78XLF', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"dark",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -600,7 +629,7 @@ Acknowledgements
 <section id="scenarios" class="level2" data-number="39.1">
 <h2 data-number="39.1" class="anchored" data-anchor-id="scenarios"><span class="header-section-number">39.1</span> Scenarios</h2>
 <p>We have a number of parameters available to us in this model:</p>
-<div id="d96bae29" class="cell" data-execution_count="2">
+<div id="bb0a6698" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -627,7 +656,7 @@ Warning
 <p>Be careful - the total number of possible permutations starts to grow very rapidly when you have lots of parameters with multiple options for each!</p>
 </div>
 </div>
-<div id="5cc38755" class="cell" data-execution_count="3">
+<div id="2541c48f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'patient_inter'</span>: [<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mean_reception_time'</span>: [<span class="dv">2</span>, <span class="dv">3</span>],</span>
@@ -666,7 +695,7 @@ Tip
 <p>For a small number of possibilities, setting the variables by hand will be fine.</p>
 <p>For a larger number, you may want to use the <code>range</code> function.</p>
 <p>e.g.&nbsp;to get 6, 10, 14 you would do</p>
-<div id="2e825793" class="cell" data-execution_count="4">
+<div id="28e16105" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>[i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>, <span class="dv">15</span>, <span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[6, 10, 14]</code></pre>
@@ -675,7 +704,7 @@ Tip
 </div>
 </div>
 <p>Next we use the itertools package to create every possible permutation of the scenarios.</p>
-<div id="ac3521ed" class="cell" data-execution_count="5">
+<div id="97ebc33c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate all scenarios:</span></span>
@@ -686,7 +715,7 @@ Tip
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(<span class="bu">zip</span>(scenarios.keys(), p)) <span class="cf">for</span> p <span class="kw">in</span> all_scenarios_tuples]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at the first 3 scenario dictionaries.</p>
-<div id="041952f8" class="cell" data-execution_count="6">
+<div id="50af0aac" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_scenarios_dicts[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[{'patient_inter': 4,
@@ -717,7 +746,7 @@ Tip
 </div>
 <p>We can see that all that has changed is the probability of seeing a doctor (the last key-value pair in each dictionary).</p>
 <p>How many scenarios have we created?</p>
-<div id="2607c2b6" class="cell" data-execution_count="7">
+<div id="4dd35f12" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(all_scenarios_dicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>1296</code></pre>
@@ -743,7 +772,7 @@ Tip
 <section id="g-class" class="level3" data-number="39.2.1">
 <h3 data-number="39.2.1" class="anchored" data-anchor-id="g-class"><span class="header-section-number">39.2.1</span> g class</h3>
 <p>We’ll just add in a space to for the scenario name.</p>
-<div id="40338f6f" class="cell" data-execution_count="8">
+<div id="fc085dff" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -767,7 +796,7 @@ Tip
 <section id="the-init-method" class="level4" data-number="39.2.3.1">
 <h4 data-number="39.2.3.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">39.2.3.1</span> The <strong>init</strong> method</h4>
 <p>The scenario is add to the results dataframe, along with some other results metrics.</p>
-<div id="61363cb0" class="cell" data-execution_count="9">
+<div id="4ca8879f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
@@ -795,7 +824,7 @@ Tip
 <section id="the-run_trial-method" class="level3" data-number="39.2.5">
 <h3 data-number="39.2.5" class="anchored" data-anchor-id="the-run_trial-method"><span class="header-section-number">39.2.5</span> The run_trial method</h3>
 <p>This is updated to include the scenario name and other new metrics.</p>
-<div id="39303fe3" class="cell" data-execution_count="10">
+<div id="2e802215" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        random.seed(run)</span>
@@ -839,7 +868,7 @@ Click here to view the code
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="fe79bdeb" class="cell" data-execution_count="11">
+<div id="14b4d760" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1155,7 +1184,7 @@ Click here to view the code
 <section id="running-the-scenarios" class="level2" data-number="39.4">
 <h2 data-number="39.4" class="anchored" data-anchor-id="running-the-scenarios"><span class="header-section-number">39.4</span> Running the scenarios</h2>
 <p>Let’s now create all of the scenario objects.</p>
-<div id="fbf53508" class="cell" data-execution_count="12">
+<div id="73754b65" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, scenario_to_run <span class="kw">in</span> <span class="bu">enumerate</span>(all_scenarios_dicts):</span>
@@ -1519,7 +1548,7 @@ Click here to view the code
 </div>
 </div>
 <p>Finally the following will give you a nice dictionary of all of your scenarios.</p>
-<div id="e0d62f9f" class="cell" data-execution_count="13">
+<div id="06317d19" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(all_scenarios_dicts).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -1603,7 +1632,7 @@ Click here to view the code
 </div>
 </div>
 </div>
-<div id="0411f948" class="cell" data-execution_count="14">
+<div id="8c86db0f" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(all_scenarios_dicts).tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -2595,6 +2624,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -3,6 +3,13 @@ project:
   output-dir: docs
 book:
   title: HSMA - the little book of DES
+  google-analytics:
+    tracking-id: "G-3YZDF78XLF"
+    anonymize-ip: true
+  cookie-consent:
+    type: express
+    style: simple
+    palette: dark
   subtitle: An introduction to writing discrete event simulation models for healthcare (and beyond) in SimPy
   author: Dan Chalk, Sammi Rosser and Amy Heather
   date: 2024/02/26
