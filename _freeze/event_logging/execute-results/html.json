@@ -1,0 +1,12 @@
+{
+  "hash": "28c0a2c559757a7554a6872fdb2ebe46",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: (Coming Soon!) Event Logging\nauthor:\n  - name: TBC\nformat:\n  html:\n    code-fold: false\n---\n\nComing soon!\n\n",
+    "supporting": [
+      "event_logging_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

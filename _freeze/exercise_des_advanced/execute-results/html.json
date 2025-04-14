@@ -1,0 +1,12 @@
+{
+  "hash": "51dccd7d5df91e100c4167265d9455d9",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Exercise - Practicing Advanced Concepts\nauthor:\n  - name: Sammi Rosser\n    orcid: 0000-0002-9552-8988\n    url: 'https://github.com/Bergam0t'\n  - name: Dan Chalk\n    orcid: 0000-0002-4165-4364\n    url: 'https://github.com/hsma-chief-elf'\nexecute:\n  eval: false\n---\n\nIn this section we’ve looked at how we can implement the following DES features in SimPy:\n\n- Simulation warm-up.\n- Priority-based queuing.\n- Resource unavailability.\n- Use of the alternative distributions.\n- Reneging.\n- Balking.\n- Entities choosing queues based on queue length.\n\nDesign and build a DES model in SimPy that uses **at least four of the features above**.\n\nThe model can be of anything you like - you may choose to try to build the conceptual model you designed in the DES Design exercise at the end of section 1, or you might choose something completely different.\n\n",
+    "supporting": [
+      "exercise_des_advanced_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

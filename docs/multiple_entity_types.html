@@ -669,7 +669,7 @@ Tip
 <p><img src="assets/2025-01-24-10-02-34.png" class="img-fluid"></p>
 <p>In this system, patients have a shared first step, but then move to very separate pathways. We have no need to track the waiting time for a ‘stabilisation waiting area’ for a non-trauma patient, as they will never use that resource.</p>
 <p>Consequently, we may opt to do the following.</p>
-<div id="42bc719d" class="cell" data-execution_count="1">
+<div id="8f43b1dc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TraumaPatient:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
@@ -690,7 +690,7 @@ Tip
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_treatment <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We could use the concept of inheritance to have a main patient class, then have multiple ‘child’ classes who inherit the properties of the parent class while also recording their own special attributes, with the different processes generating the relevant patient type. You can read more about inheritance in <a href="https://python.hsma.co.uk/inheritance.html">this chapter of the HSMA Python Book</a>. We may opt to do this in cases where our patients share a few attributes, but not all of them.</p>
-<div id="bc41be7f" class="cell" data-execution_count="2">
+<div id="3c15f1fe" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient(<span class="va">self</span>, p_id):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here we can set up any attributes that are common across all of our</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># patient types</span></span>
@@ -716,7 +716,7 @@ Tip
 </div>
 <p>However, if our patients are following the same or a sufficiently similar route that means that the attributes of the patient classes don’t substantially change, it is often simpler to add an additional attribute that we set when initialising a patient to track their ‘type’, allowing us to then filter and subset patient groups in our results. This is similar to what is done in the <a href="./priority_based_queueing.html">priority resources</a> chapter.</p>
 <p>In this case, let’s imagine we have two patients of different severities. Patients of a higher severity arrive less frequently but use resources for longer. We may set this up in the following way.</p>
-<div id="7a1a03ee" class="cell" data-execution_count="3">
+<div id="26840763" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id, severity):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>

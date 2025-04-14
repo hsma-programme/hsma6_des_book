@@ -1,0 +1,12 @@
+{
+  "hash": "4234cf25d1de6a0e22874a810c8ca87e",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Further Reading\nauthor:\n  - name: Sammi Rosser\n    orcid: 0000-0002-9552-8988\n    url: 'https://github.com/Bergam0t'\nexecute:\n  eval: false\n---\n\n## SimPy examples\n\n:::{.callout-warning}\nNote that the linked examples will generally not follow the exact structure we have used throughout this book. However, the fundamental concepts remain unchanged, and the knowledge you have acquired from this book should help you to read and understand most simpy models out there.\n:::\n\n### General examples\n\nA list of additional SimPy examples is kept up-to-date [here](https://github.com/stars/Bergam0t/lists/simpy-examples).\n\n### Visualisation examples\n\nA library of simpy visualisation examples, which may also prove useful due to containing code for a range of different types of healthcare model, can be found [here](https://github.com/Bergam0t/simpy_visualisation).\n\n",
+    "supporting": [
+      "further_reading_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
