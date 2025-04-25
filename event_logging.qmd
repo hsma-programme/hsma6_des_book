@@ -397,7 +397,11 @@ animate_activity_log(
 
 ## Adding event logging to your own model
 
-Here, we're going to work with the very basic model from the chapter['An Example SimPy Model'](an_example_simpy_model.qmd).
+Here, we're going to work with the very basic model from the chapter ['An Example SimPy Model'](an_example_simpy_model.qmd).
+
+:::{.callout-tip}
+Changed code will be highlighted in the right-hand column, with unchanged column displayed less brightly.
+:::
 
 ### the g Class
 
@@ -528,6 +532,14 @@ This method is unchanged.
 
 This is the key place in which we add our *logging*. The logs are what vidigi relies on to calculate who should be where, when, within the animation.
 
+:::{.callout-tip}
+Appending rows to a dataframe is a very slow and memory-intensive operation and could negatively affect our simulation runtime.
+
+A more efficient approach is to add **dictionaries** to a **list**. Each dictionary corresponds to one row of our eventual event log dataframe, and contains the **keys** that will form our column names, and the **values** that will be the values in each row.
+
+At the end of the process, we will pass these dictionaries to pandas and it will convert them into a dataframe - so the end result is the same, but this approach is much faster overall.
+:::
+
 Event logging takes the format below:
 
 ```{python}
@@ -541,37 +553,23 @@ self.event_log.append(
     )
 ```
 
-More details about event logging can be found in the ['Event Logging' page](populating_event_logs.qmd).
+:::{.callout-tip}
+While these columns are the bare minimum, you can take this opportunity to add as many additional fields as you see fit!
 
-This is also where we need to change the way we request resources to account for the fact we are now using a simpy store instead of directly interacting with our simpy resources.
+Bear in mind that the event log files can get quite unwieldy, and it may not be very efficient if you are adding in extra columns where the values are not always present.
 
-Where we would have previously used
+This is another benefit of using dictionaries, however - you don't always have to pass the same number of key-value pairs; the resulting dataframe will just deal with this and leave any missing 'columns' empty for that row.
+:::
 
-```{python}
-#| eval: false
-with self.treatment_cubicles.request() as req:
-    # Seize a treatment resource when available
-    yield req
+Here, we will begin to add our logs.
 
-    # ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
+In this case, we are adding logging at 5 points
 
-# CONTINUE AFTER RELEASING RESOURCE HERE
-```
-
-we instead now use
-
-```{python}
-#| eval: false
-# Seize a treatment resource when available
-treatment_resource = yield self.treatment_cubicles.get()
-
-# ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
-
-# CONTINUE AFTER RELEASING RESOURCE HERE
-
-# Resource is no longer in use, so put it back in the store
-self.treatment_cubicles.put(treatment_resource)
-```
+- arriving
+- beginning to queue (in this case, this will be the same as the arrival time)
+- beginning treatment
+- ending treatment
+- departing
 
 :::: {.columns}
 
@@ -689,6 +687,12 @@ This method is unchanged.
 
 #### the run method
 
+Our concern in the run method is adding a way to extract the event log.
+
+It will also be important to augment the event log with a run number - we already pass a run number attribute when initialising our Model class, so we can just access that.
+
+Finally, we change our model to output a dictionary of our results_df and our event log. You could approach this in different ways, like returning a list, or only returning the event log and calculating all results from the event log instead.
+
 :::: {.columns}
 
 ::: {.column width="47.5%"}
@@ -752,6 +756,8 @@ def run(self):
 
 #### the __init__ method
 
+In this, we just need to add an empty list which will hold all the event log dataframes from the individual runs.
+
 :::: {.columns}
 
 ::: {.column width="47.5%"}
@@ -797,6 +803,20 @@ def  __init__(self):
 
 
 #### the run_trial method
+
+Finally, in every iteration, we split out the results from our model (the dictionary) into two objects - one of which is our event log.
+
+We can then add this event log - remembering that it also has a column added identifying which run the event log relates to - into our list.
+
+Once we have finished the for loop - i.e. we have completed every run of the model - we can join our event log into one large dataframe.
+
+Finally, to make it easier to experiment with building visualisations, metrics, animations and more without having to rerun the model each time, we will save the resulting dataframe as a csv.
+
+:::{.callout-tip}
+You may wish to explore a datatype-preserving format like pickle, arrow or parquet for this export so that you don't run into issues with dates - but csv has the benefit of being cross-plaform, human readable and machine readable.
+
+If you are using version control (Git/GitHub), it's recommended to add this file to your `.gitignore` - it's quite large and will change frequently!
+:::
 
 :::: {.columns}
 
@@ -848,8 +868,284 @@ def run_trial(self):
         self.all_event_logs.append(event_log) #<<
 
     self.all_event_logs = pd.concat(self.all_event_logs) #<<
+
+    self.all_event_logs.to_csv("event_logs.csv") #<<
 ```
 
 :::
 
 ::::
+
+
+## Logging resource IDs
+
+If we want to make use of our full ability to monitor resource utilisation at a detailed level, and to create animations with the vidigi package, we also need to change the way we request resources to account for the fact we are now using a simpy store instead of directly interacting with our simpy resources.
+
+Where we would have previously used
+
+```{python}
+#| eval: false
+
+with self.treatment_cubicles.request() as req:
+    # Seize a treatment resource when available
+    yield req
+
+    # ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
+
+# CONTINUE AFTER RELEASING RESOURCE HERE
+```
+
+we instead now use
+
+```{python}
+#| eval: false
+
+# Seize a treatment resource when available
+treatment_resource = yield self.treatment_cubicles.get()
+
+# ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
+
+# CONTINUE AFTER RELEASING RESOURCE HERE
+
+# Resource is no longer in use, so put it back in the store
+self.treatment_cubicles.put(treatment_resource)
+```
+
+
+
+### Imports
+
+We will need to add the following to our imports:
+
+```{python}
+#| eval: false
+
+from vidigi.utils import populate_store
+```
+
+### The Model Class
+
+#### the init_resources method
+
+Vidigi needs to know *which* resource a user made use of so that we can ensure it stays with the correct resource throughout its time in the animation.
+
+The standard simpy Resource does not have a way of tracking that, so we need to do two things:
+    - create a **simpy Store** that we will store our resources in
+    - use the vidigi helper function `populate_store()` to generate a store full of special resources that each have a unique ID we can track when doing our event logging
+
+Overall, the use of stores won't generally change your code too much - and we cover exactly what needs to change a little later in this document.
+
+If you are using priority resources, this step will be a little different - see Example 3 in the documents if you need to use Resources that prioritise some entities over others.
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+
+def init_resources(self):
+    self.treatment_cubicles = simpy.Resource(
+        self.env,
+        capacity=g.n_cubicles
+        )
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Vidigi Modifications
+
+```{python}
+#| eval: false
+
+def init_resources(self):
+    self.treatment_cubicles = simpy.Store(self.env) #<<
+
+    populate_store(  #<<
+        num_resources=g.n_cubicles, #<<
+        simpy_store=self.treatment_cubicles, #<<
+        sim_env=self.env
+        ) #<<
+```
+
+:::
+
+::::
+
+#### the attend_clinic method
+
+We will return to our attend_clinic method, where we previously added in event logging, and now
+
+- make use of this new resource ID attribute
+- make the required changes to how resources are requested and released for the next user
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def attend_clinic(self, patient):
+    self.arrival = self.env.now
+    self.event_log.append(
+        {'patient': patient.identifier,
+            'pathway': 'Simplest',
+            'event_type': 'arrival_departure',
+            # you must use this event name for arrival events
+            'event': 'arrival',
+            'time': self.env.now}
+    )
+
+    # request examination resource
+    start_wait = self.env.now
+    self.event_log.append(
+        {'patient': patient.identifier,
+            'pathway': 'Simplest',
+            # for a queue, you can define your chosen event name
+            'event': 'treatment_wait_begins',
+            'event_type': 'queue',
+            'time': self.env.now}
+    )
+
+    # Seize a treatment resource when available
+    with self.treatment_cubicles.request() as req:
+        # Seize a treatment resource when available
+        yield req
+
+        # record the waiting time for registration
+        self.wait_treat = self.env.now - start_wait
+        self.event_log.append(
+            {'patient': patient.identifier,
+                'pathway': 'Simplest',
+                'event': 'treatment_begins',
+                # for a resource_use, you can define your chosen event name
+                'event_type': 'resource_use',
+                'time': self.env.now
+                }
+        )
+
+        # sample treatment duration
+        self.treat_duration = self.treat_dist.sample()
+        yield self.env.timeout(self.treat_duration)
+
+        self.event_log.append(
+            {'patient': patient.identifier,
+                'pathway': 'Simplest',
+                # for a resource_use_end, you can define your chosen event name
+                'event': 'treatment_complete',
+                'event_type': 'resource_use_end',
+                'time': self.env.now
+                }
+        )
+
+    # total time in system
+    self.total_time = self.env.now - self.arrival
+    self.event_log.append(
+        {'patient': patient.identifier,
+        'pathway': 'Simplest',
+        'event': 'depart', # you must use this event name for departure events
+        'event_type': 'arrival_departure',
+        'time': self.env.now}
+    )
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Custom Resource Modifications
+
+```{python}
+#| eval: false
+
+def attend_clinic(self, patient):
+    self.arrival = self.env.now
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            'event_type': 'arrival_departure', #<<
+            # you must use this event name for arrival events
+            'event': 'arrival',  #<<
+            'time': self.env.now} #<<
+    ) #<<
+
+    # request examination resource
+    start_wait = self.env.now
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            # for a queue, you can define your chosen event name
+            'event': 'treatment_wait_begins', #<<
+            'event_type': 'queue', #<<
+            'time': self.env.now} #<<
+    ) #<<
+
+    # Seize a treatment resource when available
+    treatment_resource = yield self.treatment_cubicles.get() #<<
+
+    # record the waiting time for registration
+    self.wait_treat = self.env.now - start_wait
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            'event': 'treatment_begins', #<<
+            # for a resource_use, you can define your chosen event name
+            'event_type': 'resource_use', #<<
+            'time': self.env.now, #<<
+            # grab the resource id from the treatment_resource requested
+            'resource_id': treatment_resource.id_attribute #<<
+            } #<<
+    ) #<<
+
+    # sample treatment duration
+    self.treat_duration = self.treat_dist.sample()
+    yield self.env.timeout(self.treat_duration)
+
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            # for a resource_use_end, you can define your chosen event name
+            'event': 'treatment_complete', #<<
+            'event_type': 'resource_use_end', #<<
+            'time': self.env.now, #<<
+            'resource_id': treatment_resource.id_attribute} #<<
+    ) #<<
+
+    # Resource is no longer in use, so put it back in the store #<<
+    self.treatment_cubicles.put(treatment_resource) #<<
+
+    # total time in system
+    self.total_time = self.env.now - self.arrival
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+        'pathway': 'Simplest', #<<
+        'event': 'depart', # you must use this event name for departure events #<<
+        'event_type': 'arrival_departure', #<<
+        'time': self.env.now} #<<
+    ) #<<
+```
+
+:::
+
+::::
+
+
+## Summary
+
+In this chapter, we have demonstrated just a few of the things you can do with event logs, and how you can efficiently add them to an existing model.
+
+In the rest of this section, we will dive deeper into some reproducible snippets and patterns to help you generate useful outputs from event logs, as well as a deeper dive into turning these into process maps with bupaR and animations with vidigi.
