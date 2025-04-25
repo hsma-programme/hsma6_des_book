@@ -1,11 +1,855 @@
 ---
-title: (Coming Soon!) Event Logging
+title: Event Logging
 author:
-  - name: TBC
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
 format:
     html:
         code-fold: false
 jupyter: python3
+filters:
+  - quarto
+  - line-highlight
 ---
 
-Coming soon!
+In this chapter and beyond, we will be using the term 'event logging' to describe the process of generating a step-by-step log of what happens to each entity as they pass through our system. The resulting file will be an 'event log'.
+
+But why bother with event logging? In previous chapters, we have managed to record a range of useful metrics from our simulation, and used these to display the performance of our model with different sets of parameters. In the debugging chapters, we have explored how to track down issues in our simulation with a combination of print statements and the logging module. So what else is there left to do?
+
+Event logging can be a way to tackle both of the above in a robust, efficient and reusable way - while also opening up the use of a wide range of reusable boilerplate code for visualising, animating and formally testing our simulation outputs.
+
+:::{.callout-tip}
+While this chapter - and the rest of the book - will make use of a particular structure for our event log, this isn't the only way you can set up an event log. However, this structure has been tested to work well across a range of different models, and interfaces well with the [vidigi](https://github.com/Bergam0t/vidigi) package for animated simulation outputs.
+:::
+
+## A sample event log
+
+First, it may be helpful to see what an event log looks like.
+
+A sample log is displayed below:
+
+```{python}
+import pandas as pd
+event_log = pd.read_csv("resources/sample_event_log.csv")
+
+event_log
+```
+
+Let's break down the key components.
+
+### Mandatory Columns
+
+We have several mandatory columns:
+
+- entity_id
+- event_type
+- event
+- time
+
+**entity_id**: a unique identifider to allow us to follow a given entity through their journey
+
+**event_type**: this column is used to distinguish between three key kinds of events:
+
+- *arrival_departure*: an entity first entering the system, or the entity leaving the system
+- *queue*: an entity beginning to queue for a resource
+  - this can also be used to just generally record the movement of someone through points of a system that don't necessarily have a traditional 'queue'
+- *resource_use*: this relates to anything where someone starts or ends their time with a resource in the system
+
+
+**event**: this column further breaks down what is happening during each event type, such as what stage of the system people are waiting to interact with
+
+**time**: this can be an absolute timestamp in the form of a datetime (e.g. 2027-01-01 23:01:47), or a relative timestamp in time units from the start of the simulation.
+
+### Recommended Columns
+
+In addition, the following columns are highly recommended to include:
+
+**run**: this separates out results across multiple simulations, allowing for easy grouping of results by run
+
+### Optional Columns
+
+There are a few more recommended but optional columns:
+
+- resource_id
+- pathway
+
+**resource_id**: While a traditional simpy resource does not have a concept of a resource ID, there are various ways we can tackle adding one into our system. Let's assume we have 5 nurses - it's very helpful to know which of these 5 nurses are in use at any given time for visualisation and auditing purposes. A discussion of approaches to this will be found in a later chapter (coming soon), or you can take a look at the `populate_store` function from vidigi for a discussion on one approach to this: [click here](https://sammirosser.com/vidigi/vidigi_docs/introduction.html#all-simpy-resources-need-to-be-changed-to-simpy-stores-containing-a-custom-resource-with-an-id-attribute)
+
+
+## Exploring our log
+
+Let's explore what we can find out even from this small sample of logs.
+
+### Tracking the journey of a single entity/patient
+
+We can easily filter down by entity ID to see how the journey of an individual looks
+
+```{python}
+event_log[event_log["entity_id"] == 1]
+```
+
+We can see that this person arrived and was seen immediately.
+
+### Calculating waits
+
+In this event log, patients who wait for treatment (an event of 'treatment_wait_begins') will have the next event of 'treatment_wait'. We'll start by just pulling out those instances.
+
+```{python}
+treatment_waits_df = event_log[event_log["event"].isin(["treatment_wait_begins","treatment_begins"])]
+
+treatment_waits_df
+```
+
+Next, we'll pivot these to a wide format.
+
+```{python}
+treatment_waits_df_wide = treatment_waits_df.pivot(index="entity_id", columns="event", values="time")
+
+treatment_waits_df_wide = treatment_waits_df_wide[['treatment_wait_begins', 'treatment_begins']]
+
+treatment_waits_df_wide
+```
+
+Finally, let's work out the average wait for only those patients who were seen by someone before our simulation finished. We first need to calculate the difference between the two stamps, which in this simulation, represents a number of minutes
+
+```{python}
+treatment_waits_df_wide["treatment_wait"] = treatment_waits_df_wide["treatment_begins"] - treatment_waits_df_wide["treatment_wait_begins"]
+
+treatment_waits_df_wide
+```
+
+Now we can calculate the mean of that column:
+
+```{python}
+treatment_waits_df_wide["treatment_wait"].mean()
+```
+
+Or the median:
+
+```{python}
+treatment_waits_df_wide["treatment_wait"].median()
+```
+
+Or the max and min waits:
+
+```{python}
+treatment_waits_df_wide["treatment_wait"].agg(['min', 'max'])
+```
+
+Or plot the distribution of waits:
+
+```{python}
+import plotly.express as px
+
+px.histogram(treatment_waits_df_wide, x="treatment_wait")
+```
+
+Or a boxplot:
+
+```{python}
+px.box(treatment_waits_df_wide, x="treatment_wait")
+```
+
+## Exploring a bigger event log
+
+This would be a lot more powerful if we weren't just working with a small sample of 50 rows of an event log. Let's instead load in the full event log from this model, which runs for a lot longer and includes multiple runs. All our existing code can be reused.
+
+```{python}
+event_log = pd.read_csv("resources/sample_event_log_10_day_10_run.csv")
+
+# We'll limit this to the first 24 hours of our clinic
+
+event_log = event_log[event_log["time"] <= 60 * 24]
+
+event_log.sample(10)
+```
+
+Let's recalculate our waits. In fact - let's write a function that could be used to make a wait table for any pair of events!
+
+We'll also make sure it takes account of the 'run' column.
+
+```{python}
+def generate_difference_df(event_log, event_1, event_2, output_col_name):
+  difference_df = event_log[event_log["event"].isin([event_1,event_2])]
+
+  difference_df_wide = difference_df.pivot(index=["entity_id", "run"], columns="event", values="time")
+
+  difference_df_wide = difference_df_wide[[event_1,event_2]]
+
+  difference_df_wide[output_col_name] = difference_df_wide[event_2] - difference_df_wide[event_1]
+
+  return difference_df_wide.reset_index()
+
+```
+
+Let's run this and view the first 20 rows.
+
+```{python}
+treatment_wait_df = generate_difference_df(event_log=event_log, event_1="treatment_wait_begins", event_2="treatment_begins", output_col_name="treatment_wait")
+
+treatment_wait_df.head(20)
+```
+
+Here, we never have a wait because these people are entering an empty system.
+
+Let's instead look at a different patient.
+
+```{python}
+treatment_wait_df[treatment_wait_df["entity_id"] == 40]
+```
+
+
+Let's sample a range of other quick visualisations we can make.
+
+
+### Cumulative arrivals
+
+Let's first just take a look at the arrivals for a single run, with each dot representing a single person arriving in our system.
+
+```{python}
+px.scatter(
+  event_log[
+    (event_log["run"]==1) &
+    (event_log["event"]=="arrival")],
+    x="time",
+    y="entity_id"
+    )
+```
+
+Here, we can see how cumulative arrivals varied by run.
+
+```{python}
+px.line(
+  event_log[event_log["event"]=="arrival"],
+  x="time",
+  y="entity_id",
+  color="run"
+  )
+```
+
+
+### Event scatterplot
+
+```{python}
+px.scatter(
+  event_log[event_log["run"]==1],
+  y="time",
+  color="event",
+  x="entity_id"
+  )
+```
+
+We can tell that the treatment wait very quickly gets out of hand for our individuals as the simulation progresses.
+
+### Treatment duration
+
+```{python}
+treatment_duration_df = generate_difference_df(
+  event_log=event_log,
+  event_1="treatment_begins",
+  event_2="treatment_complete",
+  output_col_name="treatment_duration")
+
+treatment_duration_df.head(20)
+```
+
+```{python}
+px.box(
+  treatment_duration_df,
+  x="treatment_duration",
+  title="Variation in treatment duration"
+  )
+```
+
+```{python}
+px.box(
+  treatment_duration_df, x="treatment_duration", color="run",
+  range_x=[
+          0,
+          max(treatment_duration_df["treatment_duration"]) * 1.1
+          ],
+  title="Variation in treatment duration by run"
+        )
+```
+
+
+
+### Throughput
+
+```{python}
+
+patients_entering_system = event_log[event_log["event"] == "arrival"]
+
+patients_entering_system = (
+  patients_entering_system
+  .groupby('run')[['entity_id']]
+  .count()
+  .rename(columns={"entity_id": "entering_system"})
+  )
+
+patients_entering_system
+```
+
+```{python}
+
+patients_leaving_system = event_log[event_log["event"] == "depart"]
+
+patients_leaving_system = (
+  patients_leaving_system.groupby('run')[['entity_id']]
+  .count()
+  .rename(columns={"entity_id": "leaving_system"})
+  )
+
+patients_leaving_system
+
+```
+
+```{python}
+patient_throughput_df = patients_entering_system.merge(
+  patients_leaving_system,
+  left_index=True,
+  right_index=True
+  )
+
+patient_throughput_df["throughput"] = patient_throughput_df["leaving_system"] / patient_throughput_df["entering_system"]
+
+patient_throughput_df["throughput_display"] = patient_throughput_df["throughput"].apply(lambda x: f"{x:.1%}")
+
+patient_throughput_df
+```
+
+
+
+### Animation
+
+Using the vidigi package, we can take our event log and - with only minor adjustments and additions - create a full animation of our system.
+
+```{python}
+event_position_df = pd.DataFrame([
+                    {'event': 'arrival',
+                     'x':  50, 'y': 300,
+                     'label': "Arrival" },
+
+                    # Triage - minor and trauma
+                    {'event': 'treatment_wait_begins',
+                     'x':  205, 'y': 275,
+                     'label': "Waiting for Treatment"},
+
+                    {'event': 'treatment_begins',
+                     'x':  205, 'y': 175,
+                     'resource':'n_cubicles',
+                     'label': "Being Treated"},
+
+                    {'event': 'exit',
+                     'x':  270, 'y': 70,
+                     'label': "Exit"}
+
+                ])
+```
+
+
+
+
+```{python}
+# Create a suitable class to pass in the resource numbers to the animation function
+class model_params():
+    def __init__(self):
+        self.n_cubicles = 4 # In this case, I know that there were four resources available.
+
+params = model_params()
+
+print(f"Number of nurses: {params.n_cubicles}")
+```
+
+```{python}
+from vidigi.animation import animate_activity_log
+
+animate_activity_log(
+        # We need to ensure we only pass in a single run of the model
+        # We also need to ensure that the column 'entity_id' is renamed to 'patient' to match
+        # vidigi's expectations - though this will be made more flexible in a future version
+        # of the package
+        event_log=event_log[event_log['run']==1].rename(columns={"entity_id":"patient"}),
+        event_position_df=event_position_df,
+        scenario=params,
+        debug_mode=True,
+        setup_mode=False,
+        every_x_time_units=5,
+        include_play_button=True,
+        icon_and_text_size=20,
+        gap_between_entities=6,
+        gap_between_rows=25,
+        plotly_height=700,
+        frame_duration=200,
+        plotly_width=1200,
+        override_x_max=300,
+        override_y_max=500,
+        limit_duration=event_log["time"].max().astype('int'),
+        wrap_queues_at=25,
+        step_snapshot_max=125,
+        time_display_units="dhm",
+        display_stage_labels=False,
+        add_background_image="https://raw.githubusercontent.com/Bergam0t/vidigi/refs/heads/main/examples/example_1_simplest_case/Simplest%20Model%20Background%20Image%20-%20Horizontal%20Layout.drawio.png",
+    )
+```
+
+
+## Adding event logging to your own model
+
+Here, we're going to work with the very basic model from the chapter['An Example SimPy Model'](an_example_simpy_model.qmd).
+
+### the g Class
+
+Our g class is unchanged.
+
+### the Entity Class
+
+Our entity class - in this case, Patient - is unchanged.
+
+### the Model Class
+
+#### The __init__ method
+
+To our init method for the Model class, we add an empty list that will store event logs throughout the model run for each patient.
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def __init__(self, run_number):
+    # Create a SimPy environment in which everything will live
+    self.env = simpy.Environment()
+
+    # Create a patient counter (which we'll use as a patient ID)
+    self.patient_counter = 0
+
+    # Create an empty list to store patient objects in
+    self.patients = []
+
+    # Create our resources
+    self.init_resources()
+
+    # Store the passed in run number
+    self.run_number = run_number
+
+    # Create a new Pandas DataFrame that will store some results
+    # against the patient ID (which we'll use as the index).
+    self.results_df = pd.DataFrame()
+    self.results_df["Patient ID"] = [1]
+    self.results_df["Queue Time Cubicle"] = [0.0]
+    self.results_df["Time with Nurse"] = [0.0]
+    self.results_df.set_index("Patient ID", inplace=True)
+
+    # Create an attribute to store the mean queuing times
+    # across this run of the model
+    self.mean_q_time_cubicle = 0
+
+    self.patient_inter_arrival_dist = Exponential(
+        mean = g.arrival_rate,
+        random_seed = self.run_number*g.random_number_set
+        )
+
+    self.treat_dist = Lognormal(
+        mean = g.trauma_treat_mean,
+        stdev = g.trauma_treat_var,
+        random_seed = self.run_number*g.random_number_set
+        )
+```
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Event Logging Modifications
+
+```{python}
+#| eval: false
+def __init__(self, run_number):
+    # Create a SimPy environment in which everything will live
+    self.env = simpy.Environment()
+
+    # Add an empty list to store our event logs in #<<
+    self.event_log = [] #<<
+
+    # Create a patient counter (which we'll use as a patient ID)
+    self.patient_counter = 0
+
+    # Create an empty list to store patient objects in
+    self.patients = []
+
+    # Create our resources
+    self.init_resources()
+
+    # Store the passed in run number
+    self.run_number = run_number
+
+    # Create a new Pandas DataFrame that will store some results
+    # against the patient ID (which we'll use as the index)
+    self.results_df = pd.DataFrame()
+    self.results_df["Patient ID"] = [1]
+    self.results_df["Queue Time Cubicle"] = [0.0]
+    self.results_df["Time with Nurse"] = [0.0]
+    self.results_df.set_index("Patient ID", inplace=True)
+
+    # Create an attribute to store the mean queuing times
+    # across this run of the model
+    self.mean_q_time_cubicle = 0
+
+    self.patient_inter_arrival_dist = Exponential(
+        mean = g.arrival_rate,
+        random_seed = self.run_number*g.random_number_set
+        )
+
+    self.treat_dist = Lognormal(
+        mean = g.trauma_treat_mean,
+        stdev = g.trauma_treat_var,
+        random_seed = self.run_number*g.random_number_set
+        )
+```
+
+:::
+
+::::
+
+
+#### the generator_patient_arrivals method
+
+This method is unchanged.
+
+#### the attend_clinic method
+
+This is the key place in which we add our *logging*. The logs are what vidigi relies on to calculate who should be where, when, within the animation.
+
+Event logging takes the format below:
+
+```{python}
+#| eval: false
+self.event_log.append(
+        {'patient': entity_identifier,
+            'pathway': 'My_Pathway_Name',
+            'event_type': 'arrival_departure', # or 'queue', 'resource_use', or 'resource_use_end'
+            'event': 'arrival', # or 'depart', or for 'queue' and 'resource_use' or 'resource_use_end' you can determine your own event name
+            'time': self.env.now}
+    )
+```
+
+More details about event logging can be found in the ['Event Logging' page](populating_event_logs.qmd).
+
+This is also where we need to change the way we request resources to account for the fact we are now using a simpy store instead of directly interacting with our simpy resources.
+
+Where we would have previously used
+
+```{python}
+#| eval: false
+with self.treatment_cubicles.request() as req:
+    # Seize a treatment resource when available
+    yield req
+
+    # ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
+
+# CONTINUE AFTER RELEASING RESOURCE HERE
+```
+
+we instead now use
+
+```{python}
+#| eval: false
+# Seize a treatment resource when available
+treatment_resource = yield self.treatment_cubicles.get()
+
+# ALL CODE WHERE WE NEED TO KEEP HOLD OF THE RESOURCE
+
+# CONTINUE AFTER RELEASING RESOURCE HERE
+
+# Resource is no longer in use, so put it back in the store
+self.treatment_cubicles.put(treatment_resource)
+```
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def attend_clinic(self, patient):
+    self.arrival = self.env.now
+
+    # request examination resource
+    start_wait = self.env.now
+
+    with self.treatment_cubicles.request() as req:
+        # Seize a treatment resource when available
+        yield req
+
+        # record the waiting time for registration
+        self.wait_treat = self.env.now - start_wait
+
+        # sample treatment duration
+        self.treat_duration = self.treat_dist.sample()
+        yield self.env.timeout(self.treat_duration)
+
+    # total time in system
+    self.total_time = self.env.now - self.arrival
+
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Event Logging Modifications
+
+```{python}
+#| eval: false
+def attend_clinic(self, patient):
+    self.arrival = self.env.now
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            'event_type': 'arrival_departure', #<<
+            # you must use this event name for arrival events
+            'event': 'arrival',  #<<
+            'time': self.env.now} #<<
+    ) #<<
+
+    # request examination resource
+    start_wait = self.env.now
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+            'pathway': 'Simplest', #<<
+            # for a queue, you can define your chosen event name
+            'event': 'treatment_wait_begins', #<<
+            'event_type': 'queue', #<<
+            'time': self.env.now} #<<
+    ) #<<
+
+    # Seize a treatment resource when available
+    with self.treatment_cubicles.request() as req:
+        # Seize a treatment resource when available
+        yield req
+
+        # record the waiting time for registration
+        self.wait_treat = self.env.now - start_wait
+        self.event_log.append( #<<
+            {'patient': patient.identifier, #<<
+                'pathway': 'Simplest', #<<
+                'event': 'treatment_begins', #<<
+                # for a resource_use, you can define your chosen event name
+                'event_type': 'resource_use', #<<
+                'time': self.env.now #<<
+                } #<<
+        ) #<<
+
+        # sample treatment duration
+        self.treat_duration = self.treat_dist.sample()
+        yield self.env.timeout(self.treat_duration)
+
+        self.event_log.append( #<<
+            {'patient': patient.identifier, #<<
+                'pathway': 'Simplest', #<<
+                # for a resource_use_end, you can define your chosen event name
+                'event': 'treatment_complete', #<<
+                'event_type': 'resource_use_end', #<<
+                'time': self.env.now #<<
+                } #<<
+        ) #<<
+
+    # total time in system
+    self.total_time = self.env.now - self.arrival
+    self.event_log.append( #<<
+        {'patient': patient.identifier, #<<
+        'pathway': 'Simplest', #<<
+        'event': 'depart', # you must use this event name for departure events #<<
+        'event_type': 'arrival_departure', #<<
+        'time': self.env.now} #<<
+    ) #<<
+```
+
+:::
+
+::::
+
+#### the calculate_run_results method
+
+This method is unchanged.
+
+#### the run method
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def run(self):
+    # Start up our DES entity generators that create new patients.  We've
+    # only got one in this model, but we'd need to do this for each one if
+    # we had multiple generators.
+    self.env.process(self.generator_patient_arrivals())
+
+    # Run the model for the duration specified in g class
+    self.env.run(until=g.sim_duration)
+
+    # Now the simulation run has finished, call the method that calculates
+    # run results
+    self.calculate_run_results()
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Event Logging Modifications
+
+```{python}
+#| eval: false
+def run(self):
+    # Start up our DES entity generators that create new patients.  We've
+    # only got one in this model, but we'd need to do this for each one if
+    # we had multiple generators.
+    self.env.process(self.generator_patient_arrivals())
+
+    # Run the model for the duration specified in g class
+    self.env.run(until=g.sim_duration)
+
+    # Now the simulation run has finished, call the method that calculates
+    # run results
+    self.calculate_run_results()
+
+    self.event_log = pd.DataFrame(self.event_log) #<<
+
+    self.event_log["run"] = self.run_number #<<
+
+    return {'results': self.results_df, 'event_log': self.event_log}  #<<
+```
+
+:::
+
+::::
+
+
+### the Trial Class
+
+#### the __init__ method
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def  __init__(self):
+    self.df_trial_results = pd.DataFrame()
+    self.df_trial_results["Run Number"] = [0]
+    self.df_trial_results["Arrivals"] = [0]
+    self.df_trial_results["Mean Queue Time Cubicle"] = [0.0]
+    self.df_trial_results.set_index("Run Number", inplace=True)
+
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Event Logging Modifications
+
+```{python}
+#| eval: false
+def  __init__(self):
+    self.df_trial_results = pd.DataFrame()
+    self.df_trial_results["Run Number"] = [0]
+    self.df_trial_results["Arrivals"] = [0]
+    self.df_trial_results["Mean Queue Time Cubicle"] = [0.0]
+    self.df_trial_results.set_index("Run Number", inplace=True)
+
+    self.all_event_logs = [] #<<
+```
+
+:::
+
+::::
+
+
+#### the run_trial method
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+##### Original
+
+```{python}
+#| eval: false
+def run_trial(self):
+    for run in range(g.number_of_runs):
+        random.seed(run)
+
+        my_model = Model(run)
+        my_model.run()
+
+        self.df_trial_results.loc[run] = [
+            my_model.mean_q_time_cubicle
+        ]
+
+    return self.df_trial_results
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+
+##### With Event Logging Modifications
+
+```{python}
+#| eval: false
+def run_trial(self):
+    for run in range(g.number_of_runs):
+        random.seed(run)
+
+        my_model = Model(run)
+        model_outputs = my_model.run()
+        patient_level_results = model_outputs["results"] #<<
+        event_log = model_outputs["event_log"] #<<
+
+        self.df_trial_results.loc[run] = [
+            my_model.mean_q_time_cubicle
+        ]
+
+        self.all_event_logs.append(event_log) #<<
+
+    self.all_event_logs = pd.concat(self.all_event_logs) #<<
+```
+
+:::
+
+::::
