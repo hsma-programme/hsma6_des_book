@@ -8,9 +8,10 @@ execute:
 jupyter: python3
 ---
 
+# Selecting and Parameterising Distributions using Real-World Data
 
 :::{.callout-note}
-Many thanks go to [Richard Pilbery]() for directing me to this excellent package.
+Many thanks to [Richard Pilbery](https://github.com/RichardPilbery) for directing me to this excellent package!
 :::
 
 Going beyond using some standard distributions that tend to fit certain things well, such as

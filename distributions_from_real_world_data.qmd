@@ -1,5 +1,0 @@
----
-title: (Coming Soon!) Selecting and Setting Up Distributions Using Real-World Historical Data
-author:
-  - name: TBC
----

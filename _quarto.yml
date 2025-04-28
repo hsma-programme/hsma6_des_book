@@ -39,7 +39,6 @@ book:
     - one_or_the_other.qmd
     - modelling_variable_arrival_rates.qmd
     - requesting_multiple_resources.qmd
-    - distributions_from_real_world_data.qmd
     - exercise_des_advanced.qmd
   - part: "Part 4 - Growing your Confidence as a Modeller"
     chapters:
