@@ -8,6 +8,20 @@ execute:
 # jupyter: python3
 ---
 
+```{=html}
+<style>
+.processmapR {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.processanimateR {
+  background-color: white;
+  border-radius: 4px;
+}
+</style>
+```
+
 bupaR is an R package for [process mining]().
 
 Now - while we've primarly worked in Python throughout, sometimes we come across an R package that suits our needs better than the Python equivalent. While the excellent [pm4py]() process mining package exists too, bupaR's visuals are top notch.
@@ -182,7 +196,13 @@ activity_log %>%
 
 
 
-# Working with a more advanced log
+## Working with a more advanced simulation log
+
+### Generating a flexible python function for moving from event logs to process logs
+
+Let's turn our code for processing our event log into its own reusable function.
+
+To help our visualisations distinguish between different resources better, we'll also adjust the resource IDs to reflect which process they are being used with.
 
 ```{python}
 def process_event_log_for_bupar(event_log_path):
@@ -209,6 +229,8 @@ def process_event_log_for_bupar(event_log_path):
     # Drop last 'end' row (since there’s no next row to get a timestamp from)
     df_combined = df_combined[:-1]
 
+    df_combined["resource_id"] = df_combined.apply(lambda x: f"{x['event']}_{x['resource_id']:.0f}", axis=1)
+
     df_combined.to_csv(f"{event_log_path.replace('.csv', '')}_bupar_log.csv", index=False)
 
     return df_combined
@@ -218,41 +240,61 @@ bupar_log_complex = process_event_log_for_bupar("resources/complex_event_log.csv
 bupar_log_complex.head(30)
 ```
 
-## Exploring bupaR Outputs - More Complex Simulation
+
+### Generating a flexible R function for generating a bupaR activity log
+
 
 Let's also take this opportunity to turn our conversion of the logs into a function.
 
-:::{.callout-tip}
-We could make this even more flexible so that it accepts different
-:::
-"entity_id"
+:::{.callout-tip collapse="true"}
+
 ```{r}
 library(readr)
 library(dplyr)
 library(lubridate)
 library(bupaverse)
-library(processanimateR)
+library(rlang)
+library(glue)
 
 create_activity_log <- function(filepath,
                                 run_id = 1,
                                 simulation_start = ymd_hms("2025-01-01 00:00:00"),
-                                case_id="entity_id",
-                                activity_id="event",
-                                activity_instance_id="activity_id",
-                                lifecycle_id="lifecycle_id",
-                                resource_id="resource_id"
-                                ) {
+                                case_id = "entity_id",
+                                activity_id = "event",
+                                activity_instance_id = "activity_id",
+                                lifecycle_id = "lifecycle_id",
+                                resource_id = "resource_id",
+                                time_column = "time",
+                                run_column = "run") {
   # Read the data
   data <- readr::read_csv(filepath)
 
+  # Validate that all required columns exist
+  required_cols <- c(case_id, activity_id, activity_instance_id, lifecycle_id,
+                     resource_id, time_column, run_column)
+  missing_cols <- setdiff(required_cols, names(data))
+  if (length(missing_cols) > 0) {
+    stop(glue::glue("Missing required columns: {paste(missing_cols, collapse=', ')}"))
+  }
+
+  # Tidy evaluation symbols
+  time_col_sym <- rlang::sym(time_column)
+  run_col_sym <- rlang::sym(run_column)
+
+  # Validate that the requested run_id exists
+  available_runs <- unique(dplyr::pull(data, !!run_col_sym))
+  if (!run_id %in% available_runs) {
+    stop(glue::glue("Run ID {run_id} not found. Available run IDs: {paste(available_runs, collapse=', ')}"))
+  }
+
   # Filter, create timestamp, and build event log
   activity_log <- data |>
-    dplyr::filter(run == run_id) |>
-    dplyr::mutate(timestamp_dt = simulation_start + lubridate::dminutes(time)) |>
+    dplyr::filter(!!run_col_sym == run_id) |>
+    dplyr::mutate(timestamp_dt = simulation_start + lubridate::dminutes(!!time_col_sym)) |>
     bupaR::eventlog(
-      case_id = case_id ,
+      case_id = case_id,
       activity_id = activity_id,
-      activity_instance_id = activity_id,
+      activity_instance_id = activity_instance_id,
       lifecycle_id = lifecycle_id,
       timestamp = "timestamp_dt",
       resource_id = resource_id
@@ -260,7 +302,10 @@ create_activity_log <- function(filepath,
 
   return(activity_log)
 }
+
 ```
+
+:::
 
 ```{r}
 # Example usage:
@@ -354,5 +399,5 @@ activity_log %>%
 
 ```{r}
 activity_log %>%
-    animate_process()
+    animate_process(style = "background-color: white;")
 ```
