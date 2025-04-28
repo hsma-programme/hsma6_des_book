@@ -55,6 +55,7 @@ book:
     - basic_debugging_tactics.qmd
     - tests.qmd
     - event_logging.qmd
+    - process_logs_with_bupar.qmd
     - visualising_des_models.qmd
     - tracking_resource_utilisation.qmd
     - other_model_metrics.qmd

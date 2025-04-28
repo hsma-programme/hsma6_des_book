@@ -1,0 +1,358 @@
+---
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+execute:
+  eval: true
+# jupyter: python3
+---
+
+bupaR is an R package for [process mining]().
+
+Now - while we've primarly worked in Python throughout, sometimes we come across an R package that suits our needs better than the Python equivalent. While the excellent [pm4py]() process mining package exists too, bupaR's visuals are top notch.
+
+There are a few different ways we could get our Python event logs to work with bupaR:
+
+1. the *reticulate* package (which runs Python from R) - though due to the complexity of our code, this is likely to run into issues
+2. the *r2py* package (which runs R from Python) - as we only want a little bit of R in a primarily Python project, this might be a better option
+3. Quarto's features for passings objects like dataframes between R and Python cells
+4. exporting our event log as a csv, importing this into R, and saving the resulting bupaR visuals
+    - the visuals we export can then be imported back into Streamlit apps or Quarto reports
+    - we could take this even further by using a column-type preserving data format that is interoperable between R and Python, like Feather or Parquet.
+
+In this chapter, we will use option 4.
+
+## Reshaping our event logs for bupaR
+
+The first thing we are going to do is add some extra bits that bupar requires.
+
+```{python}
+import pandas as pd
+
+event_log = pd.read_csv("resources/sample_event_log_10_day_10_run.csv")
+
+df = event_log[(event_log["event_type"]=="queue") |
+               (event_log["event_type"]=="resource_use")].copy()
+
+df["activity_id"] = df.groupby("run").cumcount() + 1
+
+# Duplicate rows and modify them
+df_start = df.copy()
+df_start["lifecycle_id"] = "start"
+
+df_end = df.copy()
+df_end["lifecycle_id"] = "complete"
+
+# Shift timestamps for 'end' rows
+df_end["time"] = df_end["time"].shift(-1)
+
+# Combine and sort
+df_combined = pd.concat([df_start, df_end]).sort_index(kind="stable")
+
+# Drop last 'end' row (since there’s no next row to get a timestamp from)
+df_combined = df_combined[:-1]
+
+df_combined.to_csv("resources/bupar_log.csv", index=False)
+
+df_combined.head(30)
+```
+
+
+
+```{r}
+library(readr)
+library(dplyr)
+library(lubridate)
+library(bupaverse)
+library(processanimateR)
+
+simulation_start <- ymd_hms("2025-01-01 00:00:00")
+
+data <- readr::read_csv("resources/bupar_log.csv")
+
+activity_log <- data |>
+    dplyr::filter(run==1) |>
+    dplyr::mutate(timestamp_dt = simulation_start + lubridate::dminutes(time)) |>
+    bupaR::convert_timestamps("timestamp_dt", ymd_hms) |>
+    bupaR::eventlog(
+        case_id = "entity_id",
+        activity_id = "event",
+        activity_instance_id = "activity_id",
+        lifecycle_id = "lifecycle_id",
+        timestamp = "timestamp_dt",
+        resource_id = "resource_id"
+        )
+
+## !!!! Note that the bupaR documentation recommmends using the
+## to_activitylog() function at the end of this set of steps.
+## This caused significant errors in testing of this code
+
+head(activity_log, 20)
+```
+
+## Exploring bupaR Outputs
+
+### bupaR Static Outputs
+
+#### Frequency Maps
+
+##### Absolute (counts)
+
+```{r}
+activity_log %>%
+    process_map(frequency("absolute"))
+```
+
+##### Absolute case
+
+```{r}
+activity_log %>%
+    process_map(frequency("absolute-case"))
+```
+
+
+##### Relative
+
+```{r}
+activity_log %>%
+    process_map(frequency("relative"))
+```
+
+#### Performance maps
+
+##### Mean Times
+
+```{r}
+activity_log %>%
+    process_map(performance())
+```
+
+##### Max Times
+
+```{r}
+activity_log %>%
+    process_map(performance(FUN = max))
+```
+
+#### Common Routes
+
+```{r}
+activity_log %>%
+    trace_explorer(n_traces = 10)
+```
+
+#### Activity Presence
+
+```{r}
+activity_log %>%
+    activity_presence() %>%
+    plot()
+```
+
+#### Processing Time
+
+```{r}
+activity_log %>%
+    processing_time("resource-activity", units = "mins") %>%
+    plot()
+```
+
+```{r}
+activity_log %>%
+    processing_time("activity", units = "mins") %>%
+    plot()
+```
+
+#### Idle Time
+
+```{r}
+activity_log %>%
+    idle_time("resource", units = "mins") %>%
+    plot()
+```
+
+
+### bupaR Animated Outputs
+
+```{r}
+activity_log %>%
+    animate_process()
+```
+
+
+
+# Working with a more advanced log
+
+```{python}
+def process_event_log_for_bupar(event_log_path):
+    event_log = pd.read_csv(event_log_path)
+
+    df = event_log[(event_log["event_type"]=="queue") |
+                (event_log["event_type"]=="resource_use")].copy()
+
+    df["activity_id"] = df.groupby("run").cumcount() + 1
+
+    # Duplicate rows and modify them
+    df_start = df.copy()
+    df_start["lifecycle_id"] = "start"
+
+    df_end = df.copy()
+    df_end["lifecycle_id"] = "complete"
+
+    # Shift timestamps for 'end' rows
+    df_end["time"] = df_end["time"].shift(-1)
+
+    # Combine and sort
+    df_combined = pd.concat([df_start, df_end]).sort_index(kind="stable")
+
+    # Drop last 'end' row (since there’s no next row to get a timestamp from)
+    df_combined = df_combined[:-1]
+
+    df_combined.to_csv(f"{event_log_path.replace('.csv', '')}_bupar_log.csv", index=False)
+
+    return df_combined
+
+bupar_log_complex = process_event_log_for_bupar("resources/complex_event_log.csv")
+
+bupar_log_complex.head(30)
+```
+
+## Exploring bupaR Outputs - More Complex Simulation
+
+Let's also take this opportunity to turn our conversion of the logs into a function.
+
+:::{.callout-tip}
+We could make this even more flexible so that it accepts different
+:::
+"entity_id"
+```{r}
+library(readr)
+library(dplyr)
+library(lubridate)
+library(bupaverse)
+library(processanimateR)
+
+create_activity_log <- function(filepath,
+                                run_id = 1,
+                                simulation_start = ymd_hms("2025-01-01 00:00:00"),
+                                case_id="entity_id",
+                                activity_id="event",
+                                activity_instance_id="activity_id",
+                                lifecycle_id="lifecycle_id",
+                                resource_id="resource_id"
+                                ) {
+  # Read the data
+  data <- readr::read_csv(filepath)
+
+  # Filter, create timestamp, and build event log
+  activity_log <- data |>
+    dplyr::filter(run == run_id) |>
+    dplyr::mutate(timestamp_dt = simulation_start + lubridate::dminutes(time)) |>
+    bupaR::eventlog(
+      case_id = case_id ,
+      activity_id = activity_id,
+      activity_instance_id = activity_id,
+      lifecycle_id = lifecycle_id,
+      timestamp = "timestamp_dt",
+      resource_id = resource_id
+    )
+
+  return(activity_log)
+}
+```
+
+```{r}
+# Example usage:
+activity_log <- create_activity_log("resources/complex_event_log_bupar_log.csv")
+
+# View a few entries
+head(activity_log, 20)
+```
+
+### bupaR Static Outputs
+
+#### Frequency Maps
+
+##### Absolute (counts)
+
+```{r}
+activity_log %>%
+    process_map(frequency("absolute"))
+```
+
+##### Absolute case
+
+```{r}
+activity_log %>%
+    process_map(frequency("absolute-case"))
+```
+
+
+##### Relative
+
+```{r}
+activity_log %>%
+    process_map(frequency("relative"))
+```
+
+#### Performance maps
+
+##### Mean Times
+
+```{r}
+activity_log %>%
+    process_map(performance())
+```
+
+##### Max Times
+
+```{r}
+activity_log %>%
+    process_map(performance(FUN = max))
+```
+
+#### Common Routes
+
+```{r}
+activity_log %>%
+    trace_explorer(n_traces = 10)
+```
+
+#### Activity Presence
+
+```{r}
+activity_log %>%
+    activity_presence() %>%
+    plot()
+```
+
+#### Processing Time
+
+```{r}
+activity_log %>%
+    processing_time("resource-activity", units = "mins") %>%
+    plot()
+```
+
+```{r}
+activity_log %>%
+    processing_time("activity", units = "mins") %>%
+    plot()
+```
+
+#### Idle Time
+
+```{r}
+activity_log %>%
+    idle_time("resource", units = "mins") %>%
+    plot()
+```
+
+
+### bupaR Animated Outputs
+
+```{r}
+activity_log %>%
+    animate_process()
+```
