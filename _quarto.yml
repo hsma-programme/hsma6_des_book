@@ -33,6 +33,7 @@ book:
     - priority_based_queueing.qmd
     - modelling_resource_unavailability.qmd
     - choosing_distributions.qmd
+    - getting_the_distribution_from_real_world_data.qmd
     - reproducibility.qmd
     - reneging_balking_jockeying.qmd
     - one_or_the_other.qmd

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Sammi Rosser">
 
-<title>30&nbsp; Event Logging – HSMA - the little book of DES</title>
+<title>31&nbsp; Event Logging – HSMA - the little book of DES</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./visualising_des_models.html" rel="next">
+<link href="./process_logs_with_bupar.html" rel="next">
 <link href="./tests.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
@@ -139,27 +139,46 @@ cookieconsent.run({
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <script type="text/javascript">
+
 window.PlotlyConfig = {MathJaxConfig: 'local'};
+
 if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+
 if (typeof require !== 'undefined') {
+
 require.undef("plotly");
+
 requirejs.config({
+
     paths: {
+
         'plotly': ['https://cdn.plot.ly/plotly-2.32.0.min']
+
     }
+
 });
+
 require(['plotly'], function(Plotly) {
+
     window._Plotly = Plotly;
+
 });
+
 }
+
 </script>
 
 
 
+
+
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="30&nbsp; Event Logging – HSMA - the little book of DES">
+<meta property="og:title" content="31&nbsp; Event Logging – HSMA - the little book of DES">
 <meta property="og:description" content="">
 <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
@@ -358,7 +377,7 @@ require(['plotly'], function(Plotly) {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basic_debugging_tactics.html">Part 5 - Debugging, Model Validation and Visualising Results</a></li><li class="breadcrumb-item"><a href="./event_logging.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Event Logging</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basic_debugging_tactics.html">Part 5 - Debugging, Model Validation and Visualising Results</a></li><li class="breadcrumb-item"><a href="./event_logging.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Event Logging</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -489,49 +508,55 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Choosing Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using Different Distributions for Different Processes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_the_distribution_from_real_world_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The fitter package</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./one_or_the_other.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">(Coming Soon!) Waiting for One or The Other</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">(Coming Soon!) Waiting for One or The Other</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./distributions_from_real_world_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">(Coming Soon!) Selecting and Setting Up Distributions Using Real-World Historical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">(Coming Soon!) Selecting and Setting Up Distributions Using Real-World Historical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
   </div>
 </li>
       </ul>
@@ -548,49 +573,49 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part_4_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">An Introduction to Modelling Complex Real-World Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Introduction to Modelling Complex Real-World Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_entity_types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Introduction to Approaching Multiple Entity Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">An Introduction to Approaching Multiple Entity Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./example_multiple_entity_types_similar_pathways.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Example - Multiple Entity Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Example - Multiple Entity Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">(Coming Soon!) Scheduling Arrivals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">(Coming Soon!) Scheduling Arrivals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dealing With Appointment Bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing With Appointment Bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">(Coming Soon!) Advanced Appointment Booking Model Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">(Coming Soon!) Advanced Appointment Booking Model Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models_multistep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">(Coming Soon!) Multi-step Appointment Booking Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Multi-step Appointment Booking Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./example_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Example Models from Other Modellers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Example Models from Other Modellers</span></span></a>
   </div>
 </li>
       </ul>
@@ -607,43 +632,49 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basic_debugging_tactics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_logging.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Event Logging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Event Logging</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./process_logs_with_bupar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Reshaping our event logs for bupaR</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
   </div>
 </li>
       </ul>
@@ -660,7 +691,7 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -677,19 +708,19 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stress_des.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stars.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sharing_reproducible_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
   </div>
 </li>
       </ul>
@@ -706,13 +737,13 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Running Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Running Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -720,13 +751,13 @@ require(['plotly'], function(Plotly) {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -745,38 +776,38 @@ require(['plotly'], function(Plotly) {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-sample-event-log" id="toc-a-sample-event-log" class="nav-link active" data-scroll-target="#a-sample-event-log"><span class="header-section-number">30.1</span> A sample event log</a>
+  <li><a href="#a-sample-event-log" id="toc-a-sample-event-log" class="nav-link active" data-scroll-target="#a-sample-event-log"><span class="header-section-number">31.1</span> A sample event log</a>
   <ul class="collapse">
-  <li><a href="#mandatory-columns" id="toc-mandatory-columns" class="nav-link" data-scroll-target="#mandatory-columns"><span class="header-section-number">30.1.1</span> Mandatory Columns</a></li>
-  <li><a href="#recommended-columns" id="toc-recommended-columns" class="nav-link" data-scroll-target="#recommended-columns"><span class="header-section-number">30.1.2</span> Recommended Columns</a></li>
-  <li><a href="#optional-columns" id="toc-optional-columns" class="nav-link" data-scroll-target="#optional-columns"><span class="header-section-number">30.1.3</span> Optional Columns</a></li>
+  <li><a href="#mandatory-columns" id="toc-mandatory-columns" class="nav-link" data-scroll-target="#mandatory-columns"><span class="header-section-number">31.1.1</span> Mandatory Columns</a></li>
+  <li><a href="#recommended-columns" id="toc-recommended-columns" class="nav-link" data-scroll-target="#recommended-columns"><span class="header-section-number">31.1.2</span> Recommended Columns</a></li>
+  <li><a href="#optional-columns" id="toc-optional-columns" class="nav-link" data-scroll-target="#optional-columns"><span class="header-section-number">31.1.3</span> Optional Columns</a></li>
   </ul></li>
-  <li><a href="#exploring-our-log" id="toc-exploring-our-log" class="nav-link" data-scroll-target="#exploring-our-log"><span class="header-section-number">30.2</span> Exploring our log</a>
+  <li><a href="#exploring-our-log" id="toc-exploring-our-log" class="nav-link" data-scroll-target="#exploring-our-log"><span class="header-section-number">31.2</span> Exploring our log</a>
   <ul class="collapse">
-  <li><a href="#tracking-the-journey-of-a-single-entitypatient" id="toc-tracking-the-journey-of-a-single-entitypatient" class="nav-link" data-scroll-target="#tracking-the-journey-of-a-single-entitypatient"><span class="header-section-number">30.2.1</span> Tracking the journey of a single entity/patient</a></li>
-  <li><a href="#calculating-waits" id="toc-calculating-waits" class="nav-link" data-scroll-target="#calculating-waits"><span class="header-section-number">30.2.2</span> Calculating waits</a></li>
+  <li><a href="#tracking-the-journey-of-a-single-entitypatient" id="toc-tracking-the-journey-of-a-single-entitypatient" class="nav-link" data-scroll-target="#tracking-the-journey-of-a-single-entitypatient"><span class="header-section-number">31.2.1</span> Tracking the journey of a single entity/patient</a></li>
+  <li><a href="#calculating-waits" id="toc-calculating-waits" class="nav-link" data-scroll-target="#calculating-waits"><span class="header-section-number">31.2.2</span> Calculating waits</a></li>
   </ul></li>
-  <li><a href="#exploring-a-bigger-event-log" id="toc-exploring-a-bigger-event-log" class="nav-link" data-scroll-target="#exploring-a-bigger-event-log"><span class="header-section-number">30.3</span> Exploring a bigger event log</a>
+  <li><a href="#exploring-a-bigger-event-log" id="toc-exploring-a-bigger-event-log" class="nav-link" data-scroll-target="#exploring-a-bigger-event-log"><span class="header-section-number">31.3</span> Exploring a bigger event log</a>
   <ul class="collapse">
-  <li><a href="#cumulative-arrivals" id="toc-cumulative-arrivals" class="nav-link" data-scroll-target="#cumulative-arrivals"><span class="header-section-number">30.3.1</span> Cumulative arrivals</a></li>
-  <li><a href="#event-scatterplot" id="toc-event-scatterplot" class="nav-link" data-scroll-target="#event-scatterplot"><span class="header-section-number">30.3.2</span> Event scatterplot</a></li>
-  <li><a href="#treatment-duration" id="toc-treatment-duration" class="nav-link" data-scroll-target="#treatment-duration"><span class="header-section-number">30.3.3</span> Treatment duration</a></li>
-  <li><a href="#throughput" id="toc-throughput" class="nav-link" data-scroll-target="#throughput"><span class="header-section-number">30.3.4</span> Throughput</a></li>
-  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation"><span class="header-section-number">30.3.5</span> Animation</a></li>
+  <li><a href="#cumulative-arrivals" id="toc-cumulative-arrivals" class="nav-link" data-scroll-target="#cumulative-arrivals"><span class="header-section-number">31.3.1</span> Cumulative arrivals</a></li>
+  <li><a href="#event-scatterplot" id="toc-event-scatterplot" class="nav-link" data-scroll-target="#event-scatterplot"><span class="header-section-number">31.3.2</span> Event scatterplot</a></li>
+  <li><a href="#treatment-duration" id="toc-treatment-duration" class="nav-link" data-scroll-target="#treatment-duration"><span class="header-section-number">31.3.3</span> Treatment duration</a></li>
+  <li><a href="#throughput" id="toc-throughput" class="nav-link" data-scroll-target="#throughput"><span class="header-section-number">31.3.4</span> Throughput</a></li>
+  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation"><span class="header-section-number">31.3.5</span> Animation</a></li>
   </ul></li>
-  <li><a href="#adding-event-logging-to-your-own-model" id="toc-adding-event-logging-to-your-own-model" class="nav-link" data-scroll-target="#adding-event-logging-to-your-own-model"><span class="header-section-number">30.4</span> Adding event logging to your own model</a>
+  <li><a href="#adding-event-logging-to-your-own-model" id="toc-adding-event-logging-to-your-own-model" class="nav-link" data-scroll-target="#adding-event-logging-to-your-own-model"><span class="header-section-number">31.4</span> Adding event logging to your own model</a>
   <ul class="collapse">
-  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">30.4.1</span> the g Class</a></li>
-  <li><a href="#the-entity-class" id="toc-the-entity-class" class="nav-link" data-scroll-target="#the-entity-class"><span class="header-section-number">30.4.2</span> the Entity Class</a></li>
-  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">30.4.3</span> the Model Class</a></li>
-  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">30.4.4</span> the Trial Class</a></li>
+  <li><a href="#the-g-class" id="toc-the-g-class" class="nav-link" data-scroll-target="#the-g-class"><span class="header-section-number">31.4.1</span> the g Class</a></li>
+  <li><a href="#the-entity-class" id="toc-the-entity-class" class="nav-link" data-scroll-target="#the-entity-class"><span class="header-section-number">31.4.2</span> the Entity Class</a></li>
+  <li><a href="#the-model-class" id="toc-the-model-class" class="nav-link" data-scroll-target="#the-model-class"><span class="header-section-number">31.4.3</span> the Model Class</a></li>
+  <li><a href="#the-trial-class" id="toc-the-trial-class" class="nav-link" data-scroll-target="#the-trial-class"><span class="header-section-number">31.4.4</span> the Trial Class</a></li>
   </ul></li>
-  <li><a href="#logging-resource-ids" id="toc-logging-resource-ids" class="nav-link" data-scroll-target="#logging-resource-ids"><span class="header-section-number">30.5</span> Logging resource IDs</a>
+  <li><a href="#logging-resource-ids" id="toc-logging-resource-ids" class="nav-link" data-scroll-target="#logging-resource-ids"><span class="header-section-number">31.5</span> Logging resource IDs</a>
   <ul class="collapse">
-  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports"><span class="header-section-number">30.5.1</span> Imports</a></li>
-  <li><a href="#the-model-class-1" id="toc-the-model-class-1" class="nav-link" data-scroll-target="#the-model-class-1"><span class="header-section-number">30.5.2</span> The Model Class</a></li>
+  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports"><span class="header-section-number">31.5.1</span> Imports</a></li>
+  <li><a href="#the-model-class-1" id="toc-the-model-class-1" class="nav-link" data-scroll-target="#the-model-class-1"><span class="header-section-number">31.5.2</span> The Model Class</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">30.6</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">31.6</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -784,9 +815,9 @@ require(['plotly'], function(Plotly) {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basic_debugging_tactics.html">Part 5 - Debugging, Model Validation and Visualising Results</a></li><li class="breadcrumb-item"><a href="./event_logging.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Event Logging</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basic_debugging_tactics.html">Part 5 - Debugging, Model Validation and Visualising Results</a></li><li class="breadcrumb-item"><a href="./event_logging.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Event Logging</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Event Logging</span></h1>
+<h1 class="title"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Event Logging</span></h1>
 </div>
 
 
@@ -825,8 +856,8 @@ Tip
 <p>While this chapter - and the rest of the book - will make use of a particular structure for our event log, this isn’t the only way you can set up an event log. However, this structure has been tested to work well across a range of different models, and interfaces well with the <a href="https://github.com/Bergam0t/vidigi">vidigi</a> package for animated simulation outputs.</p>
 </div>
 </div>
-<section id="a-sample-event-log" class="level2" data-number="30.1">
-<h2 data-number="30.1" class="anchored" data-anchor-id="a-sample-event-log"><span class="header-section-number">30.1</span> A sample event log</h2>
+<section id="a-sample-event-log" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="a-sample-event-log"><span class="header-section-number">31.1</span> A sample event log</h2>
 <p>First, it may be helpful to see what an event log looks like.</p>
 <p>A sample log is displayed below:</p>
 <div id="cde36188" class="cell" data-execution_count="1">
@@ -1359,8 +1390,8 @@ Tip
 </div>
 </div>
 <p>Let’s break down the key components.</p>
-<section id="mandatory-columns" class="level3" data-number="30.1.1">
-<h3 data-number="30.1.1" class="anchored" data-anchor-id="mandatory-columns"><span class="header-section-number">30.1.1</span> Mandatory Columns</h3>
+<section id="mandatory-columns" class="level3" data-number="31.1.1">
+<h3 data-number="31.1.1" class="anchored" data-anchor-id="mandatory-columns"><span class="header-section-number">31.1.1</span> Mandatory Columns</h3>
 <p>We have several mandatory columns:</p>
 <ul>
 <li>entity_id</li>
@@ -1381,13 +1412,13 @@ Tip
 <p><strong>event</strong>: this column further breaks down what is happening during each event type, such as what stage of the system people are waiting to interact with</p>
 <p><strong>time</strong>: this can be an absolute timestamp in the form of a datetime (e.g.&nbsp;2027-01-01 23:01:47), or a relative timestamp in time units from the start of the simulation.</p>
 </section>
-<section id="recommended-columns" class="level3" data-number="30.1.2">
-<h3 data-number="30.1.2" class="anchored" data-anchor-id="recommended-columns"><span class="header-section-number">30.1.2</span> Recommended Columns</h3>
+<section id="recommended-columns" class="level3" data-number="31.1.2">
+<h3 data-number="31.1.2" class="anchored" data-anchor-id="recommended-columns"><span class="header-section-number">31.1.2</span> Recommended Columns</h3>
 <p>In addition, the following columns are highly recommended to include:</p>
 <p><strong>run</strong>: this separates out results across multiple simulations, allowing for easy grouping of results by run</p>
 </section>
-<section id="optional-columns" class="level3" data-number="30.1.3">
-<h3 data-number="30.1.3" class="anchored" data-anchor-id="optional-columns"><span class="header-section-number">30.1.3</span> Optional Columns</h3>
+<section id="optional-columns" class="level3" data-number="31.1.3">
+<h3 data-number="31.1.3" class="anchored" data-anchor-id="optional-columns"><span class="header-section-number">31.1.3</span> Optional Columns</h3>
 <p>There are a few more recommended but optional columns:</p>
 <ul>
 <li>resource_id</li>
@@ -1396,11 +1427,11 @@ Tip
 <p><strong>resource_id</strong>: While a traditional simpy resource does not have a concept of a resource ID, there are various ways we can tackle adding one into our system. Let’s assume we have 5 nurses - it’s very helpful to know which of these 5 nurses are in use at any given time for visualisation and auditing purposes. A discussion of approaches to this will be found in a later chapter (coming soon), or you can take a look at the <code>populate_store</code> function from vidigi for a discussion on one approach to this: <a href="https://sammirosser.com/vidigi/vidigi_docs/introduction.html#all-simpy-resources-need-to-be-changed-to-simpy-stores-containing-a-custom-resource-with-an-id-attribute">click here</a></p>
 </section>
 </section>
-<section id="exploring-our-log" class="level2" data-number="30.2">
-<h2 data-number="30.2" class="anchored" data-anchor-id="exploring-our-log"><span class="header-section-number">30.2</span> Exploring our log</h2>
+<section id="exploring-our-log" class="level2" data-number="31.2">
+<h2 data-number="31.2" class="anchored" data-anchor-id="exploring-our-log"><span class="header-section-number">31.2</span> Exploring our log</h2>
 <p>Let’s explore what we can find out even from this small sample of logs.</p>
-<section id="tracking-the-journey-of-a-single-entitypatient" class="level3" data-number="30.2.1">
-<h3 data-number="30.2.1" class="anchored" data-anchor-id="tracking-the-journey-of-a-single-entitypatient"><span class="header-section-number">30.2.1</span> Tracking the journey of a single entity/patient</h3>
+<section id="tracking-the-journey-of-a-single-entitypatient" class="level3" data-number="31.2.1">
+<h3 data-number="31.2.1" class="anchored" data-anchor-id="tracking-the-journey-of-a-single-entitypatient"><span class="header-section-number">31.2.1</span> Tracking the journey of a single entity/patient</h3>
 <p>We can easily filter down by entity ID to see how the journey of an individual looks</p>
 <div id="15c1be05" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>event_log[event_log[<span class="st">"entity_id"</span>] <span class="op">==</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1480,8 +1511,8 @@ Tip
 </div>
 <p>We can see that this person arrived and was seen immediately.</p>
 </section>
-<section id="calculating-waits" class="level3" data-number="30.2.2">
-<h3 data-number="30.2.2" class="anchored" data-anchor-id="calculating-waits"><span class="header-section-number">30.2.2</span> Calculating waits</h3>
+<section id="calculating-waits" class="level3" data-number="31.2.2">
+<h3 data-number="31.2.2" class="anchored" data-anchor-id="calculating-waits"><span class="header-section-number">31.2.2</span> Calculating waits</h3>
 <p>In this event log, patients who wait for treatment (an event of ‘treatment_wait_begins’) will have the next event of ‘treatment_wait’. We’ll start by just pulling out those instances.</p>
 <div id="6b3c0ba0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>treatment_waits_df <span class="op">=</span> event_log[event_log[<span class="st">"event"</span>].isin([<span class="st">"treatment_wait_begins"</span>,<span class="st">"treatment_begins"</span>])]</span>
@@ -2035,8 +2066,8 @@ if (outputEl) {{
 </div>
 </section>
 </section>
-<section id="exploring-a-bigger-event-log" class="level2" data-number="30.3">
-<h2 data-number="30.3" class="anchored" data-anchor-id="exploring-a-bigger-event-log"><span class="header-section-number">30.3</span> Exploring a bigger event log</h2>
+<section id="exploring-a-bigger-event-log" class="level2" data-number="31.3">
+<h2 data-number="31.3" class="anchored" data-anchor-id="exploring-a-bigger-event-log"><span class="header-section-number">31.3</span> Exploring a bigger event log</h2>
 <p>This would be a lot more powerful if we weren’t just working with a small sample of 50 rows of an event log. Let’s instead load in the full event log from this model, which runs for a lot longer and includes multiple runs. All our existing code can be reused.</p>
 <div id="ca94b78f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>event_log <span class="op">=</span> pd.read_csv(<span class="st">"resources/sample_event_log_10_day_10_run.csv"</span>)</span>
@@ -2478,8 +2509,8 @@ if (outputEl) {{
 </div>
 </div>
 <p>Let’s sample a range of other quick visualisations we can make.</p>
-<section id="cumulative-arrivals" class="level3" data-number="30.3.1">
-<h3 data-number="30.3.1" class="anchored" data-anchor-id="cumulative-arrivals"><span class="header-section-number">30.3.1</span> Cumulative arrivals</h3>
+<section id="cumulative-arrivals" class="level3" data-number="31.3.1">
+<h3 data-number="31.3.1" class="anchored" data-anchor-id="cumulative-arrivals"><span class="header-section-number">31.3.1</span> Cumulative arrivals</h3>
 <p>Let’s first just take a look at the arrivals for a single run, with each dot representing a single person arriving in our system.</p>
 <div id="3139db28" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>px.scatter(</span>
@@ -2554,8 +2585,8 @@ if (outputEl) {{
 </div>
 </div>
 </section>
-<section id="event-scatterplot" class="level3" data-number="30.3.2">
-<h3 data-number="30.3.2" class="anchored" data-anchor-id="event-scatterplot"><span class="header-section-number">30.3.2</span> Event scatterplot</h3>
+<section id="event-scatterplot" class="level3" data-number="31.3.2">
+<h3 data-number="31.3.2" class="anchored" data-anchor-id="event-scatterplot"><span class="header-section-number">31.3.2</span> Event scatterplot</h3>
 <div id="22708247" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>px.scatter(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  event_log[event_log[<span class="st">"run"</span>]<span class="op">==</span><span class="dv">1</span>],</span>
@@ -2593,8 +2624,8 @@ if (outputEl) {{
 </div>
 <p>We can tell that the treatment wait very quickly gets out of hand for our individuals as the simulation progresses.</p>
 </section>
-<section id="treatment-duration" class="level3" data-number="30.3.3">
-<h3 data-number="30.3.3" class="anchored" data-anchor-id="treatment-duration"><span class="header-section-number">30.3.3</span> Treatment duration</h3>
+<section id="treatment-duration" class="level3" data-number="31.3.3">
+<h3 data-number="31.3.3" class="anchored" data-anchor-id="treatment-duration"><span class="header-section-number">31.3.3</span> Treatment duration</h3>
 <div id="ba2ca950" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>treatment_duration_df <span class="op">=</span> generate_difference_df(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  event_log<span class="op">=</span>event_log,</span>
@@ -2857,8 +2888,8 @@ if (outputEl) {{
 </div>
 </div>
 </section>
-<section id="throughput" class="level3" data-number="30.3.4">
-<h3 data-number="30.3.4" class="anchored" data-anchor-id="throughput"><span class="header-section-number">30.3.4</span> Throughput</h3>
+<section id="throughput" class="level3" data-number="31.3.4">
+<h3 data-number="31.3.4" class="anchored" data-anchor-id="throughput"><span class="header-section-number">31.3.4</span> Throughput</h3>
 <div id="c42e9311" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb24" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>patients_entering_system <span class="op">=</span> event_log[event_log[<span class="st">"event"</span>] <span class="op">==</span> <span class="st">"arrival"</span>]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -3115,8 +3146,8 @@ if (outputEl) {{
 </div>
 </div>
 </section>
-<section id="animation" class="level3" data-number="30.3.5">
-<h3 data-number="30.3.5" class="anchored" data-anchor-id="animation"><span class="header-section-number">30.3.5</span> Animation</h3>
+<section id="animation" class="level3" data-number="31.3.5">
+<h3 data-number="31.3.5" class="anchored" data-anchor-id="animation"><span class="header-section-number">31.3.5</span> Animation</h3>
 <p>Using the vidigi package, we can take our event log and - with only minor adjustments and additions - create a full animation of our system.</p>
 <div id="20228365" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb27" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>event_position_df <span class="op">=</span> pd.DataFrame([</span>
@@ -3232,8 +3263,8 @@ if (outputEl) {{
 </div>
 </section>
 </section>
-<section id="adding-event-logging-to-your-own-model" class="level2" data-number="30.4">
-<h2 data-number="30.4" class="anchored" data-anchor-id="adding-event-logging-to-your-own-model"><span class="header-section-number">30.4</span> Adding event logging to your own model</h2>
+<section id="adding-event-logging-to-your-own-model" class="level2" data-number="31.4">
+<h2 data-number="31.4" class="anchored" data-anchor-id="adding-event-logging-to-your-own-model"><span class="header-section-number">31.4</span> Adding event logging to your own model</h2>
 <p>Here, we’re going to work with the very basic model from the chapter <a href="./an_example_simpy_model.html">‘An Example SimPy Model’</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -3248,23 +3279,23 @@ Tip
 <p>Changed code will be highlighted in the right-hand column, with unchanged column displayed less brightly.</p>
 </div>
 </div>
-<section id="the-g-class" class="level3" data-number="30.4.1">
-<h3 data-number="30.4.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">30.4.1</span> the g Class</h3>
+<section id="the-g-class" class="level3" data-number="31.4.1">
+<h3 data-number="31.4.1" class="anchored" data-anchor-id="the-g-class"><span class="header-section-number">31.4.1</span> the g Class</h3>
 <p>Our g class is unchanged.</p>
 </section>
-<section id="the-entity-class" class="level3" data-number="30.4.2">
-<h3 data-number="30.4.2" class="anchored" data-anchor-id="the-entity-class"><span class="header-section-number">30.4.2</span> the Entity Class</h3>
+<section id="the-entity-class" class="level3" data-number="31.4.2">
+<h3 data-number="31.4.2" class="anchored" data-anchor-id="the-entity-class"><span class="header-section-number">31.4.2</span> the Entity Class</h3>
 <p>Our entity class - in this case, Patient - is unchanged.</p>
 </section>
-<section id="the-model-class" class="level3" data-number="30.4.3">
-<h3 data-number="30.4.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">30.4.3</span> the Model Class</h3>
-<section id="the-init-method" class="level4" data-number="30.4.3.1">
-<h4 data-number="30.4.3.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">30.4.3.1</span> The <strong>init</strong> method</h4>
+<section id="the-model-class" class="level3" data-number="31.4.3">
+<h3 data-number="31.4.3" class="anchored" data-anchor-id="the-model-class"><span class="header-section-number">31.4.3</span> the Model Class</h3>
+<section id="the-init-method" class="level4" data-number="31.4.3.1">
+<h4 data-number="31.4.3.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">31.4.3.1</span> The <strong>init</strong> method</h4>
 <p>To our init method for the Model class, we add an empty list that will store event logs throughout the model run for each patient.</p>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original" class="level5" data-number="30.4.3.1.1">
-<h5 data-number="30.4.3.1.1" class="anchored" data-anchor-id="original"><span class="header-section-number">30.4.3.1.1</span> Original</h5>
+<section id="original" class="level5" data-number="31.4.3.1.1">
+<h5 data-number="31.4.3.1.1" class="anchored" data-anchor-id="original"><span class="header-section-number">31.4.3.1.1</span> Original</h5>
 <div id="a5f6c37e" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb34" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a SimPy environment in which everything will live</span></span>
@@ -3309,8 +3340,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-event-logging-modifications" class="level5" data-number="30.4.3.1.2">
-<h5 data-number="30.4.3.1.2" class="anchored" data-anchor-id="with-event-logging-modifications"><span class="header-section-number">30.4.3.1.2</span> With Event Logging Modifications</h5>
+<section id="with-event-logging-modifications" class="level5" data-number="31.4.3.1.2">
+<h5 data-number="31.4.3.1.2" class="anchored" data-anchor-id="with-event-logging-modifications"><span class="header-section-number">31.4.3.1.2</span> With Event Logging Modifications</h5>
 <div id="60bfa3ca" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb35" data-source-line-numbers="nil" data-code-line-numbers="5,6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, run_number):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a SimPy environment in which everything will live</span></span>
@@ -3358,12 +3389,12 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-generator_patient_arrivals-method" class="level4" data-number="30.4.3.2">
-<h4 data-number="30.4.3.2" class="anchored" data-anchor-id="the-generator_patient_arrivals-method"><span class="header-section-number">30.4.3.2</span> the generator_patient_arrivals method</h4>
+<section id="the-generator_patient_arrivals-method" class="level4" data-number="31.4.3.2">
+<h4 data-number="31.4.3.2" class="anchored" data-anchor-id="the-generator_patient_arrivals-method"><span class="header-section-number">31.4.3.2</span> the generator_patient_arrivals method</h4>
 <p>This method is unchanged.</p>
 </section>
-<section id="the-attend_clinic-method" class="level4" data-number="30.4.3.3">
-<h4 data-number="30.4.3.3" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">30.4.3.3</span> the attend_clinic method</h4>
+<section id="the-attend_clinic-method" class="level4" data-number="31.4.3.3">
+<h4 data-number="31.4.3.3" class="anchored" data-anchor-id="the-attend_clinic-method"><span class="header-section-number">31.4.3.3</span> the attend_clinic method</h4>
 <p>This is the key place in which we add our <em>logging</em>. The logs are what vidigi relies on to calculate who should be where, when, within the animation.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -3416,8 +3447,8 @@ Tip
 </ul>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-1" class="level5" data-number="30.4.3.3.1">
-<h5 data-number="30.4.3.3.1" class="anchored" data-anchor-id="original-1"><span class="header-section-number">30.4.3.3.1</span> Original</h5>
+<section id="original-1" class="level5" data-number="31.4.3.3.1">
+<h5 data-number="31.4.3.3.1" class="anchored" data-anchor-id="original-1"><span class="header-section-number">31.4.3.3.1</span> Original</h5>
 <div id="b77a7b29" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb37" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.arrival <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -3443,8 +3474,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-event-logging-modifications-1" class="level5" data-number="30.4.3.3.2">
-<h5 data-number="30.4.3.3.2" class="anchored" data-anchor-id="with-event-logging-modifications-1"><span class="header-section-number">30.4.3.3.2</span> With Event Logging Modifications</h5>
+<section id="with-event-logging-modifications-1" class="level5" data-number="31.4.3.3.2">
+<h5 data-number="31.4.3.3.2" class="anchored" data-anchor-id="with-event-logging-modifications-1"><span class="header-section-number">31.4.3.3.2</span> With Event Logging Modifications</h5>
 <div id="e73f1637" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb38" data-source-line-numbers="nil" data-code-line-numbers="3,4,5,6,8,9,10,14,15,16,18,19,20,21,30,31,32,33,35,36,37,38,44,45,46,48,49,50,51,52,56,57,58,59,60,61,62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.arrival <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -3513,19 +3544,19 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-calculate_run_results-method" class="level4" data-number="30.4.3.4">
-<h4 data-number="30.4.3.4" class="anchored" data-anchor-id="the-calculate_run_results-method"><span class="header-section-number">30.4.3.4</span> the calculate_run_results method</h4>
+<section id="the-calculate_run_results-method" class="level4" data-number="31.4.3.4">
+<h4 data-number="31.4.3.4" class="anchored" data-anchor-id="the-calculate_run_results-method"><span class="header-section-number">31.4.3.4</span> the calculate_run_results method</h4>
 <p>This method is unchanged.</p>
 </section>
-<section id="the-run-method" class="level4" data-number="30.4.3.5">
-<h4 data-number="30.4.3.5" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">30.4.3.5</span> the run method</h4>
+<section id="the-run-method" class="level4" data-number="31.4.3.5">
+<h4 data-number="31.4.3.5" class="anchored" data-anchor-id="the-run-method"><span class="header-section-number">31.4.3.5</span> the run method</h4>
 <p>Our concern in the run method is adding a way to extract the event log.</p>
 <p>It will also be important to augment the event log with a run number - we already pass a run number attribute when initialising our Model class, so we can just access that.</p>
 <p>Finally, we change our model to output a dictionary of our results_df and our event log. You could approach this in different ways, like returning a list, or only returning the event log and calculating all results from the event log instead.</p>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-2" class="level5" data-number="30.4.3.5.1">
-<h5 data-number="30.4.3.5.1" class="anchored" data-anchor-id="original-2"><span class="header-section-number">30.4.3.5.1</span> Original</h5>
+<section id="original-2" class="level5" data-number="31.4.3.5.1">
+<h5 data-number="31.4.3.5.1" class="anchored" data-anchor-id="original-2"><span class="header-section-number">31.4.3.5.1</span> Original</h5>
 <div id="5eca0615" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb39" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up our DES entity generators that create new patients.  We've</span></span>
@@ -3544,8 +3575,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-event-logging-modifications-2" class="level5" data-number="30.4.3.5.2">
-<h5 data-number="30.4.3.5.2" class="anchored" data-anchor-id="with-event-logging-modifications-2"><span class="header-section-number">30.4.3.5.2</span> With Event Logging Modifications</h5>
+<section id="with-event-logging-modifications-2" class="level5" data-number="31.4.3.5.2">
+<h5 data-number="31.4.3.5.2" class="anchored" data-anchor-id="with-event-logging-modifications-2"><span class="header-section-number">31.4.3.5.2</span> With Event Logging Modifications</h5>
 <div id="9f30c2c7" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb40" data-source-line-numbers="nil" data-code-line-numbers="14,16,18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(<span class="va">self</span>):</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start up our DES entity generators that create new patients.  We've</span></span>
@@ -3571,15 +3602,15 @@ Tip
 </div>
 </section>
 </section>
-<section id="the-trial-class" class="level3" data-number="30.4.4">
-<h3 data-number="30.4.4" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">30.4.4</span> the Trial Class</h3>
-<section id="the-init-method-1" class="level4" data-number="30.4.4.1">
-<h4 data-number="30.4.4.1" class="anchored" data-anchor-id="the-init-method-1"><span class="header-section-number">30.4.4.1</span> the <strong>init</strong> method</h4>
+<section id="the-trial-class" class="level3" data-number="31.4.4">
+<h3 data-number="31.4.4" class="anchored" data-anchor-id="the-trial-class"><span class="header-section-number">31.4.4</span> the Trial Class</h3>
+<section id="the-init-method-1" class="level4" data-number="31.4.4.1">
+<h4 data-number="31.4.4.1" class="anchored" data-anchor-id="the-init-method-1"><span class="header-section-number">31.4.4.1</span> the <strong>init</strong> method</h4>
 <p>In this, we just need to add an empty list which will hold all the event log dataframes from the individual runs.</p>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-3" class="level5" data-number="30.4.4.1.1">
-<h5 data-number="30.4.4.1.1" class="anchored" data-anchor-id="original-3"><span class="header-section-number">30.4.4.1.1</span> Original</h5>
+<section id="original-3" class="level5" data-number="31.4.4.1.1">
+<h5 data-number="31.4.4.1.1" class="anchored" data-anchor-id="original-3"><span class="header-section-number">31.4.4.1.1</span> Original</h5>
 <div id="fb259372" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb41" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
@@ -3592,8 +3623,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-event-logging-modifications-3" class="level5" data-number="30.4.4.1.2">
-<h5 data-number="30.4.4.1.2" class="anchored" data-anchor-id="with-event-logging-modifications-3"><span class="header-section-number">30.4.4.1.2</span> With Event Logging Modifications</h5>
+<section id="with-event-logging-modifications-3" class="level5" data-number="31.4.4.1.2">
+<h5 data-number="31.4.4.1.2" class="anchored" data-anchor-id="with-event-logging-modifications-3"><span class="header-section-number">31.4.4.1.2</span> With Event Logging Modifications</h5>
 <div id="6b82a50d" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb42" data-source-line-numbers="nil" data-code-line-numbers="8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
@@ -3608,8 +3639,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-run_trial-method" class="level4" data-number="30.4.4.2">
-<h4 data-number="30.4.4.2" class="anchored" data-anchor-id="the-run_trial-method"><span class="header-section-number">30.4.4.2</span> the run_trial method</h4>
+<section id="the-run_trial-method" class="level4" data-number="31.4.4.2">
+<h4 data-number="31.4.4.2" class="anchored" data-anchor-id="the-run_trial-method"><span class="header-section-number">31.4.4.2</span> the run_trial method</h4>
 <p>Finally, in every iteration, we split out the results from our model (the dictionary) into two objects - one of which is our event log.</p>
 <p>We can then add this event log - remembering that it also has a column added identifying which run the event log relates to - into our list.</p>
 <p>Once we have finished the for loop - i.e.&nbsp;we have completed every run of the model - we can join our event log into one large dataframe.</p>
@@ -3630,8 +3661,8 @@ Tip
 </div>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-4" class="level5" data-number="30.4.4.2.1">
-<h5 data-number="30.4.4.2.1" class="anchored" data-anchor-id="original-4"><span class="header-section-number">30.4.4.2.1</span> Original</h5>
+<section id="original-4" class="level5" data-number="31.4.4.2.1">
+<h5 data-number="31.4.4.2.1" class="anchored" data-anchor-id="original-4"><span class="header-section-number">31.4.4.2.1</span> Original</h5>
 <div id="ff8e4c16" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb43" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
@@ -3650,8 +3681,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-event-logging-modifications-4" class="level5" data-number="30.4.4.2.2">
-<h5 data-number="30.4.4.2.2" class="anchored" data-anchor-id="with-event-logging-modifications-4"><span class="header-section-number">30.4.4.2.2</span> With Event Logging Modifications</h5>
+<section id="with-event-logging-modifications-4" class="level5" data-number="31.4.4.2.2">
+<h5 data-number="31.4.4.2.2" class="anchored" data-anchor-id="with-event-logging-modifications-4"><span class="header-section-number">31.4.4.2.2</span> With Event Logging Modifications</h5>
 <div id="cfe61664" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb44" data-source-line-numbers="nil" data-code-line-numbers="7,8,14,16,18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(g.number_of_runs):</span>
@@ -3678,8 +3709,8 @@ Tip
 </section>
 </section>
 </section>
-<section id="logging-resource-ids" class="level2" data-number="30.5">
-<h2 data-number="30.5" class="anchored" data-anchor-id="logging-resource-ids"><span class="header-section-number">30.5</span> Logging resource IDs</h2>
+<section id="logging-resource-ids" class="level2" data-number="31.5">
+<h2 data-number="31.5" class="anchored" data-anchor-id="logging-resource-ids"><span class="header-section-number">31.5</span> Logging resource IDs</h2>
 <p>If we want to make use of our full ability to monitor resource utilisation at a detailed level, and to create animations with the vidigi package, we also need to change the way we request resources to account for the fact we are now using a simpy store instead of directly interacting with our simpy resources.</p>
 <p>Where we would have previously used</p>
 <div id="45f3362c" class="cell" data-execution_count="38">
@@ -3703,25 +3734,25 @@ Tip
 <span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Resource is no longer in use, so put it back in the store</span></span>
 <span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.treatment_cubicles.put(treatment_resource)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="imports" class="level3" data-number="30.5.1">
-<h3 data-number="30.5.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">30.5.1</span> Imports</h3>
+<section id="imports" class="level3" data-number="31.5.1">
+<h3 data-number="31.5.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">31.5.1</span> Imports</h3>
 <p>We will need to add the following to our imports:</p>
 <div id="2190c0db" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb47" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vidigi.utils <span class="im">import</span> populate_store</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-model-class-1" class="level3" data-number="30.5.2">
-<h3 data-number="30.5.2" class="anchored" data-anchor-id="the-model-class-1"><span class="header-section-number">30.5.2</span> The Model Class</h3>
-<section id="the-init_resources-method" class="level4" data-number="30.5.2.1">
-<h4 data-number="30.5.2.1" class="anchored" data-anchor-id="the-init_resources-method"><span class="header-section-number">30.5.2.1</span> the init_resources method</h4>
+<section id="the-model-class-1" class="level3" data-number="31.5.2">
+<h3 data-number="31.5.2" class="anchored" data-anchor-id="the-model-class-1"><span class="header-section-number">31.5.2</span> The Model Class</h3>
+<section id="the-init_resources-method" class="level4" data-number="31.5.2.1">
+<h4 data-number="31.5.2.1" class="anchored" data-anchor-id="the-init_resources-method"><span class="header-section-number">31.5.2.1</span> the init_resources method</h4>
 <p>Vidigi needs to know <em>which</em> resource a user made use of so that we can ensure it stays with the correct resource throughout its time in the animation.</p>
 <p>The standard simpy Resource does not have a way of tracking that, so we need to do two things: - create a <strong>simpy Store</strong> that we will store our resources in - use the vidigi helper function <code>populate_store()</code> to generate a store full of special resources that each have a unique ID we can track when doing our event logging</p>
 <p>Overall, the use of stores won’t generally change your code too much - and we cover exactly what needs to change a little later in this document.</p>
 <p>If you are using priority resources, this step will be a little different - see Example 3 in the documents if you need to use Resources that prioritise some entities over others.</p>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-5" class="level5" data-number="30.5.2.1.1">
-<h5 data-number="30.5.2.1.1" class="anchored" data-anchor-id="original-5"><span class="header-section-number">30.5.2.1.1</span> Original</h5>
+<section id="original-5" class="level5" data-number="31.5.2.1.1">
+<h5 data-number="31.5.2.1.1" class="anchored" data-anchor-id="original-5"><span class="header-section-number">31.5.2.1.1</span> Original</h5>
 <div id="46c84efb" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb48" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_resources(<span class="va">self</span>):</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.treatment_cubicles <span class="op">=</span> simpy.Resource(</span>
@@ -3733,8 +3764,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-vidigi-modifications" class="level5" data-number="30.5.2.1.2">
-<h5 data-number="30.5.2.1.2" class="anchored" data-anchor-id="with-vidigi-modifications"><span class="header-section-number">30.5.2.1.2</span> With Vidigi Modifications</h5>
+<section id="with-vidigi-modifications" class="level5" data-number="31.5.2.1.2">
+<h5 data-number="31.5.2.1.2" class="anchored" data-anchor-id="with-vidigi-modifications"><span class="header-section-number">31.5.2.1.2</span> With Vidigi Modifications</h5>
 <div id="c4a131b0" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb49" data-source-line-numbers="nil" data-code-line-numbers="2,4,5,6,8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_resources(<span class="va">self</span>):</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.treatment_cubicles <span class="op">=</span> simpy.Store(<span class="va">self</span>.env) </span>
@@ -3749,8 +3780,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-attend_clinic-method-1" class="level4" data-number="30.5.2.2">
-<h4 data-number="30.5.2.2" class="anchored" data-anchor-id="the-attend_clinic-method-1"><span class="header-section-number">30.5.2.2</span> the attend_clinic method</h4>
+<section id="the-attend_clinic-method-1" class="level4" data-number="31.5.2.2">
+<h4 data-number="31.5.2.2" class="anchored" data-anchor-id="the-attend_clinic-method-1"><span class="header-section-number">31.5.2.2</span> the attend_clinic method</h4>
 <p>We will return to our attend_clinic method, where we previously added in event logging, and now</p>
 <ul>
 <li>make use of this new resource ID attribute</li>
@@ -3758,8 +3789,8 @@ Tip
 </ul>
 <div class="columns">
 <div class="column" style="width:47.5%;">
-<section id="original-6" class="level5" data-number="30.5.2.2.1">
-<h5 data-number="30.5.2.2.1" class="anchored" data-anchor-id="original-6"><span class="header-section-number">30.5.2.2.1</span> Original</h5>
+<section id="original-6" class="level5" data-number="31.5.2.2.1">
+<h5 data-number="31.5.2.2.1" class="anchored" data-anchor-id="original-6"><span class="header-section-number">31.5.2.2.1</span> Original</h5>
 <div id="a7fc0371" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb50" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.arrival <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -3828,8 +3859,8 @@ Tip
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:47.5%;">
-<section id="with-custom-resource-modifications" class="level5" data-number="30.5.2.2.2">
-<h5 data-number="30.5.2.2.2" class="anchored" data-anchor-id="with-custom-resource-modifications"><span class="header-section-number">30.5.2.2.2</span> With Custom Resource Modifications</h5>
+<section id="with-custom-resource-modifications" class="level5" data-number="31.5.2.2.2">
+<h5 data-number="31.5.2.2.2" class="anchored" data-anchor-id="with-custom-resource-modifications"><span class="header-section-number">31.5.2.2.2</span> With Custom Resource Modifications</h5>
 <div id="c2360b94" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb51" data-source-line-numbers="nil" data-code-line-numbers="3,4,5,6,8,9,10,14,15,16,18,19,20,21,24,28,29,30,31,33,34,36,37,38,44,45,46,48,49,50,51,52,54,55,59,60,61,62,63,64,65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.arrival <span class="op">=</span> <span class="va">self</span>.env.now</span>
@@ -3903,8 +3934,8 @@ Tip
 </section>
 </section>
 </section>
-<section id="summary" class="level2" data-number="30.6">
-<h2 data-number="30.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">30.6</span> Summary</h2>
+<section id="summary" class="level2" data-number="31.6">
+<h2 data-number="31.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">31.6</span> Summary</h2>
 <p>In this chapter, we have demonstrated just a few of the things you can do with event logs, and how you can efficiently add them to an existing model.</p>
 <p>In the rest of this section, we will dive deeper into some reproducible snippets and patterns to help you generate useful outputs from event logs, as well as a deeper dive into turning these into process maps with bupaR and animations with vidigi.</p>
 
@@ -4664,12 +4695,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./tests.html" class="pagination-link" aria-label="Tests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Tests</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./visualising_des_models.html" class="pagination-link" aria-label="(Coming Soon!) Visualising Entity Flow">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./process_logs_with_bupar.html" class="pagination-link" aria-label="Reshaping our event logs for bupaR">
+        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Reshaping our event logs for bupaR</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

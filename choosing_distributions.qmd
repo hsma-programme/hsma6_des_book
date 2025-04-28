@@ -11,7 +11,7 @@ execute:
 jupyter: python3
 ---
 
-# Choosing Distributions {#sec-distributions}
+# Using Different Distributions for Different Processes {#sec-distributions}
 
 :::{.callout-note title="Acknowledgements"}
 
@@ -19,6 +19,14 @@ The `LogNormal` class in this section is taken from the package [sim-tools](http
 :::
 
 In the previous session, we mentioned that whilst it’s a useful tip to start by having all of the distributions in our model be Exponential (because it’s easy to tweak an Exponential Distribution), for real world models we probably want to then adapt them to use a Lognormal Distribution for activity times.
+
+:::{.callout-tip}
+Here, we explore LogNormal as a good distribution to work with for activity times - and it very often is!
+
+However, you may also want to consider creating distributions that reflect your real-world data even more - which we cover in the next chapter on [getting distributions from real-world data](getting_the_distribution_from_real_world_data.qmd).
+
+If you are waiting on data or want to continue getting your model mocked up before diving too deep into real-world data, using LogNormal for your activity times is a great step - so have a read through the rest of this chapter!
+:::
 
 A Lognormal Distribution is commonly used in Discrete Event simulation to model the time to perform a task.  It is **right-skewed**, which basically means it has a long tail.  To put it in more understandable terms, it suggests that most activity times will be similar, but some will be longer, and some will be MUCH longer.  This tends to capture activity times in patient pathways well.
 
