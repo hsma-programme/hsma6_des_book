@@ -16,7 +16,7 @@ code-annotations: hover
 :::{.callout-note title="Acknowledgements"}
 
 * The `trace()` function is based on that in [HEP](https://github.com/AliHarp/HEP) by [Alison Harper](https://github.com/AliHarp) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0001-5274-5037) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
-* The `SimLogger` class is adapted from the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
+* The `SimLogger` class is adapted from [github.com/pythonhealthdatascience/pydesrap_mms](https://github.com/pythonhealthdatascience/pydesrap_mms) by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481).
 :::
 
 When working with your model, it can be hard to know whether it is working correctly. There are a range of different approaches we can take. These include:
@@ -1208,7 +1208,7 @@ with open("outputs/example_log.log") as f:
 
 :::{.callout-tip}
 
-For a more detailed logging implementation, see the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) - the file [notebooks/logs.ipynb](https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/notebooks/logs.ipynb) is a good place to start.
+For a more detailed logging implementation, see [github.com/pythonhealthdatascience/pydesrap_mms](https://github.com/pythonhealthdatascience/pydesrap_mms) - the file [notebooks/logs.ipynb](https://github.com/pythonhealthdatascience/pydesrap_mms/blob/main/notebooks/logs.ipynb) is a good place to start.
 
 That implementation includes:
 

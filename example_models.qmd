@@ -36,15 +36,15 @@ Code structure:
 
 ![Structure as of 7th February 2025. May not include every function/method, but tries to provide a general guide to how things interact. Click image to enlarge. Diagram created using [draw.io](https://draw.io/).](images/structure_hsma.png){.lightbox}
 
-## A queueing model
+## A nurse queueing model
 
-A SimPy model of a queueing model for a nurse consultation.
+A SimPy M/M/s model of a queues for a nurse consultation.
 
-> [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) (2025) **Python DES RAP Template**. https://github.com/pythonhealthdatascience/rap_template_python_des.
+> [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) (2025) **Simple M/M/s queuing model: Python DES RAP**. https://github.com/pythonhealthdatascience/pydesrap_mms.
 
-* [Model code](https://github.com/pythonhealthdatascience/rap_template_python_des) ([archive](https://doi.org/10.5281/zenodo.14622466)).
+* [Model code](https://github.com/pythonhealthdatascience/pydesrap_mms) ([archive](https://doi.org/10.5281/zenodo.14622466)).
 
-The repository includes a document [docs/hsma_changes.md](https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md) which explains how the model differs from those in this book, and why those changes were made.
+The repository includes a document [docs/hsma_changes.md](https://github.com/pythonhealthdatascience/pydesrap_mms/blob/main/docs/hsma_changes.md) which explains how the model differs from those in this book, and why those changes were made.
 
 Code structure:
 
