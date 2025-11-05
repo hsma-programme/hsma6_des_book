@@ -259,10 +259,12 @@ We are also going to create an empty list to store our patient objects - this is
 
         ##NEW
         # Here we set up our arrivals distribution
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(2)
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
-          random_seed1 = run_number * 42,
-          random_seed2 = run_number * 88
+          random_seed1=seeds[0],
+          random_seed2=seeds[1]
         )
 
         # Create a new Pandas DataFrame that will store some results against
@@ -451,10 +453,12 @@ class Model:
 
         ##NEW
         # Here we set up our arrivals distribution
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(2)
         self.arrivals_dist = NSPPThinning(
           data=g.arrivals_time_dependent_df,
-          random_seed1 = run_number * 42,
-          random_seed2 = run_number * 88
+          random_seed1=seeds[0],
+          random_seed2=seeds[1]
         )
 
 

@@ -453,16 +453,18 @@ def __init__(self, run_number):
     # across this run of the model
     self.mean_q_time_cubicle = 0
 
+    ss = np.random.SeedSequence(self.run_number)
+    seeds = ss.spawn(2)
     self.patient_inter_arrival_dist = Exponential(
-        mean = g.arrival_rate,
-        random_seed = self.run_number*g.random_number_set
-        )
+        mean=g.arrival_rate,
+        random_seed=seeds[0]
+    )
 
     self.treat_dist = Lognormal(
         mean = g.trauma_treat_mean,
         stdev = g.trauma_treat_var,
-        random_seed = self.run_number*g.random_number_set
-        )
+        random_seed=seeds[1]
+    )
 ```
 :::
 
@@ -507,16 +509,18 @@ def __init__(self, run_number):
     # across this run of the model
     self.mean_q_time_cubicle = 0
 
+    ss = np.random.SeedSequence(self.run_number)
+    seeds = ss.spawn(2)
     self.patient_inter_arrival_dist = Exponential(
-        mean = g.arrival_rate,
-        random_seed = self.run_number*g.random_number_set
-        )
+        mean=g.arrival_rate,
+        random_seed=seeds[0]
+    )
 
     self.treat_dist = Lognormal(
         mean = g.trauma_treat_mean,
         stdev = g.trauma_treat_var,
-        random_seed = self.run_number*g.random_number_set
-        )
+        random_seed=seeds[1]
+    )
 ```
 
 :::
