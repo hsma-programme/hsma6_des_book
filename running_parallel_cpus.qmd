@@ -272,6 +272,7 @@ First, let's run this the original way and time how long it takes.
 #| eval: true
 #| echo: false
 
+import numpy as np
 import simpy
 import random
 import pandas as pd
@@ -341,10 +342,16 @@ class Model:
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
 
-        self.patient_inter_arrival_dist = Exponential(mean = g.patient_inter, random_seed = self.run_number*2)
-        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
-        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
-        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
+        self.patient_inter_arrival_dist = Exponential(mean=g.patient_inter,
+                                                      random_seed=seeds[0])
+        self.patient_reception_time_dist = Exponential(mean=g.mean_reception_time,
+                                                       random_seed=seeds[1])
+        self.nurse_consult_time_dist = Exponential(mean=g.mean_n_consult_time,
+                                                   random_seed=seeds[2])
+        self.doctor_consult_time_dist = Exponential(mean=g.mean_d_consult_time,
+                                                   random_seed=seeds[3])
 
     # A generator function that represents the DES generator for patient
     # arrivals
@@ -594,6 +601,7 @@ Now let's run it again with parallisation.
 #| eval: true
 #| echo: false
 
+import numpy as np
 import simpy
 import random
 import pandas as pd
@@ -663,10 +671,16 @@ class Model:
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
 
-        self.patient_inter_arrival_dist = Exponential(mean = g.patient_inter, random_seed = self.run_number*2)
-        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
-        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
-        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
+        self.patient_inter_arrival_dist = Exponential(mean=g.patient_inter,
+                                                      random_seed=seeds[0])
+        self.patient_reception_time_dist = Exponential(mean=g.mean_reception_time,
+                                                       random_seed=seeds[1])
+        self.nurse_consult_time_dist = Exponential(mean=g.mean_n_consult_time,
+                                                   random_seed=seeds[2])
+        self.doctor_consult_time_dist = Exponential(mean=g.mean_d_consult_time,
+                                                   random_seed=seeds[3])
 
     # A generator function that represents the DES generator for patient
     # arrivals
