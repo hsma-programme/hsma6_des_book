@@ -12,7 +12,7 @@ code-annotations: hover
 
 :::{.callout-note title="Acknowledgements"}
 
-This section is based on the tests in the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.
+This section is based on the tests in [github.com/pythonhealthdatascience/pydesrap_mms](https://github.com/pythonhealthdatascience/pydesrap_mms) developed by [Amy Heather](https://github.com/amyheather) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0002-6596-3479) and [Tom Monks](https://github.com/TomMonks) [![ORCID ID](images/orcid.png)](https://orcid.org/0000-0003-2631-4481) from the PenCHORD team at the University of Exeter. This is a SimPy DES model run as part of a reproducible analytical pipeline, and the model structure was based on this book, among other sources.
 :::
 
 Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions. By **systematically checking for errors, inconsistencies, or unexpected behaviors**, testing helps improve the quality of a model, catch errors and prevent future issues.
@@ -155,18 +155,20 @@ class Model:
 
         ...
 
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
         self.patient_inter_arrival_dist = Exponential(
-            mean = self.param.patient_inter,  ##NEW # <2>
-            random_seed = self.run_number*2)
+            mean=self.param.patient_inter,  ##NEW # <2>
+            random_seed=seeds[0])
         self.patient_reception_time_dist = Exponential(
-            mean = self.param.mean_reception_time,  ##NEW # <2>
-            random_seed = self.run_number*3)
+            mean=self.param.mean_reception_time,  ##NEW # <2>
+            random_seed=seeds[1])
         self.nurse_consult_time_dist = Exponential(
-            mean = self.param.mean_n_consult_time,  ##NEW # <2>
-            random_seed = self.run_number*4)
+            mean=self.param.mean_n_consult_time,  ##NEW # <2>
+            random_seed=seeds[2])
         self.doctor_consult_time_dist = Exponential(
-            mean = self.param.mean_d_consult_time,  ##NEW # <2>
-            random_seed = self.run_number*5)
+            mean=self.param.mean_d_consult_time,  ##NEW # <2>
+            random_seed=seeds[3])
 
    ...
 
@@ -391,13 +393,12 @@ We generate the expected results for our backtest in a seperate Python file or J
 
 ### Further testing examples
 
-For more inspiration, check out the [Python DES RAP Template](https://github.com/pythonhealthdatascience/rap_template_python_des). Examples of other tests it includes are:
+For more inspiration, check out the [pythonhealthdatascience/pydesrap_mms](https://github.com/pythonhealthdatascience/pydesrap_mms). Examples of other tests it includes are:
 
 * Functional tests for the impact of high demand on utilisation.
 * Functional tests checking for expected decreases in the number of arrivals.
 * Functional tests for an interval auditor.
 * Functional tests for parallel execution.
 * Functional tests for a warm-up period.
-* Unit tests for the exponential class.
 * Unit tests for a logging class.
 * Unit tests for a modified parameter class which has functionality designed to prevent the addition of new attributes.

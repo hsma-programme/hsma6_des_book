@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -42,8 +42,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bcbce66894bfa8e7e94e40e0186b9bb8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4e7a6ecc11b04d2331dcee725084a9de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d329e753491efaeac79c98c4b193a686.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -262,6 +262,7 @@ cookieconsent.run({
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -850,24 +851,27 @@ View recommendations
 </section>
 <section id="implementing-these-recommendations" class="level2" data-number="39.2">
 <h2 data-number="39.2" class="anchored" data-anchor-id="implementing-these-recommendations"><span class="header-section-number">39.2</span> Implementing these recommendations</h2>
-<p>A model and repository has been developed to help <strong>support, demonstrate and serve as a possible template</strong> for how you could meet these recommendations:</p>
+<p>To demonstrate how to implement these recommendations, an open book has been developed:</p>
 <blockquote class="blockquote">
-<p>Heather, A. Monks, T. (2025). <strong>Python DES RAP Template</strong>. <a href="https://github.com/pythonhealthdatascience/rap_template_python_des/" class="uri">https://github.com/pythonhealthdatascience/rap_template_python_des/</a>.</p>
+<p>Heather, A., Monks, T., Mustafee, N., &amp; Harper, A. (2025). <strong>DES RAP Book: Reproducible Discrete-Event Simulation in Python and </strong>R. <a href="https://github.com/pythonhealthdatascience/des_rap_book" class="uri">https://github.com/pythonhealthdatascience/des_rap_book</a>.</p>
 </blockquote>
-<p>It <strong>adheres to all the recommendations</strong> from:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://github.com/pythonhealthdatascience/des_rap_book"><img src="images/des_rap_book.png" class="img-fluid figure-img"></a></p>
+<figcaption>DES RAP Book</figcaption>
+</figure>
+</div>
+<p>This book provides a <strong>step-by-step guide for building discrete-event simulation (DES) models as part of a reproducible analytical pipeline (RAP)</strong>. It follows the principles outlined in:</p>
 <ul>
 <li>✅ Heather et al.&nbsp;(2025).</li>
 <li>✅ NHS Levels of RAP Framework.</li>
 </ul>
-<p>The DES model is a simple queueing system where patients arrive, wait to see a nurse, undergo a consultation, and then leave. This model can be extended with advanced features such as multiple activities, branching paths, and priority-based queueing, as discussed in the book.</p>
-<p>The model was inspired by this book, alongside other sources and with some other changes, and so the model is similar but with some structural differences. For details on how the model differs from this book and the rationale behind those changes, refer to <a href="https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md">docs/hsma_changes.md</a> in the model repository.</p>
-<p><br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://github.com/pythonhealthdatascience/rap_template_python_des/"><img src="images/python_des_rap_template_github.png" class="img-fluid figure-img"></a></p>
-<figcaption>Python DES RAP Template GitHub</figcaption>
-</figure>
-</div>
+<p>The book walks through repository set-up, model development, analysis workflows, documentation practices and more. Examples are provided in both Python and R.</p>
+<p>Example repositories complement the book by providing fully implemented DES models - the python examples are:</p>
+<ul>
+<li><p><a href="https://github.com/pythonhealthdatascience/pydesrap_mms">pydesrap_mms</a> - a simple synthetic queueing system where patients arrive, wait to see a nurse, undergo a consultation, and then leave.</p></li>
+<li><p><a href="https://github.com/pythonhealthdatascience/pydesrap_stroke">pydesrap_stroke</a> - implementation of a published stroke model simulating patient pathways.</p></li>
+</ul>
 
 
 </section>

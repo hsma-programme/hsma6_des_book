@@ -468,20 +468,20 @@ Let's investigate this with two examples.
 #| eval: true
 random.seed(42)
 
-print(f"1: inter-arrival time 1 {random.expovariate(1.0 / g.patient_inter):.2f}")
-print(f"3: inter-arrival time 2 {random.expovariate(1.0 / g.patient_inter):.2f}")
-print(f"2: reception consult time 1 {random.expovariate(1.0 / g.mean_reception_time):.2f}")
-print(f"4: inter-arrival time 3 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"inter-arrival time 1 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"inter-arrival time 2 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"reception consult time 1 {random.expovariate(1.0 / g.mean_reception_time):.2f}")
+print(f"inter-arrival time 3 {random.expovariate(1.0 / g.patient_inter):.2f}")
 ```
 
 ```{python}
 #| eval: true
 random.seed(42)
 
-print(f"1: inter-arrival time 1 {random.expovariate(1.0 / g.patient_inter):.2f}")
-print(f"2: inter-arrival time 2 {random.expovariate(1.0 / g.patient_inter):.2f}")
-print(f"4: inter-arrival time 3 {random.expovariate(1.0 / g.patient_inter):.2f}")
-print(f"3: reception consult time  1 {random.expovariate(1.0 / g.mean_reception_time):.2f}")
+print(f"inter-arrival time 1 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"inter-arrival time 2 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"inter-arrival time 3 {random.expovariate(1.0 / g.patient_inter):.2f}")
+print(f"reception consult time  1 {random.expovariate(1.0 / g.mean_reception_time):.2f}")
 
 ```
 
@@ -500,7 +500,8 @@ So how can we do this?
 
 Effectively, we want separate seeds for the random number generator for **each separate type of event we are generating random numbers for**.
 
-This means that we have separate random number streams for the different parts of our process
+This means that we have separate random number streams for the different parts of our process:
+
 - our inter-arrival times
 - our consult times
 - our probabilities
@@ -509,9 +510,10 @@ The easiest way to implement this is to switch from using the `random` library t
 
 We will replace `random.expovariate` with the `Exponential` class.
 
-First, we need to import this class.
+First, we need `numpy`, plus the `Exponential` class from `sim-tools`.
 
 ```{python}
+import numpy as np
 from sim_tools.distributions import Exponential
 ```
 
@@ -558,22 +560,34 @@ class Model:
         self.mean_q_time_doctor = 0
 
         ##NEW - initialise distributions
-        self.patient_inter_arrival_dist = Exponential(mean = g.patient_inter, random_seed = self.run_number*2)
-        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
-        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
-        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
+        self.patient_inter_arrival_dist = Exponential(mean=g.patient_inter,
+                                                      random_seed=seeds[0])
+        self.patient_reception_time_dist = Exponential(mean=g.mean_reception_time,
+                                                       random_seed=seeds[1])
+        self.nurse_consult_time_dist = Exponential(mean=g.mean_n_consult_time,
+                                                   random_seed=seeds[2])
+        self.doctor_consult_time_dist = Exponential(mean=g.mean_d_consult_time,
+                                                   random_seed=seeds[3])
 
 ```
 
-:::{.callout-warning}
-Note that the value we pass to initialise the Exponential variable here is **just the mean time**.
+When we want to run multiple random processes at once (for example, having separate seeds for arrivals, reception, and consultation times), it's tempting to create them in a pattern like: seed1 = `run_number`, seed2 = `run_number * 2`, seed3 = `run_number * 3` and use these for each stream.
 
-When we were using random.expovariate, we passed 1 dividided by the mean time.
+But here's the catch: if `run_number` ever happens to be zero, every single stream gets a seed of zero! Even if it's not zero, simple patterns like this can mean the random streams aren't truly independent - subtle correlations can sneak in, which can throw off your simulation results (even if the code seems fine). These mistakes are really easy to miss!
+
+Instead, NumPy's `SeedSequence` gives you a safer approach. You give it one seed (like your `run_number`), and it will use this to generate separate, reliable seeds for each stream.
+
+:::{.callout-warning}
+Note that the value we pass to initialise the Exponential class here is **just the mean time**.
+
+When we were using random.expovariate, we passed 1 divided by the mean time.
 :::
 
 Next, everywhere we have previously used `random.expovariate`, we replace this with the .sample() method of our newly initialised distributions.
 
-For example
+For example:
 
 ```{python}
 sampled_doctor_act_time = random.expovariate(
@@ -597,6 +611,7 @@ The full updated code for the model is given below.
 #| eval: true
 #| echo: true
 
+import numpy as np
 import simpy
 import random
 import pandas as pd
@@ -665,10 +680,16 @@ class Model:
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
 
-        self.patient_inter_arrival_dist = Exponential(mean = g.patient_inter, random_seed = self.run_number*2)
-        self.patient_reception_time_dist = Exponential(mean = g.mean_reception_time, random_seed = self.run_number*3)
-        self.nurse_consult_time_dist = Exponential(mean = g.mean_n_consult_time, random_seed = self.run_number*4)
-        self.doctor_consult_time_dist = Exponential(mean = g.mean_d_consult_time, random_seed = self.run_number*5)
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
+        self.patient_inter_arrival_dist = Exponential(mean=g.patient_inter,
+                                                      random_seed=seeds[0])
+        self.patient_reception_time_dist = Exponential(mean=g.mean_reception_time,
+                                                       random_seed=seeds[1])
+        self.nurse_consult_time_dist = Exponential(mean=g.mean_n_consult_time,
+                                                   random_seed=seeds[2])
+        self.doctor_consult_time_dist = Exponential(mean=g.mean_d_consult_time,
+                                                   random_seed=seeds[3])
 
     # A generator function that represents the DES generator for patient
     # arrivals

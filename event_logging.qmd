@@ -370,16 +370,17 @@ animate_activity_log(
         # We also need to ensure that the column 'entity_id' is renamed to 'patient' to match
         # vidigi's expectations - though this will be made more flexible in a future version
         # of the package
-        event_log=event_log[event_log['run']==1].rename(columns={"entity_id":"patient"}),
+        event_log=event_log[event_log['run']==1],
         event_position_df=event_position_df,
         scenario=params,
         debug_mode=True,
         setup_mode=False,
         every_x_time_units=5,
         include_play_button=True,
-        icon_and_text_size=20,
+        entity_icon_size=20,
+        text_size=20,
         gap_between_entities=6,
-        gap_between_rows=25,
+        gap_between_queue_rows=25,
         plotly_height=700,
         frame_duration=200,
         plotly_width=1200,
@@ -453,16 +454,18 @@ def __init__(self, run_number):
     # across this run of the model
     self.mean_q_time_cubicle = 0
 
+    ss = np.random.SeedSequence(self.run_number)
+    seeds = ss.spawn(2)
     self.patient_inter_arrival_dist = Exponential(
-        mean = g.arrival_rate,
-        random_seed = self.run_number*g.random_number_set
-        )
+        mean=g.arrival_rate,
+        random_seed=seeds[0]
+    )
 
     self.treat_dist = Lognormal(
         mean = g.trauma_treat_mean,
         stdev = g.trauma_treat_var,
-        random_seed = self.run_number*g.random_number_set
-        )
+        random_seed=seeds[1]
+    )
 ```
 :::
 
@@ -507,16 +510,18 @@ def __init__(self, run_number):
     # across this run of the model
     self.mean_q_time_cubicle = 0
 
+    ss = np.random.SeedSequence(self.run_number)
+    seeds = ss.spawn(2)
     self.patient_inter_arrival_dist = Exponential(
-        mean = g.arrival_rate,
-        random_seed = self.run_number*g.random_number_set
-        )
+        mean=g.arrival_rate,
+        random_seed=seeds[0]
+    )
 
     self.treat_dist = Lognormal(
         mean = g.trauma_treat_mean,
         stdev = g.trauma_treat_var,
-        random_seed = self.run_number*g.random_number_set
-        )
+        random_seed=seeds[1]
+    )
 ```
 
 :::

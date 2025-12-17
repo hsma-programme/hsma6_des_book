@@ -189,8 +189,10 @@ class Model:
         self.create_bookings() ##NEW
 
         ##NEW
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(1)
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
-                                    random_seed=run_number*42) # <2>
+                                    random_seed=seeds[0]) # <2>
 
         # Create a new Pandas DataFrame that will store some results against
         # the patient ID (which we'll use as the index).
@@ -672,8 +674,10 @@ class Model:
 
 
         ##NEW
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(1)
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
-                                    random_seed=run_number*42) # <2>
+                                    random_seed=seeds[0]) # <2>
 
         # Create a new Pandas DataFrame that will store some results against
         # the patient ID (which we'll use as the index).
@@ -886,8 +890,10 @@ class Model:
         self.create_slots()
         self.create_bookings()
 
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(1)
         self.arrival_dist = Poisson(g.annual_demand / 52 / 7, # <1>
-                                    random_seed=run_number*42) # <2>
+                                    random_seed=seeds[0]) # <2>
 
         # Create a new Pandas DataFrame that will store some results against
         # the patient ID (which we'll use as the index).

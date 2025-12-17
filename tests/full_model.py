@@ -1,6 +1,7 @@
-import simpy
-import random
+import numpy as np
 import pandas as pd
+import random
+import simpy
 from sim_tools.distributions import Exponential
 
 # Class to store parameter values.
@@ -67,18 +68,20 @@ class Model:
         self.mean_q_time_nurse = 0
         self.mean_q_time_doctor = 0
 
+        ss = np.random.SeedSequence(self.run_number)
+        seeds = ss.spawn(4)
         self.patient_inter_arrival_dist = Exponential(
-            mean = self.param.patient_inter,  ##NEW
-            random_seed = self.run_number*2)
+            mean=self.param.patient_inter,  ##NEW
+            random_seed=seeds[0])
         self.patient_reception_time_dist = Exponential(
-            mean = self.param.mean_reception_time,  ##NEW
-            random_seed = self.run_number*3)
+            mean=self.param.mean_reception_time,  ##NEW
+            random_seed=seeds[1])
         self.nurse_consult_time_dist = Exponential(
-            mean = self.param.mean_n_consult_time,  ##NEW
-            random_seed = self.run_number*4)
+            mean=self.param.mean_n_consult_time,  ##NEW
+            random_seed=seeds[2])
         self.doctor_consult_time_dist = Exponential(
-            mean = self.param.mean_d_consult_time,  ##NEW
-            random_seed = self.run_number*5)
+            mean=self.param.mean_d_consult_time,  ##NEW
+            random_seed=seeds[3])
 
     # A generator function that represents the DES generator for patient
     # arrivals
