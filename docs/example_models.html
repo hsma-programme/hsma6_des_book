@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -44,8 +44,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bcbce66894bfa8e7e94e40e0186b9bb8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4e7a6ecc11b04d2331dcee725084a9de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d329e753491efaeac79c98c4b193a686.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -267,6 +267,7 @@ cookieconsent.run({
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -702,7 +703,7 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#hsma-clinic-model-diagram" id="toc-hsma-clinic-model-diagram" class="nav-link active" data-scroll-target="#hsma-clinic-model-diagram"><span class="header-section-number">27.1</span> HSMA clinic model diagram</a></li>
-  <li><a href="#a-queueing-model" id="toc-a-queueing-model" class="nav-link" data-scroll-target="#a-queueing-model"><span class="header-section-number">27.2</span> A queueing model</a></li>
+  <li><a href="#a-nurse-queueing-model" id="toc-a-nurse-queueing-model" class="nav-link" data-scroll-target="#a-nurse-queueing-model"><span class="header-section-number">27.2</span> A nurse queueing model</a></li>
   <li><a href="#an-urgent-care-call-centre-model" id="toc-an-urgent-care-call-centre-model" class="nav-link" data-scroll-target="#an-urgent-care-call-centre-model"><span class="header-section-number">27.3</span> An urgent care call centre model</a></li>
   <li><a href="#a-trauma-centre-model" id="toc-a-trauma-centre-model" class="nav-link" data-scroll-target="#a-trauma-centre-model"><span class="header-section-number">27.4</span> A trauma centre model</a></li>
   <li><a href="#an-orthopaedic-ward" id="toc-an-orthopaedic-ward" class="nav-link" data-scroll-target="#an-orthopaedic-ward"><span class="header-section-number">27.5</span> An orthopaedic ward</a></li>
@@ -773,16 +774,16 @@ Note
 </figure>
 </div>
 </section>
-<section id="a-queueing-model" class="level2" data-number="27.2">
-<h2 data-number="27.2" class="anchored" data-anchor-id="a-queueing-model"><span class="header-section-number">27.2</span> A queueing model</h2>
-<p>A SimPy model of a queueing model for a nurse consultation.</p>
+<section id="a-nurse-queueing-model" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="a-nurse-queueing-model"><span class="header-section-number">27.2</span> A nurse queueing model</h2>
+<p>A SimPy M/M/s model of a queues for a nurse consultation.</p>
 <blockquote class="blockquote">
-<p><a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> (2025) <strong>Python DES RAP Template</strong>. https://github.com/pythonhealthdatascience/rap_template_python_des.</p>
+<p><a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> (2025) <strong>Simple M/M/s queuing model: Python DES RAP</strong>. https://github.com/pythonhealthdatascience/pydesrap_mms.</p>
 </blockquote>
 <ul>
-<li><a href="https://github.com/pythonhealthdatascience/rap_template_python_des">Model code</a> (<a href="https://doi.org/10.5281/zenodo.14622466">archive</a>).</li>
+<li><a href="https://github.com/pythonhealthdatascience/pydesrap_mms">Model code</a> (<a href="https://doi.org/10.5281/zenodo.14622466">archive</a>).</li>
 </ul>
-<p>The repository includes a document <a href="https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/docs/hsma_changes.md">docs/hsma_changes.md</a> which explains how the model differs from those in this book, and why those changes were made.</p>
+<p>The repository includes a document <a href="https://github.com/pythonhealthdatascience/pydesrap_mms/blob/main/docs/hsma_changes.md">docs/hsma_changes.md</a> which explains how the model differs from those in this book, and why those changes were made.</p>
 <p>Code structure:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

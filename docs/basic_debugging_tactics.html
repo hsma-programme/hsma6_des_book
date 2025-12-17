@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -77,8 +77,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bcbce66894bfa8e7e94e40e0186b9bb8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4e7a6ecc11b04d2331dcee725084a9de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d329e753491efaeac79c98c4b193a686.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -297,6 +297,7 @@ cookieconsent.run({
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -796,7 +797,7 @@ Acknowledgements
 <div class="callout-body-container callout-body">
 <ul>
 <li>The <code>trace()</code> function is based on that in <a href="https://github.com/AliHarp/HEP">HEP</a> by <a href="https://github.com/AliHarp">Alison Harper</a> <a href="https://orcid.org/0000-0001-5274-5037"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</li>
-<li>The <code>SimLogger</code> class is adapted from the <a href="https://github.com/pythonhealthdatascience/rap_template_python_des">Python DES RAP Template</a> by <a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</li>
+<li>The <code>SimLogger</code> class is adapted from <a href="https://github.com/pythonhealthdatascience/pydesrap_mms">github.com/pythonhealthdatascience/pydesrap_mms</a> by <a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</li>
 </ul>
 </div>
 </div>
@@ -825,7 +826,7 @@ Tip
 </div>
 </div>
 <p>In each of these examples, we will just run the model once.</p>
-<div id="457652e2" class="cell" data-execution_count="1">
+<div id="c6245fdc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -861,7 +862,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>For another example using <code>print()</code> statements, see the “<a href="./reneging_balking_jockeying.html">Reneging, Balking and Jockeying</a>” chapter where they are used, for example, to record:</p>
-<div id="7c1539af" class="cell" data-execution_count="2">
+<div id="bc8c8a33" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Patient </span><span class="sc">{</span>patient<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> reneged after waiting"</span>,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="ss">f"</span><span class="sc">{</span>patient<span class="sc">.</span>patience_nurse<span class="sc">}</span><span class="ss"> minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -870,7 +871,7 @@ Tip
 <section id="coding-the-model" class="level3" data-number="28.2.1">
 <h3 data-number="28.2.1" class="anchored" data-anchor-id="coding-the-model"><span class="header-section-number">28.2.1</span> Coding the model</h3>
 <p>We will modify the <code>Model</code> class to add print statements within the <code>generator_patient_arrivals()</code> and <code>attend_clinic()</code> functions.</p>
-<div id="b33f2d72" class="cell" data-execution_count="3">
+<div id="450db09d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
@@ -928,7 +929,7 @@ Click here to view the full code
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="b10b1460" class="cell" data-execution_count="4">
+<div id="9ecb0c66" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1158,113 +1159,78 @@ Click here to view the full code
 <section id="exploring-the-outputs" class="level3" data-number="28.2.3">
 <h3 data-number="28.2.3" class="anchored" data-anchor-id="exploring-the-outputs"><span class="header-section-number">28.2.3</span> Exploring the outputs</h3>
 <p>Running the model, we’ll see the following output…</p>
-<div id="4297a046" class="cell" data-execution_count="5">
+<div id="8556edbb" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 1 arrives at: 0.000.
-Patient 1 waits for 0.000 and is seen at 0. Consultation length: 10.724.
-Patient 2 arrives at: 0.150.
-Patient 3 arrives at: 5.309.
-Patient 4 arrives at: 6.371.
-Patient 5 arrives at: 7.962.
-Patient 2 waits for 10.574 and is seen at 10.724016899760096. Consultation length: 0.200.
-Patient 3 waits for 5.615 and is seen at 10.923618999278593. Consultation length: 0.086.
-Patient 4 waits for 4.639 and is seen at 11.010046767046207. Consultation length: 8.038.
-Patient 5 waits for 11.086 and is seen at 19.04810698254277. Consultation length: 2.322.
-Patient 6 arrives at: 23.236.
-Patient 6 waits for 0.000 and is seen at 23.23637375971412. Consultation length: 2.582.
-Patient 7 arrives at: 24.742.
-Patient 7 waits for 1.076 and is seen at 25.818359178321167. Consultation length: 4.804.
-Patient 8 arrives at: 28.219.
-Patient 8 waits for 2.404 and is seen at 30.622399428034093. Consultation length: 0.806.
-Patient 9 arrives at: 31.606.
-Patient 9 waits for 0.000 and is seen at 31.6058048759237. Consultation length: 5.891.
-Patient 10 arrives at: 37.518.
-Patient 10 waits for 0.000 and is seen at 37.518138074459074. Consultation length: 4.926.
-Patient 11 arrives at: 43.757.
-Patient 11 waits for 0.000 and is seen at 43.75672280585052. Consultation length: 3.754.
-Patient 12 arrives at: 47.837.
-Patient 12 waits for 0.000 and is seen at 47.83716109080116. Consultation length: 7.447.
-Patient 13 arrives at: 51.575.
-Patient 13 waits for 3.709 and is seen at 55.283961262528265. Consultation length: 1.232.
-Patient 14 arrives at: 56.303.
-Patient 14 waits for 0.212 and is seen at 56.51591826312143. Consultation length: 10.233.
-Patient 15 arrives at: 57.747.
-Patient 16 arrives at: 60.308.
-Patient 17 arrives at: 61.744.
-Patient 15 waits for 9.002 and is seen at 66.74892482841393. Consultation length: 2.210.
-Patient 18 arrives at: 67.211.
-Patient 19 arrives at: 67.843.
-Patient 16 waits for 8.651 and is seen at 68.95866493071166. Consultation length: 0.340.
-Patient 17 waits for 7.555 and is seen at 69.2986542797349. Consultation length: 5.792.
-Patient 20 arrives at: 72.047.
-Patient 21 arrives at: 74.530.
-Patient 18 waits for 7.880 and is seen at 75.09038363936328. Consultation length: 11.580.
-Patient 22 arrives at: 76.224.
-Patient 23 arrives at: 76.378.
-Patient 24 arrives at: 78.546.
-Patient 25 arrives at: 84.580.
-Patient 19 waits for 18.827 and is seen at 86.66992435703258. Consultation length: 0.061.
-Patient 20 waits for 14.684 and is seen at 86.73073461746797. Consultation length: 3.013.
-Patient 21 waits for 15.213 and is seen at 89.74391099742128. Consultation length: 0.320.
-Patient 22 waits for 13.840 and is seen at 90.06408226252125. Consultation length: 3.324.
-Patient 23 waits for 17.010 and is seen at 93.38789010749436. Consultation length: 0.945.
-Patient 24 waits for 15.787 and is seen at 94.33269125218459. Consultation length: 7.140.
-Patient 25 waits for 16.893 and is seen at 101.47273147144615. Consultation length: 1.942.
-Patient 26 arrives at: 101.587.
-Patient 27 arrives at: 102.331.
-Patient 26 waits for 1.828 and is seen at 103.4147428371654. Consultation length: 2.334.
-Patient 28 arrives at: 104.156.
-Patient 27 waits for 3.418 and is seen at 105.74893838517372. Consultation length: 6.063.
-Patient 29 arrives at: 106.335.
-Patient 30 arrives at: 108.924.
-Patient 31 arrives at: 109.592.
-Patient 32 arrives at: 110.299.
-Patient 33 arrives at: 110.538.
-Patient 28 waits for 7.656 and is seen at 111.81212331183262. Consultation length: 0.322.
-Patient 29 waits for 5.799 and is seen at 112.13404701043532. Consultation length: 6.933.
-Patient 34 arrives at: 117.495.
-Patient 30 waits for 10.143 and is seen at 119.06730549093024. Consultation length: 0.289.
-Patient 31 waits for 9.764 and is seen at 119.35603766629579. Consultation length: 2.345.
+Patient 1 waits for 0.000 and is seen at 0. Consultation length: 11.361.
+Patient 2 arrives at: 1.215.
+Patient 3 arrives at: 10.075.
+Patient 2 waits for 10.146 and is seen at 11.361223025647098. Consultation length: 0.959.
+Patient 3 waits for 2.245 and is seen at 12.32034533137447. Consultation length: 0.907.
+Patient 4 arrives at: 15.757.
+Patient 4 waits for 0.000 and is seen at 15.757401416310442. Consultation length: 0.610.
+Patient 5 arrives at: 33.968.
+Patient 5 waits for 0.000 and is seen at 33.967948139194725. Consultation length: 0.067.
+Patient 6 arrives at: 36.620.
+Patient 6 waits for 0.000 and is seen at 36.61957464339469. Consultation length: 4.306.
+Patient 7 arrives at: 38.515.
+Patient 7 waits for 2.410 and is seen at 40.9250964328741. Consultation length: 10.170.
+Patient 8 arrives at: 43.678.
+Patient 9 arrives at: 45.997.
+Patient 10 arrives at: 48.131.
+Patient 8 waits for 7.416 and is seen at 51.09466250463547. Consultation length: 1.758.
+Patient 9 waits for 6.856 and is seen at 52.85276746710498. Consultation length: 2.712.
+Patient 10 waits for 7.434 and is seen at 55.56499932459664. Consultation length: 11.540.
+Patient 11 arrives at: 56.949.
+Patient 12 arrives at: 60.595.
+Patient 13 arrives at: 60.925.
+Patient 14 arrives at: 65.965.
+Patient 11 waits for 10.156 and is seen at 67.10491921961064. Consultation length: 4.495.
+Patient 15 arrives at: 68.633.
+Patient 12 waits for 11.005 and is seen at 71.59988421947992. Consultation length: 16.689.
+Patient 16 arrives at: 79.913.
+Patient 17 arrives at: 82.325.
+Patient 18 arrives at: 85.720.
+Patient 19 arrives at: 87.917.
+Patient 13 waits for 27.364 and is seen at 88.28882818825394. Consultation length: 4.029.
+Patient 14 waits for 26.353 and is seen at 92.3180506782778. Consultation length: 6.969.
+Patient 20 arrives at: 97.912.
+Patient 15 waits for 30.654 and is seen at 99.28672464687374. Consultation length: 4.239.
+Patient 16 waits for 23.612 and is seen at 103.52563052473577. Consultation length: 1.578.
+Patient 17 waits for 22.779 and is seen at 105.10345262949843. Consultation length: 5.395.
+Patient 18 waits for 24.779 and is seen at 110.49860806360809. Consultation length: 3.680.
+Patient 19 waits for 26.262 and is seen at 114.17902377795998. Consultation length: 1.405.
+Patient 21 arrives at: 114.251.
+Patient 20 waits for 17.671 and is seen at 115.58372983343091. Consultation length: 5.300.
 Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000        10.724017
-2              10.574291         0.199602
-3               5.614699         0.086428
-4               4.638661         8.038060
-5              11.086170         2.321768
-6               0.000000         2.581985
-7               1.076460         4.804040
-8               2.403821         0.806189
-9               0.000000         5.891071
-10              0.000000         4.926228
-11              0.000000         3.754320
-12              0.000000         7.446800
-13              3.709055         1.231957
-14              0.212443        10.233007
-15              9.001625         2.209740
-16              8.651064         0.339989
-17              7.554838         5.791729
-18              7.879701        11.579541
-19             18.826528         0.060810
-20             14.684001         3.013176
-21             15.213417         0.320171
-22             13.839593         3.323808
-23             17.009595         0.944801
-24             15.786730         7.140040
-25             16.892926         1.942011
-26              1.827984         2.334196
-27              3.417988         6.063185
-28              7.656284         0.321924
-29              5.799302         6.933258
-30             10.142826         0.288732
-31              9.764481         2.344893
+1               0.000000        11.361223
+2              10.146495         0.959122
+3               2.244904         0.906995
+4               0.000000         0.609612
+5               0.000000         0.067498
+6               0.000000         4.305522
+7               2.410242        10.169566
+8               7.416351         1.758105
+9               6.855537         2.712232
+10              7.434386        11.539920
+11             10.155822         4.494965
+12             11.005306        16.688944
+13             27.363862         4.029222
+14             26.353187         6.968674
+15             30.654051         4.238906
+16             23.612260         1.577822
+17             22.778801         5.395155
+18             24.779021         3.680416
+19             26.262079         1.404706
+20             17.671425         5.299847
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                     7.20208</code></pre>
+0                   12.857186</code></pre>
 </div>
 </div>
 </section>
@@ -1276,7 +1242,7 @@ Run Number
 <section id="coding-the-model-1" class="level3" data-number="28.3.1">
 <h3 data-number="28.3.1" class="anchored" data-anchor-id="coding-the-model-1"><span class="header-section-number">28.3.1</span> Coding the model</h3>
 <p>In our parameter class, we add a parameter <code>trace</code> which will control whether the <code>print()</code> statements are executed or not.</p>
-<div id="72b55fd2" class="cell" data-execution_count="6">
+<div id="57fe85f9" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -1298,7 +1264,7 @@ Run Number
 </div>
 </div>
 <p>We then define a new function <code>trace()</code> which will only run if <code>g.trace</code> is true.</p>
-<div id="3c350fd6" class="cell" data-execution_count="7">
+<div id="559d870e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trace(msg):</span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" </span></span>
@@ -1320,7 +1286,7 @@ Run Number
 </div>
 </div>
 <p>Then, in our model, we alter our <code>print()</code> statements so that the message is input to the <code>trace()</code> function.</p>
-<div id="1bcaf4ed" class="cell" data-execution_count="8">
+<div id="06660f2c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
@@ -1378,7 +1344,7 @@ Click here to view the full code
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="1df97c08" class="cell" data-execution_count="9">
+<div id="032f4fc6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1622,7 +1588,7 @@ Click here to view the full code
 <section id="exploring-the-outputs-1" class="level3" data-number="28.3.3">
 <h3 data-number="28.3.3" class="anchored" data-anchor-id="exploring-the-outputs-1"><span class="header-section-number">28.3.3</span> Exploring the outputs</h3>
 <p>If we set <code>g.trace = False</code>, we will see none of the patient messages are printed (and only our results from <code>print_trial_results()</code> are).</p>
-<div id="59f0709e" class="cell" data-execution_count="10">
+<div id="b95e6d78" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g.trace <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1630,108 +1596,131 @@ Click here to view the full code
 <pre><code>Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         0.515033
-2               0.000000        16.105676
-3              13.725436         6.471818
-4              16.432416         1.761055
-5              15.016513         8.896223
-6               3.109157         0.881718
-7               0.000000         8.643518
-8               8.225063         9.053969
-9              12.012615         6.340599
-10             14.435000         2.933931
-11             17.155207         0.689076
-12             13.000332         0.799066
-13              8.791537         0.923040
-14              0.000000         4.718291
-15              4.311246         9.033027
-16              9.024959         1.792199
-17              8.051979         2.034575
-18              0.000000         4.907508
-19              0.501197         2.779236
-20              0.000000         4.841451
+1               0.000000         5.103945
+2               3.205187         3.580706
+3               0.000000         0.503247
+4               0.000000         0.896004
+5               0.000000         5.748758
+6               0.000000        10.149807
+7               9.637806         4.585700
+8               0.000000         5.527218
+9               1.010662         2.061586
+10              2.998741        10.759707
+11              9.620443         7.915775
+12             10.729670         2.675265
+13              0.000000         8.109009
+14              0.000000         0.061867
+15              0.000000         4.307998
+16              0.000000         7.668730
+17              3.331483         5.361548
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                    7.189633</code></pre>
+0                    2.384352</code></pre>
 </div>
 </div>
 <p>Meanwhile, if <code>g.trace = True</code>…</p>
-<div id="dc45b90e" class="cell" data-execution_count="11">
+<div id="bc08edcf" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>g.trace <span class="op">=</span> <span class="va">True</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 1 arrives at: 0.000.
-Patient 1 waits for 0.000 and is seen at 0. Consultation length: 0.949.
-Patient 2 arrives at: 2.523.
-Patient 2 waits for 0.000 and is seen at 2.5228663887406113. Consultation length: 0.583.
-Patient 3 arrives at: 4.029.
-Patient 3 waits for 0.000 and is seen at 4.028668137656526. Consultation length: 3.192.
-Patient 4 arrives at: 9.921.
-Patient 4 waits for 0.000 and is seen at 9.921203417940536. Consultation length: 0.018.
-Patient 5 arrives at: 12.577.
-Patient 5 waits for 0.000 and is seen at 12.577134658714382. Consultation length: 2.112.
-Patient 6 arrives at: 13.534.
-Patient 7 arrives at: 14.184.
-Patient 6 waits for 1.156 and is seen at 14.689547869979073. Consultation length: 3.523.
-Patient 7 waits for 4.029 and is seen at 18.212652512617925. Consultation length: 4.645.
-Patient 8 arrives at: 18.886.
-Patient 8 waits for 3.972 and is seen at 22.8581446432479. Consultation length: 7.315.
-Patient 9 arrives at: 32.497.
-Patient 9 waits for 0.000 and is seen at 32.49747626810915. Consultation length: 1.357.
-Patient 10 arrives at: 34.010.
-Patient 10 waits for 0.000 and is seen at 34.0102442456301. Consultation length: 2.387.
-Patient 11 arrives at: 37.645.
-Patient 11 waits for 0.000 and is seen at 37.64471969428669. Consultation length: 0.221.
-Patient 12 arrives at: 41.007.
-Patient 12 waits for 0.000 and is seen at 41.00722601865192. Consultation length: 16.012.
-Patient 13 arrives at: 41.038.
-Patient 13 waits for 15.981 and is seen at 57.01906588571015. Consultation length: 29.464.
-Patient 14 arrives at: 68.510.
-Patient 15 arrives at: 74.225.
-Patient 14 waits for 17.974 and is seen at 86.48342300181554. Consultation length: 5.123.
-Patient 16 arrives at: 87.589.
-Patient 15 waits for 17.382 and is seen at 91.6067331429726. Consultation length: 0.934.
-Patient 16 waits for 4.951 and is seen at 92.54060165275669. Consultation length: 7.241.
-Patient 17 arrives at: 92.939.
-Patient 18 arrives at: 94.248.
-Patient 17 waits for 6.842 and is seen at 99.78143093758239. Consultation length: 6.249.
-Patient 19 arrives at: 100.160.
-Patient 18 waits for 11.782 and is seen at 106.03032597390029. Consultation length: 5.033.
-Patient 20 arrives at: 110.124.
-Patient 19 waits for 10.904 and is seen at 111.06378953900895. Consultation length: 6.669.
-Patient 21 arrives at: 114.464.
-Patient 20 waits for 7.609 and is seen at 117.73288671184125. Consultation length: 2.026.
-Patient 21 waits for 5.295 and is seen at 119.75916138885063. Consultation length: 8.047.
+Patient 1 waits for 0.000 and is seen at 0. Consultation length: 3.126.
+Patient 2 arrives at: 1.696.
+Patient 3 arrives at: 2.349.
+Patient 2 waits for 1.430 and is seen at 3.1260207599169982. Consultation length: 2.219.
+Patient 4 arrives at: 4.717.
+Patient 3 waits for 2.996 and is seen at 5.345189285439252. Consultation length: 2.612.
+Patient 5 arrives at: 7.114.
+Patient 4 waits for 3.241 and is seen at 7.9576771428229875. Consultation length: 6.805.
+Patient 6 arrives at: 8.607.
+Patient 7 arrives at: 9.141.
+Patient 8 arrives at: 9.422.
+Patient 9 arrives at: 13.422.
+Patient 5 waits for 7.649 and is seen at 14.762467383472185. Consultation length: 19.089.
+Patient 10 arrives at: 16.385.
+Patient 11 arrives at: 16.754.
+Patient 12 arrives at: 18.134.
+Patient 13 arrives at: 23.749.
+Patient 14 arrives at: 29.109.
+Patient 6 waits for 25.244 and is seen at 33.851342781034816. Consultation length: 0.761.
+Patient 15 arrives at: 34.216.
+Patient 7 waits for 25.472 and is seen at 34.612624100823204. Consultation length: 5.148.
+Patient 16 arrives at: 34.887.
+Patient 17 arrives at: 35.198.
+Patient 8 waits for 30.339 and is seen at 39.76059632656547. Consultation length: 4.396.
+Patient 18 arrives at: 42.284.
+Patient 19 arrives at: 42.972.
+Patient 9 waits for 30.734 and is seen at 44.156181695096606. Consultation length: 2.544.
+Patient 20 arrives at: 45.245.
+Patient 21 arrives at: 46.425.
+Patient 10 waits for 30.315 and is seen at 46.70064901323655. Consultation length: 8.921.
+Patient 11 waits for 38.868 and is seen at 55.62155311077225. Consultation length: 5.424.
+Patient 12 waits for 42.912 and is seen at 61.04508087266179. Consultation length: 5.044.
+Patient 22 arrives at: 62.545.
+Patient 23 arrives at: 64.688.
+Patient 13 waits for 42.339 and is seen at 66.08868476452511. Consultation length: 9.011.
+Patient 24 arrives at: 66.853.
+Patient 25 arrives at: 70.124.
+Patient 26 arrives at: 72.730.
+Patient 27 arrives at: 73.084.
+Patient 28 arrives at: 74.011.
+Patient 29 arrives at: 74.474.
+Patient 14 waits for 45.991 and is seen at 75.09968668142447. Consultation length: 2.752.
+Patient 30 arrives at: 77.167.
+Patient 15 waits for 43.636 and is seen at 77.8518724867598. Consultation length: 10.258.
+Patient 31 arrives at: 82.113.
+Patient 32 arrives at: 86.365.
+Patient 33 arrives at: 86.666.
+Patient 34 arrives at: 86.890.
+Patient 35 arrives at: 87.264.
+Patient 16 waits for 53.222 and is seen at 88.10945802603159. Consultation length: 5.908.
+Patient 36 arrives at: 92.168.
+Patient 17 waits for 58.819 and is seen at 94.01771955843867. Consultation length: 2.189.
+Patient 37 arrives at: 95.648.
+Patient 38 arrives at: 95.791.
+Patient 18 waits for 53.923 and is seen at 96.20630520809446. Consultation length: 7.337.
+Patient 39 arrives at: 97.463.
+Patient 40 arrives at: 101.843.
+Patient 19 waits for 60.571 and is seen at 103.54343472409994. Consultation length: 11.985.
+Patient 41 arrives at: 105.232.
+Patient 42 arrives at: 106.756.
+Patient 43 arrives at: 108.859.
+Patient 44 arrives at: 110.643.
+Patient 20 waits for 70.283 and is seen at 115.52811535654938. Consultation length: 0.933.
+Patient 45 arrives at: 116.434.
+Patient 21 waits for 70.036 and is seen at 116.46093882214575. Consultation length: 8.852.
+Patient 46 arrives at: 116.548.
+Patient 47 arrives at: 117.991.
 Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000         0.949483
-2               0.000000         0.583333
-3               0.000000         3.191868
-4               0.000000         0.018307
-5               0.000000         2.112413
-6               1.155695         3.523105
-7               4.028798         4.645492
-8               3.971928         7.315200
-9               0.000000         1.356641
-10              0.000000         2.387203
-11              0.000000         0.221378
-12              0.000000        16.011840
-13             15.981472        29.464357
-14             17.973793         5.123310
-15             17.381797         0.933869
-16              4.951300         7.240829
-17              6.842006         6.248895
-18             11.782468         5.033464
-19             10.903800         6.669097
-20              7.608666         2.026275
-21              5.295051         8.047447
+1               0.000000         3.126021
+2               1.429616         2.219169
+3               2.996034         2.612488
+4               3.240551         6.804790
+5               7.648827        19.088875
+6              25.243963         0.761281
+7              25.471680         5.147972
+8              30.338507         4.395585
+9              30.734043         2.544467
+10             30.315451         8.920904
+11             38.867700         5.423528
+12             42.911571         5.043604
+13             42.339401         9.011002
+14             45.990538         2.752186
+15             43.636037        10.257586
+16             53.222234         5.908262
+17             58.819284         2.188586
+18             53.922779         7.337130
+19             60.571367        11.984681
+20             70.283145         0.932823
+21             70.035632         8.851560
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                    5.136989</code></pre>
+0                   35.143731</code></pre>
 </div>
 </div>
 </section>
@@ -1746,7 +1735,7 @@ Run Number
 <section id="imports" class="level4" data-number="28.4.1.1">
 <h4 data-number="28.4.1.1" class="anchored" data-anchor-id="imports"><span class="header-section-number">28.4.1.1</span> Imports</h4>
 <p>First, we need to update our imports.</p>
-<div id="d49c71de" class="cell" data-execution_count="12">
+<div id="f65e2b51" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging  <span class="co">##NEW</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys  <span class="co">##NEW</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time  <span class="co">##NEW</span></span>
@@ -1781,7 +1770,7 @@ Run Number
 <li><code>file_path</code> - if saving to file, the path to use.</li>
 </ul>
 <p>The class configures handlers for logging (<code>_configure_logging()</code>), and then has a <code>log()</code> method which will be used to save messages to the log in our model.</p>
-<div id="38c70da5" class="cell" data-execution_count="13">
+<div id="f62b366b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="co">##NEW</span></span>
 <span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimLogger:</span>
 <span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1874,7 +1863,7 @@ Run Number
 <section id="g-class" class="level4" data-number="28.4.1.3">
 <h4 data-number="28.4.1.3" class="anchored" data-anchor-id="g-class"><span class="header-section-number">28.4.1.3</span> g class</h4>
 <p>In our <code>g</code> class, we will add an instance of the logging class.</p>
-<div id="646756fe" class="cell" data-execution_count="14">
+<div id="5f4aaf15" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> g:</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
@@ -1902,7 +1891,7 @@ Run Number
 <section id="model-class" class="level4" data-number="28.4.1.4">
 <h4 data-number="28.4.1.4" class="anchored" data-anchor-id="model-class"><span class="header-section-number">28.4.1.4</span> Model class</h4>
 <p>For our messages in <code>Model</code>, we now change <code>print()</code> or <code>trace()</code> instead to <code>g.logger.log()</code>.</p>
-<div id="5af39cbc" class="cell" data-execution_count="15">
+<div id="573b5834" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
@@ -1961,7 +1950,7 @@ Click here to view the full code
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="467c5659" class="cell" data-execution_count="16">
+<div id="5d979877" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging  <span class="co">##NEW</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys  <span class="co">##NEW</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time  <span class="co">##NEW</span></span>
@@ -2273,125 +2262,130 @@ Click here to view the full code
 <h3 data-number="28.4.3" class="anchored" data-anchor-id="exploring-the-outputs-2"><span class="header-section-number">28.4.3</span> Exploring the outputs</h3>
 <p>We will run the model with <code>log_to_console</code> and <code>log_to_file</code> both enabled.</p>
 <p>You’ll see that the logs are printed as before…</p>
-<div id="93967432" class="cell" data-execution_count="17">
+<div id="f96d5311" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 1 arrives at: 0.000.
-Patient 1 waits for 0.000 and is seen at 0. Consultation length: 20.445.
-Patient 2 arrives at: 3.228.
-Patient 3 arrives at: 4.778.
-Patient 4 arrives at: 11.542.
-Patient 5 arrives at: 17.416.
-Patient 6 arrives at: 18.391.
-Patient 2 waits for 17.217 and is seen at 20.444720365535566. Consultation length: 1.084.
-Patient 3 waits for 16.751 and is seen at 21.528518818320162. Consultation length: 14.875.
-Patient 7 arrives at: 27.049.
-Patient 8 arrives at: 28.655.
-Patient 4 waits for 24.862 and is seen at 36.40390758388942. Consultation length: 4.679.
-Patient 5 waits for 23.667 and is seen at 41.082495475966006. Consultation length: 2.006.
-Patient 6 waits for 24.698 and is seen at 43.08886529597139. Consultation length: 7.335.
-Patient 7 waits for 23.376 and is seen at 50.42416096680088. Consultation length: 5.859.
-Patient 9 arrives at: 53.623.
-Patient 10 arrives at: 55.255.
-Patient 8 waits for 27.629 and is seen at 56.283553427328705. Consultation length: 12.748.
-Patient 11 arrives at: 60.851.
-Patient 12 arrives at: 63.044.
-Patient 13 arrives at: 65.438.
-Patient 14 arrives at: 67.370.
-Patient 9 waits for 15.409 and is seen at 69.03203453539484. Consultation length: 2.009.
-Patient 10 waits for 15.786 and is seen at 71.04113540869592. Consultation length: 4.370.
-Patient 15 arrives at: 72.523.
-Patient 16 arrives at: 73.250.
-Patient 11 waits for 14.560 and is seen at 75.41091250233481. Consultation length: 3.733.
-Patient 12 waits for 16.100 and is seen at 79.14375033636888. Consultation length: 3.217.
-Patient 17 arrives at: 79.729.
-Patient 18 arrives at: 82.031.
-Patient 19 arrives at: 82.323.
-Patient 13 waits for 16.923 and is seen at 82.36092079540045. Consultation length: 11.472.
-Patient 20 arrives at: 90.199.
-Patient 14 waits for 26.463 and is seen at 93.83269016595533. Consultation length: 1.226.
-Patient 15 waits for 22.536 and is seen at 95.05869993983505. Consultation length: 9.555.
-Patient 21 arrives at: 98.437.
-Patient 22 arrives at: 99.959.
-Patient 23 arrives at: 102.641.
-Patient 16 waits for 31.363 and is seen at 104.61344903851816. Consultation length: 1.378.
-Patient 17 waits for 26.263 and is seen at 105.99147015629434. Consultation length: 16.713.
-Patient 24 arrives at: 113.694.
-Patient 25 arrives at: 118.770.
+Patient 1 waits for 0.000 and is seen at 0. Consultation length: 9.128.
+Patient 2 arrives at: 1.390.
+Patient 2 waits for 7.738 and is seen at 9.128216275837325. Consultation length: 0.325.
+Patient 3 arrives at: 21.178.
+Patient 3 waits for 0.000 and is seen at 21.177969726684417. Consultation length: 13.762.
+Patient 4 arrives at: 30.770.
+Patient 5 arrives at: 32.450.
+Patient 4 waits for 4.171 and is seen at 34.940392821031836. Consultation length: 0.807.
+Patient 5 waits for 3.297 and is seen at 35.747504482065075. Consultation length: 3.522.
+Patient 6 arrives at: 37.079.
+Patient 6 waits for 2.190 and is seen at 39.2693440979408. Consultation length: 10.124.
+Patient 7 arrives at: 42.210.
+Patient 8 arrives at: 44.802.
+Patient 9 arrives at: 48.804.
+Patient 7 waits for 7.184 and is seen at 49.3932266384662. Consultation length: 12.451.
+Patient 10 arrives at: 54.891.
+Patient 11 arrives at: 55.136.
+Patient 12 arrives at: 55.743.
+Patient 8 waits for 17.042 and is seen at 61.8441640569845. Consultation length: 7.606.
+Patient 13 arrives at: 64.568.
+Patient 14 arrives at: 65.082.
+Patient 15 arrives at: 65.756.
+Patient 16 arrives at: 67.081.
+Patient 17 arrives at: 67.639.
+Patient 9 waits for 20.646 and is seen at 69.44972369061622. Consultation length: 12.086.
+Patient 18 arrives at: 80.132.
+Patient 10 waits for 26.644 and is seen at 81.5356596517137. Consultation length: 7.752.
+Patient 19 arrives at: 83.164.
+Patient 20 arrives at: 83.816.
+Patient 21 arrives at: 87.314.
+Patient 11 waits for 34.151 and is seen at 89.28746953697762. Consultation length: 1.815.
+Patient 12 waits for 35.360 and is seen at 91.10257771342164. Consultation length: 3.558.
+Patient 13 waits for 30.093 and is seen at 94.6610386462429. Consultation length: 1.240.
+Patient 14 waits for 30.819 and is seen at 95.90100881905825. Consultation length: 0.904.
+Patient 15 waits for 31.049 and is seen at 96.80513148137655. Consultation length: 7.041.
+Patient 16 waits for 36.765 and is seen at 103.84660101836144. Consultation length: 6.569.
+Patient 22 arrives at: 106.052.
+Patient 17 waits for 42.776 and is seen at 110.41570607219107. Consultation length: 6.170.
+Patient 23 arrives at: 111.508.
+Patient 18 waits for 36.455 and is seen at 116.58616982145658. Consultation length: 1.077.
+Patient 19 waits for 34.499 and is seen at 117.6630718354606. Consultation length: 0.098.
+Patient 20 waits for 33.945 and is seen at 117.76095925666442. Consultation length: 12.722.
 Run Number 0
             Q Time Nurse  Time with Nurse
 Patient ID                               
-1               0.000000        20.444720
-2              17.217182         1.083798
-3              16.750729        14.875389
-4              24.862249         4.678588
-5              23.666877         2.006370
-6              24.698140         7.335296
-7              23.375503         5.859392
-8              27.629033        12.748481
-9              15.409151         2.009101
-10             15.785961         4.369777
-11             14.560386         3.732838
-12             16.099564         3.217170
-13             16.922809        11.471769
-14             26.462548         1.226010
-15             22.535522         9.554749
-16             31.363139         1.378021
-17             26.262731        16.713489
+1               0.000000         9.128216
+2               7.737856         0.325456
+3               0.000000        13.762423
+4               4.170533         0.807112
+5               3.297285         3.521840
+6               2.190234        10.123883
+7               7.183670        12.450937
+8              17.042214         7.605560
+9              20.645588        12.085936
+10             26.644418         7.751810
+11             34.151279         1.815108
+12             35.359538         3.558461
+13             30.092986         1.239970
+14             30.819039         0.904123
+15             31.049421         7.041470
+16             36.765274         6.569105
+17             42.776282         6.170464
+18             36.454576         1.076902
+19             34.499073         0.097887
+20             33.945194        12.721683
 Trial Results
             Mean Q Time Nurse
 Run Number                   
-0                   20.211854</code></pre>
+0                   21.741223</code></pre>
 </div>
 </div>
 <p>…but also, a <code>.log</code> file has been generated containing the logs:</p>
-<div id="c26118ee" class="cell" data-execution_count="18">
+<div id="dce20810" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"outputs/example_log.log"</span>) <span class="im">as</span> f:</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Patient 1 arrives at: 0.000.
-Patient 1 waits for 0.000 and is seen at 0. Consultation length: 20.445.
-Patient 2 arrives at: 3.228.
-Patient 3 arrives at: 4.778.
-Patient 4 arrives at: 11.542.
-Patient 5 arrives at: 17.416.
-Patient 6 arrives at: 18.391.
-Patient 2 waits for 17.217 and is seen at 20.444720365535566. Consultation length: 1.084.
-Patient 3 waits for 16.751 and is seen at 21.528518818320162. Consultation length: 14.875.
-Patient 7 arrives at: 27.049.
-Patient 8 arrives at: 28.655.
-Patient 4 waits for 24.862 and is seen at 36.40390758388942. Consultation length: 4.679.
-Patient 5 waits for 23.667 and is seen at 41.082495475966006. Consultation length: 2.006.
-Patient 6 waits for 24.698 and is seen at 43.08886529597139. Consultation length: 7.335.
-Patient 7 waits for 23.376 and is seen at 50.42416096680088. Consultation length: 5.859.
-Patient 9 arrives at: 53.623.
-Patient 10 arrives at: 55.255.
-Patient 8 waits for 27.629 and is seen at 56.283553427328705. Consultation length: 12.748.
-Patient 11 arrives at: 60.851.
-Patient 12 arrives at: 63.044.
-Patient 13 arrives at: 65.438.
-Patient 14 arrives at: 67.370.
-Patient 9 waits for 15.409 and is seen at 69.03203453539484. Consultation length: 2.009.
-Patient 10 waits for 15.786 and is seen at 71.04113540869592. Consultation length: 4.370.
-Patient 15 arrives at: 72.523.
-Patient 16 arrives at: 73.250.
-Patient 11 waits for 14.560 and is seen at 75.41091250233481. Consultation length: 3.733.
-Patient 12 waits for 16.100 and is seen at 79.14375033636888. Consultation length: 3.217.
-Patient 17 arrives at: 79.729.
-Patient 18 arrives at: 82.031.
-Patient 19 arrives at: 82.323.
-Patient 13 waits for 16.923 and is seen at 82.36092079540045. Consultation length: 11.472.
-Patient 20 arrives at: 90.199.
-Patient 14 waits for 26.463 and is seen at 93.83269016595533. Consultation length: 1.226.
-Patient 15 waits for 22.536 and is seen at 95.05869993983505. Consultation length: 9.555.
-Patient 21 arrives at: 98.437.
-Patient 22 arrives at: 99.959.
-Patient 23 arrives at: 102.641.
-Patient 16 waits for 31.363 and is seen at 104.61344903851816. Consultation length: 1.378.
-Patient 17 waits for 26.263 and is seen at 105.99147015629434. Consultation length: 16.713.
-Patient 24 arrives at: 113.694.
-Patient 25 arrives at: 118.770.
+Patient 1 waits for 0.000 and is seen at 0. Consultation length: 9.128.
+Patient 2 arrives at: 1.390.
+Patient 2 waits for 7.738 and is seen at 9.128216275837325. Consultation length: 0.325.
+Patient 3 arrives at: 21.178.
+Patient 3 waits for 0.000 and is seen at 21.177969726684417. Consultation length: 13.762.
+Patient 4 arrives at: 30.770.
+Patient 5 arrives at: 32.450.
+Patient 4 waits for 4.171 and is seen at 34.940392821031836. Consultation length: 0.807.
+Patient 5 waits for 3.297 and is seen at 35.747504482065075. Consultation length: 3.522.
+Patient 6 arrives at: 37.079.
+Patient 6 waits for 2.190 and is seen at 39.2693440979408. Consultation length: 10.124.
+Patient 7 arrives at: 42.210.
+Patient 8 arrives at: 44.802.
+Patient 9 arrives at: 48.804.
+Patient 7 waits for 7.184 and is seen at 49.3932266384662. Consultation length: 12.451.
+Patient 10 arrives at: 54.891.
+Patient 11 arrives at: 55.136.
+Patient 12 arrives at: 55.743.
+Patient 8 waits for 17.042 and is seen at 61.8441640569845. Consultation length: 7.606.
+Patient 13 arrives at: 64.568.
+Patient 14 arrives at: 65.082.
+Patient 15 arrives at: 65.756.
+Patient 16 arrives at: 67.081.
+Patient 17 arrives at: 67.639.
+Patient 9 waits for 20.646 and is seen at 69.44972369061622. Consultation length: 12.086.
+Patient 18 arrives at: 80.132.
+Patient 10 waits for 26.644 and is seen at 81.5356596517137. Consultation length: 7.752.
+Patient 19 arrives at: 83.164.
+Patient 20 arrives at: 83.816.
+Patient 21 arrives at: 87.314.
+Patient 11 waits for 34.151 and is seen at 89.28746953697762. Consultation length: 1.815.
+Patient 12 waits for 35.360 and is seen at 91.10257771342164. Consultation length: 3.558.
+Patient 13 waits for 30.093 and is seen at 94.6610386462429. Consultation length: 1.240.
+Patient 14 waits for 30.819 and is seen at 95.90100881905825. Consultation length: 0.904.
+Patient 15 waits for 31.049 and is seen at 96.80513148137655. Consultation length: 7.041.
+Patient 16 waits for 36.765 and is seen at 103.84660101836144. Consultation length: 6.569.
+Patient 22 arrives at: 106.052.
+Patient 17 waits for 42.776 and is seen at 110.41570607219107. Consultation length: 6.170.
+Patient 23 arrives at: 111.508.
+Patient 18 waits for 36.455 and is seen at 116.58616982145658. Consultation length: 1.077.
+Patient 19 waits for 34.499 and is seen at 117.6630718354606. Consultation length: 0.098.
+Patient 20 waits for 33.945 and is seen at 117.76095925666442. Consultation length: 12.722.
 </code></pre>
 </div>
 </div>
@@ -2405,7 +2399,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For a more detailed logging implementation, see the <a href="https://github.com/pythonhealthdatascience/rap_template_python_des">Python DES RAP Template</a> - the file <a href="https://github.com/pythonhealthdatascience/rap_template_python_des/blob/main/notebooks/logs.ipynb">notebooks/logs.ipynb</a> is a good place to start.</p>
+<p>For a more detailed logging implementation, see <a href="https://github.com/pythonhealthdatascience/pydesrap_mms">github.com/pythonhealthdatascience/pydesrap_mms</a> - the file <a href="https://github.com/pythonhealthdatascience/pydesrap_mms/blob/main/notebooks/logs.ipynb">notebooks/logs.ipynb</a> is a good place to start.</p>
 <p>That implementation includes:</p>
 <ul>
 <li>Log of the model state at initialisation and parameters used.</li>

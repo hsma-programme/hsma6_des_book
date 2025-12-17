@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -77,8 +77,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bcbce66894bfa8e7e94e40e0186b9bb8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4e7a6ecc11b04d2331dcee725084a9de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d329e753491efaeac79c98c4b193a686.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -297,6 +297,7 @@ cookieconsent.run({
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -794,7 +795,7 @@ Acknowledgements
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This section is based on the tests in the <a href="https://github.com/pythonhealthdatascience/rap_template_python_des">Python DES RAP Template</a> developed by <a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> from the PenCHORD team at the University of Exeter. This is a template for running SimPy DES models within a reproducible analytical pipeline, and the model structure in the template was based on this book, among other sources.</p>
+<p>This section is based on the tests in <a href="https://github.com/pythonhealthdatascience/pydesrap_mms">github.com/pythonhealthdatascience/pydesrap_mms</a> developed by <a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> from the PenCHORD team at the University of Exeter. This is a SimPy DES model run as part of a reproducible analytical pipeline, and the model structure was based on this book, among other sources.</p>
 </div>
 </div>
 <p>Testing is the process of evaluating a model to ensure it works as expected, gives reliable results, and can handle different conditions. By <strong>systematically checking for errors, inconsistencies, or unexpected behaviors</strong>, testing helps improve the quality of a model, catch errors and prevent future issues.</p>
@@ -802,7 +803,7 @@ Acknowledgements
 <h2 data-number="29.1" class="anchored" data-anchor-id="pytest"><span class="header-section-number">29.1</span> Pytest</h2>
 <p>When you create a model, you will naturally carry out tests, with simple manual checks where you observe outputs and ensure they look right. These checks can be formalised and <strong>automated</strong> so that you can run them after any changes, and catch any issues that arise.</p>
 <p>A popular framework for testing in python is <strong>pytest</strong>.</p>
-<div id="0fdb5035" class="cell" data-execution_count="1">
+<div id="91779b04" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -816,7 +817,7 @@ Acknowledgements
 <p>Each test in pytest is a function that contains an assertion statement to check a condition (e.g.&nbsp;<code>number &gt; 0</code>). If the condition fails, pytest will return an error message (e.g.&nbsp;“The number should be positive”).</p>
 <p>Tests are typically stored in a folder called <code>tests</code>, with filenames starting with the prefix <code>test_</code>. This naming convention allows pytest to automatically discover and run all the tests in the folder.</p>
 <p>Here’s an example of a simple test using pytest:</p>
-<div id="3059ee64" class="cell" data-execution_count="2">
+<div id="128c518f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_positive():</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Confirm that the number is positive.</span></span>
@@ -843,17 +844,17 @@ Test output:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="632f16f6" class="cell" data-execution_count="3">
+<div id="bcb5ff33" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
-<pre><code>============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
-rootdir: /mnt/c/hsma6_des_book
-plugins: anyio-4.3.0
+<pre><code>============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\hsma6_des_book
+plugins: anyio-4.8.0
 collected 1 item
 
-tests/test_example_simple.py .                                           [100%]
+tests\test_example_simple.py .                                           [100%]
 
-============================== 1 passed in 0.60s ===============================</code></pre>
+============================== 1 passed in 0.06s ==============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -866,7 +867,7 @@ tests/test_example_simple.py .                                           [100%]
 <h3 data-number="29.1.3" class="anchored" data-anchor-id="parametrise"><span class="header-section-number">29.1.3</span> Parametrise</h3>
 <p>We can execute the same test on different parameters using <code>pytest.mark.parametrize</code>.</p>
 <p>Here’s an example:</p>
-<div id="f6251227" class="cell" data-execution_count="4">
+<div id="28820174" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@pytest.mark.parametrize</span>(<span class="st">"number"</span>, [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_positive_param(number):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -889,18 +890,18 @@ Test output:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="8326e255" class="cell" data-execution_count="5">
+<div id="7c26e5d4" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
-<pre><code>============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
-rootdir: /mnt/c/hsma6_des_book
-plugins: anyio-4.3.0
+<pre><code>============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\hsma6_des_book
+plugins: anyio-4.8.0
 collected 4 items
 
-tests/test_example_param.py ...F                                         [100%]
+tests\test_example_param.py ...F                                         [100%]
 
-=================================== FAILURES ===================================
-___________________________ test_positive_param[-1] ____________________________
+================================== FAILURES ===================================
+___________________________ test_positive_param[-1] ___________________________
 
 number = -1
 
@@ -917,10 +918,10 @@ number = -1
 E       AssertionError: The number -1 is not positive.
 E       assert -1 &gt; 0
 
-tests/test_example_param.py:13: AssertionError
-=========================== short test summary info ============================
-FAILED tests/test_example_param.py::test_positive_param[-1] - AssertionError: The number -1 is not positive.
-========================= 1 failed, 3 passed in 8.47s ==========================</code></pre>
+tests\test_example_param.py:13: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_example_param.py::test_positive_param[-1] - AssertionError:...
+========================= 1 failed, 3 passed in 0.20s =========================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>&lt;ExitCode.TESTS_FAILED: 1&gt;</code></pre>
@@ -950,7 +951,7 @@ Tip
 <section id="param-class" class="level3" data-number="29.2.1">
 <h3 data-number="29.2.1" class="anchored" data-anchor-id="param-class"><span class="header-section-number">29.2.1</span> Param class</h3>
 <p>As these are no longer “global” parameters, we will rename <code>g</code> to <code>Param</code>.</p>
-<div id="7ff07618" class="cell" data-execution_count="6">
+<div id="d4a9ca34" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store parameter values.</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Param:  <span class="co">##NEW</span></span>
 <span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
@@ -980,7 +981,7 @@ Tip
 <section id="model-class" class="level3" data-number="29.2.3">
 <h3 data-number="29.2.3" class="anchored" data-anchor-id="model-class"><span class="header-section-number">29.2.3</span> Model class</h3>
 <p>Set parameters as an input to the class. Each instance of <code>g</code> is changed to <code>param</code> (which refers to the parameter instance provided to the class).</p>
-<div id="083377e6" class="cell" data-execution_count="7">
+<div id="de9f6773" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param, run_number):  <span class="co">##NEW</span></span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
@@ -995,34 +996,36 @@ Tip
 <span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a>        ...</span>
 <span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_inter_arrival_dist <span class="op">=</span> Exponential(</span>
-<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.patient_inter,  <span class="co">##NEW</span></span>
-<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_reception_time_dist <span class="op">=</span> Exponential(</span>
-<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_reception_time,  <span class="co">##NEW</span></span>
-<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">3</span>)</span>
-<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse_consult_time_dist <span class="op">=</span> Exponential(</span>
-<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_n_consult_time,  <span class="co">##NEW</span></span>
-<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">4</span>)</span>
-<span id="annotated-cell-5-24"><a href="#annotated-cell-5-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor_consult_time_dist <span class="op">=</span> Exponential(</span>
-<span id="annotated-cell-5-25"><a href="#annotated-cell-5-25" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_d_consult_time,  <span class="co">##NEW</span></span>
-<span id="annotated-cell-5-26"><a href="#annotated-cell-5-26" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">5</span>)</span>
-<span id="annotated-cell-5-27"><a href="#annotated-cell-5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-28"><a href="#annotated-cell-5-28" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>        ss <span class="op">=</span> np.random.SeedSequence(<span class="va">self</span>.run_number)</span>
+<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>        seeds <span class="op">=</span> ss.spawn(<span class="dv">4</span>)</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_inter_arrival_dist <span class="op">=</span> Exponential(</span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.patient_inter,  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">0</span>])</span>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_reception_time_dist <span class="op">=</span> Exponential(</span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_reception_time,  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">1</span>])</span>
+<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse_consult_time_dist <span class="op">=</span> Exponential(</span>
+<span id="annotated-cell-5-24"><a href="#annotated-cell-5-24" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_n_consult_time,  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-25"><a href="#annotated-cell-5-25" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">2</span>])</span>
+<span id="annotated-cell-5-26"><a href="#annotated-cell-5-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor_consult_time_dist <span class="op">=</span> Exponential(</span>
+<span id="annotated-cell-5-27"><a href="#annotated-cell-5-27" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_d_consult_time,  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-28"><a href="#annotated-cell-5-28" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">3</span>])</span>
 <span id="annotated-cell-5-29"><a href="#annotated-cell-5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-30"><a href="#annotated-cell-5-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
+<span id="annotated-cell-5-30"><a href="#annotated-cell-5-30" aria-hidden="true" tabindex="-1"></a>   ...</span>
 <span id="annotated-cell-5-31"><a href="#annotated-cell-5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-32"><a href="#annotated-cell-5-32" aria-hidden="true" tabindex="-1"></a>        ...</span>
+<span id="annotated-cell-5-32"><a href="#annotated-cell-5-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
 <span id="annotated-cell-5-33"><a href="#annotated-cell-5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-34"><a href="#annotated-cell-5-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> random.uniform(<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;</span> <span class="va">self</span>.param.prob_seeing_doctor:  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-34"><a href="#annotated-cell-5-34" aria-hidden="true" tabindex="-1"></a>        ...</span>
 <span id="annotated-cell-5-35"><a href="#annotated-cell-5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-36"><a href="#annotated-cell-5-36" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="annotated-cell-5-36"><a href="#annotated-cell-5-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> random.uniform(<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;</span> <span class="va">self</span>.param.prob_seeing_doctor:  <span class="co">##NEW</span></span>
 <span id="annotated-cell-5-37"><a href="#annotated-cell-5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-38"><a href="#annotated-cell-5-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
-<span id="annotated-cell-5-39"><a href="#annotated-cell-5-39" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
-<span id="annotated-cell-5-40"><a href="#annotated-cell-5-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span><span class="va">self</span>.param.sim_duration)  <span class="co">##NEW</span></span>
-<span id="annotated-cell-5-41"><a href="#annotated-cell-5-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-42"><a href="#annotated-cell-5-42" aria-hidden="true" tabindex="-1"></a>        ...</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-5-38"><a href="#annotated-cell-5-38" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="annotated-cell-5-39"><a href="#annotated-cell-5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-40"><a href="#annotated-cell-5-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
+<span id="annotated-cell-5-41"><a href="#annotated-cell-5-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
+<span id="annotated-cell-5-42"><a href="#annotated-cell-5-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span><span class="va">self</span>.param.sim_duration)  <span class="co">##NEW</span></span>
+<span id="annotated-cell-5-43"><a href="#annotated-cell-5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-44"><a href="#annotated-cell-5-44" aria-hidden="true" tabindex="-1"></a>        ...</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
@@ -1031,7 +1034,7 @@ Tip
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="7,9,11,16,19,22,25,34,40" data-code-annotation="2">Replaced all <code>g</code> with <code>self.param</code>.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="7,9,11,18,21,24,27,36,42" data-code-annotation="2">Replaced all <code>g</code> with <code>self.param</code>.</span>
 </dd>
 </dl>
 </div>
@@ -1040,7 +1043,7 @@ Tip
 <section id="trial-class" class="level3" data-number="29.2.4">
 <h3 data-number="29.2.4" class="anchored" data-anchor-id="trial-class"><span class="header-section-number">29.2.4</span> Trial class</h3>
 <p>Set parameters as an input to the class, and renamed <code>g</code> to <code>param</code>. Also, disabled printing sections.</p>
-<div id="ef6934aa" class="cell" data-execution_count="8">
+<div id="758a990c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>, param):  <span class="co">##NEW</span></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
@@ -1116,311 +1119,314 @@ Click here to view the code
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="48d27a76" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Exponential</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store parameter values.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Param:  <span class="co">##NEW</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    mean_d_consult_time <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    number_of_receptionists <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    number_of_nurses <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    number_of_doctors <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    prob_seeing_doctor <span class="op">=</span> <span class="fl">0.6</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    sim_duration <span class="op">=</span> <span class="dv">600</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_recep <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_doctor <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number and</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instance of the parameter class when we create a new model.</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param, run_number):  <span class="co">##NEW</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the passed in parameters</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a SimPy environment in which everything will live</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a patient counter (which we'll use as a patient ID)</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create our resources</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.receptionist <span class="op">=</span> simpy.Resource(</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_receptionists)  <span class="co">##NEW</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse <span class="op">=</span> simpy.Resource(</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_nurses)  <span class="co">##NEW</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor <span class="op">=</span> simpy.Resource(</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_doctors)  <span class="co">##NEW</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the passed in run number</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.run_number <span class="op">=</span> run_number</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a new Pandas DataFrame that will store some results against</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the patient ID (which we'll use as the index).</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df <span class="op">=</span> pd.DataFrame()</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Patient ID"</span>] <span class="op">=</span> [<span class="dv">1</span>]</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.set_index(<span class="st">"Patient ID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create an attribute to store the mean queuing times across this run of</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the model</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_recep <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_inter_arrival_dist <span class="op">=</span> Exponential(</span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.patient_inter,  <span class="co">##NEW</span></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_reception_time_dist <span class="op">=</span> Exponential(</span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_reception_time,  <span class="co">##NEW</span></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">3</span>)</span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse_consult_time_dist <span class="op">=</span> Exponential(</span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_n_consult_time,  <span class="co">##NEW</span></span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">4</span>)</span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor_consult_time_dist <span class="op">=</span> Exponential(</span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">=</span> <span class="va">self</span>.param.mean_d_consult_time,  <span class="co">##NEW</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>            random_seed <span class="op">=</span> <span class="va">self</span>.run_number<span class="op">*</span><span class="dv">5</span>)</span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A generator function that represents the DES generator for patient</span></span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>    <span class="co"># arrivals</span></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We use an infinite loop here to keep doing this indefinitely whilst</span></span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the simulation runs</span></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Increment the patient counter by 1 (this means our first patient</span></span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>            <span class="co"># will have an ID of 1)</span></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Create a new patient - an instance of the Patient Class we</span></span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>            <span class="co"># defined above.  Remember, we pass in the ID when creating a</span></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patient - so here we pass the patient counter to use as the ID.</span></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>            p <span class="op">=</span> Patient(<span class="va">self</span>.patient_counter)</span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Tell SimPy to start up the attend_clinic generator function with</span></span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>            <span class="co"># this patient (the generator function that will model the</span></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patient's journey through the system)</span></span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env.process(<span class="va">self</span>.attend_clinic(p))</span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Randomly sample the time to the next patient arriving.  Here, we</span></span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>            <span class="co"># sample from an exponential distribution (common for inter-arrival</span></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>            <span class="co"># times), and pass in a lambda value of 1 / mean.  The mean</span></span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>            <span class="co"># inter-arrival time is stored in the g class.</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>            sampled_inter <span class="op">=</span> <span class="va">self</span>.patient_inter_arrival_dist.sample()</span>
-<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze this instance of this function in place until the</span></span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>            <span class="co"># inter-arrival time we sampled above has elapsed.  Note - time in</span></span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>            <span class="co"># SimPy progresses in "Time Units", which can represent anything</span></span>
-<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>            <span class="co"># you like (just make sure you're consistent within the model)</span></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_inter)</span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A generator function that represents the pathway for a patient going</span></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>    <span class="co"># through the clinic.</span></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The patient object is passed in to the generator function so we can</span></span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract information from / record information to it</span></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
-<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>        start_q_recep <span class="op">=</span> <span class="va">self</span>.env.now</span>
-<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.receptionist.request() <span class="im">as</span> req:</span>
-<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
+<div id="97d16cc4" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simpy</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_tools.distributions <span class="im">import</span> Exponential</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Class to store parameter values.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Param:  <span class="co">##NEW</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    patient_inter <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    mean_n_consult_time <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    mean_d_consult_time <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    number_of_receptionists <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    number_of_nurses <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    number_of_doctors <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    prob_seeing_doctor <span class="op">=</span> <span class="fl">0.6</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    sim_duration <span class="op">=</span> <span class="dv">600</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    number_of_runs <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing patients coming in to the clinic.</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Patient:</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_id):</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> p_id</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_recep <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q_time_doctor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing our model of the clinic.</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor to set up the model for a run.  We pass in a run number and</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instance of the parameter class when we create a new model.</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param, run_number):  <span class="co">##NEW</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the passed in parameters</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a SimPy environment in which everything will live</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env <span class="op">=</span> simpy.Environment()</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a patient counter (which we'll use as a patient ID)</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create our resources</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.receptionist <span class="op">=</span> simpy.Resource(</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_receptionists)  <span class="co">##NEW</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse <span class="op">=</span> simpy.Resource(</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_nurses)  <span class="co">##NEW</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor <span class="op">=</span> simpy.Resource(</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env, capacity<span class="op">=</span><span class="va">self</span>.param.number_of_doctors)  <span class="co">##NEW</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the passed in run number</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.run_number <span class="op">=</span> run_number</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a new Pandas DataFrame that will store some results against</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the patient ID (which we'll use as the index).</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Patient ID"</span>] <span class="op">=</span> [<span class="dv">1</span>]</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df[<span class="st">"Time with Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.results_df.set_index(<span class="st">"Patient ID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create an attribute to store the mean queuing times across this run of</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the model</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_recep <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>        ss <span class="op">=</span> np.random.SeedSequence(<span class="va">self</span>.run_number)</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>        seeds <span class="op">=</span> ss.spawn(<span class="dv">4</span>)</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_inter_arrival_dist <span class="op">=</span> Exponential(</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.patient_inter,  <span class="co">##NEW</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">0</span>])</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.patient_reception_time_dist <span class="op">=</span> Exponential(</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_reception_time,  <span class="co">##NEW</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">1</span>])</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nurse_consult_time_dist <span class="op">=</span> Exponential(</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_n_consult_time,  <span class="co">##NEW</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">2</span>])</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.doctor_consult_time_dist <span class="op">=</span> Exponential(</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>            mean<span class="op">=</span><span class="va">self</span>.param.mean_d_consult_time,  <span class="co">##NEW</span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>            random_seed<span class="op">=</span>seeds[<span class="dv">3</span>])</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A generator function that represents the DES generator for patient</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>    <span class="co"># arrivals</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generator_patient_arrivals(<span class="va">self</span>):</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We use an infinite loop here to keep doing this indefinitely whilst</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the simulation runs</span></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Increment the patient counter by 1 (this means our first patient</span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>            <span class="co"># will have an ID of 1)</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.patient_counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Create a new patient - an instance of the Patient Class we</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>            <span class="co"># defined above.  Remember, we pass in the ID when creating a</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patient - so here we pass the patient counter to use as the ID.</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>            p <span class="op">=</span> Patient(<span class="va">self</span>.patient_counter)</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Tell SimPy to start up the attend_clinic generator function with</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>            <span class="co"># this patient (the generator function that will model the</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patient's journey through the system)</span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.env.process(<span class="va">self</span>.attend_clinic(p))</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Randomly sample the time to the next patient arriving.  Here, we</span></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>            <span class="co"># sample from an exponential distribution (common for inter-arrival</span></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a>            <span class="co"># times), and pass in a lambda value of 1 / mean.  The mean</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>            <span class="co"># inter-arrival time is stored in the g class.</span></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>            sampled_inter <span class="op">=</span> <span class="va">self</span>.patient_inter_arrival_dist.sample()</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze this instance of this function in place until the</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>            <span class="co"># inter-arrival time we sampled above has elapsed.  Note - time in</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>            <span class="co"># SimPy progresses in "Time Units", which can represent anything</span></span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a>            <span class="co"># you like (just make sure you're consistent within the model)</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_inter)</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A generator function that represents the pathway for a patient going</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>    <span class="co"># through the clinic.</span></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The patient object is passed in to the generator function so we can</span></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract information from / record information to it</span></span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> attend_clinic(<span class="va">self</span>, patient):</span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>        start_q_recep <span class="op">=</span> <span class="va">self</span>.env.now</span>
 <span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>            end_q_recep <span class="op">=</span> <span class="va">self</span>.env.now</span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>            patient.q_time_recep <span class="op">=</span> end_q_recep <span class="op">-</span> start_q_recep</span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>            sampled_recep_act_time <span class="op">=</span> <span class="va">self</span>.patient_reception_time_dist.sample()</span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Recep"</span>] <span class="op">=</span> (</span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>                 patient.q_time_recep</span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Recep"</span>] <span class="op">=</span> (</span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>                 sampled_recep_act_time</span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.receptionist.request() <span class="im">as</span> req:</span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>            end_q_recep <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>            patient.q_time_recep <span class="op">=</span> end_q_recep <span class="op">-</span> start_q_recep</span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>            sampled_recep_act_time <span class="op">=</span> <span class="va">self</span>.patient_reception_time_dist.sample()</span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Recep"</span>] <span class="op">=</span> (</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>                 patient.q_time_recep</span>
 <span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_recep_act_time)</span>
-<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Here's where the patient finishes with the receptionist, and starts</span></span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>        <span class="co"># queuing for the nurse</span></span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Recep"</span>] <span class="op">=</span> (</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>                 sampled_recep_act_time</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_recep_act_time)</span>
 <span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Record the time the patient started queuing for a nurse</span></span>
-<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Here's where the patient finishes with the receptionist, and starts</span></span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>        <span class="co"># queuing for the nurse</span></span>
 <span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>        <span class="co"># This code says request a nurse resource, and do all of the following</span></span>
-<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>        <span class="co"># block of code with that nurse resource held in place (and therefore</span></span>
-<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>        <span class="co"># not usable by another patient)</span></span>
-<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.nurse.request() <span class="im">as</span> req:</span>
-<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze the function until the request for a nurse can be met.</span></span>
-<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>            <span class="co"># The patient is currently queuing.</span></span>
-<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
-<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>            <span class="co"># When we get to this bit of code, control has been passed back to</span></span>
-<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>            <span class="co"># the generator function, and therefore the request for a nurse has</span></span>
-<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>            <span class="co"># been met.  We now have the nurse, and have stopped queuing, so we</span></span>
-<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>            <span class="co"># can record the current time as the time we finished queuing.</span></span>
-<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>            end_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
-<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calculate the time this patient was queuing for the nurse, and</span></span>
-<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>            <span class="co"># record it in the patient's attribute for this.</span></span>
-<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>            patient.q_time_nurse <span class="op">=</span> end_q_nurse <span class="op">-</span> start_q_nurse</span>
-<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Now we'll randomly sample the time this patient with the nurse.</span></span>
-<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here, we use an Exponential distribution for simplicity, but you</span></span>
-<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a>            <span class="co"># would typically use a Log Normal distribution for a real model</span></span>
-<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (we'll come back to that).  As with sampling the inter-arrival</span></span>
-<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>            <span class="co"># times, we grab the mean from the g class, and pass in 1 / mean</span></span>
-<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>            <span class="co"># as the lambda value.</span></span>
-<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>            sampled_nurse_act_time <span class="op">=</span> <span class="va">self</span>.nurse_consult_time_dist.sample()</span>
-<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here we'll store the queuing time for the nurse and the sampled</span></span>
-<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>            <span class="co"># time to spend with the nurse in the results DataFrame against the</span></span>
-<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>            <span class="co"># ID for this patient.  In real world models, you may not want to</span></span>
-<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>            <span class="co"># bother storing the sampled activity times - but as this is a</span></span>
-<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>            <span class="co"># simple model, we'll do it here.</span></span>
-<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>            <span class="co"># We use a handy property of pandas called .at, which works a bit</span></span>
-<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>            <span class="co"># like .loc.  .at allows us to access (and therefore change) a</span></span>
-<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>            <span class="co"># particular cell in our DataFrame by providing the row and column.</span></span>
-<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here, we specify the row as the patient ID (the index), and the</span></span>
-<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>            <span class="co"># column for the value we want to update for that patient.</span></span>
-<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Nurse"</span>] <span class="op">=</span> (</span>
-<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>                patient.q_time_nurse)</span>
-<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Nurse"</span>] <span class="op">=</span> (</span>
-<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>                sampled_nurse_act_time)</span>
-<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze this function in place for the activity time we sampled</span></span>
-<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>            <span class="co"># above.  This is the patient spending time with the nurse.</span></span>
-<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span>
-<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>            <span class="co"># When the time above elapses, the generator function will return</span></span>
-<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>            <span class="co"># here.  As there's nothing more that we've written, the function</span></span>
-<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>            <span class="co"># will simply end.  This is a sink.  We could choose to add</span></span>
-<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>            <span class="co"># something here if we wanted to record something - e.g. a counter</span></span>
-<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>            <span class="co"># for number of patients that left, recording something about the</span></span>
-<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patients that left at a particular sink etc.</span></span>
-<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Conditional logic to see if patient goes on to see doctor</span></span>
-<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We sample from the uniform distribution between 0 and 1.  If the value</span></span>
-<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>        <span class="co"># is less than the probability of seeing a doctor (stored in g Class)</span></span>
-<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>        <span class="co"># then we say the patient sees a doctor.</span></span>
-<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If not, this block of code won't be run and the patient will just</span></span>
-<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>        <span class="co"># leave the system (we could add in an else if we wanted a branching</span></span>
-<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a>        <span class="co"># path to another activity instead)</span></span>
-<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> random.uniform(<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;</span> <span class="va">self</span>.param.prob_seeing_doctor:  <span class="co">##NEW</span></span>
-<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a>            start_q_doctor <span class="op">=</span> <span class="va">self</span>.env.now</span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="va">self</span>.doctor.request() <span class="im">as</span> req:</span>
-<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> req</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Record the time the patient started queuing for a nurse</span></span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>        start_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>        <span class="co"># This code says request a nurse resource, and do all of the following</span></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>        <span class="co"># block of code with that nurse resource held in place (and therefore</span></span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>        <span class="co"># not usable by another patient)</span></span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="va">self</span>.nurse.request() <span class="im">as</span> req:</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze the function until the request for a nurse can be met.</span></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>            <span class="co"># The patient is currently queuing.</span></span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> req</span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>            <span class="co"># When we get to this bit of code, control has been passed back to</span></span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>            <span class="co"># the generator function, and therefore the request for a nurse has</span></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>            <span class="co"># been met.  We now have the nurse, and have stopped queuing, so we</span></span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>            <span class="co"># can record the current time as the time we finished queuing.</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>            end_q_nurse <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calculate the time this patient was queuing for the nurse, and</span></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>            <span class="co"># record it in the patient's attribute for this.</span></span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a>            patient.q_time_nurse <span class="op">=</span> end_q_nurse <span class="op">-</span> start_q_nurse</span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Now we'll randomly sample the time this patient with the nurse.</span></span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here, we use an Exponential distribution for simplicity, but you</span></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>            <span class="co"># would typically use a Log Normal distribution for a real model</span></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (we'll come back to that).  As with sampling the inter-arrival</span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a>            <span class="co"># times, we grab the mean from the g class, and pass in 1 / mean</span></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>            <span class="co"># as the lambda value.</span></span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>            sampled_nurse_act_time <span class="op">=</span> <span class="va">self</span>.nurse_consult_time_dist.sample()</span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here we'll store the queuing time for the nurse and the sampled</span></span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>            <span class="co"># time to spend with the nurse in the results DataFrame against the</span></span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>            <span class="co"># ID for this patient.  In real world models, you may not want to</span></span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>            <span class="co"># bother storing the sampled activity times - but as this is a</span></span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>            <span class="co"># simple model, we'll do it here.</span></span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>            <span class="co"># We use a handy property of pandas called .at, which works a bit</span></span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>            <span class="co"># like .loc.  .at allows us to access (and therefore change) a</span></span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>            <span class="co"># particular cell in our DataFrame by providing the row and column.</span></span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Here, we specify the row as the patient ID (the index), and the</span></span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>            <span class="co"># column for the value we want to update for that patient.</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Nurse"</span>] <span class="op">=</span> (</span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>                patient.q_time_nurse)</span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Nurse"</span>] <span class="op">=</span> (</span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>                sampled_nurse_act_time)</span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Freeze this function in place for the activity time we sampled</span></span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>            <span class="co"># above.  This is the patient spending time with the nurse.</span></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_nurse_act_time)</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>            <span class="co"># When the time above elapses, the generator function will return</span></span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>            <span class="co"># here.  As there's nothing more that we've written, the function</span></span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a>            <span class="co"># will simply end.  This is a sink.  We could choose to add</span></span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>            <span class="co"># something here if we wanted to record something - e.g. a counter</span></span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>            <span class="co"># for number of patients that left, recording something about the</span></span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>            <span class="co"># patients that left at a particular sink etc.</span></span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Conditional logic to see if patient goes on to see doctor</span></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We sample from the uniform distribution between 0 and 1.  If the value</span></span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>        <span class="co"># is less than the probability of seeing a doctor (stored in g Class)</span></span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a>        <span class="co"># then we say the patient sees a doctor.</span></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If not, this block of code won't be run and the patient will just</span></span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a>        <span class="co"># leave the system (we could add in an else if we wanted a branching</span></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>        <span class="co"># path to another activity instead)</span></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> random.uniform(<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;</span> <span class="va">self</span>.param.prob_seeing_doctor:  <span class="co">##NEW</span></span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>            start_q_doctor <span class="op">=</span> <span class="va">self</span>.env.now</span>
 <span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>                end_q_doctor <span class="op">=</span> <span class="va">self</span>.env.now</span>
-<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a>                patient.q_time_doctor <span class="op">=</span> end_q_doctor <span class="op">-</span> start_q_doctor</span>
-<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a>                sampled_doctor_act_time <span class="op">=</span> <span class="va">self</span>.nurse_consult_time_dist.sample()</span>
-<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Doctor"</span>] <span class="op">=</span> (</span>
-<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_doctor</span>
-<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Doctor"</span>] <span class="op">=</span> (</span>
-<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a>                    sampled_doctor_act_time</span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="va">self</span>.doctor.request() <span class="im">as</span> req:</span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> req</span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a>                end_q_doctor <span class="op">=</span> <span class="va">self</span>.env.now</span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>                patient.q_time_doctor <span class="op">=</span> end_q_doctor <span class="op">-</span> start_q_doctor</span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>                sampled_doctor_act_time <span class="op">=</span> <span class="va">self</span>.nurse_consult_time_dist.sample()</span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Q Time Doctor"</span>] <span class="op">=</span> (</span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a>                    patient.q_time_doctor</span>
 <span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_doctor_act_time)</span>
-<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This method calculates results over a single run.  Here we just calculate</span></span>
-<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a mean, but in real world models you'd probably want to calculate more.</span></span>
-<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_run_results(<span class="va">self</span>):</span>
-<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Take the mean of the queuing times across patients in this run of the</span></span>
-<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a>        <span class="co"># model.</span></span>
-<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_recep <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Recep"</span>].mean()</span>
-<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>].mean()</span>
-<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>].mean()</span>
-<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The run method starts up the DES entity generators, runs the simulation,</span></span>
-<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and in turns calls anything we need to generate results for the run</span></span>
-<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
-<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Start up our DES entity generators that create new patients.  We've</span></span>
-<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a>        <span class="co"># only got one in this model, but we'd need to do this for each one if</span></span>
-<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>        <span class="co"># we had multiple generators.</span></span>
-<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
-<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run the model for the duration specified in g class</span></span>
-<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span><span class="va">self</span>.param.sim_duration)  <span class="co">##NEW</span></span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.results_df.at[patient.<span class="bu">id</span>, <span class="st">"Time with Doctor"</span>] <span class="op">=</span> (</span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>                    sampled_doctor_act_time</span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> <span class="va">self</span>.env.timeout(sampled_doctor_act_time)</span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This method calculates results over a single run.  Here we just calculate</span></span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a mean, but in real world models you'd probably want to calculate more.</span></span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_run_results(<span class="va">self</span>):</span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Take the mean of the queuing times across patients in this run of the</span></span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>        <span class="co"># model.</span></span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_recep <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Recep"</span>].mean()</span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_nurse <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Nurse"</span>].mean()</span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_q_time_doctor <span class="op">=</span> <span class="va">self</span>.results_df[<span class="st">"Q Time Doctor"</span>].mean()</span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The run method starts up the DES entity generators, runs the simulation,</span></span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and in turns calls anything we need to generate results for the run</span></span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>):</span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Start up our DES entity generators that create new patients.  We've</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a>        <span class="co"># only got one in this model, but we'd need to do this for each one if</span></span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>        <span class="co"># we had multiple generators.</span></span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.process(<span class="va">self</span>.generator_patient_arrivals())</span>
 <span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Now the simulation run has finished, call the method that calculates</span></span>
-<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run results</span></span>
-<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_run_results()</span>
-<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the run number with the patient-level results from this run of</span></span>
-<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the model</span></span>
-<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.results_df)</span>
-<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation - a batch of simulation runs.</span></span>
-<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
-<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
-<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a>    <span class="co"># results from each run against run number, with run number as the index.</span></span>
-<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>, param):  <span class="co">##NEW</span></span>
-<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the model parameters</span></span>
-<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
-<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
-<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
-<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Arrivals"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
-<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
-<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results.set_index(<span class="st">"Run Number"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to print out the results from the trial.  In real world models,</span></span>
-<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>    <span class="co"># you'd likely save them as well as (or instead of) printing them</span></span>
-<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
-<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
-<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.df_trial_results.<span class="bu">round</span>(<span class="dv">2</span>))</span>
-<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="va">self</span>.df_trial_results.mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
-<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to run a trial</span></span>
-<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
-<span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(f"{self.param.number_of_receptionists} receptionists, " +</span></span>
-<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>        <span class="co">#      f"{self.param.number_of_nurses} nurses, " +</span></span>
-<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a>        <span class="co">#       f"{self.param.number_of_doctors} doctors")  ##NEW - no printing</span></span>
-<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print("")</span></span>
-<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run the simulation for the number of runs specified in g class.</span></span>
-<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For each run, we create a new instance of the Model class and call its</span></span>
-<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run method, which sets everything else in motion.  Once the run has</span></span>
-<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a>        <span class="co"># completed, we grab out the stored run results (just mean queuing time</span></span>
-<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a>        <span class="co"># here) and store it against the run number in the trial results</span></span>
-<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a>        <span class="co"># dataframe.</span></span>
-<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.param.number_of_runs):  <span class="co">##NEW</span></span>
-<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a>            random.seed(run)</span>
-<span id="cb8-291"><a href="#cb8-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a>            my_model <span class="op">=</span> Model(param<span class="op">=</span><span class="va">self</span>.param, run_number<span class="op">=</span>run)  <span class="co">##NEW</span></span>
-<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a>            patient_level_results <span class="op">=</span> my_model.run()</span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run the model for the duration specified in g class</span></span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.env.run(until<span class="op">=</span><span class="va">self</span>.param.sim_duration)  <span class="co">##NEW</span></span>
+<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Now the simulation run has finished, call the method that calculates</span></span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run results</span></span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.calculate_run_results()</span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the run number with the patient-level results from this run of</span></span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the model</span></span>
+<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.results_df)</span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a><span class="co"># Class representing a Trial for our simulation - a batch of simulation runs.</span></span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trial:</span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The constructor sets up a pandas dataframe that will store the key</span></span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a>    <span class="co"># results from each run against run number, with run number as the index.</span></span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span>  <span class="fu">__init__</span>(<span class="va">self</span>, param):  <span class="co">##NEW</span></span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store the model parameters</span></span>
+<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param <span class="op">=</span> param  <span class="co">##NEW</span></span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Run Number"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Arrivals"</span>] <span class="op">=</span> [<span class="dv">0</span>]</span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Recep"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Nurse"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results[<span class="st">"Mean Q Time Doctor"</span>] <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df_trial_results.set_index(<span class="st">"Run Number"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to print out the results from the trial.  In real world models,</span></span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a>    <span class="co"># you'd likely save them as well as (or instead of) printing them</span></span>
+<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_trial_results(<span class="va">self</span>):</span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Trial Results"</span>)</span>
+<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="va">self</span>.df_trial_results.<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="va">self</span>.df_trial_results.mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Method to run a trial</span></span>
+<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run_trial(<span class="va">self</span>):</span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(f"{self.param.number_of_receptionists} receptionists, " +</span></span>
+<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a>        <span class="co">#      f"{self.param.number_of_nurses} nurses, " +</span></span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>        <span class="co">#       f"{self.param.number_of_doctors} doctors")  ##NEW - no printing</span></span>
+<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print("")</span></span>
+<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run the simulation for the number of runs specified in g class.</span></span>
+<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For each run, we create a new instance of the Model class and call its</span></span>
+<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run method, which sets everything else in motion.  Once the run has</span></span>
+<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a>        <span class="co"># completed, we grab out the stored run results (just mean queuing time</span></span>
+<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a>        <span class="co"># here) and store it against the run number in the trial results</span></span>
+<span id="cb8-291"><a href="#cb8-291" aria-hidden="true" tabindex="-1"></a>        <span class="co"># dataframe.</span></span>
+<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> run <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.param.number_of_runs):  <span class="co">##NEW</span></span>
+<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a>            random.seed(run)</span>
 <span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results.loc[run] <span class="op">=</span> [</span>
-<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a>                <span class="bu">len</span>(patient_level_results),</span>
-<span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_recep,</span>
-<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_nurse,</span>
-<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_doctor</span>
-<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a>                ]</span>
-<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - no printing</span></span>
-<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Once the trial (ie all runs) has completed, print the final results</span></span>
-<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a>        <span class="co"># self.print_trial_results()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a>            my_model <span class="op">=</span> Model(param<span class="op">=</span><span class="va">self</span>.param, run_number<span class="op">=</span>run)  <span class="co">##NEW</span></span>
+<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a>            patient_level_results <span class="op">=</span> my_model.run()</span>
+<span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df_trial_results.loc[run] <span class="op">=</span> [</span>
+<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a>                <span class="bu">len</span>(patient_level_results),</span>
+<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_recep,</span>
+<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_nurse,</span>
+<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a>                my_model.mean_q_time_doctor</span>
+<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a>                ]</span>
+<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a>        <span class="co">##NEW - no printing</span></span>
+<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Once the trial (ie all runs) has completed, print the final results</span></span>
+<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a>        <span class="co"># self.print_trial_results()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1445,7 +1451,7 @@ Click here to view the code
 <li>The length of the nurse consultation decreases.</li>
 </ul>
 <p>For simplicity, this test just focuses the nurse waiting times, but this idea can be expanded to other resources and metrics in the model as well.</p>
-<div id="331666eb" class="cell" data-execution_count="10">
+<div id="7ab9534d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1521,17 +1527,17 @@ Test output:
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="5b547821" class="cell" data-execution_count="11">
+<div id="a262f1a8" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
-<pre><code>============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
-rootdir: /mnt/c/hsma6_des_book
-plugins: anyio-4.3.0
+<pre><code>============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\hsma6_des_book
+plugins: anyio-4.8.0
 collected 3 items
 
-tests/test_functionaltest.py ...                                         [100%]
+tests\test_functionaltest.py ...                                         [100%]
 
-============================== 3 passed in 0.89s ===============================</code></pre>
+============================== 3 passed in 0.34s ==============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -1545,7 +1551,7 @@ tests/test_functionaltest.py ...                                         [100%]
 <h3 data-number="29.3.2" class="anchored" data-anchor-id="unit-tests"><span class="header-section-number">29.3.2</span> Unit tests</h3>
 <p>Unit tests are a type of functional testing that focuses on individual components (e.g.&nbsp;methods, classes) and tests them in isolation to ensure they work as intended.</p>
 <p>For example, we expect that our model should fail if the number of doctors or the patient inter-arrival time were set to 0. This is tested using <code>test_zero_inputs</code>.</p>
-<div id="e1901aea" class="cell" data-execution_count="12">
+<div id="9738abc2" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1585,18 +1591,18 @@ Test output:
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="d635ea3a" class="cell" data-execution_count="13">
+<div id="2fc1db25" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
-<pre><code>============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
-rootdir: /mnt/c/hsma6_des_book
-plugins: anyio-4.3.0
+<pre><code>============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\hsma6_des_book
+plugins: anyio-4.8.0
 collected 2 items
 
-tests/test_unittest.py FF                                                [100%]
+tests\test_unittest.py FF                                                [100%]
 
-=================================== FAILURES ===================================
-____________________ test_zero_inputs[number_of_doctors-0] _____________________
+================================== FAILURES ===================================
+____________________ test_zero_inputs[number_of_doctors-0] ____________________
 
 param_name = 'number_of_doctors', value = 0
 
@@ -1622,8 +1628,8 @@ param_name = 'number_of_doctors', value = 0
 &gt;       with pytest.raises(ValueError):
 E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
 
-tests/test_unittest.py:24: Failed
-______________________ test_zero_inputs[patient_inter-0] _______________________
+tests\test_unittest.py:24: Failed
+______________________ test_zero_inputs[patient_inter-0] ______________________
 
 param_name = 'patient_inter', value = 0
 
@@ -1649,11 +1655,11 @@ param_name = 'patient_inter', value = 0
 &gt;       with pytest.raises(ValueError):
 E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
 
-tests/test_unittest.py:24: Failed
-=========================== short test summary info ============================
-FAILED tests/test_unittest.py::test_zero_inputs[number_of_doctors-0] - Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
-FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
-============================== 2 failed in 7.96s ===============================</code></pre>
+tests\test_unittest.py:24: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_unittest.py::test_zero_inputs[number_of_doctors-0] - Failed...
+FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DI...
+============================== 2 failed in 0.12s ==============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>&lt;ExitCode.TESTS_FAILED: 1&gt;</code></pre>
@@ -1668,7 +1674,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <li><strong>Patient inter-arrival time = 0</strong>: The model would have run infinitely, as it would just constantly generating new patients.</li>
 </ul>
 <p>To address this, we could add error handling which raises an error for users if they try to input a value of 0. For example, we could add the following code to our <code>Model __init__</code> method:</p>
-<div id="182c2b5d" class="cell" data-execution_count="14">
+<div id="63035244" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the specified parameters</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> param_name <span class="kw">in</span> [<span class="st">"sim_duration"</span>, <span class="st">"patient_inter"</span>]:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1686,7 +1692,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <h3 data-number="29.3.3" class="anchored" data-anchor-id="back-tests"><span class="header-section-number">29.3.3</span> Back tests</h3>
 <p>Back tests check that the model code produces results consistent with those generated historically/from prior code.</p>
 <p>First, we’ll generate a set of expected results, with a specific set of parameters. Although this may seem unnecessary in this case, as they match our default parameters in our <code>Param</code> class, these are still specified to ensure that we are testing on the same parameters, even if defaults change in Param class.</p>
-<div id="098ec4c9" class="cell" data-execution_count="15">
+<div id="f7aac901" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>param <span class="op">=</span> Param()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>param.patient_inter <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>param.mean_reception_time <span class="op">=</span> <span class="dv">2</span></span>
@@ -1700,7 +1706,7 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>param.number_of_runs <span class="op">=</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll then run the model and save the results to <code>.csv</code> files.</p>
-<div id="2bf01f09" class="cell" data-execution_count="16">
+<div id="51fbb4c3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run trial</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>trial <span class="op">=</span> Trial(param)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>trial.run_trial()</span>
@@ -1711,15 +1717,15 @@ FAILED tests/test_unittest.py::test_zero_inputs[patient_inter-0] - Failed: DID N
 <div class="cell-output cell-output-stdout">
 <pre><code>            Arrivals  Mean Q Time Recep  Mean Q Time Nurse  Mean Q Time Doctor
 Run Number                                                                    
-0              102.0           0.000000          57.193168            1.146714
-1              125.0           1.842723         144.688786            0.018501
-2              112.0           0.845851          15.299135            1.131864
-3              120.0           1.082325          82.669429            0.037010
-4              132.0           1.943043         107.474373            0.506261</code></pre>
+0              115.0           0.784037          84.988116            1.457872
+1              118.0           2.380390          83.806804            0.284548
+2              115.0           1.094317          21.583588            1.580249
+3              126.0           1.733049          54.613322            0.291588
+4              124.0           2.102781          75.413983            0.061135</code></pre>
 </div>
 </div>
 <p>In the test, we’ll run the same model parameters, then import and compare against the saved <code>.csv</code> file to check for any differences.</p>
-<div id="5782221f" class="cell" data-execution_count="17">
+<div id="32726fa4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> full_model <span class="im">import</span> Param, Trial</span>
@@ -1765,17 +1771,17 @@ Test output:
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="956414fb" class="cell" data-execution_count="18">
+<div id="357baa4b" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-stdout">
-<pre><code>============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-8.3.4, pluggy-1.5.0
-rootdir: /mnt/c/hsma6_des_book
-plugins: anyio-4.3.0
+<pre><code>============================= test session starts =============================
+platform win32 -- Python 3.11.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\hsma6_des_book
+plugins: anyio-4.8.0
 collected 1 item
 
-tests/test_backtest.py .                                                 [100%]
+tests\test_backtest.py .                                                 [100%]
 
-============================== 1 passed in 4.63s ===============================</code></pre>
+============================== 1 passed in 4.53s ==============================</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>&lt;ExitCode.OK: 0&gt;</code></pre>
@@ -1788,14 +1794,13 @@ tests/test_backtest.py .                                                 [100%]
 </section>
 <section id="further-testing-examples" class="level3" data-number="29.3.4">
 <h3 data-number="29.3.4" class="anchored" data-anchor-id="further-testing-examples"><span class="header-section-number">29.3.4</span> Further testing examples</h3>
-<p>For more inspiration, check out the <a href="https://github.com/pythonhealthdatascience/rap_template_python_des">Python DES RAP Template</a>. Examples of other tests it includes are:</p>
+<p>For more inspiration, check out the <a href="https://github.com/pythonhealthdatascience/pydesrap_mms">pythonhealthdatascience/pydesrap_mms</a>. Examples of other tests it includes are:</p>
 <ul>
 <li>Functional tests for the impact of high demand on utilisation.</li>
 <li>Functional tests checking for expected decreases in the number of arrivals.</li>
 <li>Functional tests for an interval auditor.</li>
 <li>Functional tests for parallel execution.</li>
 <li>Functional tests for a warm-up period.</li>
-<li>Unit tests for the exponential class.</li>
 <li>Unit tests for a logging class.</li>
 <li>Unit tests for a modified parameter class which has functionality designed to prevent the addition of new attributes.</li>
 </ul>
