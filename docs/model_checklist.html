@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sammi Rosser">
-<meta name="author" content="Dan Chalk">
 
-<title>8&nbsp; Exercise - Building Your First Model – HSMA - the little book of DES</title>
+<title>42&nbsp; Model Readiness Checklist – HSMA - the little book of DES</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./model_warm_up.html" rel="next">
-<link href="./an_example_simpy_model_branching.html" rel="prev">
+<link href="./alternative_foss_simulation_libraries_software.html" rel="next">
+<link href="./running_parallel_cpus.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
@@ -105,9 +103,8 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="8&nbsp; Exercise - Building Your First Model – HSMA - the little book of DES">
+<meta property="og:title" content="42&nbsp; Model Readiness Checklist – HSMA - the little book of DES">
 <meta property="og:description" content="">
-<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -305,7 +302,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./exercise_gp.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model_checklist.html">Part 9 - Using a Model for Decision Making</a></li><li class="breadcrumb-item"><a href="./model_checklist.html"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -400,7 +397,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link active">
+  <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></span></a>
   </div>
 </li>
@@ -681,7 +678,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model_checklist.html" class="sidebar-item-text sidebar-link">
+  <a href="./model_checklist.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></span></a>
   </div>
 </li>
@@ -715,8 +712,31 @@ cookieconsent.run({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#required-outputs" id="toc-required-outputs" class="nav-link active" data-scroll-target="#required-outputs"><span class="header-section-number">8.1</span> Required outputs</a></li>
-  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal"><span class="header-section-number">8.2</span> Goal</a></li>
+  <li><a href="#bronze" id="toc-bronze" class="nav-link active" data-scroll-target="#bronze"><span class="header-section-number">42.1</span> Bronze</a>
+  <ul class="collapse">
+  <li><a href="#visualisations" id="toc-visualisations" class="nav-link" data-scroll-target="#visualisations"><span class="header-section-number">42.1.1</span> Visualisations</a></li>
+  <li><a href="#core-logic-checks" id="toc-core-logic-checks" class="nav-link" data-scroll-target="#core-logic-checks"><span class="header-section-number">42.1.2</span> Core Logic Checks</a></li>
+  <li><a href="#key-checks-against-the-real-system" id="toc-key-checks-against-the-real-system" class="nav-link" data-scroll-target="#key-checks-against-the-real-system"><span class="header-section-number">42.1.3</span> Key checks against the real system</a></li>
+  <li><a href="#process-and-stakeholder-checks" id="toc-process-and-stakeholder-checks" class="nav-link" data-scroll-target="#process-and-stakeholder-checks"><span class="header-section-number">42.1.4</span> Process and Stakeholder Checks</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"><span class="header-section-number">42.1.5</span> Documentation</a></li>
+  </ul></li>
+  <li><a href="#silver" id="toc-silver" class="nav-link" data-scroll-target="#silver"><span class="header-section-number">42.2</span> Silver</a>
+  <ul class="collapse">
+  <li><a href="#model-robustness" id="toc-model-robustness" class="nav-link" data-scroll-target="#model-robustness"><span class="header-section-number">42.2.1</span> Model Robustness</a></li>
+  <li><a href="#documentation-1" id="toc-documentation-1" class="nav-link" data-scroll-target="#documentation-1"><span class="header-section-number">42.2.2</span> Documentation</a></li>
+  <li><a href="#code-review" id="toc-code-review" class="nav-link" data-scroll-target="#code-review"><span class="header-section-number">42.2.3</span> Code Review</a></li>
+  <li><a href="#automated-testing" id="toc-automated-testing" class="nav-link" data-scroll-target="#automated-testing"><span class="header-section-number">42.2.4</span> Automated Testing</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">42.2.5</span> Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#gold" id="toc-gold" class="nav-link" data-scroll-target="#gold"><span class="header-section-number">42.3</span> Gold</a>
+  <ul class="collapse">
+  <li><a href="#documentation-2" id="toc-documentation-2" class="nav-link" data-scroll-target="#documentation-2"><span class="header-section-number">42.3.1</span> Documentation</a></li>
+  <li><a href="#reproducibility-1" id="toc-reproducibility-1" class="nav-link" data-scroll-target="#reproducibility-1"><span class="header-section-number">42.3.2</span> Reproducibility</a></li>
+  <li><a href="#model-efficiency" id="toc-model-efficiency" class="nav-link" data-scroll-target="#model-efficiency"><span class="header-section-number">42.3.3</span> Model Efficiency</a></li>
+  <li><a href="#model-communication-and-validation" id="toc-model-communication-and-validation" class="nav-link" data-scroll-target="#model-communication-and-validation"><span class="header-section-number">42.3.4</span> Model Communication and Validation</a></li>
+  <li><a href="#best-practice-around-variability-and-model-setup" id="toc-best-practice-around-variability-and-model-setup" class="nav-link" data-scroll-target="#best-practice-around-variability-and-model-setup"><span class="header-section-number">42.3.5</span> Best Practice around Variability and Model Setup</a></li>
+  <li><a href="#automated-testing-1" id="toc-automated-testing-1" class="nav-link" data-scroll-target="#automated-testing-1"><span class="header-section-number">42.3.6</span> Automated Testing</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -724,22 +744,15 @@ cookieconsent.run({
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_simpy.html">Part 2 - Your First SimPy Model</a></li><li class="breadcrumb-item"><a href="./exercise_gp.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model_checklist.html">Part 9 - Using a Model for Decision Making</a></li><li class="breadcrumb-item"><a href="./model_checklist.html"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></h1>
+<h1 class="title"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-             <p><a href="https://github.com/hsma-chief-elf">Dan Chalk</a> <a href="https://orcid.org/0000-0002-4165-4364" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
     
   
     
@@ -750,47 +763,184 @@ cookieconsent.run({
 </header>
 
 
-<p>Your task is to build a Discrete Event Simulation model of the following GP surgery.</p>
-<p><img src="images/exercise_gp.png" class="img-fluid"></p>
-<p>Patients:</p>
+<p>Model readiness is a somewhat subjective thing.</p>
+<p>However, the checklists below are designed to provide some sort of guidance to help you determine whether your model is ready to be used for supporting real-world decision making.</p>
+<p>It also must be recognised that many models are being written in non-optimal contexts, where sufficient time does not exist to write all of the automated test cases you would like to. Therefore, this checklist aims to give you a meaningful minimum to aim for to give you the best possible chance of delivering an output that is valid to be used for decision-making.</p>
+<p>With this in mind, the levels of the checklist roughly correspond to the below</p>
+<p><strong>Bronze</strong>: Aimed at models designed to be used for small to medium scale real-world decision making in a single organisation.</p>
+<p><strong>Silver</strong>: Aimed at models designed to be used for real-world decision making at a larger scale (e.g.&nbsp;a more costly decision, or across multiple areas)</p>
+<p><strong>Gold</strong>: Aimed at models that are intended to be reused across multiple organisations, and/or multiple times, and/or published in scientific journals - so the original author may not be involved in future use and changes</p>
+<section id="bronze" class="level2" data-number="42.1">
+<h2 data-number="42.1" class="anchored" data-anchor-id="bronze"><span class="header-section-number">42.1</span> Bronze</h2>
+<section id="visualisations" class="level3" data-number="42.1.1">
+<h3 data-number="42.1.1" class="anchored" data-anchor-id="visualisations"><span class="header-section-number">42.1.1</span> Visualisations</h3>
 <ul>
-<li>Arrive into the GP surgery around every 3 minutes.</li>
-<li>Spend around 2 minutes being registered.</li>
-<li>Then spend around 8 minutes with the GP.</li>
+<li>[] Visualise the following:
+<ul>
+<li>[] Arrivals over time (using a dotplot or heatmap)</li>
+<li>[] Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at )</li>
+<li>[] Distributions of generated activity times</li>
+<li>[] Distributions of generated inter-arrival times</li>
+<li>[] Queue lengths over time</li>
+</ul></li>
 </ul>
-<p>Around a quarter of patients need to book a test at reception after they’ve seen the GP, and this takes around 4 minutes.</p>
-<p>In addition to registering patients and booking tests, receptionists also answer incoming calls, which come in around every 10 minutes and last about 4 minutes.</p>
-<p>The surgery currently has 1 receptionist and 2 GPs. They feel there is a problem in their system as they are receiving complaints about lengthy delays both from patients and callers. They want you to build a simulation model to find out what’s happening and propose some solutions.</p>
-<p>Your model should represent a “day in the life” of the surgery, which is open to both in-person patients and telephone callers for 8 hours continuously.</p>
-<p>Your trial should be at least 100 runs of the simulation.</p>
-<section id="required-outputs" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="required-outputs"><span class="header-section-number">8.1</span> Required outputs</h2>
-<p>The surgery is only interested in queuing times for each of the queues in the system (you don’t need to worry about storing sampled activity times for example), but they would like to look at the results for patients and callers separately. You should give them mean results as a minimum, but you may consider providing additional results too.</p>
-<p>You also need to calculate and provide them with the mean queuing times across the trial (eg mean queue for registration across all runs, for GP etc - so four numbers that you would report). You’ll need a new method in your Trial class to calculate this. You should find this a helpful output, as it’ll help you compare scenarios easily. Report these means to 1 decimal place.</p>
 </section>
-<section id="goal" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="goal"><span class="header-section-number">8.2</span> Goal</h2>
-<p>Once you’ve built the model, use it to:</p>
-<ol type="1">
-<li>Identify where you think the problem is</li>
-<li>Provide proposals for how you would fix it (this can include anything you like - they are open to suggestions - more resources, changes to processes to cut activity times, having the GP book the test, anything you can think of!</li>
-</ol>
-<p>Try different things, different solutions.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Take a copy of the original working file for the base case scenario first :)</p>
-</div>
-</div>
+<section id="core-logic-checks" class="level3" data-number="42.1.2">
+<h3 data-number="42.1.2" class="anchored" data-anchor-id="core-logic-checks"><span class="header-section-number">42.1.2</span> Core Logic Checks</h3>
+<ul>
+<li>[] Watch the journey of several individuals (via logs or animations)</li>
+<li>[] Check that all described stages demonstrate at least some activity during a sufficiently long, representative run</li>
+<li>[] Implement a random seed implemented for reproducibility under same inputs
+<ul>
+<li>[] Verify this visually by running twice with the same seed, confirming outputs do not change</li>
+</ul></li>
+<li>[] Manually check that the number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)</li>
+<li>[] Manually check that entities are never in two places at once</li>
+<li>[] Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model)</li>
+<li>[] Outputs are being derived from a minimum of 30 runs (ideally more)</li>
+<li>[] Warm up length visually checked to be appropriate</li>
+<li>[] Manually review that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point)</li>
+<li>[] Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g.&nbsp;during breaks, evenings, weekends)</li>
+</ul>
+</section>
+<section id="key-checks-against-the-real-system" class="level3" data-number="42.1.3">
+<h3 data-number="42.1.3" class="anchored" data-anchor-id="key-checks-against-the-real-system"><span class="header-section-number">42.1.3</span> Key checks against the real system</h3>
+<ul>
+<li>[] Number of entities arriving in sim verified against historical patterns (averages sensible, distributions sensible)
+<ul>
+<li>[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system</li>
+</ul></li>
+<li>[] Generated activity times visually verified (averages sensible, distribution sensible)
+<ul>
+<li>[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system</li>
+</ul></li>
+<li>[] Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this</li>
+<li>[] Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this</li>
+<li>[] Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?</li>
+</ul>
+</section>
+<section id="process-and-stakeholder-checks" class="level3" data-number="42.1.4">
+<h3 data-number="42.1.4" class="anchored" data-anchor-id="process-and-stakeholder-checks"><span class="header-section-number">42.1.4</span> Process and Stakeholder Checks</h3>
+<ul>
+<li>[] Approve the simulation process map with stakeholders</li>
+<li>[] Check the scenario outputs with stakeholders - do they feel reasonable?
+<ul>
+<li>Note that stakeholder responses to outputs shouldn’t necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention</li>
+</ul></li>
+</ul>
+</section>
+<section id="documentation" class="level3" data-number="42.1.5">
+<h3 data-number="42.1.5" class="anchored" data-anchor-id="documentation"><span class="header-section-number">42.1.5</span> Documentation</h3>
+<ul>
+<li>[] Write a readme that
+<ul>
+<li>[] Explains how to run the model</li>
+<li>[] Gives a brief overview of the system being modelled</li>
+</ul></li>
+<li>[] Include sufficient comments in your work to help people understand non-obvious elements of the code</li>
+</ul>
+</section>
+</section>
+<section id="silver" class="level2" data-number="42.2">
+<h2 data-number="42.2" class="anchored" data-anchor-id="silver"><span class="header-section-number">42.2</span> Silver</h2>
+<section id="model-robustness" class="level3" data-number="42.2.1">
+<h3 data-number="42.2.1" class="anchored" data-anchor-id="model-robustness"><span class="header-section-number">42.2.1</span> Model Robustness</h3>
+<ul>
+<li>[] Undertake sensitivity analysis</li>
+</ul>
+</section>
+<section id="documentation-1" class="level3" data-number="42.2.2">
+<h3 data-number="42.2.2" class="anchored" data-anchor-id="documentation-1"><span class="header-section-number">42.2.2</span> Documentation</h3>
+<ul>
+<li>[] Add docstrings</li>
+<li>[] Complete a formal model reporting checklist (e.g STRESS-DES)</li>
+</ul>
+</section>
+<section id="code-review" class="level3" data-number="42.2.3">
+<h3 data-number="42.2.3" class="anchored" data-anchor-id="code-review"><span class="header-section-number">42.2.3</span> Code Review</h3>
+<ul>
+<li>[] Have a code review undertaken by someone else (see <a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html">the DES RAP book: peer review</a>)</li>
+</ul>
+</section>
+<section id="automated-testing" class="level3" data-number="42.2.4">
+<h3 data-number="42.2.4" class="anchored" data-anchor-id="automated-testing"><span class="header-section-number">42.2.4</span> Automated Testing</h3>
+<ul>
+<li>[] Define formal automated tests:
+<ul>
+<li>[] Model running successfully</li>
+<li>[] Varying results are obtained when using different seeds and the same parameters</li>
+<li>[] Identical results are obtained when the same seed and parameters are used</li>
+<li>[] Number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)</li>
+<li>[] Utilisation never exceeds capacity (i.e.&nbsp;resources are never in use by multiple entities, unless allowed in your model)</li>
+<li>[] All stages of the model show some activity (i.e.&nbsp;there are no ‘orphaned’ steps)</li>
+<li>[] Simple ‘expected behaviour’ when parameters are varied
+<ul>
+<li>[] longer activity time = worse performance</li>
+<li>[] more arrivals = longer queues</li>
+</ul></li>
+<li>[] Write tests for behaviour under extreme conditions
+<ul>
+<li>[] Heavy Demand</li>
+<li>[] Little to no demand</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="reproducibility" class="level3" data-number="42.2.5">
+<h3 data-number="42.2.5" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">42.2.5</span> Reproducibility</h3>
+<ul>
+<li>[] Meet the core requirements of the STARS reproducibility framework</li>
+</ul>
+</section>
+</section>
+<section id="gold" class="level2" data-number="42.3">
+<h2 data-number="42.3" class="anchored" data-anchor-id="gold"><span class="header-section-number">42.3</span> Gold</h2>
+<section id="documentation-2" class="level3" data-number="42.3.1">
+<h3 data-number="42.3.1" class="anchored" data-anchor-id="documentation-2"><span class="header-section-number">42.3.1</span> Documentation</h3>
+<ul>
+<li>[] Documentation site created</li>
+</ul>
+</section>
+<section id="reproducibility-1" class="level3" data-number="42.3.2">
+<h3 data-number="42.3.2" class="anchored" data-anchor-id="reproducibility-1"><span class="header-section-number">42.3.2</span> Reproducibility</h3>
+<ul>
+<li>[] Complete some or all of the optional elements of the STARS framework</li>
+</ul>
+</section>
+<section id="model-efficiency" class="level3" data-number="42.3.3">
+<h3 data-number="42.3.3" class="anchored" data-anchor-id="model-efficiency"><span class="header-section-number">42.3.3</span> Model Efficiency</h3>
+<ul>
+<li>[] Parallelisation implemented</li>
+</ul>
+</section>
+<section id="model-communication-and-validation" class="level3" data-number="42.3.4">
+<h3 data-number="42.3.4" class="anchored" data-anchor-id="model-communication-and-validation"><span class="header-section-number">42.3.4</span> Model Communication and Validation</h3>
+<ul>
+<li>[] Animated model output created (if appropriate)
+<ul>
+<li>Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs</li>
+</ul></li>
+</ul>
+</section>
+<section id="best-practice-around-variability-and-model-setup" class="level3" data-number="42.3.5">
+<h3 data-number="42.3.5" class="anchored" data-anchor-id="best-practice-around-variability-and-model-setup"><span class="header-section-number">42.3.5</span> Best Practice around Variability and Model Setup</h3>
+<ul>
+<li>[] Formal method used for determining warm-up period</li>
+<li>[] Formal method used for determining appropriate replication count</li>
+</ul>
+</section>
+<section id="automated-testing-1" class="level3" data-number="42.3.6">
+<h3 data-number="42.3.6" class="anchored" data-anchor-id="automated-testing-1"><span class="header-section-number">42.3.6</span> Automated Testing</h3>
+<ul>
+<li>[] Define formal automated tests for:
+<ul>
+<li>[] Comparison of base case outputs to historical data for key metrics</li>
+<li>[] Statistical testing of generated distributions against real-world data (e.g.&nbsp;Kolgomorov-Smirnov Test)</li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1545,13 +1695,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./an_example_simpy_model_branching.html" class="pagination-link" aria-label="Adding Branching Paths">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span>
+      <a href="./running_parallel_cpus.html" class="pagination-link" aria-label="Parallelisation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Parallelisation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./model_warm_up.html" class="pagination-link" aria-label="Warm Up Periods">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./alternative_foss_simulation_libraries_software.html" class="pagination-link" aria-label="Alternative FOSS Simulation Libraries and Software">
+        <span class="nav-page-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1735,73 +1735,117 @@
     ]
   },
   {
+    "objectID": "model_checklist.html",
+    "href": "model_checklist.html",
+    "title": "42  Model Readiness Checklist",
+    "section": "",
+    "text": "42.1 Bronze\nModel readiness is a somewhat subjective thing.\nHowever, the checklists below are designed to provide some sort of guidance to help you determine whether your model is ready to be used for supporting real-world decision making.\nIt also must be recognised that many models are being written in non-optimal contexts, where sufficient time does not exist to write all of the automated test cases you would like to. Therefore, this checklist aims to give you a meaningful minimum to aim for to give you the best possible chance of delivering an output that is valid to be used for decision-making.\nWith this in mind, the levels of the checklist roughly correspond to the below\nBronze: Aimed at models designed to be used for small to medium scale real-world decision making in a single organisation.\nSilver: Aimed at models designed to be used for real-world decision making at a larger scale (e.g. a more costly decision, or across multiple areas)\nGold: Aimed at models that are intended to be reused across multiple organisations, and/or multiple times, and/or published in scientific journals - so the original author may not be involved in future use and changes",
+    "crumbs": [
+      "Part 9 - Using a Model for Decision Making",
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Model Readiness Checklist</span>"
+    ]
+  },
+  {
+    "objectID": "model_checklist.html#bronze",
+    "href": "model_checklist.html#bronze",
+    "title": "42  Model Readiness Checklist",
+    "section": "",
+    "text": "42.1.1 Visualisations\n\n[] Visualise the following:\n\n[] Arrivals over time (using a dotplot or heatmap)\n[] Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at )\n[] Distributions of generated activity times\n[] Distributions of generated inter-arrival times\n[] Queue lengths over time\n\n\n\n\n42.1.2 Core Logic Checks\n\n[] Watch the journey of several individuals (via logs or animations)\n[] Check that all described stages demonstrate at least some activity during a sufficiently long, representative run\n[] Implement a random seed implemented for reproducibility under same inputs\n\n[] Verify this visually by running twice with the same seed, confirming outputs do not change\n\n[] Manually check that the number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)\n[] Manually check that entities are never in two places at once\n[] Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model)\n[] Outputs are being derived from a minimum of 30 runs (ideally more)\n[] Warm up length visually checked to be appropriate\n[] Manually review that time units have been used consistently throughout the code (e.g. time inputs don’t swap from minutes to hours at any point)\n[] Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g. during breaks, evenings, weekends)\n\n\n\n42.1.3 Key checks against the real system\n\n[] Number of entities arriving in sim verified against historical patterns (averages sensible, distributions sensible)\n\n[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system\n\n[] Generated activity times visually verified (averages sensible, distribution sensible)\n\n[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system\n\n[] Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this\n[] Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this\n[] Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?\n\n\n\n42.1.4 Process and Stakeholder Checks\n\n[] Approve the simulation process map with stakeholders\n[] Check the scenario outputs with stakeholders - do they feel reasonable?\n\nNote that stakeholder responses to outputs shouldn’t necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention\n\n\n\n\n42.1.5 Documentation\n\n[] Write a readme that\n\n[] Explains how to run the model\n[] Gives a brief overview of the system being modelled\n\n[] Include sufficient comments in your work to help people understand non-obvious elements of the code",
+    "crumbs": [
+      "Part 9 - Using a Model for Decision Making",
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Model Readiness Checklist</span>"
+    ]
+  },
+  {
+    "objectID": "model_checklist.html#silver",
+    "href": "model_checklist.html#silver",
+    "title": "42  Model Readiness Checklist",
+    "section": "42.2 Silver",
+    "text": "42.2 Silver\n\n42.2.1 Model Robustness\n\n[] Undertake sensitivity analysis\n\n\n\n42.2.2 Documentation\n\n[] Add docstrings\n[] Complete a formal model reporting checklist (e.g STRESS-DES)\n\n\n\n42.2.3 Code Review\n\n[] Have a code review undertaken by someone else (see the DES RAP book: peer review)\n\n\n\n42.2.4 Automated Testing\n\n[] Define formal automated tests:\n\n[] Model running successfully\n[] Varying results are obtained when using different seeds and the same parameters\n[] Identical results are obtained when the same seed and parameters are used\n[] Number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)\n[] Utilisation never exceeds capacity (i.e. resources are never in use by multiple entities, unless allowed in your model)\n[] All stages of the model show some activity (i.e. there are no ‘orphaned’ steps)\n[] Simple ‘expected behaviour’ when parameters are varied\n\n[] longer activity time = worse performance\n[] more arrivals = longer queues\n\n[] Write tests for behaviour under extreme conditions\n\n[] Heavy Demand\n[] Little to no demand\n\n\n\n\n\n42.2.5 Reproducibility\n\n[] Meet the core requirements of the STARS reproducibility framework",
+    "crumbs": [
+      "Part 9 - Using a Model for Decision Making",
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Model Readiness Checklist</span>"
+    ]
+  },
+  {
+    "objectID": "model_checklist.html#gold",
+    "href": "model_checklist.html#gold",
+    "title": "42  Model Readiness Checklist",
+    "section": "42.3 Gold",
+    "text": "42.3 Gold\n\n42.3.1 Documentation\n\n[] Documentation site created\n\n\n\n42.3.2 Reproducibility\n\n[] Complete some or all of the optional elements of the STARS framework\n\n\n\n42.3.3 Model Efficiency\n\n[] Parallelisation implemented\n\n\n\n42.3.4 Model Communication and Validation\n\n[] Animated model output created (if appropriate)\n\nAnimations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs\n\n\n\n\n42.3.5 Best Practice around Variability and Model Setup\n\n[] Formal method used for determining warm-up period\n[] Formal method used for determining appropriate replication count\n\n\n\n42.3.6 Automated Testing\n\n[] Define formal automated tests for:\n\n[] Comparison of base case outputs to historical data for key metrics\n[] Statistical testing of generated distributions against real-world data (e.g. Kolgomorov-Smirnov Test)",
+    "crumbs": [
+      "Part 9 - Using a Model for Decision Making",
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Model Readiness Checklist</span>"
+    ]
+  },
+  {
     "objectID": "alternative_foss_simulation_libraries_software.html",
     "href": "alternative_foss_simulation_libraries_software.html",
-    "title": "42  Alternative FOSS Simulation Libraries and Software",
+    "title": "43  Alternative FOSS Simulation Libraries and Software",
     "section": "",
-    "text": "42.1 Python libraries\nWhile the focus of this book is on SimPy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.",
+    "text": "43.1 Python libraries\nWhile the focus of this book is on SimPy, there are other open-source alternatives for discrete event simulation. We will not give a full treatment of the pros and cons of each option, but just make you aware of the key players and some resources for each so you can explore them if you wish to.",
     "crumbs": [
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
     ]
   },
   {
     "objectID": "alternative_foss_simulation_libraries_software.html#python-libraries",
     "href": "alternative_foss_simulation_libraries_software.html#python-libraries",
-    "title": "42  Alternative FOSS Simulation Libraries and Software",
+    "title": "43  Alternative FOSS Simulation Libraries and Software",
     "section": "",
-    "text": "42.1.1 ciw\n\n“Ciw is a discrete event simulation library for open queueing networks. Its core features include the capability to simulate networks of queues, multiple customer classes, and implementation of Type I blocking for restricted networks. A number of other features are also implemented, including priorities, baulking, reneging, schedules, slotted services, batch arrivals, service disciplines, dynamic customer classes, and deadlock detection.\n\n\nThe name Ciw is the Welsh word for a queue.”\n\n\nCiw documentation\n\nAn example of a ciw simulation of an urgent care call centre can be found in this repository.\nThere is also a more detailed description of the steps required to convert a model from simpy to ciw in this tutorial by Monks.\n\n\n42.1.2 salabim\n\n“Salabim is a package for discrete event simulation in Python. It follows the methodology of process description as originally demonstrated in Simula and later in Prosim, Must and Tomas. The process interaction methods are also quite similar to the Python package SimPy version 2.\n\n\nThe package comprises discrete event simulation, queue handling, resources, stores, statistical sampling and monitoring. And -last but not least- real time 2D- and 3D-animation and video production.”\n\n\nSalabim documentation\n\nSalabim is thoroughly documented and sets itself apart by providing methods for 2D and 3D animation.",
+    "text": "43.1.1 ciw\n\n“Ciw is a discrete event simulation library for open queueing networks. Its core features include the capability to simulate networks of queues, multiple customer classes, and implementation of Type I blocking for restricted networks. A number of other features are also implemented, including priorities, baulking, reneging, schedules, slotted services, batch arrivals, service disciplines, dynamic customer classes, and deadlock detection.\n\n\nThe name Ciw is the Welsh word for a queue.”\n\n\nCiw documentation\n\nAn example of a ciw simulation of an urgent care call centre can be found in this repository.\nThere is also a more detailed description of the steps required to convert a model from simpy to ciw in this tutorial by Monks.\n\n\n43.1.2 salabim\n\n“Salabim is a package for discrete event simulation in Python. It follows the methodology of process description as originally demonstrated in Simula and later in Prosim, Must and Tomas. The process interaction methods are also quite similar to the Python package SimPy version 2.\n\n\nThe package comprises discrete event simulation, queue handling, resources, stores, statistical sampling and monitoring. And -last but not least- real time 2D- and 3D-animation and video production.”\n\n\nSalabim documentation\n\nSalabim is thoroughly documented and sets itself apart by providing methods for 2D and 3D animation.",
     "crumbs": [
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
     ]
   },
   {
     "objectID": "alternative_foss_simulation_libraries_software.html#r-libraries",
     "href": "alternative_foss_simulation_libraries_software.html#r-libraries",
-    "title": "42  Alternative FOSS Simulation Libraries and Software",
-    "section": "42.2 R libraries",
-    "text": "42.2 R libraries\n\n42.2.1 simmeR\n\nsimmer is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like SimPy or SimJulia, it leverages the power of Rcpp to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of trajectory: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the magrittr package.\n\n\nsimmer documentation\n\nThe documentation is notable for containing details on translating models from simpy to simmer.\nLink\nUsers of R in the NHS community have been exploring the use of simpy for healthcare examples for several years.\nThis tutorial from the strategy unit covers the creation of a simple model.\nOne key benefit is being able to plot a flow diagram of the steps in a simmer model.\n\n\n\nSimmer Plot: credit to Stacey Croft, Anastasiia Zharinova and Tom Jemmett 1",
+    "title": "43  Alternative FOSS Simulation Libraries and Software",
+    "section": "43.2 R libraries",
+    "text": "43.2 R libraries\n\n43.2.1 simmeR\n\nsimmer is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like SimPy or SimJulia, it leverages the power of Rcpp to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of trajectory: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the magrittr package.\n\n\nsimmer documentation\n\nThe documentation is notable for containing details on translating models from simpy to simmer.\nLink\nUsers of R in the NHS community have been exploring the use of simpy for healthcare examples for several years.\nThis tutorial from the strategy unit covers the creation of a simple model.\nOne key benefit is being able to plot a flow diagram of the steps in a simmer model.\n\n\n\nSimmer Plot: credit to Stacey Croft, Anastasiia Zharinova and Tom Jemmett 1",
     "crumbs": [
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
     ]
   },
   {
     "objectID": "alternative_foss_simulation_libraries_software.html#gui-software",
     "href": "alternative_foss_simulation_libraries_software.html#gui-software",
-    "title": "42  Alternative FOSS Simulation Libraries and Software",
-    "section": "42.3 GUI software",
-    "text": "42.3 GUI software\n\n42.3.1 JaamSim\nJaamSim is quite different from all of the other offerings discussed so far due to it providing a graphical, drag and drop interface for simulations.\nYou can read more, and download the software, on their website.\nOne big benefit of JaamSim, in addition to its lower barrier to entry, is the ability to visually demonstrate the movement of entities to stakeholders, as well as generating graphs which update live as the simulation is run.",
+    "title": "43  Alternative FOSS Simulation Libraries and Software",
+    "section": "43.3 GUI software",
+    "text": "43.3 GUI software\n\n43.3.1 JaamSim\nJaamSim is quite different from all of the other offerings discussed so far due to it providing a graphical, drag and drop interface for simulations.\nYou can read more, and download the software, on their website.\nOne big benefit of JaamSim, in addition to its lower barrier to entry, is the ability to visually demonstrate the movement of entities to stakeholders, as well as generating graphs which update live as the simulation is run.",
     "crumbs": [
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
     ]
   },
   {
     "objectID": "alternative_foss_simulation_libraries_software.html#footnotes",
     "href": "alternative_foss_simulation_libraries_software.html#footnotes",
-    "title": "42  Alternative FOSS Simulation Libraries and Software",
+    "title": "43  Alternative FOSS Simulation Libraries and Software",
     "section": "",
     "text": "https://the-strategy-unit.github.io/des_simmer_workshop/↩︎",
     "crumbs": [
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Alternative FOSS Simulation Libraries and Software</span>"
     ]
   },
   {
     "objectID": "further_reading.html",
     "href": "further_reading.html",
-    "title": "43  Further Reading",
+    "title": "44  Further Reading",
     "section": "",
-    "text": "43.1 SimPy examples",
+    "text": "44.1 SimPy examples",
     "crumbs": [
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Further Reading</span>"
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Further Reading</span>"
     ]
   },
   {
     "objectID": "further_reading.html#simpy-examples",
     "href": "further_reading.html#simpy-examples",
-    "title": "43  Further Reading",
+    "title": "44  Further Reading",
     "section": "",
-    "text": "Warning\n\n\n\nNote that the linked examples will generally not follow the exact structure we have used throughout this book. However, the fundamental concepts remain unchanged, and the knowledge you have acquired from this book should help you to read and understand most simpy models out there.\n\n\n\n43.1.1 General examples\nA list of additional SimPy examples is kept up-to-date here.\n\n\n43.1.2 Visualisation examples\nA library of simpy visualisation examples, which may also prove useful due to containing code for a range of different types of healthcare model, can be found here.",
+    "text": "Warning\n\n\n\nNote that the linked examples will generally not follow the exact structure we have used throughout this book. However, the fundamental concepts remain unchanged, and the knowledge you have acquired from this book should help you to read and understand most simpy models out there.\n\n\n\n44.1.1 General examples\nA list of additional SimPy examples is kept up-to-date here.\n\n\n44.1.2 Visualisation examples\nA library of simpy visualisation examples, which may also prove useful due to containing code for a range of different types of healthcare model, can be found here.",
     "crumbs": [
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Further Reading</span>"
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Further Reading</span>"
     ]
   }
 ]

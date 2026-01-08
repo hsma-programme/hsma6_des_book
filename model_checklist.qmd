@@ -66,16 +66,20 @@ With this in mind, the levels of the checklist roughly correspond to the below
 ## Silver
 
 ### Model Robustness
+
 - [] Undertake sensitivity analysis
 
 ### Documentation
+
 - [] Add docstrings
 - [] Complete a formal model reporting checklist (e.g STRESS-DES)
 
 ### Code Review
+
 - [] Have a code review undertaken by someone else (see [the DES RAP book: peer review](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html))
 
 ### Automated Testing
+
 - [] Define formal automated tests:
     - [] Model running successfully
     - [] Varying results are obtained when using different seeds and the same parameters
@@ -104,10 +108,23 @@ With this in mind, the levels of the checklist roughly correspond to the below
 ### Reproducibility
 
 - [] Complete some or all of the optional elements of the STARS framework
+
+### Model Efficiency
+
 - [] Parallelisation implemented
-- [] Model inspected via animation
+
+### Model Communication and Validation
+
+- [] Animated model output created (if appropriate)
+    - Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs
+
+### Best Practice around Variability and Model Setup
+
 - [] Formal method used for determining warm-up period
 - [] Formal method used for determining appropriate replication count
+
+### Automated Testing
+
 - [] Define formal automated tests for:
     - [] Comparison of base case outputs to historical data for key metrics
     - [] Statistical testing of generated distributions against real-world data (e.g. Kolgomorov-Smirnov Test)
