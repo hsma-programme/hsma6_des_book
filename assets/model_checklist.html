@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>model_checklist</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="model_checklist_files/libs/clipboard/clipboard.min.js"></script>
+<script src="model_checklist_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="model_checklist_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="model_checklist_files/libs/quarto-html/popper.min.js"></script>
+<script src="model_checklist_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="model_checklist_files/libs/quarto-html/anchor.min.js"></script>
+<link href="model_checklist_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="model_checklist_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="model_checklist_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="model_checklist_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="model_checklist_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="bronze" class="level2">
+<h2 class="anchored" data-anchor-id="bronze">Bronze</h2>
+<section id="visualisations" class="level3">
+<h3 class="anchored" data-anchor-id="visualisations">Visualisations</h3>
+<p><em>Creating simple visualisations of a few key areas is one of the best ways to spot unexpected behaviour and quickly validate key parts of your model logic. They allow you to quickly verify whether something looks unusually high or low, or if patterns are intuitively ‘wrong’.</em></p>
+<p>Visualise the following:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Arrivals over time</label>
+<ul>
+<li><em>This could be done as a dot/scatter plot with time on the x axis and each dot representing the arrival of an individual, with separate runs represented on the y axis, or as a heatmap</em></li>
+<li><em>This helps to see if there are any unexpectedly large gaps between arrivals and if the general pace of arrivals over different time periods matches your understanding of the system</em></li>
+<li><em>You could also do this recurrently at relevant timescale if recurrent patterns of arrivals - e.g if you are using time-dependent arrival generators to reflect patterns within a day, or across days/weeks/months. You could take an existing dotplot, filter it to a single run, and make the y axis instead reflect the day of week, for example.</em></li>
+</ul></li>
+<li><label><input type="checkbox">Resource use over time</label>
+<ul>
+<li><em>This can be done overall as a line plot with simulation or clock time on the x axis and number or percentage of resources in use over time</em></li>
+<li><em>You could also do this recurrently at relevant timescale if recurrent patterns of resource use - for example, if resources are obstructed in the evenings or at weekends</em>.</li>
+</ul></li>
+<li><label><input type="checkbox">Distributions of generated activity times <strong>AND</strong> generated inter-arrival times (one plot per activity or arrival generator).</label>
+<ul>
+<li><em>This could be done with a histogram, box plot, swarm plot or violin plot</em></li>
+<li><em>This helps to check that the distribution of generated times roughly matches the real-world pattern, as well as checking for any implausibly long or short times</em></li>
+</ul></li>
+<li><label><input type="checkbox">Queue lengths over time.</label>
+<ul>
+<li><em>This can be done with a line plot with simulation or clock time on the x axis and queue length on the y axis</em></li>
+<li><em>This is useful for checking whether queues do build up, and if so, if they are implausibly large or small in comparison to the real system</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="core-logic-checks" class="level3">
+<h3 class="anchored" data-anchor-id="core-logic-checks">Core Logic Checks</h3>
+<p><em>When you are doing these checks, you are really just looking for something being ‘off’.</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Watch the journey of several individuals (via logs or animations).</label>
+<ul>
+<li><em>Do the journeys look ‘right’? Do entities follow the paths you’d expect?</em></li>
+</ul></li>
+<li><label><input type="checkbox">Check that all described stages demonstrate at least some activity during a sufficiently long, representative run.</label>
+<ul>
+<li><em>For example, in a model where patients arrive, all patients are triaged, then <strong>some</strong> patients are advised by a nurse while others are treated by a doctor, before all patients are discharged, you would want to confirm that entities are reaching each of these stages (e.g.&nbsp;through <a href="https://des.hsma.co.uk/basic_debugging_tactics.html#using-simple-print-statements">console logs</a>), or that resources at each stage show at least some utilisation (e.g.&nbsp;via the plot you generate), helping you identify if there is an issue with logic that decides which pathway entities follow</em></li>
+</ul></li>
+<li><label><input type="checkbox">Manually check that the number of entities entering the model equals the number of leaving the model plus the number still in the model.</label>
+<ul>
+<li><em>This ensures no entities are “lost” in queues with no output no sink.</em></li>
+</ul></li>
+<li><label><input type="checkbox">Manually check that entities are never in two places at once.</label>
+<ul>
+<li>*This is more easily and robustly checked using <a href="https://des.hsma.co.uk/event_logging.html">event logs</a>, checking that the start and end times of events do not overlap.</li>
+<li>*However, you may be able to do some more basic checks with <a href="https://des.hsma.co.uk/basic_debugging_tactics.html#using-simple-print-statements">console logs</a>, though this will not be as robust.</li>
+</ul></li>
+<li><label><input type="checkbox">Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model).</label></li>
+<li><label><input type="checkbox">Manually review the code to check that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point).</label></li>
+<li><label><input type="checkbox">Manually check that resources are not used at times where they should be obstructed/unavailable (e.g.&nbsp;during breaks, evenings, weekends).</label></li>
+</ul>
+</section>
+<section id="robustness-for-decision-making" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-for-decision-making">Robustness for decision-making</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Number of runs set to a <strong>minimum of 30</strong> (ideally more) for generating any metrics or other outputs that will be used for decision-making.</label></li>
+<li><label><input type="checkbox"><a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/length_warmup.html">Warm up length visually checked to be appropriate</a>.</label></li>
+</ul>
+</section>
+<section id="reproducibility" class="level3">
+<h3 class="anchored" data-anchor-id="reproducibility">Reproducibility</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Add a random seed to the model, then test it by running the model twice with the same seed, and visually check outputs to confirm that the results do not change.</label></li>
+</ul>
+</section>
+<section id="key-checks-against-the-real-system" class="level3">
+<h3 class="anchored" data-anchor-id="key-checks-against-the-real-system">Key checks against the real system</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Number of entities arriving in simulation verified against historical patterns (averages sensible, distributions sensible).</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Generated activity times visually verified (averages sensible, distribution sensible).</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Visual check that there are no implausible activity lengths.</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If necessary, apply a cap to generated activity times to resolve this.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Visual check that there are no implausible inter-arrival times for entities</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If necessary, apply a cap to generated inter-arrival times to resolve this.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?</label></li>
+</ul>
+</section>
+<section id="process-and-stakeholder-checks" class="level3">
+<h3 class="anchored" data-anchor-id="process-and-stakeholder-checks">Process and Stakeholder Checks</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Approve the simulation process map with stakeholders.</label></li>
+<li><label><input type="checkbox">Check the scenario outputs with stakeholders - do they feel reasonable?</label>
+<ul>
+<li>Note that stakeholder responses to outputs shouldn’t necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention.</li>
+</ul></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Write a readme that explains how to run the model and gives a brief overview of the system being modelled.</label></li>
+<li><label><input type="checkbox">Include sufficient comments in your work to help people understand non-obvious elements of the code.</label></li>
+<li><label><input type="checkbox">Clearly document</label>
+<ul class="task-list">
+<li><label><input type="checkbox">data sources</label></li>
+<li><label><input type="checkbox">assumptions</label></li>
+<li><label><input type="checkbox">inputs</label></li>
+<li><label><input type="checkbox">decisions - including any changes to the analytical plan or decisions made during analysis</label></li>
+</ul></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#dependency-management">Document the versions of packages you have used</a>, ideally using a requirements.txt or environment.yml file.</label></li>
+</ul>
+</section>
+</section>
+<section id="silver" class="level2">
+<h2 class="anchored" data-anchor-id="silver">Silver</h2>
+<section id="documentation-1" class="level3">
+<h3 class="anchored" data-anchor-id="documentation-1">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Add <a href="https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/making-your-code-super-readable-with-docstrings">docstrings</a>.</label></li>
+<li><label><input type="checkbox">Complete a formal model reporting checklist (e.g <a href="https://des.hsma.co.uk/stress_des.html">STRESS-DES</a>).</label></li>
+</ul>
+</section>
+<section id="code-review" class="level3">
+<h3 class="anchored" data-anchor-id="code-review">Code Review</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Have a code review undertaken by someone else (see <a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html">the DES RAP book: peer review</a>).</label></li>
+</ul>
+</section>
+<section id="automated-testing" class="level3">
+<h3 class="anchored" data-anchor-id="automated-testing">Automated Testing</h3>
+<p>Define <a href="https://des.hsma.co.uk/tests.html">formal automated tests</a>:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Model running successfully.</label></li>
+<li><label><input type="checkbox">Varying results are obtained when using different seeds and the same parameters.</label></li>
+<li><label><input type="checkbox">Identical results are obtained when the same seed and parameters are used.</label></li>
+<li><label><input type="checkbox">Number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are “lost” in queues with no output no sink.</label></li>
+<li><label><input type="checkbox">Utilisation never exceeds capacity (i.e.&nbsp;resources are never in use by multiple entities, unless allowed in your model).</label></li>
+<li><label><input type="checkbox">All stages of the model show some activity (i.e.&nbsp;there are no ‘orphaned’ steps).</label></li>
+<li><label><input type="checkbox">Simple ‘expected behaviour’ when parameters are varied:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Longer activity time = worse performance.</label></li>
+<li><label><input type="checkbox">More arrivals = longer queues.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Write tests for behaviour under extreme conditions:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Heavy demand.</label></li>
+<li><label><input type="checkbox">Little to no demand.</label></li>
+</ul></li>
+</ul>
+</section>
+<section id="reusability" class="level3">
+<h3 class="anchored" data-anchor-id="reusability">Reusability</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Add an <a href="https://des.hsma.co.uk/stars.html#open-licence">Open Licence</a> to your repository</label></li>
+</ul>
+</section>
+<section id="version-control" class="level3">
+<h3 class="anchored" data-anchor-id="version-control">Version Control</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Use version control for code (Git)</label></li>
+</ul>
+</section>
+<section id="model-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="model-robustness">Model Robustness</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Undertake sensitivity analysis (i.e.&nbsp;check how much changes in model input variables affect output performance measures, and consider whether results appear sensible/expected)</label></li>
+</ul>
+</section>
+</section>
+<section id="gold" class="level2">
+<h2 class="anchored" data-anchor-id="gold">Gold</h2>
+<section id="documentation-2" class="level3">
+<h3 class="anchored" data-anchor-id="documentation-2">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#documentation-hosting">Create a documentation site and host this</a>.</label>
+<ul>
+<li>Consider using a framework like <a href="https://squidfunk.github.io/mkdocs-material/">mkdocs-material</a> to automatically display the docstrings of your functions and classes in an easy-to-access manner</li>
+</ul></li>
+<li><label><input type="checkbox"><a href="https://keepachangelog.com/en/1.1.0/">Set up and maintain a changelog</a>.</label></li>
+<li><label><input type="checkbox">Use <a href="https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/github-issues">GitHub Issues</a> to document planned changes</label></li>
+</ul>
+</section>
+<section id="reusability-1" class="level3">
+<h3 class="anchored" data-anchor-id="reusability-1">Reusability</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-researcher-and-contributor-identifier-orcid">Research artifact metadata (ORCID)</a></label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-science-archive">Open Science Archive</a></label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#online-coding-environment">Online Coding Environment</a></label></li>
+</ul>
+</section>
+<section id="model-efficiency" class="level3">
+<h3 class="anchored" data-anchor-id="model-efficiency">Model Efficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/running_parallel_cpus.html">Parallelisation</a> implemented.</label></li>
+</ul>
+</section>
+<section id="model-communication-and-validation" class="level3">
+<h3 class="anchored" data-anchor-id="model-communication-and-validation">Model Communication and Validation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#model-interface">Create a web app interface for your model</a></label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#web-app-hosting">Host the web app interface for your model</a></label></li>
+<li><label><input type="checkbox"><a href="https://hsma-tools.github.io/vidigi/vidigi_docs/adding_vidigi_to_a_simple_simpy_model_hsma_structure.html">Animated model output</a> created (if appropriate).</label>
+<ul>
+<li><em>Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="best-practice-around-variability-and-model-setup" class="level3">
+<h3 class="anchored" data-anchor-id="best-practice-around-variability-and-model-setup">Best Practice around Variability and Model Setup</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Formal automated method implemented for determining warm-up period.</label></li>
+<li><label><input type="checkbox">Formal method used for determining appropriate replication count.</label></li>
+</ul>
+</section>
+<section id="automated-testing-1" class="level3">
+<h3 class="anchored" data-anchor-id="automated-testing-1">Automated Testing</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Define formal automated tests for:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Comparison of base case outputs to historical data for key metrics.</label></li>
+<li><label><input type="checkbox">Statistical testing of generated distributions against real-world data (e.g.&nbsp;Kolgomorov-Smirnov Test).</label></li>
+</ul></li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

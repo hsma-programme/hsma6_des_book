@@ -64,7 +64,7 @@ function copyTextById(id, button) {
 .bg-gold { background-color: #DDC22A; }
 
 ul.task-list em {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     opacity: 0.7
 }
 
@@ -105,13 +105,26 @@ The checklist is divided into three levels:
 
 {{< downloadthis assets/model_checklist.md dname=des_model_checklist label="Download DES Model Checklist markdown file" >}}
 
+{{< downloadthis assets/model_checklist_minimal.md dname=des_model_checklist label="Download Full DES Model Checklist markdown file (including instructions)" >}}
+
+<button class="copy-btn"
+        onclick="copyTextById('model-checklist-minimal', this)">
+📋 Copy Checklist
+</button>
+
 <button class="copy-btn"
         onclick="copyTextById('model-checklist', this)">
-📋 Copy Checklist
+📋 Copy Checklist (Including Instructions)
 </button>
 
 {{< include assets/model_checklist.md >}}
 
 <textarea id="model-checklist" style="display:none;">
+{{< include assets/model_checklist.md >}}
+</textarea>
+
+{{< include assets/model_checklist_minimal.md >}}
+
+<textarea id="model-checklist-minimal" style="display:none;">
 {{< include assets/model_checklist.md >}}
 </textarea>
