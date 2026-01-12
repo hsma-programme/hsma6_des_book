@@ -42,20 +42,66 @@ function copyTextById(id, button) {
   border-color: #FFD1D1;
   color: #FFABAB;
 }
+
+
+.value-box-simple {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: black;
+  min-height: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+
+.bg-bronze { background-color: #B46203; }
+
+.bg-silver { background-color: #B6B6B6; }
+
+.bg-gold { background-color: #DDC22A; }
+
+ul.task-list em {
+    font-size: 0.7rem;
+    opacity: 0.7
+}
+
 </style>
 
 
 Judging whether a model is ready to support real-world decisions is often a subjective choice. The checklist below offers practical guidance to **help you decide when your model is ready enough to be used**.
 
+You may wish to read more generally around [verification and validation](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/verification_validation.html) and [tests](https://des.hsma.co.uk/tests.html) as well.
+
 We recognise that models are **often developed in less-than-ideal contexts**, where there isn't enough time or resource to implement all the automated tests you might like. This checklist therefore aims to give you a meaningful minimum to aim for, giving you the best possible chance of delivering an output that is valid for use in decision-making.
 
 The checklist is divided into three levels:
 
+::: {.value-box-simple .bg-bronze}
+
 * **Bronze**: For models used in small- to medium-scale decision-making within a single organisation. Focuses on harm reduction and catching critical errors using largely manual or visual checks.
+
+:::
+
+<br/>
+
+::: {.value-box-simple .bg-silver}
 
 * **Silver**: For models that inform larger or costlier decisions, or are applied across multiple areas. Encourages stronger assurance measures (e.g. peer review, partial automation) where feasible.
 
+:::
+
+<br/>
+
+::: {.value-box-simple .bg-gold}
+
 * **Gold**: For models that will be reused, adapted, or published (e.g. in scientific journals), where the original author may not be involved. Emphasises transparency, documentation, and robustness to long-term or external use.
+
+:::
+
+<br/>
 
 {{< downloadthis assets/model_checklist.md dname=des_model_checklist label="Download DES Model Checklist markdown file" >}}
 
