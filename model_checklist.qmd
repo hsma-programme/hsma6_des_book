@@ -1,4 +1,49 @@
-# Model Readiness Checklist
+---
+title: Model Readiness Checklist
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+number-sections: false
+---
+
+<script>
+function copyTextById(id, button) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    button.classList.add("copied");
+    button.innerHTML = "✓ Copied";
+
+    setTimeout(() => {
+      button.classList.remove("copied");
+      button.innerHTML = "📋 Copy Checklist";
+    }, 2000);
+  });
+}
+</script>
+
+<style>
+.copy-btn {
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #690000;
+  cursor: pointer;
+  color:#FFFFFFDF;
+}
+
+.copy-btn.copied {
+  background: #D1000A;
+  border-color: #FFD1D1;
+  color: #FFABAB;
+}
+</style>
+
 
 Judging whether a model is ready to support real-world decisions is often a subjective choice. The checklist below offers practical guidance to **help you decide when your model is ready enough to be used**.
 
@@ -12,115 +57,15 @@ The checklist is divided into three levels:
 
 * **Gold**: For models that will be reused, adapted, or published (e.g. in scientific journals), where the original author may not be involved. Emphasises transparency, documentation, and robustness to long-term or external use.
 
+{{< downloadthis assets/model_checklist.md dname=des_model_checklist label="Download DES Model Checklist markdown file" >}}
 
-## Bronze
+<button class="copy-btn"
+        onclick="copyTextById('model-checklist', this)">
+📋 Copy Checklist
+</button>
 
-### Visualisations
+{{< include assets/model_checklist.md >}}
 
-Visualise the following:
-
-- [ ] Arrivals over time (using a dotplot or heatmap).
-- [ ] Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at).
-- [ ] Distributions of generated activity times.
-- [ ] Distributions of generated inter-arrival times.
-- [ ] Queue lengths over time.
-
-### Core Logic Checks
-
-- [ ] Watch the journey of several individuals (via logs or animations).
-- [ ] Check that all described stages demonstrate at least some activity during a sufficiently long, representative run.
-- [ ] Add a random seed to the model, then test it by running the model twice with the same seed, and confirming that the results do not change by visually checking outputs.
-- [ ] Manually check that the number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are "lost" in queues with no output no sink.
-- [ ] Manually check that entities are never in two places at once.
-- [ ] Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model).
-- [ ] Outputs are being derived from a minimum of 30 runs (ideally more).
-- [ ] Warm up length visually checked to be appropriate.
-- [ ] Manually review that time units have been used consistently throughout the code (e.g. time inputs don't swap from minutes to hours at any point).
-- [ ] Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g. during breaks, evenings, weekends).
-
-### Key checks against the real system
-
-- [ ] Number of entities arriving in simulation verified against historical patterns (averages sensible, distributions sensible).
-    - [ ] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.
-- [ ] Generated activity times visually verified (averages sensible, distribution sensible).
-    - [ ] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.
-- [ ] Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this.
-- [ ] Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this.
-- [ ] Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?
-
-### Process and Stakeholder Checks
-
-- [ ] Approve the simulation process map with stakeholders.
-- [ ] Check the scenario outputs with stakeholders - do they feel reasonable?
-    - Note that stakeholder responses to outputs shouldn't necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention.
-
-### Documentation
-
-- [ ] Write a readme that explains how to run the model and gives a brief overview of the system being modelled.
-- [ ] Include sufficient comments in your work to help people understand non-obvious elements of the code.
-
-## Silver
-
-### Model Robustness
-
-- [ ] Undertake sensitivity analysis.
-
-### Documentation
-
-- [ ] Add docstrings.
-- [ ] Complete a formal model reporting checklist (e.g STRESS-DES).
-
-### Code Review
-
-- [ ] Have a code review undertaken by someone else (see [the DES RAP book: peer review](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html)).
-
-### Automated Testing
-
-Define formal automated tests:
-
-- [ ] Model running successfully.
-- [ ] Varying results are obtained when using different seeds and the same parameters.
-- [ ] Identical results are obtained when the same seed and parameters are used.
-- [ ] Number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are "lost" in queues with no output no sink.
-- [ ] Utilisation never exceeds capacity (i.e. resources are never in use by multiple entities, unless allowed in your model).
-- [ ] All stages of the model show some activity (i.e. there are no 'orphaned' steps).
-- [ ] Simple 'expected behaviour' when parameters are varied:
-    - [ ] Longer activity time = worse performance.
-    - [ ] More arrivals = longer queues.
-- [ ] Write tests for behaviour under extreme conditions:
-    - [ ] Heavy demand.
-    - [ ] Little to no demand.
-
-### Reproducibility
-
-- [ ] Meet the core requirements of the STARS reproducibility framework.
-
-## Gold
-
-### Documentation
-
-- [ ] Documentation site created.
-
-### Reproducibility
-
-- [ ] Complete some or all of the optional elements of the STARS framework.
-
-### Model Efficiency
-
-- [ ] Parallelisation implemented.
-
-### Model Communication and Validation
-
-- [ ] Animated model output created (if appropriate).
-    - Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.
-
-### Best Practice around Variability and Model Setup
-
-- [ ] Formal method used for determining warm-up period.
-- [ ] Formal method used for determining appropriate replication count.
-
-### Automated Testing
-
-- [ ] Define formal automated tests for:
-    - [ ] Comparison of base case outputs to historical data for key metrics.
-    - [ ] Statistical testing of generated distributions against real-world data (e.g. Kolgomorov-Smirnov Test).
+<textarea id="model-checklist" style="display:none;">
+{{< include assets/model_checklist.md >}}
+</textarea>

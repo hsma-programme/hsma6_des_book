@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sammi Rosser">
+<meta name="author" content="Amy Heather">
 
-<title>42&nbsp; Model Readiness Checklist – HSMA - the little book of DES</title>
+<title>Model Readiness Checklist – HSMA - the little book of DES</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -47,6 +49,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-b15b462b2190debf99393ec3328ee6c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/quarto-contrib/downloadthis-1.9.1/downloadthis.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,8 +106,9 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta property="og:title" content="42&nbsp; Model Readiness Checklist – HSMA - the little book of DES">
+<meta property="og:title" content="Model Readiness Checklist – HSMA - the little book of DES">
 <meta property="og:description" content="">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="HSMA - the little book of DES">
 </head>
 
@@ -712,30 +716,31 @@ cookieconsent.run({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bronze" id="toc-bronze" class="nav-link active" data-scroll-target="#bronze"><span class="header-section-number">42.1</span> Bronze</a>
+  <li><a href="#bronze" id="toc-bronze" class="nav-link active" data-scroll-target="#bronze">Bronze</a>
   <ul class="collapse">
-  <li><a href="#visualisations" id="toc-visualisations" class="nav-link" data-scroll-target="#visualisations"><span class="header-section-number">42.1.1</span> Visualisations</a></li>
-  <li><a href="#core-logic-checks" id="toc-core-logic-checks" class="nav-link" data-scroll-target="#core-logic-checks"><span class="header-section-number">42.1.2</span> Core Logic Checks</a></li>
-  <li><a href="#key-checks-against-the-real-system" id="toc-key-checks-against-the-real-system" class="nav-link" data-scroll-target="#key-checks-against-the-real-system"><span class="header-section-number">42.1.3</span> Key checks against the real system</a></li>
-  <li><a href="#process-and-stakeholder-checks" id="toc-process-and-stakeholder-checks" class="nav-link" data-scroll-target="#process-and-stakeholder-checks"><span class="header-section-number">42.1.4</span> Process and Stakeholder Checks</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"><span class="header-section-number">42.1.5</span> Documentation</a></li>
+  <li><a href="#visualisations" id="toc-visualisations" class="nav-link" data-scroll-target="#visualisations">Visualisations</a></li>
+  <li><a href="#core-logic-checks" id="toc-core-logic-checks" class="nav-link" data-scroll-target="#core-logic-checks">Core Logic Checks</a></li>
+  <li><a href="#key-checks-against-the-real-system" id="toc-key-checks-against-the-real-system" class="nav-link" data-scroll-target="#key-checks-against-the-real-system">Key checks against the real system</a></li>
+  <li><a href="#process-and-stakeholder-checks" id="toc-process-and-stakeholder-checks" class="nav-link" data-scroll-target="#process-and-stakeholder-checks">Process and Stakeholder Checks</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
   </ul></li>
-  <li><a href="#silver" id="toc-silver" class="nav-link" data-scroll-target="#silver"><span class="header-section-number">42.2</span> Silver</a>
+  <li><a href="#silver" id="toc-silver" class="nav-link" data-scroll-target="#silver">Silver</a>
   <ul class="collapse">
-  <li><a href="#model-robustness" id="toc-model-robustness" class="nav-link" data-scroll-target="#model-robustness"><span class="header-section-number">42.2.1</span> Model Robustness</a></li>
-  <li><a href="#documentation-1" id="toc-documentation-1" class="nav-link" data-scroll-target="#documentation-1"><span class="header-section-number">42.2.2</span> Documentation</a></li>
-  <li><a href="#code-review" id="toc-code-review" class="nav-link" data-scroll-target="#code-review"><span class="header-section-number">42.2.3</span> Code Review</a></li>
-  <li><a href="#automated-testing" id="toc-automated-testing" class="nav-link" data-scroll-target="#automated-testing"><span class="header-section-number">42.2.4</span> Automated Testing</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">42.2.5</span> Reproducibility</a></li>
+  <li><a href="#model-robustness" id="toc-model-robustness" class="nav-link" data-scroll-target="#model-robustness">Model Robustness</a></li>
+  <li><a href="#documentation-1" id="toc-documentation-1" class="nav-link" data-scroll-target="#documentation-1">Documentation</a></li>
+  <li><a href="#code-review" id="toc-code-review" class="nav-link" data-scroll-target="#code-review">Code Review</a></li>
+  <li><a href="#automated-testing" id="toc-automated-testing" class="nav-link" data-scroll-target="#automated-testing">Automated Testing</a></li>
+  <li><a href="#reusability" id="toc-reusability" class="nav-link" data-scroll-target="#reusability">Reusability</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version Control</a></li>
   </ul></li>
-  <li><a href="#gold" id="toc-gold" class="nav-link" data-scroll-target="#gold"><span class="header-section-number">42.3</span> Gold</a>
+  <li><a href="#gold" id="toc-gold" class="nav-link" data-scroll-target="#gold">Gold</a>
   <ul class="collapse">
-  <li><a href="#documentation-2" id="toc-documentation-2" class="nav-link" data-scroll-target="#documentation-2"><span class="header-section-number">42.3.1</span> Documentation</a></li>
-  <li><a href="#reproducibility-1" id="toc-reproducibility-1" class="nav-link" data-scroll-target="#reproducibility-1"><span class="header-section-number">42.3.2</span> Reproducibility</a></li>
-  <li><a href="#model-efficiency" id="toc-model-efficiency" class="nav-link" data-scroll-target="#model-efficiency"><span class="header-section-number">42.3.3</span> Model Efficiency</a></li>
-  <li><a href="#model-communication-and-validation" id="toc-model-communication-and-validation" class="nav-link" data-scroll-target="#model-communication-and-validation"><span class="header-section-number">42.3.4</span> Model Communication and Validation</a></li>
-  <li><a href="#best-practice-around-variability-and-model-setup" id="toc-best-practice-around-variability-and-model-setup" class="nav-link" data-scroll-target="#best-practice-around-variability-and-model-setup"><span class="header-section-number">42.3.5</span> Best Practice around Variability and Model Setup</a></li>
-  <li><a href="#automated-testing-1" id="toc-automated-testing-1" class="nav-link" data-scroll-target="#automated-testing-1"><span class="header-section-number">42.3.6</span> Automated Testing</a></li>
+  <li><a href="#documentation-2" id="toc-documentation-2" class="nav-link" data-scroll-target="#documentation-2">Documentation</a></li>
+  <li><a href="#reusability-1" id="toc-reusability-1" class="nav-link" data-scroll-target="#reusability-1">Reusability</a></li>
+  <li><a href="#model-efficiency" id="toc-model-efficiency" class="nav-link" data-scroll-target="#model-efficiency">Model Efficiency</a></li>
+  <li><a href="#model-communication-and-validation" id="toc-model-communication-and-validation" class="nav-link" data-scroll-target="#model-communication-and-validation">Model Communication and Validation</a></li>
+  <li><a href="#best-practice-around-variability-and-model-setup" id="toc-best-practice-around-variability-and-model-setup" class="nav-link" data-scroll-target="#best-practice-around-variability-and-model-setup">Best Practice around Variability and Model Setup</a></li>
+  <li><a href="#automated-testing-1" id="toc-automated-testing-1" class="nav-link" data-scroll-target="#automated-testing-1">Automated Testing</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -746,13 +751,20 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model_checklist.html">Part 9 - Using a Model for Decision Making</a></li><li class="breadcrumb-item"><a href="./model_checklist.html"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></h1>
+<h1 class="title"><span class="chapter-title">Model Readiness Checklist</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p><a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
   
     
@@ -763,181 +775,380 @@ cookieconsent.run({
 </header>
 
 
-<p>Model readiness is a somewhat subjective thing.</p>
-<p>However, the checklists below are designed to provide some sort of guidance to help you determine whether your model is ready to be used for supporting real-world decision making.</p>
-<p>It also must be recognised that many models are being written in non-optimal contexts, where sufficient time does not exist to write all of the automated test cases you would like to. Therefore, this checklist aims to give you a meaningful minimum to aim for to give you the best possible chance of delivering an output that is valid to be used for decision-making.</p>
-<p>With this in mind, the levels of the checklist roughly correspond to the below</p>
-<p><strong>Bronze</strong>: Aimed at models designed to be used for small to medium scale real-world decision making in a single organisation.</p>
-<p><strong>Silver</strong>: Aimed at models designed to be used for real-world decision making at a larger scale (e.g.&nbsp;a more costly decision, or across multiple areas)</p>
-<p><strong>Gold</strong>: Aimed at models that are intended to be reused across multiple organisations, and/or multiple times, and/or published in scientific journals - so the original author may not be involved in future use and changes</p>
-<section id="bronze" class="level2" data-number="42.1">
-<h2 data-number="42.1" class="anchored" data-anchor-id="bronze"><span class="header-section-number">42.1</span> Bronze</h2>
-<section id="visualisations" class="level3" data-number="42.1.1">
-<h3 data-number="42.1.1" class="anchored" data-anchor-id="visualisations"><span class="header-section-number">42.1.1</span> Visualisations</h3>
+<script>
+function copyTextById(id, button) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    button.classList.add("copied");
+    button.innerHTML = "✓ Copied";
+
+    setTimeout(() => {
+      button.classList.remove("copied");
+      button.innerHTML = "📋 Copy Checklist";
+    }, 2000);
+  });
+}
+</script>
+<style>
+.copy-btn {
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #690000;
+  cursor: pointer;
+  color:#FFFFFFDF;
+}
+
+.copy-btn.copied {
+  background: #D1000A;
+  border-color: #FFD1D1;
+  color: #FFABAB;
+}
+</style>
+<p>Judging whether a model is ready to support real-world decisions is often a subjective choice. The checklist below offers practical guidance to <strong>help you decide when your model is ready enough to be used</strong>.</p>
+<p>We recognise that models are <strong>often developed in less-than-ideal contexts</strong>, where there isn’t enough time or resource to implement all the automated tests you might like. This checklist therefore aims to give you a meaningful minimum to aim for, giving you the best possible chance of delivering an output that is valid for use in decision-making.</p>
+<p>The checklist is divided into three levels:</p>
 <ul>
-<li>[] Visualise the following:
+<li><p><strong>Bronze</strong>: For models used in small- to medium-scale decision-making within a single organisation. Focuses on harm reduction and catching critical errors using largely manual or visual checks.</p></li>
+<li><p><strong>Silver</strong>: For models that inform larger or costlier decisions, or are applied across multiple areas. Encourages stronger assurance measures (e.g.&nbsp;peer review, partial automation) where feasible.</p></li>
+<li><p><strong>Gold</strong>: For models that will be reused, adapted, or published (e.g.&nbsp;in scientific journals), where the original author may not be involved. Emphasises transparency, documentation, and robustness to long-term or external use.</p></li>
+</ul>
+<p><a href="#dnldts64622" onclick="fetch('data:text/plain;base64,IyMgQnJvbnplDQoNCiMjIyBWaXN1YWxpc2F0aW9ucw0KDQpWaXN1YWxpc2UgdGhlIGZvbGxvd2luZzoNCg0KLSBbIF0gQXJyaXZhbHMgb3ZlciB0aW1lICh1c2luZyBhIGRvdHBsb3Qgb3IgaGVhdG1hcCkuDQotIFsgXSBSZXNvdXJjZSB1c2Ugb3ZlciB0aW1lIChvdmVyYWxsIGFzIGEgbGluZSBwbG90LCBwbHVzIHJlY3VycmVudGx5IGF0IHJlbGV2YW50IHRpbWVzY2FsZSBpZiByZWN1cnJlbnQgcGF0dGVybnMgb2YgcmVzb3VyY2UgdXNlIGF0KS4NCi0gWyBdIERpc3RyaWJ1dGlvbnMgb2YgZ2VuZXJhdGVkIGFjdGl2aXR5IHRpbWVzLg0KLSBbIF0gRGlzdHJpYnV0aW9ucyBvZiBnZW5lcmF0ZWQgaW50ZXItYXJyaXZhbCB0aW1lcy4NCi0gWyBdIFF1ZXVlIGxlbmd0aHMgb3ZlciB0aW1lLg0KDQojIyMgQ29yZSBMb2dpYyBDaGVja3MNCg0KLSBbIF0gV2F0Y2ggdGhlIGpvdXJuZXkgb2Ygc2V2ZXJhbCBpbmRpdmlkdWFscyAodmlhIGxvZ3Mgb3IgYW5pbWF0aW9ucykuDQotIFsgXSBDaGVjayB0aGF0IGFsbCBkZXNjcmliZWQgc3RhZ2VzIGRlbW9uc3RyYXRlIGF0IGxlYXN0IHNvbWUgYWN0aXZpdHkgZHVyaW5nIGEgc3VmZmljaWVudGx5IGxvbmcsIHJlcHJlc2VudGF0aXZlIHJ1bi4NCi0gWyBdIEFkZCBhIHJhbmRvbSBzZWVkIHRvIHRoZSBtb2RlbCwgdGhlbiB0ZXN0IGl0IGJ5IHJ1bm5pbmcgdGhlIG1vZGVsIHR3aWNlIHdpdGggdGhlIHNhbWUgc2VlZCwgYW5kIGNvbmZpcm1pbmcgdGhhdCB0aGUgcmVzdWx0cyBkbyBub3QgY2hhbmdlIGJ5IHZpc3VhbGx5IGNoZWNraW5nIG91dHB1dHMuDQotIFsgXSBNYW51YWxseSBjaGVjayB0aGF0IHRoZSBudW1iZXIgb2YgZW50aXRpZXMgZW50ZXJpbmcgdGhlIG1vZGVsIGVxdWFscyB0aGUgbnVtYmVyIG9mIGxlYXZpbmcgdGhlIG1vZGVsIHBsdXMgdGhlIG51bWJlciBzdGlsbCBpbiB0aGUgbW9kZWwuIFRoaXMgZW5zdXJlcyBubyBlbnRpdGllcyBhcmUgImxvc3QiIGluIHF1ZXVlcyB3aXRoIG5vIG91dHB1dCBubyBzaW5rLg0KLSBbIF0gTWFudWFsbHkgY2hlY2sgdGhhdCBlbnRpdGllcyBhcmUgbmV2ZXIgaW4gdHdvIHBsYWNlcyBhdCBvbmNlLg0KLSBbIF0gTWFudWFsbHkgY2hlY2sgdGhhdCByZXNvdXJjZXMgYXJlIG5ldmVyIHNpbXVsdGFuZW91c2x5IGluIHVzZSBieSB0d28gZW50aXRpZXMgYXQgb25jZSAob3Igd2hhdGV2ZXIgdmFyaWF0aW9uIGlzIGFwcHJvcHJpYXRlIGZvciB5b3VyIG1vZGVsKS4NCi0gWyBdIE91dHB1dHMgYXJlIGJlaW5nIGRlcml2ZWQgZnJvbSBhIG1pbmltdW0gb2YgMzAgcnVucyAoaWRlYWxseSBtb3JlKS4NCi0gWyBdIFdhcm0gdXAgbGVuZ3RoIHZpc3VhbGx5IGNoZWNrZWQgdG8gYmUgYXBwcm9wcmlhdGUuDQotIFsgXSBNYW51YWxseSByZXZpZXcgdGhhdCB0aW1lIHVuaXRzIGhhdmUgYmVlbiB1c2VkIGNvbnNpc3RlbnRseSB0aHJvdWdob3V0IHRoZSBjb2RlIChlLmcuIHRpbWUgaW5wdXRzIGRvbid0IHN3YXAgZnJvbSBtaW51dGVzIHRvIGhvdXJzIGF0IGFueSBwb2ludCkuDQotIFsgXSBNYW51YWxseSBjaGVjayBsb2dzIHRvIGVuc3VyZSB0aGF0IHJlc291cmNlcyBhcmUgbm90IHVzZWQgYXQgdGltZXMgd2hlcmUgdGhleSBzaG91bGQgYmUgb2JzdHJ1Y3RlZC91bmF2YWlsYWJsZSAoZS5nLiBkdXJpbmcgYnJlYWtzLCBldmVuaW5ncywgd2Vla2VuZHMpLg0KDQojIyMgS2V5IGNoZWNrcyBhZ2FpbnN0IHRoZSByZWFsIHN5c3RlbQ0KDQotIFsgXSBOdW1iZXIgb2YgZW50aXRpZXMgYXJyaXZpbmcgaW4gc2ltdWxhdGlvbiB2ZXJpZmllZCBhZ2FpbnN0IGhpc3RvcmljYWwgcGF0dGVybnMgKGF2ZXJhZ2VzIHNlbnNpYmxlLCBkaXN0cmlidXRpb25zIHNlbnNpYmxlKS4NCiAgICAtIFsgXSBJZiByZWxldmFudCwgdGhpcyBpcyBhbHNvIGNoZWNrZWQgZm9yIGVudGl0eSBzdWJ0eXBlcy9lbnRpdGllcyB3aXRoIGRpZmZlcmVudCBhdHRyaWJ1dGVzIHdoZXJlIGl0IGlzIGltcG9ydGFudCB0aGF0IHRoZXNlIHBhdHRlcm5zIG1hdGNoIHRoZSByZWFsIHN5c3RlbS4NCi0gWyBdIEdlbmVyYXRlZCBhY3Rpdml0eSB0aW1lcyB2aXN1YWxseSB2ZXJpZmllZCAoYXZlcmFnZXMgc2Vuc2libGUsIGRpc3RyaWJ1dGlvbiBzZW5zaWJsZSkuDQogICAgLSBbIF0gSWYgcmVsZXZhbnQsIHRoaXMgaXMgYWxzbyBjaGVja2VkIGZvciBlbnRpdHkgc3VidHlwZXMvZW50aXRpZXMgd2l0aCBkaWZmZXJlbnQgYXR0cmlidXRlcyB3aGVyZSBpdCBpcyBpbXBvcnRhbnQgdGhhdCB0aGVzZSBwYXR0ZXJucyBtYXRjaCB0aGUgcmVhbCBzeXN0ZW0uDQotIFsgXSBWaXN1YWwgY2hlY2sgdGhhdCB0aGVyZSBhcmUgbm8gaW1wbGF1c2libGUgYWN0aXZpdHkgbGVuZ3Rocywgd2l0aCBhIGNhcCBhcHBsaWVkIGlmIG5lY2Vzc2FyeSB0byByZXNvbHZlIHRoaXMuDQotIFsgXSBWaXN1YWwgY2hlY2sgdGhhdCB0aGVyZSBhcmUgbm8gaW1wbGF1c2libGUgaW50ZXItYXJyaXZhbCB0aW1lcyBmb3IgZW50aXRpZXMsIHdpdGggYSBjYXAgYXBwbGllZCBpZiBuZWNlc3NhcnkgdG8gcmVzb2x2ZSB0aGlzLg0KLSBbIF0gVmlzdWFsIGNoZWNrIG9mIEtQSSBvdXRwdXRzIGFnYWluc3QgdGhlIGhpc3RvcmljYWwgYmFzZWxpbmUgLSBkbyB0aGVzZSBsb29rIHNlbnNpYmxlIGFuZCBzaW1pbGFyIHRvIGhpc3RvcmljYWwgZGF0YT8NCg0KIyMjIFByb2Nlc3MgYW5kIFN0YWtlaG9sZGVyIENoZWNrcw0KDQotIFsgXSBBcHByb3ZlIHRoZSBzaW11bGF0aW9uIHByb2Nlc3MgbWFwIHdpdGggc3Rha2Vob2xkZXJzLg0KLSBbIF0gQ2hlY2sgdGhlIHNjZW5hcmlvIG91dHB1dHMgd2l0aCBzdGFrZWhvbGRlcnMgLSBkbyB0aGV5IGZlZWwgcmVhc29uYWJsZT8NCiAgICAtIE5vdGUgdGhhdCBzdGFrZWhvbGRlciByZXNwb25zZXMgdG8gb3V0cHV0cyBzaG91bGRuJ3QgbmVjZXNzYXJpbHkgYmUgdGFrZW4gYXMgYSBkZWZpbml0ZSByaWdodC93cm9uZyBqdWRnbWVudCBvbiB0aGUgbW9kZWwgLSBidXQgdGhleSBtYXkgaGVscCB0byBzZW5zZSBjaGVjayBvciBpbmRpY2F0ZSBhcmVhcyBmb3IgbW9yZSBhdHRlbnRpb24uDQoNCiMjIyBEb2N1bWVudGF0aW9uDQoNCi0gWyBdIFdyaXRlIGEgcmVhZG1lIHRoYXQgZXhwbGFpbnMgaG93IHRvIHJ1biB0aGUgbW9kZWwgYW5kIGdpdmVzIGEgYnJpZWYgb3ZlcnZpZXcgb2YgdGhlIHN5c3RlbSBiZWluZyBtb2RlbGxlZC4NCi0gWyBdIEluY2x1ZGUgc3VmZmljaWVudCBjb21tZW50cyBpbiB5b3VyIHdvcmsgdG8gaGVscCBwZW9wbGUgdW5kZXJzdGFuZCBub24tb2J2aW91cyBlbGVtZW50cyBvZiB0aGUgY29kZS4NCi0gWyBdIENsZWFybHkgZG9jdW1lbnQNCiAgICAtIFsgXSBkYXRhIHNvdXJjZXMNCiAgICAtIFsgXSBhc3N1bXB0aW9ucw0KICAgIC0gWyBdIGlucHV0cw0KICAgIC0gWyBdIGRlY2lzaW9ucyAtIGluY2x1ZGluZyBhbnkgY2hhbmdlcyB0byB0aGUgYW5hbHl0aWNhbCBwbGFuIG9yIGRlY2lzaW9ucyBtYWRlIGR1cmluZyBhbmFseXNpcw0KDQojIyBTaWx2ZXINCg0KIyMjIE1vZGVsIFJvYnVzdG5lc3MNCg0KLSBbIF0gVW5kZXJ0YWtlIHNlbnNpdGl2aXR5IGFuYWx5c2lzLg0KDQojIyMgRG9jdW1lbnRhdGlvbg0KDQotIFsgXSBBZGQgZG9jc3RyaW5ncy4NCi0gWyBdIENvbXBsZXRlIGEgZm9ybWFsIG1vZGVsIHJlcG9ydGluZyBjaGVja2xpc3QgKGUuZyBTVFJFU1MtREVTKS4NCg0KIyMjIENvZGUgUmV2aWV3DQoNCi0gWyBdIEhhdmUgYSBjb2RlIHJldmlldyB1bmRlcnRha2VuIGJ5IHNvbWVvbmUgZWxzZSAoc2VlIFt0aGUgREVTIFJBUCBib29rOiBwZWVyIHJldmlld10oaHR0cHM6Ly9weXRob25oZWFsdGhkYXRhc2NpZW5jZS5naXRodWIuaW8vZGVzX3JhcF9ib29rL3BhZ2VzL2d1aWRlL3NoYXJpbmcvcGVlcl9yZXZpZXcuaHRtbCkpLg0KDQojIyMgQXV0b21hdGVkIFRlc3RpbmcNCg0KRGVmaW5lIGZvcm1hbCBhdXRvbWF0ZWQgdGVzdHM6DQoNCi0gWyBdIE1vZGVsIHJ1bm5pbmcgc3VjY2Vzc2Z1bGx5Lg0KLSBbIF0gVmFyeWluZyByZXN1bHRzIGFyZSBvYnRhaW5lZCB3aGVuIHVzaW5nIGRpZmZlcmVudCBzZWVkcyBhbmQgdGhlIHNhbWUgcGFyYW1ldGVycy4NCi0gWyBdIElkZW50aWNhbCByZXN1bHRzIGFyZSBvYnRhaW5lZCB3aGVuIHRoZSBzYW1lIHNlZWQgYW5kIHBhcmFtZXRlcnMgYXJlIHVzZWQuDQotIFsgXSBOdW1iZXIgb2YgZW50aXRpZXMgZW50ZXJpbmcgdGhlIG1vZGVsIGVxdWFscyB0aGUgbnVtYmVyIG9mIGxlYXZpbmcgdGhlIG1vZGVsIHBsdXMgdGhlIG51bWJlciBzdGlsbCBpbiB0aGUgbW9kZWwuIFRoaXMgZW5zdXJlcyBubyBlbnRpdGllcyBhcmUgImxvc3QiIGluIHF1ZXVlcyB3aXRoIG5vIG91dHB1dCBubyBzaW5rLg0KLSBbIF0gVXRpbGlzYXRpb24gbmV2ZXIgZXhjZWVkcyBjYXBhY2l0eSAoaS5lLiByZXNvdXJjZXMgYXJlIG5ldmVyIGluIHVzZSBieSBtdWx0aXBsZSBlbnRpdGllcywgdW5sZXNzIGFsbG93ZWQgaW4geW91ciBtb2RlbCkuDQotIFsgXSBBbGwgc3RhZ2VzIG9mIHRoZSBtb2RlbCBzaG93IHNvbWUgYWN0aXZpdHkgKGkuZS4gdGhlcmUgYXJlIG5vICdvcnBoYW5lZCcgc3RlcHMpLg0KLSBbIF0gU2ltcGxlICdleHBlY3RlZCBiZWhhdmlvdXInIHdoZW4gcGFyYW1ldGVycyBhcmUgdmFyaWVkOg0KICAgIC0gWyBdIExvbmdlciBhY3Rpdml0eSB0aW1lID0gd29yc2UgcGVyZm9ybWFuY2UuDQogICAgLSBbIF0gTW9yZSBhcnJpdmFscyA9IGxvbmdlciBxdWV1ZXMuDQotIFsgXSBXcml0ZSB0ZXN0cyBmb3IgYmVoYXZpb3VyIHVuZGVyIGV4dHJlbWUgY29uZGl0aW9uczoNCiAgICAtIFsgXSBIZWF2eSBkZW1hbmQuDQogICAgLSBbIF0gTGl0dGxlIHRvIG5vIGRlbWFuZC4NCg0KIyMjIFJldXNhYmlsaXR5DQoNCi0gWyBdIE1lZXQgdGhlIGNvcmUgcmVxdWlyZW1lbnRzIG9mIHRoZSBTVEFSUyByZXVzYWJpbGl0eSBmcmFtZXdvcms6DQogICAgLSBbIF0gT3BlbiBMaWNlbmNlDQogICAgLSBbIF0gRGVwZW5kZW5jeSBNYW5hZ2VtZW50DQogICAgLSBbIF0gRnJlZSBhbmQgT3BlbiBTb3VyY2UgTW9kZWwNCiAgICAtIFsgXSBNaW5pbXVtIERvY3VtZW50YXRpb24NCiAgICAtIFsgXSBSZXNlYXJjaCBhcnRpZmFjdCBtZXRhZGF0YQ0KICAgIC0gWyBdIFJlbW90ZSBDb2RlIFJlcG9zaXRvcnkNCiAgICAtIFsgXSBPcGVuIFNjaWVuY2UgQXJjaGl2ZQ0KDQojIyMgVmVyc2lvbiBDb250cm9sDQoNCi0gWyBdIFVzZSB2ZXJzaW9uIGNvbnRyb2wgZm9yIGNvZGUgKEdpdCkNCg0KIyMgR29sZA0KDQojIyMgRG9jdW1lbnRhdGlvbg0KDQotIFsgXSBEb2N1bWVudGF0aW9uIHNpdGUgY3JlYXRlZC4NCi0gWyBdIFNldCB1cCBhbmQgbWFpbnRhaW4gYSBjaGFuZ2Vsb2cuDQoNCiMjIyBSZXVzYWJpbGl0eQ0KDQotIFsgXSBDb21wbGV0ZSBzb21lIG9yIGFsbCBvZiB0aGUgb3B0aW9uYWwgZWxlbWVudHMgb2YgdGhlIFNUQVJTIHJldXNhYmlsaXR5IGZyYW1ld29yazoNCiAgICAtIFsgXSBIb3N0ZWQgV2ViIEFwcA0KICAgIC0gWyBdIEhvc3RlZCBEb2N1bWVudGF0aW9uDQogICAgLSBbIF0gT25saW5lIENvZGluZyBFbnZpcm9ubWVudA0KICAgIC0gWyBdIEVuaGFuY2VkIERvY3VtZW50YXRpb24NCiAgICAtIFsgXSBNb2RlbCBJbnRlcmZhY2UNCg0KIyMjIE1vZGVsIEVmZmljaWVuY3kNCg0KLSBbIF0gUGFyYWxsZWxpc2F0aW9uIGltcGxlbWVudGVkLg0KDQojIyMgTW9kZWwgQ29tbXVuaWNhdGlvbiBhbmQgVmFsaWRhdGlvbg0KDQotIFsgXSBBbmltYXRlZCBtb2RlbCBvdXRwdXQgY3JlYXRlZCAoaWYgYXBwcm9wcmlhdGUpLg0KICAgIC0gQW5pbWF0aW9ucyBhbHNvIGhhdmUgYSByb2xlIHRvIHBsYXkgaW4gbW9kZWwgdmFsaWRhdGlvbiAtIGluc3BlY3RpbmcgdGhlIGFuaW1hdGlvbiwgaW5jbHVkaW5nIHdpdGggbm9uLXRlY2huaWNhbCBzdGFrZWhvbGRlcnMsIGNhbiBoZWxwIGlkZW50aWZ5IHN1YnRsZSBidWdzLg0KDQojIyMgQmVzdCBQcmFjdGljZSBhcm91bmQgVmFyaWFiaWxpdHkgYW5kIE1vZGVsIFNldHVwDQoNCi0gWyBdIEZvcm1hbCBtZXRob2QgdXNlZCBmb3IgZGV0ZXJtaW5pbmcgd2FybS11cCBwZXJpb2QuDQotIFsgXSBGb3JtYWwgbWV0aG9kIHVzZWQgZm9yIGRldGVybWluaW5nIGFwcHJvcHJpYXRlIHJlcGxpY2F0aW9uIGNvdW50Lg0KDQojIyMgQXV0b21hdGVkIFRlc3RpbmcNCg0KLSBbIF0gRGVmaW5lIGZvcm1hbCBhdXRvbWF0ZWQgdGVzdHMgZm9yOg0KICAgIC0gWyBdIENvbXBhcmlzb24gb2YgYmFzZSBjYXNlIG91dHB1dHMgdG8gaGlzdG9yaWNhbCBkYXRhIGZvciBrZXkgbWV0cmljcy4NCiAgICAtIFsgXSBTdGF0aXN0aWNhbCB0ZXN0aW5nIG9mIGdlbmVyYXRlZCBkaXN0cmlidXRpb25zIGFnYWluc3QgcmVhbC13b3JsZCBkYXRhIChlLmcuIEtvbGdvbW9yb3YtU21pcm5vdiBUZXN0KS4NCg==').then(res => res.blob()).then(blob => {
+      const downloadURL = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = downloadURL;
+      a.download = 'des_model_checklist.md'; a.click();
+      window.URL.revokeObjectURL(downloadURL);
+      document.body.removeChild(a);
+        });"><button class="btn btn-default downloadthis  " id="dnldts64622"><i class="bi bi-download"></i> Download DES Model Checklist markdown file </button></a></p>
+<button class="copy-btn" onclick="copyTextById('model-checklist', this)">
+📋 Copy Checklist
+</button>
+<section id="bronze" class="level2">
+<h2 class="anchored" data-anchor-id="bronze">Bronze</h2>
+<section id="visualisations" class="level3">
+<h3 class="anchored" data-anchor-id="visualisations">Visualisations</h3>
+<p>Visualise the following:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Arrivals over time (using a dotplot or heatmap).</label></li>
+<li><label><input type="checkbox">Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at).</label></li>
+<li><label><input type="checkbox">Distributions of generated activity times.</label></li>
+<li><label><input type="checkbox">Distributions of generated inter-arrival times.</label></li>
+<li><label><input type="checkbox">Queue lengths over time.</label></li>
+</ul>
+</section>
+<section id="core-logic-checks" class="level3">
+<h3 class="anchored" data-anchor-id="core-logic-checks">Core Logic Checks</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Watch the journey of several individuals (via logs or animations).</label></li>
+<li><label><input type="checkbox">Check that all described stages demonstrate at least some activity during a sufficiently long, representative run.</label></li>
+<li><label><input type="checkbox">Add a random seed to the model, then test it by running the model twice with the same seed, and confirming that the results do not change by visually checking outputs.</label></li>
+<li><label><input type="checkbox">Manually check that the number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are “lost” in queues with no output no sink.</label></li>
+<li><label><input type="checkbox">Manually check that entities are never in two places at once.</label></li>
+<li><label><input type="checkbox">Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model).</label></li>
+<li><label><input type="checkbox">Outputs are being derived from a minimum of 30 runs (ideally more).</label></li>
+<li><label><input type="checkbox">Warm up length visually checked to be appropriate.</label></li>
+<li><label><input type="checkbox">Manually review that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point).</label></li>
+<li><label><input type="checkbox">Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g.&nbsp;during breaks, evenings, weekends).</label></li>
+</ul>
+</section>
+<section id="key-checks-against-the-real-system" class="level3">
+<h3 class="anchored" data-anchor-id="key-checks-against-the-real-system">Key checks against the real system</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Number of entities arriving in simulation verified against historical patterns (averages sensible, distributions sensible).</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Generated activity times visually verified (averages sensible, distribution sensible).</label>
+<ul class="task-list">
+<li><label><input type="checkbox">If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.</label></li>
+</ul></li>
+<li><label><input type="checkbox">Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this.</label></li>
+<li><label><input type="checkbox">Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this.</label></li>
+<li><label><input type="checkbox">Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?</label></li>
+</ul>
+</section>
+<section id="process-and-stakeholder-checks" class="level3">
+<h3 class="anchored" data-anchor-id="process-and-stakeholder-checks">Process and Stakeholder Checks</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Approve the simulation process map with stakeholders.</label></li>
+<li><label><input type="checkbox">Check the scenario outputs with stakeholders - do they feel reasonable?</label>
 <ul>
-<li>[] Arrivals over time (using a dotplot or heatmap)</li>
-<li>[] Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at )</li>
-<li>[] Distributions of generated activity times</li>
-<li>[] Distributions of generated inter-arrival times</li>
-<li>[] Queue lengths over time</li>
+<li>Note that stakeholder responses to outputs shouldn’t necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention.</li>
 </ul></li>
 </ul>
 </section>
-<section id="core-logic-checks" class="level3" data-number="42.1.2">
-<h3 data-number="42.1.2" class="anchored" data-anchor-id="core-logic-checks"><span class="header-section-number">42.1.2</span> Core Logic Checks</h3>
-<ul>
-<li>[] Watch the journey of several individuals (via logs or animations)</li>
-<li>[] Check that all described stages demonstrate at least some activity during a sufficiently long, representative run</li>
-<li>[] Implement a random seed implemented for reproducibility under same inputs
-<ul>
-<li>[] Verify this visually by running twice with the same seed, confirming outputs do not change</li>
-</ul></li>
-<li>[] Manually check that the number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)</li>
-<li>[] Manually check that entities are never in two places at once</li>
-<li>[] Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model)</li>
-<li>[] Outputs are being derived from a minimum of 30 runs (ideally more)</li>
-<li>[] Warm up length visually checked to be appropriate</li>
-<li>[] Manually review that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point)</li>
-<li>[] Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g.&nbsp;during breaks, evenings, weekends)</li>
-</ul>
-</section>
-<section id="key-checks-against-the-real-system" class="level3" data-number="42.1.3">
-<h3 data-number="42.1.3" class="anchored" data-anchor-id="key-checks-against-the-real-system"><span class="header-section-number">42.1.3</span> Key checks against the real system</h3>
-<ul>
-<li>[] Number of entities arriving in sim verified against historical patterns (averages sensible, distributions sensible)
-<ul>
-<li>[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system</li>
-</ul></li>
-<li>[] Generated activity times visually verified (averages sensible, distribution sensible)
-<ul>
-<li>[] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system</li>
-</ul></li>
-<li>[] Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this</li>
-<li>[] Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this</li>
-<li>[] Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?</li>
-</ul>
-</section>
-<section id="process-and-stakeholder-checks" class="level3" data-number="42.1.4">
-<h3 data-number="42.1.4" class="anchored" data-anchor-id="process-and-stakeholder-checks"><span class="header-section-number">42.1.4</span> Process and Stakeholder Checks</h3>
-<ul>
-<li>[] Approve the simulation process map with stakeholders</li>
-<li>[] Check the scenario outputs with stakeholders - do they feel reasonable?
-<ul>
-<li>Note that stakeholder responses to outputs shouldn’t necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention</li>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Write a readme that explains how to run the model and gives a brief overview of the system being modelled.</label></li>
+<li><label><input type="checkbox">Include sufficient comments in your work to help people understand non-obvious elements of the code.</label></li>
+<li><label><input type="checkbox">Clearly document</label>
+<ul class="task-list">
+<li><label><input type="checkbox">data sources</label></li>
+<li><label><input type="checkbox">assumptions</label></li>
+<li><label><input type="checkbox">inputs</label></li>
+<li><label><input type="checkbox">decisions - including any changes to the analytical plan or decisions made during analysis</label></li>
 </ul></li>
 </ul>
 </section>
-<section id="documentation" class="level3" data-number="42.1.5">
-<h3 data-number="42.1.5" class="anchored" data-anchor-id="documentation"><span class="header-section-number">42.1.5</span> Documentation</h3>
-<ul>
-<li>[] Write a readme that
-<ul>
-<li>[] Explains how to run the model</li>
-<li>[] Gives a brief overview of the system being modelled</li>
+</section>
+<section id="silver" class="level2">
+<h2 class="anchored" data-anchor-id="silver">Silver</h2>
+<section id="model-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="model-robustness">Model Robustness</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Undertake sensitivity analysis.</label></li>
+</ul>
+</section>
+<section id="documentation-1" class="level3">
+<h3 class="anchored" data-anchor-id="documentation-1">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Add docstrings.</label></li>
+<li><label><input type="checkbox">Complete a formal model reporting checklist (e.g STRESS-DES).</label></li>
+</ul>
+</section>
+<section id="code-review" class="level3">
+<h3 class="anchored" data-anchor-id="code-review">Code Review</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Have a code review undertaken by someone else (see <a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html">the DES RAP book: peer review</a>).</label></li>
+</ul>
+</section>
+<section id="automated-testing" class="level3">
+<h3 class="anchored" data-anchor-id="automated-testing">Automated Testing</h3>
+<p>Define formal automated tests:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Model running successfully.</label></li>
+<li><label><input type="checkbox">Varying results are obtained when using different seeds and the same parameters.</label></li>
+<li><label><input type="checkbox">Identical results are obtained when the same seed and parameters are used.</label></li>
+<li><label><input type="checkbox">Number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are “lost” in queues with no output no sink.</label></li>
+<li><label><input type="checkbox">Utilisation never exceeds capacity (i.e.&nbsp;resources are never in use by multiple entities, unless allowed in your model).</label></li>
+<li><label><input type="checkbox">All stages of the model show some activity (i.e.&nbsp;there are no ‘orphaned’ steps).</label></li>
+<li><label><input type="checkbox">Simple ‘expected behaviour’ when parameters are varied:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Longer activity time = worse performance.</label></li>
+<li><label><input type="checkbox">More arrivals = longer queues.</label></li>
 </ul></li>
-<li>[] Include sufficient comments in your work to help people understand non-obvious elements of the code</li>
-</ul>
-</section>
-</section>
-<section id="silver" class="level2" data-number="42.2">
-<h2 data-number="42.2" class="anchored" data-anchor-id="silver"><span class="header-section-number">42.2</span> Silver</h2>
-<section id="model-robustness" class="level3" data-number="42.2.1">
-<h3 data-number="42.2.1" class="anchored" data-anchor-id="model-robustness"><span class="header-section-number">42.2.1</span> Model Robustness</h3>
-<ul>
-<li>[] Undertake sensitivity analysis</li>
-</ul>
-</section>
-<section id="documentation-1" class="level3" data-number="42.2.2">
-<h3 data-number="42.2.2" class="anchored" data-anchor-id="documentation-1"><span class="header-section-number">42.2.2</span> Documentation</h3>
-<ul>
-<li>[] Add docstrings</li>
-<li>[] Complete a formal model reporting checklist (e.g STRESS-DES)</li>
-</ul>
-</section>
-<section id="code-review" class="level3" data-number="42.2.3">
-<h3 data-number="42.2.3" class="anchored" data-anchor-id="code-review"><span class="header-section-number">42.2.3</span> Code Review</h3>
-<ul>
-<li>[] Have a code review undertaken by someone else (see <a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html">the DES RAP book: peer review</a>)</li>
-</ul>
-</section>
-<section id="automated-testing" class="level3" data-number="42.2.4">
-<h3 data-number="42.2.4" class="anchored" data-anchor-id="automated-testing"><span class="header-section-number">42.2.4</span> Automated Testing</h3>
-<ul>
-<li>[] Define formal automated tests:
-<ul>
-<li>[] Model running successfully</li>
-<li>[] Varying results are obtained when using different seeds and the same parameters</li>
-<li>[] Identical results are obtained when the same seed and parameters are used</li>
-<li>[] Number of entities in = the number of entities out + those still in model (no ‘lost’ entities in queues with no sink)</li>
-<li>[] Utilisation never exceeds capacity (i.e.&nbsp;resources are never in use by multiple entities, unless allowed in your model)</li>
-<li>[] All stages of the model show some activity (i.e.&nbsp;there are no ‘orphaned’ steps)</li>
-<li>[] Simple ‘expected behaviour’ when parameters are varied
-<ul>
-<li>[] longer activity time = worse performance</li>
-<li>[] more arrivals = longer queues</li>
-</ul></li>
-<li>[] Write tests for behaviour under extreme conditions
-<ul>
-<li>[] Heavy Demand</li>
-<li>[] Little to no demand</li>
-</ul></li>
+<li><label><input type="checkbox">Write tests for behaviour under extreme conditions:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Heavy demand.</label></li>
+<li><label><input type="checkbox">Little to no demand.</label></li>
 </ul></li>
 </ul>
 </section>
-<section id="reproducibility" class="level3" data-number="42.2.5">
-<h3 data-number="42.2.5" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">42.2.5</span> Reproducibility</h3>
-<ul>
-<li>[] Meet the core requirements of the STARS reproducibility framework</li>
-</ul>
-</section>
-</section>
-<section id="gold" class="level2" data-number="42.3">
-<h2 data-number="42.3" class="anchored" data-anchor-id="gold"><span class="header-section-number">42.3</span> Gold</h2>
-<section id="documentation-2" class="level3" data-number="42.3.1">
-<h3 data-number="42.3.1" class="anchored" data-anchor-id="documentation-2"><span class="header-section-number">42.3.1</span> Documentation</h3>
-<ul>
-<li>[] Documentation site created</li>
-</ul>
-</section>
-<section id="reproducibility-1" class="level3" data-number="42.3.2">
-<h3 data-number="42.3.2" class="anchored" data-anchor-id="reproducibility-1"><span class="header-section-number">42.3.2</span> Reproducibility</h3>
-<ul>
-<li>[] Complete some or all of the optional elements of the STARS framework</li>
-</ul>
-</section>
-<section id="model-efficiency" class="level3" data-number="42.3.3">
-<h3 data-number="42.3.3" class="anchored" data-anchor-id="model-efficiency"><span class="header-section-number">42.3.3</span> Model Efficiency</h3>
-<ul>
-<li>[] Parallelisation implemented</li>
-</ul>
-</section>
-<section id="model-communication-and-validation" class="level3" data-number="42.3.4">
-<h3 data-number="42.3.4" class="anchored" data-anchor-id="model-communication-and-validation"><span class="header-section-number">42.3.4</span> Model Communication and Validation</h3>
-<ul>
-<li>[] Animated model output created (if appropriate)
-<ul>
-<li>Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs</li>
+<section id="reusability" class="level3">
+<h3 class="anchored" data-anchor-id="reusability">Reusability</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Meet the core requirements of the STARS reusability framework:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Open Licence</label></li>
+<li><label><input type="checkbox">Dependency Management</label></li>
+<li><label><input type="checkbox">Free and Open Source Model</label></li>
+<li><label><input type="checkbox">Minimum Documentation</label></li>
+<li><label><input type="checkbox">Research artifact metadata</label></li>
+<li><label><input type="checkbox">Remote Code Repository</label></li>
+<li><label><input type="checkbox">Open Science Archive</label></li>
 </ul></li>
 </ul>
 </section>
-<section id="best-practice-around-variability-and-model-setup" class="level3" data-number="42.3.5">
-<h3 data-number="42.3.5" class="anchored" data-anchor-id="best-practice-around-variability-and-model-setup"><span class="header-section-number">42.3.5</span> Best Practice around Variability and Model Setup</h3>
-<ul>
-<li>[] Formal method used for determining warm-up period</li>
-<li>[] Formal method used for determining appropriate replication count</li>
+<section id="version-control" class="level3">
+<h3 class="anchored" data-anchor-id="version-control">Version Control</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Use version control for code (Git)</label></li>
 </ul>
 </section>
-<section id="automated-testing-1" class="level3" data-number="42.3.6">
-<h3 data-number="42.3.6" class="anchored" data-anchor-id="automated-testing-1"><span class="header-section-number">42.3.6</span> Automated Testing</h3>
-<ul>
-<li>[] Define formal automated tests for:
-<ul>
-<li>[] Comparison of base case outputs to historical data for key metrics</li>
-<li>[] Statistical testing of generated distributions against real-world data (e.g.&nbsp;Kolgomorov-Smirnov Test)</li>
+</section>
+<section id="gold" class="level2">
+<h2 class="anchored" data-anchor-id="gold">Gold</h2>
+<section id="documentation-2" class="level3">
+<h3 class="anchored" data-anchor-id="documentation-2">Documentation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Documentation site created.</label></li>
+<li><label><input type="checkbox">Set up and maintain a changelog.</label></li>
+</ul>
+</section>
+<section id="reusability-1" class="level3">
+<h3 class="anchored" data-anchor-id="reusability-1">Reusability</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Complete some or all of the optional elements of the STARS reusability framework:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Hosted Web App</label></li>
+<li><label><input type="checkbox">Hosted Documentation</label></li>
+<li><label><input type="checkbox">Online Coding Environment</label></li>
+<li><label><input type="checkbox">Enhanced Documentation</label></li>
+<li><label><input type="checkbox">Model Interface</label></li>
 </ul></li>
 </ul>
+</section>
+<section id="model-efficiency" class="level3">
+<h3 class="anchored" data-anchor-id="model-efficiency">Model Efficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Parallelisation implemented.</label></li>
+</ul>
+</section>
+<section id="model-communication-and-validation" class="level3">
+<h3 class="anchored" data-anchor-id="model-communication-and-validation">Model Communication and Validation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Animated model output created (if appropriate).</label>
+<ul>
+<li>Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.</li>
+</ul></li>
+</ul>
+</section>
+<section id="best-practice-around-variability-and-model-setup" class="level3">
+<h3 class="anchored" data-anchor-id="best-practice-around-variability-and-model-setup">Best Practice around Variability and Model Setup</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Formal method used for determining warm-up period.</label></li>
+<li><label><input type="checkbox">Formal method used for determining appropriate replication count.</label></li>
+</ul>
+</section>
+<section id="automated-testing-1" class="level3">
+<h3 class="anchored" data-anchor-id="automated-testing-1">Automated Testing</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Define formal automated tests for:</label>
+<ul class="task-list">
+<li><label><input type="checkbox">Comparison of base case outputs to historical data for key metrics.</label></li>
+<li><label><input type="checkbox">Statistical testing of generated distributions against real-world data (e.g.&nbsp;Kolgomorov-Smirnov Test).</label></li>
+</ul></li>
+</ul>
+<textarea id="model-checklist" style="display:none;">## Bronze
+
+### Visualisations
+
+Visualise the following:
+
+- [ ] Arrivals over time (using a dotplot or heatmap).
+- [ ] Resource use over time (overall as a line plot, plus recurrently at relevant timescale if recurrent patterns of resource use at).
+- [ ] Distributions of generated activity times.
+- [ ] Distributions of generated inter-arrival times.
+- [ ] Queue lengths over time.
+
+### Core Logic Checks
+
+- [ ] Watch the journey of several individuals (via logs or animations).
+- [ ] Check that all described stages demonstrate at least some activity during a sufficiently long, representative run.
+- [ ] Add a random seed to the model, then test it by running the model twice with the same seed, and confirming that the results do not change by visually checking outputs.
+- [ ] Manually check that the number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are "lost" in queues with no output no sink.
+- [ ] Manually check that entities are never in two places at once.
+- [ ] Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model).
+- [ ] Outputs are being derived from a minimum of 30 runs (ideally more).
+- [ ] Warm up length visually checked to be appropriate.
+- [ ] Manually review that time units have been used consistently throughout the code (e.g. time inputs don't swap from minutes to hours at any point).
+- [ ] Manually check logs to ensure that resources are not used at times where they should be obstructed/unavailable (e.g. during breaks, evenings, weekends).
+
+### Key checks against the real system
+
+- [ ] Number of entities arriving in simulation verified against historical patterns (averages sensible, distributions sensible).
+    - [ ] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.
+- [ ] Generated activity times visually verified (averages sensible, distribution sensible).
+    - [ ] If relevant, this is also checked for entity subtypes/entities with different attributes where it is important that these patterns match the real system.
+- [ ] Visual check that there are no implausible activity lengths, with a cap applied if necessary to resolve this.
+- [ ] Visual check that there are no implausible inter-arrival times for entities, with a cap applied if necessary to resolve this.
+- [ ] Visual check of KPI outputs against the historical baseline - do these look sensible and similar to historical data?
+
+### Process and Stakeholder Checks
+
+- [ ] Approve the simulation process map with stakeholders.
+- [ ] Check the scenario outputs with stakeholders - do they feel reasonable?
+    - Note that stakeholder responses to outputs shouldn't necessarily be taken as a definite right/wrong judgment on the model - but they may help to sense check or indicate areas for more attention.
+
+### Documentation
+
+- [ ] Write a readme that explains how to run the model and gives a brief overview of the system being modelled.
+- [ ] Include sufficient comments in your work to help people understand non-obvious elements of the code.
+- [ ] Clearly document
+    - [ ] data sources
+    - [ ] assumptions
+    - [ ] inputs
+    - [ ] decisions - including any changes to the analytical plan or decisions made during analysis
+
+## Silver
+
+### Model Robustness
+
+- [ ] Undertake sensitivity analysis.
+
+### Documentation
+
+- [ ] Add docstrings.
+- [ ] Complete a formal model reporting checklist (e.g STRESS-DES).
+
+### Code Review
+
+- [ ] Have a code review undertaken by someone else (see [the DES RAP book: peer review](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/sharing/peer_review.html)).
+
+### Automated Testing
+
+Define formal automated tests:
+
+- [ ] Model running successfully.
+- [ ] Varying results are obtained when using different seeds and the same parameters.
+- [ ] Identical results are obtained when the same seed and parameters are used.
+- [ ] Number of entities entering the model equals the number of leaving the model plus the number still in the model. This ensures no entities are "lost" in queues with no output no sink.
+- [ ] Utilisation never exceeds capacity (i.e. resources are never in use by multiple entities, unless allowed in your model).
+- [ ] All stages of the model show some activity (i.e. there are no 'orphaned' steps).
+- [ ] Simple 'expected behaviour' when parameters are varied:
+    - [ ] Longer activity time = worse performance.
+    - [ ] More arrivals = longer queues.
+- [ ] Write tests for behaviour under extreme conditions:
+    - [ ] Heavy demand.
+    - [ ] Little to no demand.
+
+### Reusability
+
+- [ ] Meet the core requirements of the STARS reusability framework:
+    - [ ] Open Licence
+    - [ ] Dependency Management
+    - [ ] Free and Open Source Model
+    - [ ] Minimum Documentation
+    - [ ] Research artifact metadata
+    - [ ] Remote Code Repository
+    - [ ] Open Science Archive
+
+### Version Control
+
+- [ ] Use version control for code (Git)
+
+## Gold
+
+### Documentation
+
+- [ ] Documentation site created.
+- [ ] Set up and maintain a changelog.
+
+### Reusability
+
+- [ ] Complete some or all of the optional elements of the STARS reusability framework:
+    - [ ] Hosted Web App
+    - [ ] Hosted Documentation
+    - [ ] Online Coding Environment
+    - [ ] Enhanced Documentation
+    - [ ] Model Interface
+
+### Model Efficiency
+
+- [ ] Parallelisation implemented.
+
+### Model Communication and Validation
+
+- [ ] Animated model output created (if appropriate).
+    - Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.
+
+### Best Practice around Variability and Model Setup
+
+- [ ] Formal method used for determining warm-up period.
+- [ ] Formal method used for determining appropriate replication count.
+
+### Automated Testing
+
+- [ ] Define formal automated tests for:
+    - [ ] Comparison of base case outputs to historical data for key metrics.
+    - [ ] Statistical testing of generated distributions against real-world data (e.g. Kolgomorov-Smirnov Test).
+
+</textarea>
 
 
 </section>
