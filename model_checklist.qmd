@@ -70,10 +70,7 @@ ul.task-list em {
 
 </style>
 
-
 Judging whether a model is ready to support real-world decisions is often a subjective choice. The checklist below offers practical guidance to **help you decide when your model is ready enough to be used**.
-
-You may wish to read more generally around [verification and validation](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/verification_validation.html) and [tests](https://des.hsma.co.uk/tests.html) as well.
 
 We recognise that models are **often developed in less-than-ideal contexts**, where there isn't enough time or resource to implement all the automated tests you might like. This checklist therefore aims to give you a meaningful minimum to aim for, giving you the best possible chance of delivering an output that is valid for use in decision-making.
 
@@ -103,6 +100,19 @@ The checklist is divided into three levels:
 
 <br/>
 
+Note that you don't have to complete everything in one level before moving on to tasks in the next level.
+For example, your particular project may prioritise having an easy-to-use interface for stakeholders to interact with (a 'gold' recommendation) before it has automated tests (a 'silver' recommendation). This is fine! The levels are designed to help guide you, not act as a prescriptive set of rules.
+
+:::{.callout-tip}
+You may wish to read more generally around [verification and validation](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/verification_validation.html), [tests](https://des.hsma.co.uk/tests.html) and [quality assurance](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/quality_assurance.html) as well.
+:::
+
+---
+
+# Checklist
+
+<br/>
+
 {{< downloadthis assets/model_checklist.md dname=des_model_checklist label="Download DES Model Checklist markdown file" >}}
 
 {{< downloadthis assets/model_checklist_minimal.md dname=des_model_checklist label="Download Full DES Model Checklist markdown file (including instructions)" >}}
@@ -117,13 +127,13 @@ The checklist is divided into three levels:
 📋 Copy Checklist (Including Instructions)
 </button>
 
+<br/>
+
 {{< include assets/model_checklist.md >}}
 
 <textarea id="model-checklist" style="display:none;">
 {{< include assets/model_checklist.md >}}
 </textarea>
-
-{{< include assets/model_checklist_minimal.md >}}
 
 <textarea id="model-checklist-minimal" style="display:none;">
 {{< include assets/model_checklist.md >}}

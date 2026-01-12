@@ -47,6 +47,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<p>⭐ = recommendation is part of the <a href="https://des.hsma.co.uk/stars.html">STARS reusability framework</a></p>
 <section id="bronze" class="level2">
 <h2 class="anchored" data-anchor-id="bronze">Bronze</h2>
 <section id="visualisations" class="level3">
@@ -85,6 +86,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><em>Do the journeys look ‘right’? Do entities follow the paths you’d expect?</em></li>
 </ul></li>
+<li><label><input type="checkbox">Review the code to check that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point).</label></li>
+</ul>
+<p><em>The following items can be robustly checked using <a href="https://des.hsma.co.uk/event_logging.html">event logs</a>.</em></p>
+<p><em>However, you may be able to do some more basic checks with <a href="https://des.hsma.co.uk/basic_debugging_tactics.html#using-simple-print-statements">console logs</a>.</em></p>
+<ul class="task-list">
 <li><label><input type="checkbox">Check that all described stages demonstrate at least some activity during a sufficiently long, representative run.</label>
 <ul>
 <li><em>For example, in a model where patients arrive, all patients are triaged, then <strong>some</strong> patients are advised by a nurse while others are treated by a doctor, before all patients are discharged, you would want to confirm that entities are reaching each of these stages (e.g.&nbsp;through <a href="https://des.hsma.co.uk/basic_debugging_tactics.html#using-simple-print-statements">console logs</a>), or that resources at each stage show at least some utilisation (e.g.&nbsp;via the plot you generate), helping you identify if there is an issue with logic that decides which pathway entities follow</em></li>
@@ -93,13 +99,8 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><em>This ensures no entities are “lost” in queues with no output no sink.</em></li>
 </ul></li>
-<li><label><input type="checkbox">Manually check that entities are never in two places at once.</label>
-<ul>
-<li>*This is more easily and robustly checked using <a href="https://des.hsma.co.uk/event_logging.html">event logs</a>, checking that the start and end times of events do not overlap.</li>
-<li>*However, you may be able to do some more basic checks with <a href="https://des.hsma.co.uk/basic_debugging_tactics.html#using-simple-print-statements">console logs</a>, though this will not be as robust.</li>
-</ul></li>
+<li><label><input type="checkbox">Manually check that entities are never in two places at once.</label></li>
 <li><label><input type="checkbox">Manually check that resources are never simultaneously in use by two entities at once (or whatever variation is appropriate for your model).</label></li>
-<li><label><input type="checkbox">Manually review the code to check that time units have been used consistently throughout the code (e.g.&nbsp;time inputs don’t swap from minutes to hours at any point).</label></li>
 <li><label><input type="checkbox">Manually check that resources are not used at times where they should be obstructed/unavailable (e.g.&nbsp;during breaks, evenings, weekends).</label></li>
 </ul>
 </section>
@@ -107,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="robustness-for-decision-making">Robustness for decision-making</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Number of runs set to a <strong>minimum of 30</strong> (ideally more) for generating any metrics or other outputs that will be used for decision-making.</label></li>
-<li><label><input type="checkbox"><a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/length_warmup.html">Warm up length visually checked to be appropriate</a>.</label></li>
+<li><label><input type="checkbox"><a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/length_warmup.html">Warm up length visually checked</a> to be appropriate.</label></li>
 </ul>
 </section>
 <section id="reproducibility" class="level3">
@@ -151,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="documentation" class="level3">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Write a readme that explains how to run the model and gives a brief overview of the system being modelled.</label></li>
+<li><label><input type="checkbox">Write a readme that explains how to run the model, how to change parameters in the model, and gives a brief overview of the system being modelled. ⭐</label></li>
 <li><label><input type="checkbox">Include sufficient comments in your work to help people understand non-obvious elements of the code.</label></li>
 <li><label><input type="checkbox">Clearly document</label>
 <ul class="task-list">
@@ -160,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 <li><label><input type="checkbox">inputs</label></li>
 <li><label><input type="checkbox">decisions - including any changes to the analytical plan or decisions made during analysis</label></li>
 </ul></li>
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#dependency-management">Document the versions of packages you have used</a>, ideally using a requirements.txt or environment.yml file.</label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#dependency-management">Document the versions of packages you have used</a>, ideally using a requirements.txt or environment.yml file. ⭐</label></li>
 </ul>
 </section>
 </section>
@@ -204,13 +205,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="reusability" class="level3">
 <h3 class="anchored" data-anchor-id="reusability">Reusability</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Add an <a href="https://des.hsma.co.uk/stars.html#open-licence">Open Licence</a> to your repository</label></li>
+<li><label><input type="checkbox">Add an <a href="https://des.hsma.co.uk/stars.html#open-licence">Open Licence</a> to your repository ⭐</label></li>
 </ul>
 </section>
 <section id="version-control" class="level3">
 <h3 class="anchored" data-anchor-id="version-control">Version Control</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Use version control for code (Git)</label></li>
+<li><label><input type="checkbox">Make the model available on a remote code hosting service (e.g.&nbsp;GitHub, BitBucket) ⭐</label></li>
 </ul>
 </section>
 <section id="model-robustness" class="level3">
@@ -225,20 +227,21 @@ ul.task-list li input[type="checkbox"] {
 <section id="documentation-2" class="level3">
 <h3 class="anchored" data-anchor-id="documentation-2">Documentation</h3>
 <ul class="task-list">
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#documentation-hosting">Create a documentation site and host this</a>.</label>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#documentation-hosting">Create a documentation site and host this</a>. ⭐</label>
 <ul>
 <li>Consider using a framework like <a href="https://squidfunk.github.io/mkdocs-material/">mkdocs-material</a> to automatically display the docstrings of your functions and classes in an easy-to-access manner</li>
 </ul></li>
 <li><label><input type="checkbox"><a href="https://keepachangelog.com/en/1.1.0/">Set up and maintain a changelog</a>.</label></li>
-<li><label><input type="checkbox">Use <a href="https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/github-issues">GitHub Issues</a> to document planned changes</label></li>
+<li><label><input type="checkbox">Use <a href="https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/github-issues">GitHub Issues</a> to track bugs and highlight remaining tasks.</label></li>
+<li><label><input type="checkbox"><a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/quality_assurance.html">Document your quality assurance process.</a></label></li>
 </ul>
 </section>
 <section id="reusability-1" class="level3">
 <h3 class="anchored" data-anchor-id="reusability-1">Reusability</h3>
 <ul class="task-list">
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-researcher-and-contributor-identifier-orcid">Research artifact metadata (ORCID)</a></label></li>
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-science-archive">Open Science Archive</a></label></li>
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#online-coding-environment">Online Coding Environment</a></label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-researcher-and-contributor-identifier-orcid">Research artifact metadata (ORCID)</a> ⭐</label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#open-science-archive">Open Science Archive</a> ⭐</label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#online-coding-environment">Online Coding Environment</a> ⭐</label></li>
 </ul>
 </section>
 <section id="model-efficiency" class="level3">
@@ -250,8 +253,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-communication-and-validation" class="level3">
 <h3 class="anchored" data-anchor-id="model-communication-and-validation">Model Communication and Validation</h3>
 <ul class="task-list">
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#model-interface">Create a web app interface for your model</a></label></li>
-<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#web-app-hosting">Host the web app interface for your model</a></label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#model-interface">Create a web app interface for your model</a> ⭐</label></li>
+<li><label><input type="checkbox"><a href="https://des.hsma.co.uk/stars.html#web-app-hosting">Host the web app interface for your model</a> ⭐</label></li>
 <li><label><input type="checkbox"><a href="https://hsma-tools.github.io/vidigi/vidigi_docs/adding_vidigi_to_a_simple_simpy_model_hsma_structure.html">Animated model output</a> created (if appropriate).</label>
 <ul>
 <li><em>Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.</em></li>
@@ -262,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="best-practice-around-variability-and-model-setup">Best Practice around Variability and Model Setup</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Formal automated method implemented for determining warm-up period.</label></li>
-<li><label><input type="checkbox">Formal method used for determining appropriate replication count.</label></li>
+<li><label><input type="checkbox"><a href="https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/n_reps.html">Formal method used for determining appropriate replication count</a>.</label></li>
 </ul>
 </section>
 <section id="automated-testing-1" class="level3">

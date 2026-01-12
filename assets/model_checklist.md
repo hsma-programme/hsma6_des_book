@@ -1,3 +1,5 @@
+⭐ = recommendation is part of the [STARS reusability framework](https://des.hsma.co.uk/stars.html)
+
 ## Bronze
 
 ### Visualisations
@@ -44,7 +46,7 @@ Visualise the following:
 ### Robustness for decision-making
 
 - [ ] Number of runs set to a **minimum of 30** (ideally more) for generating any metrics or other outputs that will be used for decision-making.
-- [ ] [Warm up length visually checked] to be appropriate(https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/length_warmup.html).
+- [ ] [Warm up length visually checked](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/length_warmup.html) to be appropriate.
 
 ### Reproducibility
 
@@ -70,14 +72,14 @@ Visualise the following:
 
 ### Documentation
 
-- [ ] Write a readme that explains how to run the model and gives a brief overview of the system being modelled.
+- [ ] Write a readme that explains how to run the model, how to change parameters in the model, and gives a brief overview of the system being modelled. ⭐
 - [ ] Include sufficient comments in your work to help people understand non-obvious elements of the code.
 - [ ] Clearly document
     - [ ] data sources
     - [ ] assumptions
     - [ ] inputs
     - [ ] decisions - including any changes to the analytical plan or decisions made during analysis
-- [ ] [Document the versions of packages you have used](https://des.hsma.co.uk/stars.html#dependency-management), ideally using a requirements.txt or environment.yml file.
+- [ ] [Document the versions of packages you have used](https://des.hsma.co.uk/stars.html#dependency-management), ideally using a requirements.txt or environment.yml file. ⭐
 
 
 ## Silver
@@ -110,11 +112,12 @@ Define [formal automated tests](https://des.hsma.co.uk/tests.html):
 
 ### Reusability
 
-- [ ] Add an [Open Licence](https://des.hsma.co.uk/stars.html#open-licence) to your repository
+- [ ] Add an [Open Licence](https://des.hsma.co.uk/stars.html#open-licence) to your repository ⭐
 
 ### Version Control
 
 - [ ] Use version control for code (Git)
+- [ ] Make the model available on a remote code hosting service (e.g. GitHub, BitBucket) ⭐
 
 ### Model Robustness
 
@@ -124,16 +127,17 @@ Define [formal automated tests](https://des.hsma.co.uk/tests.html):
 
 ### Documentation
 
-- [ ] [Create a documentation site and host this](https://des.hsma.co.uk/stars.html#documentation-hosting).
+- [ ] [Create a documentation site and host this](https://des.hsma.co.uk/stars.html#documentation-hosting). ⭐
     - Consider using a framework like [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) to automatically display the docstrings of your functions and classes in an easy-to-access manner
 - [ ] [Set up and maintain a changelog](https://keepachangelog.com/en/1.1.0/).
-- [ ] Use [GitHub Issues](https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/github-issues) to document planned changes
+- [ ] Use [GitHub Issues](https://hsma-programme.github.io/h6_march_2025_forum_presentation/#/github-issues) to track bugs and highlight remaining tasks.
+- [ ] [Document your quality assurance process.](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/quality_assurance.html)
 
 ### Reusability
 
-- [ ] [Research artifact metadata (ORCID)](https://des.hsma.co.uk/stars.html#open-researcher-and-contributor-identifier-orcid)
-- [ ] [Open Science Archive](https://des.hsma.co.uk/stars.html#open-science-archive)
-- [ ] [Online Coding Environment](https://des.hsma.co.uk/stars.html#online-coding-environment)
+- [ ] [Research artifact metadata (ORCID)](https://des.hsma.co.uk/stars.html#open-researcher-and-contributor-identifier-orcid) ⭐
+- [ ] [Open Science Archive](https://des.hsma.co.uk/stars.html#open-science-archive) ⭐
+- [ ] [Online Coding Environment](https://des.hsma.co.uk/stars.html#online-coding-environment) ⭐
 
 ### Model Efficiency
 
@@ -141,15 +145,15 @@ Define [formal automated tests](https://des.hsma.co.uk/tests.html):
 
 ### Model Communication and Validation
 
-- [ ] [Create a web app interface for your model](https://des.hsma.co.uk/stars.html#model-interface)
-- [ ] [Host the web app interface for your model](https://des.hsma.co.uk/stars.html#web-app-hosting)
+- [ ] [Create a web app interface for your model](https://des.hsma.co.uk/stars.html#model-interface) ⭐
+- [ ] [Host the web app interface for your model](https://des.hsma.co.uk/stars.html#web-app-hosting) ⭐
 - [ ] [Animated model output](https://hsma-tools.github.io/vidigi/vidigi_docs/adding_vidigi_to_a_simple_simpy_model_hsma_structure.html) created (if appropriate).
     - *Animations also have a role to play in model validation - inspecting the animation, including with non-technical stakeholders, can help identify subtle bugs.*
 
 ### Best Practice around Variability and Model Setup
 
 - [ ] Formal automated method implemented for determining warm-up period.
-- [ ] Formal method used for determining appropriate replication count.
+- [ ] [Formal method used for determining appropriate replication count](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/output_analysis/n_reps.html).
 
 ### Automated Testing
 
