@@ -72,6 +72,9 @@ book:
     chapters:
     - testing_large_numbers_scenarios.qmd
     - running_parallel_cpus.qmd
+  - part: "Part 9 - Using a Model for Decision Making"
+    chapters:
+    - model_checklist.qmd
   - alternative_foss_simulation_libraries_software.qmd
   - further_reading.qmd
   - references.qmd

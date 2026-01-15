@@ -1,0 +1,140 @@
+---
+title: Model Readiness Checklist
+author:
+  - name: Sammi Rosser
+    orcid: 0000-0002-9552-8988
+    url: https://github.com/Bergam0t
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+    url: https://github.com/amyheather
+number-sections: false
+---
+
+<script>
+function copyTextById(id, button) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    button.classList.add("copied");
+    button.innerHTML = "✓ Copied";
+
+    setTimeout(() => {
+      button.classList.remove("copied");
+      button.innerHTML = "📋 Copy Checklist";
+    }, 2000);
+  });
+}
+</script>
+
+<style>
+.copy-btn {
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #690000;
+  cursor: pointer;
+  color:#FFFFFFDF;
+}
+
+.copy-btn.copied {
+  background: #D1000A;
+  border-color: #FFD1D1;
+  color: #FFABAB;
+}
+
+
+.value-box-simple {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: black;
+  min-height: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+
+.bg-bronze { background-color: #B46203; }
+
+.bg-silver { background-color: #B6B6B6; }
+
+.bg-gold { background-color: #DDC22A; }
+
+ul.task-list em {
+    font-size: 0.8rem;
+    opacity: 0.7
+}
+
+</style>
+
+Judging whether a model is ready to support real-world decisions is often a subjective choice. The checklist below offers practical guidance to **help you decide when your model is ready enough to be used**.
+
+We recognise that models are **often developed in less-than-ideal contexts**, where there isn't enough time or resource to implement all the automated tests you might like. This checklist therefore aims to give you a meaningful minimum to aim for, giving you the best possible chance of delivering an output that is valid for use in decision-making.
+
+The checklist is divided into three levels:
+
+::: {.value-box-simple .bg-bronze}
+
+* **Bronze**: For models used in small- to medium-scale decision-making within a single organisation. Focuses on harm reduction and catching critical errors using largely manual or visual checks.
+
+:::
+
+<br/>
+
+::: {.value-box-simple .bg-silver}
+
+* **Silver**: For models that inform larger or costlier decisions, or are applied across multiple areas. Encourages stronger assurance measures (e.g. peer review, partial automation) where feasible.
+
+:::
+
+<br/>
+
+::: {.value-box-simple .bg-gold}
+
+* **Gold**: For models that will be reused, adapted, or published (e.g. in scientific journals), where the original author may not be involved. Emphasises transparency, documentation, and robustness to long-term or external use.
+
+:::
+
+<br/>
+
+Note that you don't have to complete everything in one level before moving on to tasks in the next level.
+For example, your particular project may prioritise having an easy-to-use interface for stakeholders to interact with (a 'gold' recommendation) before it has automated tests (a 'silver' recommendation). This is fine! The levels are designed to help guide you, not act as a prescriptive set of rules.
+
+:::{.callout-tip}
+You may wish to read more generally around [verification and validation](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/verification_validation.html), [tests](https://des.hsma.co.uk/tests.html) and [quality assurance](https://pythonhealthdatascience.github.io/des_rap_book/pages/guide/verification_validation/quality_assurance.html) as well.
+:::
+
+---
+
+# Checklist
+
+<br/>
+
+{{< downloadthis assets/model_checklist.md dname=des_model_checklist label="Download DES Model Checklist markdown file" >}}
+
+{{< downloadthis assets/model_checklist_minimal.md dname=des_model_checklist label="Download Full DES Model Checklist markdown file (including instructions)" >}}
+
+<button class="copy-btn"
+        onclick="copyTextById('model-checklist-minimal', this)">
+📋 Copy Checklist
+</button>
+
+<button class="copy-btn"
+        onclick="copyTextById('model-checklist', this)">
+📋 Copy Checklist (Including Instructions)
+</button>
+
+<br/>
+
+{{< include assets/model_checklist.md >}}
+
+<textarea id="model-checklist" style="display:none;">
+{{< include assets/model_checklist.md >}}
+</textarea>
+
+<textarea id="model-checklist-minimal" style="display:none;">
+{{< include assets/model_checklist.md >}}
+</textarea>
