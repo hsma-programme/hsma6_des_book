@@ -1,8 +1,52 @@
-# Licencing, Attribution and Acknowledgements {.unnumbered}
+# Introduction
 
-## Licencing
+Welcome! This book is intended to act as a gateway to the wonderful world of discrete event simulation (DES).
 
-### Code Snippets {.unnumbered}
+DES is, I think, one of the most powerful tools you can add to your toolkit as an analyst, data scientist, or operational researcher. Learning the building blocks of simulation opens up the capability to simulate almost any system you can imagine.
+
+I'm part of a team of healthcare researchers, using DES to simulate air ambulances, stroke wards, and so much more. Our students on the [Health Service Modelling Associates (HSMA)](https://hsma.co.uk) course have undertaken [so many DES](https://hsma.co.uk/previous_projects/projects_by_methods.html#discrete-event-simulation) projects - it's far and away the most popular method for real-world problem solving that we teach, always outstripping machine learning, natural language processing and geographic optimization in every cohort when it comes to choosing a technique that will solve the actual operational issues facing their organisations. That's not to say the other techniques aren't valuable, but DES is the hidden gem that no-one knows exists and don't know they need.
+
+DES is widely used across a range of industries, and while most of our examples have a healthcare slant, you will find the model concepts and structures here can translate to other places!
+
+This book was written to serve as a companion to our taught sessions on discrete event simulation in the HSMA course, but can be used as a standalone resource and reference, regardless of whether you've taken the HSMA course or intend to.
+
+::: {.callout-tip}
+
+We're hard at work writing the second edition of this book, bringing together all our learnings since writing this first edition. Expect tweaks to our model structure to make it more robust and easier to expand, as well as brand new sections on model visualisation,
+
+Don't worry - when it's ready, this version of the book will still remain available!
+
+:::
+
+
+::: {.callout-note}
+
+I'm also the author of the simulation visualisation package [vidigi](https://github.com/hsma-tools/vidigi).
+
+Head to its [documentation site](https://hsma-tools.github.io/vidigi/examples/examples.html) to see various examples of animated simulations using the model structure we teach in this book (as well as many examples of other model structures).
+
+:::
+
+We hope you enjoy your foray into the world of DES with us, and please do send any feedback you have by raising an issue on the repository [here](https://github.com/hsma-programme/hsma6_des_book/issues).
+
+We'd also love to hear if you've found the book useful - drop us an email [here](mailto:penchord@exeter.ac.uk).
+
+
+- Sammi Rosser, co-author of the Little Book of DES
+
+
+
+## Licencing, Attribution and Acknowledgements {.unnumbered}
+
+### Support
+
+This book is independent research supported by the National Institute for Health and Care Research Applied Research Collaboration South West. The views expressed in this publication are those of the author(s) and not necessarily those of the National Institute for Health and Care Research or the Department of Health and Social Care.
+
+[![](resources/logos/ARC-logo-horizontal-white.svg)](https://arc-sw.nihr.ac.uk/)
+
+### Licencing
+
+#### Code Snippets {.unnumbered}
 
 All code in this book is provided under the MIT Licence.
 
@@ -12,7 +56,7 @@ All code in this book is provided under the MIT Licence.
 
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-### Text {.unnumbered}
+#### Text {.unnumbered}
 
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
@@ -26,7 +70,7 @@ The accompanying text in this book is licenced under a
 
 [![][cc-by-nc-sa-image]][cc-by-nc-sa]
 
-## Attribution and Acknowledgements {.unnumbered}
+### Attribution and Acknowledgements {.unnumbered}
 
 The content in this book is a combined effort, bringing together the knowledge of the Peninsula Collaborative for Operational Research and Design (PenCHORD) on the topic.
 
@@ -37,7 +81,7 @@ The content in parts 3 and 4 is more of a mixture of content from the HSMA lectu
 All work that has been adapted is licenced under the MIT Licence. To comply with the terms of this licence, the MIT licence is provided below.
 
 :::{.callout-note}
-### MIT Licence of adapted code
+#### MIT Licence of adapted code
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
