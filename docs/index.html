@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.11.0">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 
 <title>HSMA - the little book of DES</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -42,12 +48,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-59898bd1c6b9d2bb783127feaa000c76.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d329e753491efaeac79c98c4b193a686.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8108d1407d7e552e0257d8df6641c1a3.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-97fd6bf2d1014f562a8821d5b4194cbd.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-af50193e8d2711e282d6322616a27682.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b15b462b2190debf99393ec3328ee6c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2654555b9e10fe3295cc5f82f41ea192.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-70b00b080fb0721b4a8b84b33ed3457a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -304,7 +310,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Licencing, Attribution and Acknowledgements</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -319,7 +325,8 @@ cookieconsent.run({
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
-      <img src="./resources/logos/hsma_logo_transparent_background_large.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./resources/logos/hsma_logo_transparent_background_large.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./resources/logos/hsma_logo_transparent_background_large.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -332,7 +339,7 @@ cookieconsent.run({
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Licencing, Attribution and Acknowledgements</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -347,13 +354,13 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_des_concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercise - Designing a DES</span></span></a>
   </div>
 </li>
       </ul>
@@ -370,37 +377,37 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_simpy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Introduction to SimPy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./recommended_structure_classes_for_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Recommended Structure for DES Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Example SimPy Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_multiple_steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Multiple Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_example_simpy_model_branching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Adding Branching Paths</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_gp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercise - Building Your First Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -417,67 +424,67 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./model_warm_up.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Warm Up Periods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./priority_based_queueing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Priority-Based Queueing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_resource_unavailability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelling Resource Unavailability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./choosing_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using Different Distributions for Different Processes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Using Different Distributions for Different Processes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./getting_the_distribution_from_real_world_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Selecting and Parameterising Distributions using Real-World Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Selecting and Parameterising Distributions using Real-World Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reneging_balking_jockeying.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reneging, Balking and Jockeying</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./one_or_the_other.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">(Coming Soon!) Waiting for One or The Other</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">(Coming Soon!) Waiting for One or The Other</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_variable_arrival_rates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Modelling Variable Arrival Rates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./requesting_multiple_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Requesting Multiple Resources Simultaneously</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercise_des_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Exercise - Practicing Advanced Concepts</span></span></a>
   </div>
 </li>
       </ul>
@@ -494,49 +501,49 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part_4_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">An Introduction to Modelling Complex Real-World Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Introduction to Modelling Complex Real-World Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_entity_types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Introduction to Approaching Multiple Entity Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">An Introduction to Approaching Multiple Entity Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./example_multiple_entity_types_similar_pathways.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Example - Multiple Entity Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Example - Multiple Entity Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scheduling_arrivals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">(Coming Soon!) Scheduling Arrivals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">(Coming Soon!) Scheduling Arrivals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dealing With Appointment Bookings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Dealing With Appointment Bookings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models_advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">(Coming Soon!) Advanced Appointment Booking Model Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">(Coming Soon!) Advanced Appointment Booking Model Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appointment_style_booking_models_multistep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">(Coming Soon!) Multi-step Appointment Booking Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">(Coming Soon!) Multi-step Appointment Booking Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./example_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Example Models from Other Modellers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Example Models from Other Modellers</span></span></a>
   </div>
 </li>
       </ul>
@@ -553,49 +560,49 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basic_debugging_tactics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Basic Debugging Tactics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_logging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Event Logging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Event Logging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./process_logs_with_bupar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Reshaping our event logs for bupaR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Reshaping our event logs for bupaR</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_des_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Entity Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tracking_resource_utilisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Tracking Resource Utilisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./other_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Other Model Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualising_model_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">(Coming Soon!) Visualising Model Metrics</span></span></a>
   </div>
 </li>
       </ul>
@@ -612,7 +619,7 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_creating_web_apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Creating Web Apps</span></span></a>
   </div>
 </li>
       </ul>
@@ -629,19 +636,19 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stress_des.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">STRESS-DES Reporting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stars.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">The STARS Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sharing_reproducible_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Sharing reproducible models</span></span></a>
   </div>
 </li>
       </ul>
@@ -658,13 +665,13 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing_large_numbers_scenarios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Running Large Numbers of Scenarios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Running Large Numbers of Scenarios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./running_parallel_cpus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Parallelisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -681,7 +688,7 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./model_checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Model Readiness Checklist</span></span></a>
   </div>
 </li>
       </ul>
@@ -689,13 +696,13 @@ cookieconsent.run({
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./alternative_foss_simulation_libraries_software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Alternative FOSS Simulation Libraries and Software</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -714,14 +721,14 @@ cookieconsent.run({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#licencing-attribution-and-acknowledgements" id="toc-licencing-attribution-and-acknowledgements" class="nav-link active" data-scroll-target="#licencing-attribution-and-acknowledgements">Licencing, Attribution and Acknowledgements</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#licencing" id="toc-licencing" class="nav-link" data-scroll-target="#licencing">Licencing</a>
+  <li><a href="#licencing-attribution-and-acknowledgements" id="toc-licencing-attribution-and-acknowledgements" class="nav-link" data-scroll-target="#licencing-attribution-and-acknowledgements">Licencing, Attribution and Acknowledgements</a>
   <ul class="collapse">
-  <li><a href="#code-snippets" id="toc-code-snippets" class="nav-link" data-scroll-target="#code-snippets">Code Snippets</a></li>
-  <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text">Text</a></li>
-  </ul></li>
+  <li><a href="#support" id="toc-support" class="nav-link" data-scroll-target="#support"><span class="header-section-number">1.0.1</span> Support</a></li>
+  <li><a href="#licencing" id="toc-licencing" class="nav-link" data-scroll-target="#licencing"><span class="header-section-number">1.0.2</span> Licencing</a></li>
   <li><a href="#attribution-and-acknowledgements" id="toc-attribution-and-acknowledgements" class="nav-link" data-scroll-target="#attribution-and-acknowledgements">Attribution and Acknowledgements</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -763,12 +770,57 @@ cookieconsent.run({
 
 
 
-<section id="licencing-attribution-and-acknowledgements" class="level1 unnumbered">
-<h1 class="unnumbered">Licencing, Attribution and Acknowledgements</h1><p><img src="resources/logos/cover_image_bing_image_generator.jpeg" title="HSMA - the little book of DES" class="quarto-cover-image nolightbox img-fluid"></p>
-<section id="licencing" class="level2">
-<h2 class="anchored" data-anchor-id="licencing">Licencing</h2>
-<section id="code-snippets" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="code-snippets">Code Snippets</h3>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1><p><img src="resources/logos/cover_image_bing_image_generator.jpeg" title="HSMA - the little book of DES" class="quarto-cover-image nolightbox img-fluid"></p>
+<p>Welcome! This book is intended to act as a gateway to the wonderful world of discrete event simulation (DES).</p>
+<p>DES is, I think, one of the most powerful tools you can add to your toolkit as an analyst, data scientist, or operational researcher. Learning the building blocks of simulation opens up the capability to simulate almost any system you can imagine.</p>
+<p>I’m part of a team of healthcare researchers, using DES to simulate air ambulances, stroke wards, and so much more. Our students on the <a href="https://hsma.co.uk">Health Service Modelling Associates (HSMA)</a> course have undertaken <a href="https://hsma.co.uk/previous_projects/projects_by_methods.html#discrete-event-simulation">so many DES</a> projects - it’s far and away the most popular method for real-world problem solving that we teach, always outstripping machine learning, natural language processing and geographic optimization in every cohort when it comes to choosing a technique that will solve the actual operational issues facing their organisations. That’s not to say the other techniques aren’t valuable, but DES is the hidden gem that no-one knows exists and don’t know they need.</p>
+<p>DES is widely used across a range of industries, and while most of our examples have a healthcare slant, you will find the model concepts and structures here can translate to other places!</p>
+<p>This book was written to serve as a companion to our taught sessions on discrete event simulation in the HSMA course, but can be used as a standalone resource and reference, regardless of whether you’ve taken the HSMA course or intend to.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We’re hard at work writing the second edition of this book, bringing together all our learnings since writing this first edition. Expect tweaks to our model structure to make it more robust and easier to expand, as well as brand new sections on model visualisation,</p>
+<p>Don’t worry - when it’s ready, this version of the book will still remain available!</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m also the author of the simulation visualisation package <a href="https://github.com/hsma-tools/vidigi">vidigi</a>.</p>
+<p>Head to its <a href="https://hsma-tools.github.io/vidigi/examples/examples.html">documentation site</a> to see various examples of animated simulations using the model structure we teach in this book (as well as many examples of other model structures).</p>
+</div>
+</div>
+<p>We hope you enjoy your foray into the world of DES with us, and please do send any feedback you have by raising an issue on the repository <a href="https://github.com/hsma-programme/hsma6_des_book/issues">here</a>.</p>
+<p>We’d also love to hear if you’ve found the book useful - drop us an email <a href="mailto:penchord@exeter.ac.uk">here</a>.</p>
+<ul>
+<li>Sammi Rosser, co-author of the Little Book of DES</li>
+</ul>
+<section id="licencing-attribution-and-acknowledgements" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="licencing-attribution-and-acknowledgements">Licencing, Attribution and Acknowledgements</h2>
+<section id="support" class="level3" data-number="1.0.1">
+<h3 data-number="1.0.1" class="anchored" data-anchor-id="support"><span class="header-section-number">1.0.1</span> Support</h3>
+<p>This book is independent research supported by the National Institute for Health and Care Research Applied Research Collaboration South West. The views expressed in this publication are those of the author(s) and not necessarily those of the National Institute for Health and Care Research or the Department of Health and Social Care.</p>
+<p><a href="https://arc-sw.nihr.ac.uk/"><img src="resources/logos/ARC-logo-horizontal-white.svg" class="img-fluid"></a></p>
+</section>
+<section id="licencing" class="level3" data-number="1.0.2">
+<h3 data-number="1.0.2" class="anchored" data-anchor-id="licencing"><span class="header-section-number">1.0.2</span> Licencing</h3>
+<section id="code-snippets" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="code-snippets">Code Snippets</h4>
 <p>All code in this book is provided under the MIT Licence.</p>
 <blockquote class="blockquote">
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
@@ -780,15 +832,15 @@ cookieconsent.run({
 <p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 </blockquote>
 </section>
-<section id="text" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="text">Text</h3>
+<section id="text" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="text">Text</h4>
 <p>The accompanying text in this book is licenced under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
 <p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" class="img-fluid"></a></p>
 <p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid"></a></p>
 </section>
 </section>
-<section id="attribution-and-acknowledgements" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="attribution-and-acknowledgements">Attribution and Acknowledgements</h2>
+<section id="attribution-and-acknowledgements" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="attribution-and-acknowledgements">Attribution and Acknowledgements</h3>
 <p>The content in this book is a combined effort, bringing together the knowledge of the Peninsula Collaborative for Operational Research and Design (PenCHORD) on the topic.</p>
 <p>The content in part 1 and a large amount of part 2 is from a series of sessions given on discrete event simulation as part of the HSMA programme. These lectures and accompanying code examples were written by <a href="https://github.com/hsma-chief-elf">Dr Daniel Chalk</a> <a href="https://orcid.org/0000-0002-4165-4364"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a> and made available under the <strong>CC BY-NC-SA 4.0</strong> licence. The chapters often replicate the wording of these lectures nearly exactly, with minor tweaks and additions for readability and to better suit the format of a book made by <a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</p>
 <p>The content in parts 3 and 4 is more of a mixture of content from the HSMA lectures along with brand new content written for this book mostly by <a href="https://github.com/Bergam0t">Sammi Rosser</a> <a href="https://orcid.org/0000-0002-9552-8988"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>, with a few pages also by <a href="https://github.com/amyheather">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>. The book also draws on a range of work done by other members of the PenCHORD team, including: <a href="https://github.com/TomMonks">Tom Monks</a> <a href="https://orcid.org/0000-0003-2631-4481"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>, <a href="https://github.com/MichaelAllen1966">Mike Allen</a> <a href="https://orcid.org/0000-0002-8746-9957"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>, and <a href="https://github.com/aselaws">Anna Laws</a> <a href="https://orcid.org/0000-0002-2145-0487"><img src="images/orcid.png" class="img-fluid" alt="ORCID ID"></a>.</p>
@@ -799,7 +851,7 @@ cookieconsent.run({
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MIT Licence of adapted code
+<span class="screen-reader-only">Note</span>MIT Licence of adapted code
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -814,6 +866,7 @@ MIT Licence of adapted code
 <p><strong>HSMA 6: Lecture 3</strong>- <a href="https://docs.google.com/presentation/d/1y7S7bjJtdLQCquzzZ2vjYzRx9-RwXE-SWgWf88fLc4o/edit?usp=sharing">Slides</a> - <a href="https://github.com/hsma-programme/h6_simpy_part_2">Github</a></p>
 
 
+</section>
 </section>
 </section>
 
@@ -1219,13 +1272,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1572,7 +1626,7 @@ window.onload = function() {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./intro_to_des_concepts.html" class="pagination-link" aria-label="Introduction to DES Concepts">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to DES Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

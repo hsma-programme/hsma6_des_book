@@ -2,3 +2,5 @@
 /env/
 *.pdf
 .venv
+
+**/*.quarto_ipynb
